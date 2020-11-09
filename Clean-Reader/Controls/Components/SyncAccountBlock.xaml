@@ -1,0 +1,46 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.SyncAccountBlock"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}"
+                                x:Name="LoginButton" HorizontalAlignment="Stretch"
+                                Foreground="{ThemeResource PrimaryColor}"
+                                x:Uid="Control_AddSyncAccountTipBlock">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="User" FontSize="{CustomResource BodyFontSize}"
+                                 HorizontalAlignment="Left"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
+        <Grid x:Name="DetailContainer" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <PersonPicture x:Name="Avatar" Width="40" Height="40" DisplayName="Richard Zhang"
+                       VerticalAlignment="Center" Style="{StaticResource BasicPersonPictureStyle}"/>
+            <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Left"
+                    Margin="20,0,0,0">
+                <TextBlock x:Name="UserNameBlock" Style="{StaticResource BodyTextStyle}" Text="Richard Zhang"
+                       Foreground="{ThemeResource PrimaryColor}" FontWeight="SemiBold"/>
+                <TextBlock Text="OneDrive" x:Name="SyncTypeBlock" Style="{StaticResource SmallTextStyle}"
+                       Margin="0,3,0,0"/>
+            </StackPanel>
+            <interaction:ExtraButton Style="{StaticResource DefaultExtraButtonStyle}"
+                                 Background="Transparent" x:Name="MenuButton"
+                                 Grid.Column="2" VerticalAlignment="Center"
+                                 >
+                <uwp:FeatherIcon Symbol="Delete" FontSize="{CustomResource BodyFontSize}"/>
+            </interaction:ExtraButton>
+        </Grid>
+    </Grid>
+    
+</UserControl>

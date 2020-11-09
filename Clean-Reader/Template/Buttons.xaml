@@ -228,6 +228,7 @@
     <Style TargetType="interaction:IconButton" x:Key="DefaultIconButtonStyle" BasedOn="{StaticResource DefaultExtraButtonStyle}">
         <Setter Property="GutterWidth" Value="15" />
         <Setter Property="Padding" Value="24,12" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="ProgressRingStyle" Value="{StaticResource BasicProgressRingStyle}" />
         <Setter Property="TextStyle">
             <Setter.Value>

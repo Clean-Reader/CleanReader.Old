@@ -72,7 +72,7 @@
     <Style x:Key="ExpandListViewContainerStyle" TargetType="ListViewItem">
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}"/>
+        <Setter Property="Foreground" Value="{ThemeResource TipTextColor}"/>
         <Setter Property="TabNavigation" Value="Local"/>
         <Setter Property="IsHoldingEnabled" Value="True"/>
         <Setter Property="Padding" Value="0,0"/>
@@ -103,7 +103,7 @@
                                            Control.IsTemplateFocusTarget="True" 
                                            PressedBackground="Transparent" 
                                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" 
-                                           PointerOverForeground="{ThemeResource TipTextColor}" 
+                                           PointerOverForeground="{ThemeResource NormalTextColor}" 
                                            PointerOverBackground="Transparent" 
                                            RevealBorderThickness="0" 
                                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
@@ -118,7 +118,11 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Selected"/>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.FontWeight" Value="Bold" />
+                                    </VisualState.Setters>
+                                </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
@@ -129,12 +133,14 @@
                                     <VisualState.Setters>
                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
+                                        <Setter Target="Root.FontWeight" Value="Bold" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOverPressed">
                                     <VisualState.Setters>
                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
+                                        <Setter Target="Root.FontWeight" Value="Bold" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">

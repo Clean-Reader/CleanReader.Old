@@ -85,30 +85,5 @@ namespace Clean_Reader.Models.UI
             Count = -1;
             IsSelected = false;
         }
-
-        /// <summary>
-        /// 发现条目
-        /// </summary>
-        /// <param name="type">条目类型</param>
-        public EntryItem(EntryType type)
-        {
-            EntryType = type;
-            GroupType = GroupType.Discovery;
-            IsSelected = false;
-            Count = -1;
-            Parameter = "";
-            Name = App.Tools.App.GetLocalizationTextFromResource(type);
-        }
-
-        public static List<EntryItem> GetDiscoveryList()
-        {
-            return new List<EntryItem>
-            {
-                new EntryItem(EntryType.Category),
-                new EntryItem(EntryType.Rank),
-                new EntryItem(EntryType.EndBooks),
-                new EntryItem(EntryType.Topic),
-            };
-        }
     }
 }

@@ -11,6 +11,7 @@ namespace Clean_Reader.Models.Core
         public AppViewModel()
         {
             _yuenovClient = new YuenovClient();
+            _yuenovClient.SetOpenToken("e89309f4-6cd8-4a45-90de-922e7d71455a");
         }
         
         public async Task OneDriveInit()

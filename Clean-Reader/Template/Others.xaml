@@ -56,7 +56,8 @@
                                        VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" Foreground="{ThemeResource PrimaryColor}"
                                        ToolTipService.ToolTip="{TemplateBinding HeaderText}" Text="{TemplateBinding HeaderText}"/>
                             <TextBlock x:Name="CollapseStatusIcon" Text="&#xE930;" Foreground="{ThemeResource TipTextColor}" VerticalAlignment="Center"
-                                             FontSize="{CustomResource BasicFontSize}" Grid.Column="2" FontFamily="{StaticResource Feather}"/>
+                                       FontSize="{CustomResource BasicFontSize}" Grid.Column="2" FontFamily="{StaticResource Feather}"
+                                       Visibility="{TemplateBinding StatusIconVisibility}"/>
                         </Grid>
                         <Grid Grid.Row="1" x:Name="DetailContainer" Background="{ThemeResource ExpandColor}"
                               Visibility="Collapsed">

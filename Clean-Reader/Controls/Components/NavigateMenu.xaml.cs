@@ -45,7 +45,7 @@ namespace Clean_Reader.Controls.Components
                     item.IsExpand = false;
             }
             Enum.TryParse(container.Tag.ToString(), out GroupType type);
-            if (type != GroupType.Setting)
+            if (type != GroupType.Setting && type != GroupType.Discovery)
             {
                 await HandleExpand(type);
                 container.IsExpand = !container.IsExpand;
@@ -61,6 +61,7 @@ namespace Clean_Reader.Controls.Components
             }
             else
             {
+                UnselectItems(vm.StoreCollection, vm.ShelfCollection);
                 // show setting page
             }
         }
@@ -72,11 +73,8 @@ namespace Clean_Reader.Controls.Components
                 case GroupType.Shelf:
                     await ShelfHandle();
                     break;
-                case GroupType.Discovery:
-                    if (App.VM.DiscoveryCollection.Count == 0)
-                        EntryItem.GetDiscoveryList().ForEach(p => App.VM.DiscoveryCollection.Add(p));
-                        break;
                 case GroupType.Store:
+                    await StoreHandle();
                     break;
                 default:
                     break;
@@ -90,13 +88,29 @@ namespace Clean_Reader.Controls.Components
                 ShelfContainer.GoToLoading();
                 await App.VM.ShelfInit();
                 ShelfContainer.GoToLoading(false);
-            } 
+            }
+            if (vm.ShelfCollection.Count == 1 && !vm.ShelfCollection.First().IsSelected)
+            {
+                vm.ShelfCollection.First().IsSelected = true;
+                ShelfContainer.InnerListView.SelectedItem = vm.ShelfCollection.First();
+                // goto shelf
+            }
+        }
+
+        private async Task StoreHandle()
+        {
+            if (App.VM.StoreCollection.Count == 0)
+            {
+                StoreContainer.GoToLoading();
+                await App.VM.WebCategoriesInit();
+                StoreContainer.GoToLoading(false);
+            }
         }
 
         public void CheckLayout()
         {
             var container = Container.Children.OfType<CollapseItem>().Where(p => p.IsExpand).FirstOrDefault();
-            
+
             if (container != null)
             {
                 int rowIndex = Grid.GetRow(container);
@@ -106,6 +120,36 @@ namespace Clean_Reader.Controls.Components
                         Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Star);
                     else
                         Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Auto);
+                }
+            }
+        }
+
+        private void Collapse_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var container = sender as CollapseItem;
+            var item = e.ClickedItem as EntryItem;
+            switch (item.GroupType)
+            {
+                case GroupType.Shelf:
+                    UnselectItems(vm.StoreCollection);
+                    //Load Shelf Page
+                    break;
+                case GroupType.Store:
+                    UnselectItems(vm.ShelfCollection);
+                    //Load Store Page
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UnselectItems(params ObservableCollection<EntryItem>[] collections)
+        {
+            foreach (var collection in collections)
+            {
+                foreach (var item in collection)
+                {
+                    item.IsSelected = false;
                 }
             }
         }

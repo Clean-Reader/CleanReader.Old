@@ -2,14 +2,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Theme">
-    
-    <AcrylicBrush x:Key="SideBackground" BackgroundSource="HostBackdrop" TintColor="White" FallbackColor="#f9fafe" TintOpacity="0.8"/>
-    <AcrylicBrush x:Key="PaneBackground" BackgroundSource="Backdrop" TintColor="White" FallbackColor="#f9fafe" TintOpacity="0.8"/>
+
+    <AcrylicBrush x:Key="SideBackground" BackgroundSource="HostBackdrop" TintColor="White" FallbackColor="#F4F4F6" TintOpacity="0.8"/>
+    <AcrylicBrush x:Key="PaneBackground" BackgroundSource="Backdrop" TintColor="White" FallbackColor="#F4F4F6" TintOpacity="0.8"/>
     <SolidColorBrush x:Key="MaskBackground" Color="White" Opacity="0.6"/>
     <SolidColorBrush x:Key="PopupBackground" Color="#f2f7fd"/>
     <SolidColorBrush x:Key="PageBackground" Color="White"/>
     <SolidColorBrush x:Key="PageOverBackground" Color="#DEE5EB"/>
-    <SolidColorBrush x:Key="CardBackground" Color="#F9F9F9"/>
+    <SolidColorBrush x:Key="CardBackground" Color="#FAFAFB"/>
     <SolidColorBrush x:Key="CardBackgroundOver" Color="#E6EDF5"/>
     <SolidColorBrush x:Key="PointerOverMaskBackground" Color="Gray" Opacity="0.2"/>
     <SolidColorBrush x:Key="TransparentBackground" Color="White" Opacity="0.01"/>
@@ -44,5 +44,5 @@
     <SolidColorBrush x:Key="ErrorColorOpacity" Color="#F63340" Opacity="0.2"/>
     <SolidColorBrush x:Key="ErrorColorOver" Color="#E32528"/>
 
-    <SolidColorBrush x:Key="ExpandColor" Color="#F0F0F8"/>
+    <SolidColorBrush x:Key="ExpandColor" Color="#E3E3F0"/>
 </ResourceDictionary>

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuenov.SDK;
+using Yuenov.SDK.Models.Share;
 
 namespace Clean_Reader.Models.Core
 {
@@ -25,9 +26,10 @@ namespace Clean_Reader.Models.Core
         private string[] _scopes= new string[] { "Files.ReadWrite.AppFolder", "User.Read" };
         public OneDriveHelper _onedrive;
 
-        public List<Book> TotalBookList = new List<Book>();
+        public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();
         public ObservableCollection<EntryItem> ShelfCollection = new ObservableCollection<EntryItem>();
-        public ObservableCollection<EntryItem> DiscoveryCollection = new ObservableCollection<EntryItem>();
         public ObservableCollection<EntryItem> StoreCollection = new ObservableCollection<EntryItem>();
+
+        public List<Channel> WebChannels = new List<Channel>();
     }
 }

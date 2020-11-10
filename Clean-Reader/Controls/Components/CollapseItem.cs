@@ -34,6 +34,9 @@ namespace Clean_Reader.Controls.Components
             _detailContainer = GetTemplateChild("DetailContainer") as Grid;
             InnerListView = GetTemplateChild("DetailListView") as ListView;
 
+            _loadingRing = GetTemplateChild("LoadingRing") as ProgressRing;
+            _headerIcon = GetTemplateChild("HeaderIcon") as ContentPresenter;
+
             _headerContainer.Tapped += (_s, _e) => { HeaderTapped?.Invoke(this, EventArgs.Empty); };
             InnerListView.ItemClick += (_s, _e) => { ItemClick?.Invoke(this, _e); };
 
@@ -55,8 +58,6 @@ namespace Clean_Reader.Controls.Components
                 _loadingRing.IsActive = false;
             }
         }
-
-
 
         #region Dependencies
 
@@ -116,6 +117,18 @@ namespace Clean_Reader.Controls.Components
         // Using a DependencyProperty as the backing store for IsExpand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsExpandProperty =
             DependencyProperty.Register("IsExpand", typeof(bool), typeof(CollapseItem), new PropertyMetadata(false, new PropertyChangedCallback(IsExpand_Changed)));
+
+        public Visibility StatusIconVisibility
+        {
+            get { return (Visibility)GetValue(StatusIconVisibilityProperty); }
+            set { SetValue(StatusIconVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for StatusIconVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StatusIconVisibilityProperty =
+            DependencyProperty.Register("StatusIconVisibility", typeof(Visibility), typeof(CollapseItem), new PropertyMetadata(Visibility.Visible));
+
+
 
         #endregion
 

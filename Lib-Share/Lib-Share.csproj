@@ -120,10 +120,12 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Enums\BookType.cs" />
     <Compile Include="Enums\ColorNames.cs" />
     <Compile Include="Enums\LanguageNames.cs" />
     <Compile Include="Enums\SettingNames.cs" />
     <Compile Include="Enums\StyleNames.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\StaticString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Lib_Share.rd.xml" />
@@ -133,10 +135,10 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Helper.UWP">
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Yuenov.Sdk">
-      <Version>1.0.1</Version>
+      <Version>1.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

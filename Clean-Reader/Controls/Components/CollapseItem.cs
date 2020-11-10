@@ -18,6 +18,8 @@ namespace Clean_Reader.Controls.Components
         public ListView InnerListView;
         private Grid _headerContainer;
         private Grid _detailContainer;
+        private ProgressRing _loadingRing;
+        private ContentPresenter _headerIcon;
 
         public event ItemClickEventHandler ItemClick;
         public event EventHandler HeaderTapped;
@@ -34,9 +36,27 @@ namespace Clean_Reader.Controls.Components
 
             _headerContainer.Tapped += (_s, _e) => { HeaderTapped?.Invoke(this, EventArgs.Empty); };
             InnerListView.ItemClick += (_s, _e) => { ItemClick?.Invoke(this, _e); };
-            
+
             base.OnApplyTemplate();
         }
+
+        public void GoToLoading(bool isLoading = true)
+        {
+            if (isLoading)
+            {
+                IsEnabled = false;
+                _headerIcon.Visibility = Visibility.Collapsed;
+                _loadingRing.IsActive = true;
+            }
+            else
+            {
+                IsEnabled = true;
+                _headerIcon.Visibility = Visibility.Visible;
+                _loadingRing.IsActive = false;
+            }
+        }
+
+
 
         #region Dependencies
 
@@ -95,7 +115,7 @@ namespace Clean_Reader.Controls.Components
 
         // Using a DependencyProperty as the backing store for IsExpand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsExpandProperty =
-            DependencyProperty.Register("IsExpand", typeof(bool), typeof(CollapseItem), new PropertyMetadata(false,new PropertyChangedCallback(IsExpand_Changed)));
+            DependencyProperty.Register("IsExpand", typeof(bool), typeof(CollapseItem), new PropertyMetadata(false, new PropertyChangedCallback(IsExpand_Changed)));
 
         #endregion
 

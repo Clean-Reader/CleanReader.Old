@@ -144,14 +144,29 @@
   <data name="Tip_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Tip_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>
+  </data>
+  <data name="Tip_DefaultShelf" xml:space="preserve">
+    <value>Default Shelf</value>
+  </data>
+  <data name="Tip_EndBooks" xml:space="preserve">
+    <value>Finished Novel</value>
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>Failed to acquire user</value>
   </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>Do you want to log out of OneDrive? Local reading records will not be synchronized after exiting</value>
+  </data>
+  <data name="Tip_Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="Tip_Topic" xml:space="preserve">
+    <value>Topic</value>
   </data>
   <data name="Tip_UpdateTitle" xml:space="preserve">
     <value>Update Information</value>

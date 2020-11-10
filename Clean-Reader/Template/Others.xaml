@@ -44,7 +44,14 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter Content="{TemplateBinding HeaderIcon}" VerticalAlignment="Center"/>
+                            <Grid>
+                                <ContentPresenter Content="{TemplateBinding HeaderIcon}" VerticalAlignment="Center"
+                                                  x:Name="HeaderIcon"/>
+                                <ProgressRing Style="{StaticResource BasicProgressRingStyle}" Width="20" Height="20"
+                                              MinWidth="20" MinHeight="20" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                              x:Name="LoadingRing"/>
+                            </Grid>
+                            
                             <TextBlock Style="{StaticResource BasicTextStyle}" Grid.Column="1" Margin="15,0,0,0"
                                        VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" Foreground="{ThemeResource PrimaryColor}"
                                        ToolTipService.ToolTip="{TemplateBinding HeaderText}" Text="{TemplateBinding HeaderText}"/>

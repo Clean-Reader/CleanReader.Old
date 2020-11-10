@@ -11,6 +11,9 @@
         public const string LanZh = "zh_CN";
         public const string LanEn = "en_US";
 
-        public const string FontDefault = "Segoe UI";
+        public const string FontDefault = "Microsoft YaHei UI";
+
+        public const string FileShelfList = "Shelf.json";
+        public const string FileShelfIndex = "ShelfIndex.json";
     }
 }

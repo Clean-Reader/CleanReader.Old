@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Clean_Reader.Models.Core;
+using Clean_Reader.Models.Enums;
+using Clean_Reader.Models.UI;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -21,7 +24,7 @@ namespace Clean_Reader.Controls.Components
 {
     public sealed partial class NavigateMenu : UserControl
     {
-
+        public AppViewModel vm = App.VM;
         private double ParentHeight
         {
             get => App.VM._sidePanel.NavigateRow.ActualHeight;
@@ -41,16 +44,53 @@ namespace Clean_Reader.Controls.Components
                 if (!item.Equals(container))
                     item.IsExpand = false;
             }
-            container.IsExpand = !container.IsExpand;
-            await Task.Delay(50);
-            int rowIndex = Grid.GetRow(container);
-            for (int i = 0; i < Container.RowDefinitions.Count; i++)
+            Enum.TryParse(container.Tag.ToString(), out GroupType type);
+            if (type != GroupType.Setting)
             {
-                if (rowIndex == i && Container.ActualHeight > ParentHeight && container.IsExpand)
-                    Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Star);
-                else
-                    Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Auto);
+                await HandleExpand(type);
+                container.IsExpand = !container.IsExpand;
+                await Task.Delay(50);
+                int rowIndex = Grid.GetRow(container);
+                for (int i = 0; i < Container.RowDefinitions.Count; i++)
+                {
+                    if (rowIndex == i && Container.ActualHeight > ParentHeight && container.IsExpand)
+                        Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Star);
+                    else
+                        Container.RowDefinitions[i].Height = new GridLength(1, GridUnitType.Auto);
+                }
             }
+            else
+            {
+                // show setting page
+            }
+        }
+
+        private async Task HandleExpand(GroupType type)
+        {
+            switch (type)
+            {
+                case GroupType.Shelf:
+                    await ShelfHandle();
+                    break;
+                case GroupType.Discovery:
+                    if (App.VM.DiscoveryCollection.Count == 0)
+                        EntryItem.GetDiscoveryList().ForEach(p => App.VM.DiscoveryCollection.Add(p));
+                        break;
+                case GroupType.Store:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async Task ShelfHandle()
+        {
+            if (App.VM.ShelfCollection.Count == 0)
+            {
+                ShelfContainer.GoToLoading();
+                await App.VM.ShelfInit();
+                ShelfContainer.GoToLoading(false);
+            } 
         }
 
         public void CheckLayout()

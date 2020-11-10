@@ -1,8 +1,11 @@
 ﻿using Clean_Reader.Controls.Layout;
+using Clean_Reader.Models.UI;
+using Lib.Share.Models;
 using Richasy.Controls.Reader;
 using Richasy.Helper.UWP;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +24,10 @@ namespace Clean_Reader.Models.Core
         private const string _clientId = "4ce94634-4e8d-4e7a-9967-18c59afd1dc7";
         private string[] _scopes= new string[] { "Files.ReadWrite.AppFolder", "User.Read" };
         public OneDriveHelper _onedrive;
+
+        public List<Book> TotalBookList = new List<Book>();
+        public ObservableCollection<EntryItem> ShelfCollection = new ObservableCollection<EntryItem>();
+        public ObservableCollection<EntryItem> DiscoveryCollection = new ObservableCollection<EntryItem>();
+        public ObservableCollection<EntryItem> StoreCollection = new ObservableCollection<EntryItem>();
     }
 }

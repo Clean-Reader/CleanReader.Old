@@ -6,8 +6,13 @@
         Warning,
         Confirm,
         Cancel,
-        AuthorizationCanceled,
+        Category,
+        Rank,
+        EndBooks,
+        Topic,
+        DefaultShelf,
         GetUserFailed,
+        AuthorizationCanceled,
         OneDriveLogoutWarning
     }
 }

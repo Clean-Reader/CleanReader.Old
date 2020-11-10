@@ -28,6 +28,7 @@
 
     <SolidColorBrush x:Key="PrimaryColorOpacity" Color="#B3B3F6" Opacity="0.1"/>
     <SolidColorBrush x:Key="PrimaryColor" Color="#322A6F"/>
+    <SolidColorBrush x:Key="PrimaryColorDown" Color="#5D568C"/>
     <SolidColorBrush x:Key="PrimaryColorOver" Color="#32259B"/>
     <SolidColorBrush x:Key="SecondaryColorOpacity" Color="#38B1DD" Opacity="0.2"/>
     <LinearGradientBrush x:Key="SecondaryColor" StartPoint="0,0" EndPoint="1,1">

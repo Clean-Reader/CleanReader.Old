@@ -31,6 +31,7 @@
             <GradientStop Color="#6b3fbe" Offset="1"/>
         </GradientStopCollection>
     </LinearGradientBrush>
+    <SolidColorBrush x:Key="PrimaryColorDown" Color="#5D568C"/>
     <SolidColorBrush x:Key="PrimaryColorOver" Color="#7E4AE0"/>
     <SolidColorBrush x:Key="SecondaryColorOpacity" Color="#F7BA71" Opacity="0.2"/>
     <LinearGradientBrush x:Key="SecondaryColor" StartPoint="0,0" EndPoint="1,1">

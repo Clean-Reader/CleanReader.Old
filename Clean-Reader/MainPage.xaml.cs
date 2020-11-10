@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Clean_Reader.Models.Enums;
+using Clean_Reader.Models.UI;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -29,9 +31,10 @@ namespace Clean_Reader
         {
             this.InitializeComponent();
             Current = this;
+            vm._rootFrame = MainFrame;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
         }
@@ -39,6 +42,7 @@ namespace Clean_Reader
         private void RichasyPage_Loaded(object sender, RoutedEventArgs e)
         {
             vm.CheckUpdate();
+            vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
             // TODO
         }
 

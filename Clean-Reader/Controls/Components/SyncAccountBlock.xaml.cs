@@ -46,7 +46,7 @@ namespace Clean_Reader.Controls.Components
             string token = App.Tools.App.GetLocalSetting(SettingNames.OneDriveAccessToken, "");
             bool isEmpty = string.IsNullOrEmpty(token);
             LoginButton.Visibility = isEmpty ? Visibility.Visible : Visibility.Collapsed;
-            DetailContainer.Visibility = isEmpty ? Visibility.Collapsed : Visibility.Visible;
+            LogoutButton.Visibility = isEmpty ? Visibility.Collapsed : Visibility.Visible;
             string name = App.Tools.App.GetLocalSetting(SettingNames.OneDriveUserName, "");
             if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(token))
             {
@@ -60,13 +60,14 @@ namespace Clean_Reader.Controls.Components
                 }
                 else
                 {
-                    name = "--";
                     App.VM.ShowPopup(LanguageNames.GetUserFailed, true);
                 }
             }
+            Avatar.DisplayName = name;
+            if (string.IsNullOrEmpty(name))
+                name = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.NeedLogin);
             Avatar.Visibility = Visibility.Visible;
             LoadingRing.IsActive = false;
-            Avatar.DisplayName = name;
             UserNameBlock.Text = name;
         }
 

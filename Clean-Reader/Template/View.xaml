@@ -69,10 +69,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ExpandListViewContainerStyle" TargetType="ListViewItem">
+    <Style x:Key="MenuListViewContainerStyle" TargetType="ListViewItem">
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{ThemeResource TipTextColor}"/>
+        <Setter Property="Background" Value="{ThemeResource CardBackground}"/>
+        <Setter Property="Foreground" Value="{ThemeResource PrimaryColor}"/>
         <Setter Property="TabNavigation" Value="Local"/>
         <Setter Property="IsHoldingEnabled" Value="True"/>
         <Setter Property="Padding" Value="0,0"/>
@@ -101,19 +101,19 @@
                                            FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" 
                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                            Control.IsTemplateFocusTarget="True" 
-                                           PressedBackground="Transparent" 
+                                           PressedBackground="{ThemeResource PrimaryColorOpacity}"
                                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" 
-                                           PointerOverForeground="{ThemeResource NormalTextColor}" 
-                                           PointerOverBackground="Transparent" 
+                                           PointerOverForeground="{ThemeResource PrimaryColorOver}" 
+                                           PointerOverBackground="{ThemeResource PrimaryColorOpacity}" 
                                            RevealBorderThickness="0" 
                                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 
                                            RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" 
-                                           RevealBackground="{ThemeResource ListViewItemRevealBackground}" 
-                                           SelectedForeground="{ThemeResource PrimaryColor}" 
+                                           RevealBackground="Transparent" 
+                                           SelectedForeground="White" 
                                            SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" 
-                                           SelectedBackground="Transparent" 
-                                           SelectedPressedBackground="Transparent" 
-                                           SelectedPointerOverBackground="Transparent" 
+                                           SelectedBackground="{ThemeResource PrimaryColorDown}" 
+                                           SelectedPressedBackground="{ThemeResource PrimaryColor}" 
+                                           SelectedPointerOverBackground="{ThemeResource PrimaryColor}" 
                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -480,7 +480,41 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    <Style x:Key="NoScrollGridView" TargetType="GridView">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="TabNavigation" Value="Once"/>
+        <Setter Property="IsSwipeEnabled" Value="True"/>
+        <Setter Property="ShowsScrollingPlaceholders" Value="True" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+        <Setter Property="FocusVisualMargin" Value="-2"/>
+        <Setter Property="ItemContainerTransitions">
+            <Setter.Value>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition/>
+                    <ContentThemeTransition/>
+                    <ReorderThemeTransition/>
+                    <EntranceThemeTransition IsStaggeringEnabled="False"/>
+                </TransitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridView">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
+                        <ItemsPresenter HorizontalAlignment="Center" Footer="{TemplateBinding Footer}" FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Padding="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="BasicListView" TargetType="ListView">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="TabNavigation" Value="Once"/>

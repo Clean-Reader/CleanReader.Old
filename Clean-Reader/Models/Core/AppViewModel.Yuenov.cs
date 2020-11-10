@@ -15,15 +15,13 @@ namespace Clean_Reader.Models.Core
             var response = await _yuenovClient.GetTotalCategoriesAsync();
             if (response.Result.Code == ResultCode.Success)
             {
-                WebChannels = response.Data.Channels;
-                var categories = WebChannels.SelectMany(p => p.Categories);
+                WebCategories.Clear();
+                var categories = response.Data.Channels.SelectMany(p => p.Categories);
                 foreach (var cate in categories)
                 {
-                    if (!StoreCollection.Any(p => p.Name == cate.CategoryName))
+                    if (!WebCategories.Any(p => p.CategoryName == cate.CategoryName))
                     {
-                        var item = new EntryItem(cate.CategoryName);
-                        item.Parameter = cate.CategoryId.ToString();
-                        StoreCollection.Add(item);
+                        WebCategories.Add(cate);
                     }
                 }
             }

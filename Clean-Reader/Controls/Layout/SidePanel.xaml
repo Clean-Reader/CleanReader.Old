@@ -5,7 +5,7 @@
     xmlns:local="using:Clean_Reader.Controls.Layout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
-    mc:Ignorable="d" SizeChanged="UserControl_SizeChanged"
+    mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" x:Name="NavigateRow" x:FieldModifier="public"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--同步账户-->
@@ -30,7 +30,8 @@
             </interaction:IconButton.Icon>
         </interaction:IconButton>
         <!--导航栏-->
-        <components:NavigateMenu Grid.Row="2" Margin="0,25,0,0" x:Name="NavigateMenu"/>
+        <components:NavigateMenu Grid.Row="2" Margin="0,25,0,0" x:Name="NavigateMenu"
+                                 />
         <!--朗读控制器-->
     </Grid>
 </UserControl>

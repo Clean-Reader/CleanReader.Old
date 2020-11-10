@@ -9,89 +9,29 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
-        <DataTemplate x:DataType="ui:EntryItem" x:Key="ShelfItemTemplate">
-            <ListViewItem x:Name="Container" IsSelected="{x:Bind IsSelected,Mode=TwoWay}">
-                <Grid Padding="20,15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1F5;" FontSize="{CustomResource SmallFontSize}"
-                              VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"
-                               ToolTipService.ToolTip="{x:Bind Name,Mode=OneWay}" Text="{x:Bind Name,Mode=OneWay}"
-                               VerticalAlignment="Center" FontFamily="{CustomResource Basic}" FontSize="{CustomResource BasicFontSize}"
-                               Margin="20,0,0,0"/>
-                    <TextBlock Text="{x:Bind Count,Mode=OneWay}" Style="{StaticResource SmallTextStyle}"
-                               Grid.Column="2" VerticalAlignment="Center" Margin="10,0,5,0"/>
-                </Grid>
-            </ListViewItem>
-        </DataTemplate>
-        <DataTemplate x:DataType="ui:EntryItem" x:Key="DefaultItemTemplate">
-            <ListViewItem x:Name="Container" IsSelected="{x:Bind IsSelected,Mode=TwoWay}">
-                <Grid Padding="20,15">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1F5;" FontSize="{CustomResource SmallFontSize}"
-                              VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"
-                               ToolTipService.ToolTip="{x:Bind Name,Mode=OneWay}" Text="{x:Bind Name,Mode=OneWay}"
-                               VerticalAlignment="Center" FontFamily="{CustomResource Basic}" FontSize="{CustomResource BasicFontSize}"
-                               Margin="20,0,0,0"/>
-                </Grid>
-            </ListViewItem>
+        <DataTemplate x:DataType="ui:MenuItem" x:Key="MenuItemTemplate">
+            <Grid Padding="20,15" BorderBrush="{ThemeResource LineColor}"
+                  BorderThickness="0,0,0,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <uwp:FeatherIcon FontSize="{CustomResource BodyFontSize}" Symbol="{x:Bind Icon}"
+                                 VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Margin="25,0,0,0" VerticalAlignment="Center"
+                           Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" FontFamily="{CustomResource Basic}"
+                           FontSize="{CustomResource BasicFontSize}"/>
+            </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Border x:Name="RootBorder">
-        <Grid x:Name="Container">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <local:CollapseItem x:Name="ShelfContainer" x:Uid="Control_ShelfCollapseItem"
-                            VerticalAlignment="Top" CornerRadius="10,10,0,0" Background="{ThemeResource CardBackground}"
-                            HeaderTapped="CollapseItem_HeaderTapped" Tag="Shelf"
-                            ItemsSource="{x:Bind vm.ShelfCollection}"
-                            ItemTemplate="{StaticResource ShelfItemTemplate}"
-                            ItemClick="Collapse_ItemClick"
-                            >
-                <local:CollapseItem.HeaderIcon>
-                    <uwp:FeatherIcon Symbol="BookOpen" Foreground="{ThemeResource PrimaryColor}" FontSize="{CustomResource BasicFontSize}"/>
-                </local:CollapseItem.HeaderIcon>
-            </local:CollapseItem>
-            <local:CollapseItem x:Name="StoreContainer" x:Uid="Control_StoreCollapseItem"
-                            VerticalAlignment="Top" Grid.Row="2" Background="{ThemeResource CardBackground}"
-                            HeaderTapped="CollapseItem_HeaderTapped" Tag="Store"
-                            ItemsSource="{x:Bind vm.StoreCollection}"
-                            ItemTemplate="{StaticResource DefaultItemTemplate}"
-                            >
-                <local:CollapseItem.HeaderIcon>
-                    <uwp:FeatherIcon Symbol="LifeBuoy" Foreground="{ThemeResource PrimaryColor}" FontSize="{CustomResource BasicFontSize}"/>
-                </local:CollapseItem.HeaderIcon>
-            </local:CollapseItem>
-            <local:CollapseItem x:Name="DiscoveryContainer" x:Uid="Control_DiscoveryCollapseItem"
-                            VerticalAlignment="Top" Grid.Row="1" Background="{ThemeResource CardBackground}"
-                            HeaderTapped="CollapseItem_HeaderTapped" Tag="Discovery"
-                            StatusIconVisibility="Collapsed"
-                            >
-                <local:CollapseItem.HeaderIcon>
-                    <uwp:FeatherIcon Symbol="Compass" Foreground="{ThemeResource PrimaryColor}" FontSize="{CustomResource BasicFontSize}"/>
-                </local:CollapseItem.HeaderIcon>
-            </local:CollapseItem>
-            <local:CollapseItem x:Name="SettingContainer" x:Uid="Control_SettingCollapseItem"
-                            VerticalAlignment="Top" Grid.Row="3" Background="{ThemeResource CardBackground}"
-                            HeaderTapped="CollapseItem_HeaderTapped" Tag="Setting" CornerRadius="0,0,10,10"
-                                StatusIconVisibility="Collapsed"
-                            >
-                <local:CollapseItem.HeaderIcon>
-                    <uwp:FeatherIcon Symbol="Settings" Foreground="{ThemeResource PrimaryColor}" FontSize="{CustomResource BasicFontSize}"/>
-                </local:CollapseItem.HeaderIcon>
-            </local:CollapseItem>
-        </Grid>
-    </Border>
+    <Grid x:Name="Container">
+        <ListView x:Name="MenuListView"
+                  ItemTemplate="{StaticResource MenuItemTemplate}"
+                  ItemContainerStyle="{StaticResource MenuListViewContainerStyle}"
+                  Style="{StaticResource BasicListView}"
+                  IsItemClickEnabled="True"
+                  ItemClick="MenuListView_ItemClick"
+                  ItemsSource="{x:Bind MenuItemCollection}"
+                  Loaded="MenuListView_Loaded"/>
+    </Grid>
 </UserControl>

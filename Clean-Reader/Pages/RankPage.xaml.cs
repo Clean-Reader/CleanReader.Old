@@ -21,9 +21,9 @@ namespace Clean_Reader.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class StorePage : RichasyPage
+    public sealed partial class RankPage : RichasyPage
     {
-        public StorePage():base()
+        public RankPage():base()
         {
             this.InitializeComponent();
         }

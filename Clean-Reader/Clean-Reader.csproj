@@ -121,7 +121,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Components\CollapseItem.cs" />
+    <Compile Include="Controls\Components\AppSearchBox.xaml.cs">
+      <DependentUpon>AppSearchBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\NavigateMenu.xaml.cs">
       <DependentUpon>NavigateMenu.xaml</DependentUpon>
     </Compile>
@@ -142,12 +144,19 @@
     <Compile Include="Models\Core\AppViewModel.Properties.cs" />
     <Compile Include="Models\Core\AppViewModel.Shelf.cs" />
     <Compile Include="Models\Core\AppViewModel.Yuenov.cs" />
-    <Compile Include="Models\Enums\EntryType.cs" />
-    <Compile Include="Models\Enums\GroupType.cs" />
+    <Compile Include="Models\Enums\MenuItemType.cs" />
     <Compile Include="Models\UI\CustomResourceLoader.cs" />
-    <Compile Include="Models\UI\EntryItem.cs" />
+    <Compile Include="Models\UI\MenuItem.cs" />
+    <Compile Include="Models\UI\SearchResult.cs" />
+    <Compile Include="Models\UI\SearchResultSelector.cs" />
+    <Compile Include="Pages\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DiscoveryPage.xaml.cs">
       <DependentUpon>DiscoveryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RankPage.xaml.cs">
+      <DependentUpon>RankPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -155,8 +164,8 @@
     <Compile Include="Pages\ShelfPage.xaml.cs">
       <DependentUpon>ShelfPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StorePage.xaml.cs">
-      <DependentUpon>StorePage.xaml</DependentUpon>
+    <Compile Include="Pages\TopicPage.xaml.cs">
+      <DependentUpon>TopicPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -232,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Components\AppSearchBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\NavigateMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,7 +265,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DiscoveryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RankPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,7 +285,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\StorePage.xaml">
+    <Page Include="Pages\TopicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,10 +312,6 @@
     <Page Include="Template\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Template\Others.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Theme\Dark.xaml">
       <SubType>Designer</SubType>

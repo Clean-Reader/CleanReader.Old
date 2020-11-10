@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.AppSearchBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:Clean_Reader.Models.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <DataTemplate x:DataType="ui:SearchResult" x:Key="LocalTemplate">
+            <Grid Padding="15,10">
+                <TextBlock Text="{x:Bind Book.Name}"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:DataType="ui:SearchResult" x:Key="WebTemplate">
+            <Grid Padding="15,10">
+                <TextBlock Style="{StaticResource BodyTextStyle}">
+                    <Run x:Uid="Control_SearchFromWeb" Foreground="{ThemeResource TipTextColor}"/>
+                    <Run Text=": "/>
+                    <Run Text="{x:Bind SearchText,Mode=OneWay}"/>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+        <ui:SearchResultSelector LocalResultTemplate="{StaticResource LocalTemplate}" WebResultTemplate="{StaticResource WebTemplate}"
+                                 x:Key="SearchSelector"/>
+    </UserControl.Resources>
+    <Grid>
+        <AutoSuggestBox Style="{StaticResource BasicSearchBoxStyle}" Width="300"
+                        x:Uid="Control_AppSearchBox" TextChanged="AutoSuggestBox_TextChanged"
+                        ItemsSource="{x:Bind ResultCollection}" QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                        ItemTemplateSelector="{StaticResource SearchSelector}"/>
+    </Grid>
+</UserControl>

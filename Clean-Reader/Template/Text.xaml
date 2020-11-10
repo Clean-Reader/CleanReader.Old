@@ -22,7 +22,10 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     <Style x:Key="HeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextStyle}">
-        <Setter Property="FontSize" Value="80" />
+        <Setter Property="FontSize" Value="{CustomResource HeaderFontSize}" />
+    </Style>
+    <Style x:Key="LargeTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextStyle}">
+        <Setter Property="FontSize" Value="{CustomResource LargeFontSize}" />
     </Style>
     <Style x:Key="SmallTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextStyle}">
         <Setter Property="FontSize" Value="{CustomResource SmallFontSize}" />

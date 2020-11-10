@@ -5,11 +5,62 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
     mc:Ignorable="d"
     >
 
-    <Grid>
+    <ScrollViewer Style="{StaticResource BasicScrollViewer}"
+                  VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollMode="Disabled">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" x:Uid="Control_LastestReadTipBlock"
+                           HorizontalAlignment="Left"/>
+                <ListView Grid.Row="1" Grid.ColumnSpan="2"
+                          x:Name="LastestReadListView" IsItemClickEnabled="True"
+                          Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"/>
+            </Grid>
+            
+            <Grid Grid.Row="1" Margin="0,35,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" x:Name="ShelfNameBlock"
+                           Text="全部书籍" HorizontalAlignment="Left"/>
+                <interaction:ActionButton Grid.Column="1" Style="{StaticResource DefaultActionButtonStyle}"
+                                          x:Name="ShelfButton">
+                    <interaction:ActionButton.Icon>
+                        <uwp:FeatherIcon Symbol="Sliders" FontSize="{CustomResource BodyFontSize}"/>
+                    </interaction:ActionButton.Icon>
+                </interaction:ActionButton>
 
-    </Grid>
+                <controls:AdaptiveGridView Grid.Row="1" Grid.ColumnSpan="2" StretchContentForSingleRow="False"
+                          x:Name="ShelfBookGridView" IsItemClickEnabled="True"
+                          Style="{StaticResource NoScrollGridView}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"
+                                           DesiredWidth="160" ItemHeight="230"/>
+            </Grid>
+            
+        </Grid>
+    </ScrollViewer>
+    
 </ui:RichasyPage>

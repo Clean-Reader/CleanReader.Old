@@ -123,20 +123,17 @@
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>Add sync account</value>
   </data>
-  <data name="Control_DiscoveryCollapseItem.HeaderText" xml:space="preserve">
-    <value>Discovery</value>
+  <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
+    <value>Find books</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
   </data>
-  <data name="Control_SettingCollapseItem.HeaderText" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
+    <value>Recently Read</value>
   </data>
-  <data name="Control_ShelfCollapseItem.HeaderText" xml:space="preserve">
-    <value>Shelf</value>
-  </data>
-  <data name="Control_StoreCollapseItem.HeaderText" xml:space="preserve">
-    <value>Book Store</value>
+  <data name="Control_SearchFromWeb.Text" xml:space="preserve">
+    <value>Search in Bookstore</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>Authorization suspension</value>
@@ -153,17 +150,29 @@
   <data name="Tip_DefaultShelf" xml:space="preserve">
     <value>Default Shelf</value>
   </data>
+  <data name="Tip_Discovery" xml:space="preserve">
+    <value>Discovery</value>
+  </data>
   <data name="Tip_EndBooks" xml:space="preserve">
     <value>Finished Novel</value>
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>Failed to acquire user</value>
   </data>
+  <data name="Tip_NeedLogin" xml:space="preserve">
+    <value>Need Login</value>
+  </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>Do you want to log out of OneDrive? Local reading records will not be synchronized after exiting</value>
   </data>
   <data name="Tip_Rank" xml:space="preserve">
     <value>Rank</value>
+  </data>
+  <data name="Tip_Setting" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Tip_Shelf" xml:space="preserve">
+    <value>Shelf</value>
   </data>
   <data name="Tip_Topic" xml:space="preserve">
     <value>Topic</value>

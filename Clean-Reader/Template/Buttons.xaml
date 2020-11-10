@@ -28,9 +28,9 @@
     </Style>
     <Style TargetType="interaction:ActionButton" x:Key="DefaultActionButtonStyle">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}" />
+        <Setter Property="Foreground" Value="{ThemeResource ImportantTextColor}" />
         <Setter Property="BorderBrush" Value="{ThemeResource LineColor}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="PointerOverBackground" Value="{ThemeResource PageOverBackground}" />
         <Setter Property="PointerOverBorderBrush" Value="{ThemeResource PrimaryColor}" />
         <Setter Property="PointerOverForeground" Value="{ThemeResource PrimaryColor}" />
@@ -226,7 +226,7 @@
         </Setter>
     </Style>
     <Style TargetType="interaction:IconButton" x:Key="DefaultIconButtonStyle" BasedOn="{StaticResource DefaultExtraButtonStyle}">
-        <Setter Property="GutterWidth" Value="15" />
+        <Setter Property="GutterWidth" Value="25" />
         <Setter Property="Padding" Value="20,12" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="ProgressRingStyle" Value="{StaticResource BasicProgressRingStyle}" />

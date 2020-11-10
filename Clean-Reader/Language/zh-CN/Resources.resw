@@ -123,20 +123,17 @@
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>添加同步账户</value>
   </data>
-  <data name="Control_DiscoveryCollapseItem.HeaderText" xml:space="preserve">
-    <value>发现</value>
+  <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
+    <value>查找书籍</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>导入书籍</value>
   </data>
-  <data name="Control_SettingCollapseItem.HeaderText" xml:space="preserve">
-    <value>设置</value>
+  <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
+    <value>最近阅读</value>
   </data>
-  <data name="Control_ShelfCollapseItem.HeaderText" xml:space="preserve">
-    <value>书架</value>
-  </data>
-  <data name="Control_StoreCollapseItem.HeaderText" xml:space="preserve">
-    <value>书城</value>
+  <data name="Control_SearchFromWeb.Text" xml:space="preserve">
+    <value>在书城中查询</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>授权中止</value>
@@ -153,17 +150,29 @@
   <data name="Tip_DefaultShelf" xml:space="preserve">
     <value>默认书架</value>
   </data>
+  <data name="Tip_Discovery" xml:space="preserve">
+    <value>发现</value>
+  </data>
   <data name="Tip_EndBooks" xml:space="preserve">
     <value>完本</value>
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>获取用户失败</value>
   </data>
+  <data name="Tip_NeedLogin" xml:space="preserve">
+    <value>未登录</value>
+  </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>您是否要退出OneDrive？退出后本地阅读记录将不会同步</value>
   </data>
   <data name="Tip_Rank" xml:space="preserve">
     <value>榜单</value>
+  </data>
+  <data name="Tip_Setting" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Tip_Shelf" xml:space="preserve">
+    <value>书架</value>
   </data>
   <data name="Tip_Topic" xml:space="preserve">
     <value>专题</value>

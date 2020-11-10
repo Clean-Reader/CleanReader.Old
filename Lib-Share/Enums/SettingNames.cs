@@ -9,6 +9,7 @@
         FontSize,
         OneDriveAccessToken,
         OneDriveUserName,
-        OneDriveExpiryTime
+        OneDriveExpiryTime,
+        LastShelfId
     }
 }

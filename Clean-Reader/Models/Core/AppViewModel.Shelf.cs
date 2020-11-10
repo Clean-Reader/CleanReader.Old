@@ -14,36 +14,37 @@ namespace Clean_Reader.Models.Core
     {
         public async Task ShelfInit()
         {
-            ShelfCollection.Clear();
             var books = await App.Tools.IO.GetLocalDataAsync<List<Book>>(StaticString.FileShelfList);
-            var shelfs = await App.Tools.IO.GetLocalDataAsync<List<EntryItem>>(StaticString.FileShelfIndex);
-            var defaultShelf = new EntryItem(App.Tools.App.GetLocalizationTextFromResource(LanguageNames.DefaultShelf),
-                                            "default",0);
-            shelfs.ForEach(p => p.Count = 0);
+            var shelfs = await App.Tools.IO.GetLocalDataAsync<List<Shelf>>(StaticString.FileShelfIndex);
+            var defaultShelf = new Shelf(App.Tools.App.GetLocalizationTextFromResource(LanguageNames.DefaultShelf),"default");
             if (books.Count > 0)
             {
                 foreach (var book in books)
                 {
                     if (!string.IsNullOrEmpty(book.ShelfId))
                     {
-                        var shelf = shelfs.Where(p => p.Parameter == book.ShelfId).FirstOrDefault();
+                        var shelf = shelfs.Where(p => p.Id == book.ShelfId).FirstOrDefault();
                         if (shelf == null)
                         {
                             book.ShelfId = "";
-                            defaultShelf.Count += 1;
                         }  
-                        else
-                            shelf.Count += 1;
                     }
                 }
             }
+            TotalBookList = books;
             ShelfCollection.Add(defaultShelf);
             shelfs.ForEach(p => ShelfCollection.Add(p));
+            string lastOpenShelfId = App.Tools.App.GetLocalSetting(SettingNames.LastShelfId, "default");
+            var lastShelf = shelfs.Where(p => p.Id == lastOpenShelfId).FirstOrDefault();
+            if (lastShelf != null)
+                CurrentShelf = lastShelf;
+            else
+                CurrentShelf = shelfs.First();
         }
 
         public async Task SaveShelf()
         {
-            var list = ShelfCollection.Where(p => p.Parameter != "default").ToList();
+            var list = ShelfCollection.Where(p => p.Id != "default").ToList();
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfIndex, JsonConvert.SerializeObject(list));
         }
     }

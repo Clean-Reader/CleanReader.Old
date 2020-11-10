@@ -13,6 +13,7 @@
         DefaultShelf,
         GetUserFailed,
         AuthorizationCanceled,
-        OneDriveLogoutWarning
+        OneDriveLogoutWarning,
+        NeedLogin
     }
 }

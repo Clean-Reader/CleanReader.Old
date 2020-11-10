@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:layout="using:Clean_Reader.Controls.Layout"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:layout="using:Clean_Reader.Controls.Layout" xmlns:components="using:Clean_Reader.Controls.Components"
     mc:Ignorable="d"
     Loaded="RichasyPage_Loaded"
     SizeChanged="RichasyPage_SizeChanged"
@@ -21,8 +21,22 @@
             </SplitView.Pane>
 
             <SplitView.Content>
-                <Grid Background="{ThemeResource PageBackground}">
-                    <Frame x:Name="MainFrame"/>
+                <Grid Background="{ThemeResource PageBackground}"
+                      Padding="45,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource LargeTextStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                   x:Name="TitleBlock" x:FieldModifier="public" LineHeight="0"/>
+                        <components:AppSearchBox Grid.Column="1" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Frame x:Name="MainFrame" Grid.Row="1" Margin="0,35,0,0"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>

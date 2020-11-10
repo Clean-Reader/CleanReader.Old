@@ -24,10 +24,5 @@ namespace Clean_Reader.Controls.Layout
             }
             ImportButton.IsLoading = false;
         }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            NavigateMenu.CheckLayout();
-        }
     }
 }

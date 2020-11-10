@@ -10,16 +10,7 @@
     d:DesignWidth="400">
 
     <Grid>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}"
-                                x:Name="LoginButton" HorizontalAlignment="Stretch"
-                                Foreground="{ThemeResource PrimaryColor}" CornerRadius="10"
-                                x:Uid="Control_AddSyncAccountTipBlock" Click="LoginButton_Click">
-            <interaction:IconButton.Icon>
-                <uwp:FeatherIcon Symbol="User" FontSize="{CustomResource BodyFontSize}"
-                                 HorizontalAlignment="Left"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
-        <Grid x:Name="DetailContainer" Visibility="Collapsed">
+        <Grid x:Name="DetailContainer">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -40,8 +31,16 @@
                        Margin="0,3,0,0"/>
             </StackPanel>
             <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
-                                      x:Name="LogoutButton" VerticalAlignment="Center"
+                                      x:Name="LoginButton" VerticalAlignment="Center"
                                       Grid.Column="2" Diameter="35"
+                                      Click="LoginButton_Click" BorderThickness="0">
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="LogIn" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
+            <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                      x:Name="LogoutButton" VerticalAlignment="Center"
+                                      Grid.Column="2" Diameter="35" Visibility="Collapsed"
                                       Click="LogoutButton_Click" BorderThickness="0">
                 <interaction:ActionButton.Icon>
                     <uwp:FeatherIcon Symbol="LogOut" FontSize="{CustomResource BasicFontSize}"/>

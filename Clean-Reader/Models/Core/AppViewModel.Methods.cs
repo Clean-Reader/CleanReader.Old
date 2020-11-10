@@ -1,4 +1,6 @@
-﻿using Lib.Share.Enums;
+﻿using Clean_Reader.Models.Enums;
+using Clean_Reader.Pages;
+using Lib.Share.Enums;
 using Lib.Share.Models;
 using Richasy.Controls.UWP.Popups;
 using Richasy.Controls.UWP.Widgets;
@@ -7,11 +9,48 @@ using Richasy.Font.UWP.Enums;
 using System;
 using Windows.Globalization;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Clean_Reader.Models.Core
 {
     public partial class AppViewModel
     {
+        /// <summary>
+        /// 导航到指定页面
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="paramter">参数</param>
+        public void NavigateToPage(MenuItemType type, object paramter = null)
+        {
+            Type pageType = null;
+            switch (type)
+            {
+                case MenuItemType.Shelf:
+                    pageType = typeof(ShelfPage);
+                    break;
+                case MenuItemType.Discovery:
+                    pageType = typeof(DiscoveryPage);
+                    break;
+                case MenuItemType.Category:
+                    pageType = typeof(CategoryPage);
+                    break;
+                case MenuItemType.Rank:
+                    pageType = typeof(RankPage);
+                    break;
+                case MenuItemType.Topic:
+                    pageType = typeof(TopicPage);
+                    break;
+                case MenuItemType.Setting:
+                    pageType = typeof(SettingPage);
+                    break;
+                default:
+                    break;
+            }
+            if(_rootFrame.Content==null || !_rootFrame.Content.GetType().Equals(pageType))
+                _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
+        }
+
+
         public void ShowPopup(LanguageNames name, bool isError = false)
         {
             ShowPopup(App.Tools.App.GetLocalizationTextFromResource(name), isError);

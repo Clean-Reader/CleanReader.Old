@@ -126,6 +126,7 @@
     <Compile Include="Enums\SettingNames.cs" />
     <Compile Include="Enums\StyleNames.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Shelf.cs" />
     <Compile Include="Models\StaticString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Lib_Share.rd.xml" />
@@ -133,6 +134,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Richasy.Controls.UWP">
+      <Version>1.1.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Helper.UWP">
       <Version>1.0.9</Version>

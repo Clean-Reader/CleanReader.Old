@@ -11,10 +11,10 @@
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="FontFamily" Value="{CustomResource Basic}" />
         <Setter Property="FontSize" Value="{CustomResource BodyFontSize}" />
-        <Setter Property="PointerOverBackground" Value="{ThemeResource CardBackground}" />
+        <Setter Property="PointerOverBackground" Value="Transparent" />
         <Setter Property="PointerOverBorderBrush" Value="Transparent" />
         <Setter Property="PointerOverForeground" Value="{ThemeResource ImportantTextColor}" />
-        <Setter Property="FocusBackground" Value="{ThemeResource CardBackground}" />
+        <Setter Property="FocusBackground" Value="Transparent" />
         <Setter Property="FocusBorderBrush" Value="Transparent" />
         <Setter Property="FocusForeground" Value="{ThemeResource ImportantTextColor}" />
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -258,11 +258,10 @@
         <Setter Property="Background" Value="{ThemeResource PageOverBackground}" />
         <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextControlSelectionHighlightColor}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="PlaceholderForeground" Value="Transparent" />
         <Setter Property="FontSize" Value="{CustomResource BasicFontSize}" />
         <Setter Property="FontFamily" Value="{CustomResource Basic}"/>
-        <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="Height" Value="40" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
@@ -325,7 +324,7 @@
                                                     FontStyle="Normal"
                                                     FontSize="{CustomResource SmallFontSize}"
                                                     Text="&#xEA15;"
-                                                    FontFamily="{ThemeResource Icon}"
+                                                    FontFamily="{ThemeResource Feather}"
                                                     AutomationProperties.AccessibilityView="Raw" />
                                             </Grid>
                                         </ControlTemplate>
@@ -570,17 +569,17 @@
     <Style TargetType="AutoSuggestBox" x:Key="BasicSearchBoxStyle">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Height" Value="45" />
         <Setter Property="CornerRadius" Value="5" />
-        <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}" />
+        <Setter Property="Padding" Value="20,12,20,0" />
         <Setter Property="FontFamily" Value="{CustomResource Basic}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource BasicListViewContainerStyle}" />
-        <Setter Property="TextBoxStyle" Value="{StaticResource SearchSuggestBoxTextBoxStyle}" />
+        <Setter Property="TextBoxStyle" Value="{StaticResource TrasparentTextBoxStyle}" />
         <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="AutoSuggestBox">
-                    <Grid x:Name="LayoutRoot">
+                    <Grid x:Name="LayoutRoot" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource LineColor}">
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="Orientation">
@@ -592,14 +591,17 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-
-                        <TextBox x:Name="TextBox"
+                        <uwp:FeatherIcon Symbol="Search" FontSize="{CustomResource SubFontSize}"
+                                         Foreground="{ThemeResource ImportantTextColor}"
+                                         VerticalAlignment="Center"/>
+                        <interaction:ExtraTextBox x:Name="TextBox" Grid.Column="1"
                             Style="{TemplateBinding TextBoxStyle}"
                             PlaceholderText="{TemplateBinding PlaceholderText}"
                             Header="{TemplateBinding Header}"

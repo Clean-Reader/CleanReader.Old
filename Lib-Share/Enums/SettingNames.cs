@@ -7,6 +7,8 @@
         Language,
         Theme,
         FontSize,
-        OneDriveAccessToken
+        OneDriveAccessToken,
+        OneDriveExpiryTime,
+        OneDriveUserName
     }
 }

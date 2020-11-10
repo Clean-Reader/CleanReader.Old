@@ -5,6 +5,9 @@
         UpdateTitle,
         Warning,
         Confirm,
-        Cancel
+        Cancel,
+        AuthorizationCanceled,
+        GetUserFailed,
+        OneDriveLogoutWarning
     }
 }

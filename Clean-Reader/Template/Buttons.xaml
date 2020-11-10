@@ -31,10 +31,10 @@
         <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}" />
         <Setter Property="BorderBrush" Value="{ThemeResource LineColor}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="PointerOverBackground" Value="Transparent" />
+        <Setter Property="PointerOverBackground" Value="{ThemeResource PageOverBackground}" />
         <Setter Property="PointerOverBorderBrush" Value="{ThemeResource PrimaryColor}" />
         <Setter Property="PointerOverForeground" Value="{ThemeResource PrimaryColor}" />
-        <Setter Property="PressBackground" Value="Transparent" />
+        <Setter Property="PressBackground" Value="{ThemeResource PageOverBackground}" />
         <Setter Property="PressBorderBrush" Value="{ThemeResource PrimaryColorOver}" />
         <Setter Property="PressForeground" Value="{ThemeResource PrimaryColorOver}" />
         <Setter Property="Diameter" Value="40" />
@@ -227,7 +227,7 @@
     </Style>
     <Style TargetType="interaction:IconButton" x:Key="DefaultIconButtonStyle" BasedOn="{StaticResource DefaultExtraButtonStyle}">
         <Setter Property="GutterWidth" Value="15" />
-        <Setter Property="Padding" Value="24,12" />
+        <Setter Property="Padding" Value="20,12" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="ProgressRingStyle" Value="{StaticResource BasicProgressRingStyle}" />
         <Setter Property="TextStyle">

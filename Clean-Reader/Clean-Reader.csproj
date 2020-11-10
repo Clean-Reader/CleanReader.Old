@@ -121,6 +121,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\CollapseItem.cs" />
+    <Compile Include="Controls\Components\NavigateMenu.xaml.cs">
+      <DependentUpon>NavigateMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\SyncAccountBlock.xaml.cs">
       <DependentUpon>SyncAccountBlock.xaml</DependentUpon>
     </Compile>
@@ -223,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Components\NavigateMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\SyncAccountBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -279,6 +287,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Template\Others.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Theme\Dark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,7 +320,9 @@
       <Version>1.0.9</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Feather.ttf" />
+  </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Language\en-US\Resources.resw" />
   </ItemGroup>

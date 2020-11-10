@@ -47,4 +47,6 @@
     <SolidColorBrush x:Key="ErrorColor" Color="#F63340"/>
     <SolidColorBrush x:Key="ErrorColorOpacity" Color="#F63340" Opacity="0.2"/>
     <SolidColorBrush x:Key="ErrorColorOver" Color="#E32528"/>
+
+    <SolidColorBrush x:Key="ExpandColor" Color="#F0F0F8"/>
 </ResourceDictionary>

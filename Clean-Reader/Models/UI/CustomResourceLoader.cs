@@ -16,7 +16,7 @@ namespace Clean_Reader.Models.UI
             }
             else if (resourceId.Contains("Font"))
             {
-                double NormalSize = Convert.ToDouble(App.Tools.App.GetLocalSetting(SettingNames.FontSize, "15"));
+                double NormalSize = Convert.ToDouble(App.Tools.App.GetLocalSetting(SettingNames.FontSize, "14"));
                 if (resourceId == "BasicFontSize")
                     return NormalSize;
                 else if (resourceId == "SmallFontSize")

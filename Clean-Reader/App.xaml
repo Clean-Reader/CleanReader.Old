@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="ms-appx:///Template/View.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Template/Converters.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Template/Input.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Template/Others.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

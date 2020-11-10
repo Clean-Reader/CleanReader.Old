@@ -123,11 +123,35 @@
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>添加同步账户</value>
   </data>
+  <data name="Control_DiscoveryCollapseItem.HeaderText" xml:space="preserve">
+    <value>发现</value>
+  </data>
+  <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
+    <value>导入书籍</value>
+  </data>
+  <data name="Control_SettingCollapseItem.HeaderText" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Control_ShelfCollapseItem.HeaderText" xml:space="preserve">
+    <value>书架</value>
+  </data>
+  <data name="Control_StoreCollapseItem.HeaderText" xml:space="preserve">
+    <value>书城</value>
+  </data>
+  <data name="Tip_AuthorizationCanceled" xml:space="preserve">
+    <value>授权中止</value>
+  </data>
   <data name="Tip_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>确认</value>
+  </data>
+  <data name="Tip_GetUserFailed" xml:space="preserve">
+    <value>获取用户失败</value>
+  </data>
+  <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
+    <value>您是否要退出OneDrive？退出后本地阅读记录将不会同步</value>
   </data>
   <data name="Tip_UpdateTitle" xml:space="preserve">
     <value>更新说明</value>

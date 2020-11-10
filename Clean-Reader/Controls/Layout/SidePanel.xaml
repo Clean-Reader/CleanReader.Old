@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Controls.Layout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components"
-    mc:Ignorable="d"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d" SizeChanged="UserControl_SizeChanged"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
@@ -14,13 +14,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" x:Name="NavigateRow" x:FieldModifier="public"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--同步账户-->
         <components:SyncAccountBlock/>
         <!--导入按钮-->
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" CornerRadius="10"
+                                x:Name="ImportButton" HorizontalAlignment="Stretch"
+                                Foreground="{ThemeResource PrimaryColor}" Margin="0,25,0,0"
+                                x:Uid="Control_ImportBookTipBlock" Click="ImportButton_Click"
+                                Grid.Row="1">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="Plus" FontSize="{CustomResource BodyFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
         <!--导航栏-->
+        <components:NavigateMenu Grid.Row="2" Margin="0,25,0,0" x:Name="NavigateMenu"/>
         <!--朗读控制器-->
     </Grid>
 </UserControl>

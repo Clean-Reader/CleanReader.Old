@@ -12,8 +12,8 @@
     <Grid>
         <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}"
                                 x:Name="LoginButton" HorizontalAlignment="Stretch"
-                                Foreground="{ThemeResource PrimaryColor}"
-                                x:Uid="Control_AddSyncAccountTipBlock">
+                                Foreground="{ThemeResource PrimaryColor}" CornerRadius="10"
+                                x:Uid="Control_AddSyncAccountTipBlock" Click="LoginButton_Click">
             <interaction:IconButton.Icon>
                 <uwp:FeatherIcon Symbol="User" FontSize="{CustomResource BodyFontSize}"
                                  HorizontalAlignment="Left"/>
@@ -25,21 +25,28 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <PersonPicture x:Name="Avatar" Width="40" Height="40" DisplayName="Richard Zhang"
+            <Grid>
+                <PersonPicture x:Name="Avatar" Width="40" Height="40"
                        VerticalAlignment="Center" Style="{StaticResource BasicPersonPictureStyle}"/>
+                <ProgressRing x:Name="LoadingRing" VerticalAlignment="Center" HorizontalAlignment="Center"
+                              Style="{StaticResource BasicProgressRingStyle}" Width="25" Height="25"/>
+            </Grid>
+            
             <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Left"
                     Margin="20,0,0,0">
-                <TextBlock x:Name="UserNameBlock" Style="{StaticResource BodyTextStyle}" Text="Richard Zhang"
+                <TextBlock x:Name="UserNameBlock" Style="{StaticResource BodyTextStyle}"
                        Foreground="{ThemeResource PrimaryColor}" FontWeight="SemiBold"/>
                 <TextBlock Text="OneDrive" x:Name="SyncTypeBlock" Style="{StaticResource SmallTextStyle}"
                        Margin="0,3,0,0"/>
             </StackPanel>
-            <interaction:ExtraButton Style="{StaticResource DefaultExtraButtonStyle}"
-                                 Background="Transparent" x:Name="MenuButton"
-                                 Grid.Column="2" VerticalAlignment="Center"
-                                 >
-                <uwp:FeatherIcon Symbol="Delete" FontSize="{CustomResource BodyFontSize}"/>
-            </interaction:ExtraButton>
+            <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                      x:Name="LogoutButton" VerticalAlignment="Center"
+                                      Grid.Column="2" Diameter="35"
+                                      Click="LogoutButton_Click" BorderThickness="0">
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="LogOut" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
         </Grid>
     </Grid>
     

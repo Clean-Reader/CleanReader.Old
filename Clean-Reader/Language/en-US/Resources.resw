@@ -123,11 +123,35 @@
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>Add sync account</value>
   </data>
+  <data name="Control_DiscoveryCollapseItem.HeaderText" xml:space="preserve">
+    <value>Discovery</value>
+  </data>
+  <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
+    <value>Import Book</value>
+  </data>
+  <data name="Control_SettingCollapseItem.HeaderText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Control_ShelfCollapseItem.HeaderText" xml:space="preserve">
+    <value>Shelf</value>
+  </data>
+  <data name="Control_StoreCollapseItem.HeaderText" xml:space="preserve">
+    <value>Book Store</value>
+  </data>
+  <data name="Tip_AuthorizationCanceled" xml:space="preserve">
+    <value>Authorization suspension</value>
+  </data>
   <data name="Tip_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>
+  </data>
+  <data name="Tip_GetUserFailed" xml:space="preserve">
+    <value>Failed to acquire user</value>
+  </data>
+  <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
+    <value>Do you want to log out of OneDrive? Local reading records will not be synchronized after exiting</value>
   </data>
   <data name="Tip_UpdateTitle" xml:space="preserve">
     <value>Update Information</value>

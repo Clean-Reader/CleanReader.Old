@@ -33,7 +33,7 @@ namespace Clean_Reader.Models.Core
                 var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Misc/Update_{lan}.txt"));
                 string content = await FileIO.ReadTextAsync(file);
                 main.Description = content;
-                main.LogoUri = "ms-appx:///Assets/StoreLogo.png";
+                main.LogoUri = "ms-appx:///Assets/logo.png";
                 main.ActionButtonStyle = App.Tools.App.GetStyleFromResource(StyleNames.PrimaryActionButtonStyle);
                 main.ActionIcon = new FeatherIcon(FeatherSymbol.X);
                 main.TitleTextStyle = App.Tools.App.GetStyleFromResource(StyleNames.SubtitleTextStyle);

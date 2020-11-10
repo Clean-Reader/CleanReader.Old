@@ -11,6 +11,7 @@
                    Text="{Binding}"
                    />
     </DataTemplate>
+    <FontFamily x:Key="Feather">/Assets/Fonts/Feather.ttf#Feather</FontFamily>
     <Style TargetType="ContentDialog" x:Key="BasicDialogStyle">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>

@@ -1,13 +1,8 @@
-﻿using Richasy.Controls.UWP.Popups;
-using Richasy.Controls.UWP.Widgets;
-using Richasy.Font.UWP;
-using Richasy.Font.UWP.Enums;
-using System;
-using Windows.Globalization;
-using Windows.Storage;
+﻿using System;
 using Lib.Share.Enums;
-using Lib.Share.Models;
 using Yuenov.SDK;
+using Richasy.Helper.UWP;
+using System.Threading.Tasks;
 
 namespace Clean_Reader.Models.Core
 {
@@ -18,5 +13,26 @@ namespace Clean_Reader.Models.Core
             _yuenovClient = new YuenovClient();
         }
         
+        public async Task OneDriveInit()
+        {
+            string token = App.Tools.App.GetLocalSetting(SettingNames.OneDriveAccessToken, "");
+            if (string.IsNullOrEmpty(token))
+                _onedrive = new OneDriveHelper(_clientId, _scopes);
+            else
+            {
+                _onedrive = new OneDriveHelper(_clientId, _scopes, token);
+                int now = App.Tools.App.GetNowSeconds();
+                int expiry = Convert.ToInt32(App.Tools.App.GetLocalSetting(SettingNames.OneDriveExpiryTime, "0"));
+                if (now >= expiry)
+                {
+                    var result = await _onedrive.RefreshTokenAsync();
+                    if (result != null)
+                    {
+                        App.Tools.App.WriteLocalSetting(SettingNames.OneDriveAccessToken, result.AccessToken);
+                        App.Tools.App.WriteLocalSetting(SettingNames.OneDriveExpiryTime, App.Tools.App.DateToTimeStamp(result.ExpiresOn.DateTime).ToString());
+                    }
+                }
+            }
+        }
     }
 }

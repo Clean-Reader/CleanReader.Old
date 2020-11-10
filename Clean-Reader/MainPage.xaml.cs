@@ -24,12 +24,16 @@ namespace Clean_Reader
     /// </summary>
     public sealed partial class MainPage : RichasyPage
     {
-        public static MainPage Current;
         public AppViewModel vm = App.VM;
         public MainPage()
         {
             this.InitializeComponent();
             Current = this;
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
         }
 
         private void RichasyPage_Loaded(object sender, RoutedEventArgs e)

@@ -15,6 +15,7 @@
         AuthorizationCanceled,
         OneDriveLogoutWarning,
         NeedLogin,
-        RepeatBook
+        RepeatBook,
+        ShelfSelection
     }
 }

@@ -1,4 +1,5 @@
-﻿using Clean_Reader.Models.UI;
+﻿using Clean_Reader.Controls.Dialogs;
+using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Lib.Share.Models;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ namespace Clean_Reader.Models.Core
         {
             var books = await App.Tools.IO.GetLocalDataAsync<List<Book>>(StaticString.FileShelfList);
             var shelfs = await App.Tools.IO.GetLocalDataAsync<List<Shelf>>(StaticString.FileShelfIndex);
+            var lastest = await App.Tools.IO.GetLocalDataAsync<List<string>>(StaticString.FileLastestList);
             var defaultShelf = new Shelf(App.Tools.App.GetLocalizationTextFromResource(LanguageNames.DefaultShelf), "default");
             if (books.Count > 0)
             {
@@ -36,6 +38,12 @@ namespace Clean_Reader.Models.Core
             TotalBookList = books;
             ShelfCollection.Add(defaultShelf);
             shelfs.ForEach(p => ShelfCollection.Add(p));
+            foreach (var lastId in lastest)
+            {
+                var book = books.Where(p => p.BookId == lastId).FirstOrDefault();
+                if (book != null)
+                    LastestReadCollection.Add(book);
+            }
             string lastOpenShelfId = App.Tools.App.GetLocalSetting(SettingNames.LastShelfId, "default");
             var lastShelf = shelfs.Where(p => p.Id == lastOpenShelfId).FirstOrDefault();
             if (lastShelf != null)
@@ -44,10 +52,22 @@ namespace Clean_Reader.Models.Core
                 CurrentShelf = ShelfCollection.First();
         }
 
-        public async Task ImportBooks(IEnumerable<StorageFile> files, string shelfId = "")
+        public async Task ImportBooks()
         {
+            var files = await App.Tools.IO.OpenLocalFilesAsync(".epub", ".txt");
             if (files == null || files.Count() == 0)
                 return;
+            string shelfId = "";
+            if (ShelfCollection.Count > 1)
+            {
+                var shelfDialog = new ShelfSelectionDialog(CurrentShelf);
+                shelfDialog.PrimaryButtonClick += (_s, _e) =>
+                {
+                    if (shelfDialog.SelectedItem != null)
+                        shelfId = shelfDialog.SelectedItem.Id == "default" ? "" : shelfDialog.SelectedItem.Id;
+                };
+                await shelfDialog.ShowAsync();
+            }
             foreach (var file in files)
             {
                 var book = new Book(file, shelfId);
@@ -67,7 +87,7 @@ namespace Clean_Reader.Models.Core
             }
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
-                InitCurrentShelf();
+                CurrentShelfInit();
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
         }
 

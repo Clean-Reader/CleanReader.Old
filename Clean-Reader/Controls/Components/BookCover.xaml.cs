@@ -1,5 +1,4 @@
-﻿using HN.Controls;
-using Lib.Share.Enums;
+﻿using Lib.Share.Enums;
 using Lib.Share.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,31 +15,6 @@ namespace Clean_Reader.Controls.Components
             this.InitializeComponent();
         }
 
-        public bool IsShowBackground
-        {
-            get { return (bool)GetValue(IsShowBackgroundProperty); }
-            set { SetValue(IsShowBackgroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsShowBackground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsShowBackgroundProperty =
-            DependencyProperty.Register("IsShowBackground", typeof(bool), typeof(BookCover), new PropertyMetadata(true,new PropertyChangedCallback(IsShowBackground_Changed)));
-
-        private static void IsShowBackground_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var instance = d as BookCover;
-            if ((bool)e.NewValue)
-            {
-                instance.BackgroundImage.Visibility = Visibility.Visible;
-                instance.BackgroundMask.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                instance.BackgroundImage.Visibility = Visibility.Collapsed;
-                instance.BackgroundMask.Visibility = Visibility.Collapsed;
-            }
-        }
-
         public Book Data
         {
             get { return (Book)GetValue(DataProperty); }
@@ -49,11 +23,11 @@ namespace Clean_Reader.Controls.Components
 
         // Using a DependencyProperty as the backing store for Data.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(Book), typeof(BookCover), new PropertyMetadata(null,new PropertyChangedCallback(Data_Changed)));
+            DependencyProperty.Register("Data", typeof(Book), typeof(BookCover), new PropertyMetadata(null, new PropertyChangedCallback(Data_Changed)));
 
         private static void Data_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if(e.NewValue!=null && e.NewValue is Book data)
+            if (e.NewValue != null && e.NewValue is Book data)
             {
                 var instance = d as BookCover;
                 switch (data.Type)
@@ -62,7 +36,7 @@ namespace Clean_Reader.Controls.Components
                         instance.CoverImage.Visibility = Visibility.Collapsed;
                         instance.SimpleCover.Visibility = Visibility.Visible;
                         instance.BookNameBlock.Text = data.Name;
-                        instance.SimpleCover.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.TxtColor);
+                        instance.SimpleCover.Background = instance.BackgroundRect.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.TxtColor);
                         break;
                     case BookType.Epub:
                         instance.CoverImage.Visibility = Visibility.Visible;
@@ -75,7 +49,7 @@ namespace Clean_Reader.Controls.Components
                         instance.CoverImage.Visibility = Visibility.Visible;
                         instance.SimpleCover.Visibility = Visibility.Collapsed;
                         instance.CoverImage.Source = new BitmapImage(new System.Uri(App.VM._yuenovClient.GetImageUrl(data.Cover))) { DecodePixelWidth = 140 };
-                        if(instance.BackgroundImage.Visibility==Visibility.Visible)
+                        if (instance.BackgroundImage.Visibility == Visibility.Visible)
                             instance.BackgroundImage.Source = new BitmapImage(new System.Uri(App.VM._yuenovClient.GetImageUrl(data.Cover))) { DecodePixelWidth = 40 };
                         break;
                     default:
@@ -90,9 +64,9 @@ namespace Clean_Reader.Controls.Components
             SimpleCover.Visibility = Visibility.Visible;
             BookNameBlock.Text = Data.Name;
             if (Data.Type == BookType.Epub)
-                SimpleCover.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.EpubColor);
+                SimpleCover.Background = BackgroundRect.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.EpubColor);
             else
-                SimpleCover.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.TxtColor);
+                SimpleCover.Background = BackgroundRect.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.TxtColor);
         }
     }
 }

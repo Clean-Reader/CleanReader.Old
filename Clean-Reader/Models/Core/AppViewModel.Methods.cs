@@ -2,14 +2,19 @@
 using Clean_Reader.Pages;
 using Lib.Share.Enums;
 using Lib.Share.Models;
+using Newtonsoft.Json;
+using Richasy.Controls.Reader.Models;
 using Richasy.Controls.UWP.Popups;
 using Richasy.Controls.UWP.Widgets;
 using Richasy.Font.UWP;
 using Richasy.Font.UWP.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.Globalization;
 using Windows.Storage;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace Clean_Reader.Models.Core
@@ -51,15 +56,52 @@ namespace Clean_Reader.Models.Core
                 _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
         }
 
+        public async void OpenReaderView(Book book)
+        {
+            if (book == null)
+                return;
+            if(LastestReadCollection.Contains(book))
+                LastestReadCollection.Remove(book);
+            LastestReadCollection.Insert(0, book);
+            int maxCount = Convert.ToInt32(App.Tools.App.GetLocalSetting(SettingNames.MaxLastestBookCount, "12"));
+            if (LastestReadCollection.Count > maxCount)
+                LastestReadCollection.RemoveAt(LastestReadCollection.Count - 1);
+            
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(ReaderPage), book, new DrillInNavigationTransitionInfo());
+            await App.Tools.IO.SetLocalDataAsync(StaticString.FileLastestList, JsonConvert.SerializeObject(LastestReadCollection.Select(p => p.BookId)));
+        }
+
+        public void CloseReaderView()
+        {
+            var frame = Window.Current.Content as Frame;
+            if (frame.CanGoBack)
+                frame.GoBack(new EntranceNavigationTransitionInfo());
+        }
+
+        public async void ViewStyleInit()
+        {
+            var txtStyle = await App.Tools.IO.GetLocalDataAsync<TxtViewStyle>(StaticString.FileTxtStyle, "{}");
+            var epubStyle = await App.Tools.IO.GetLocalDataAsync<EpubViewStyle>(StaticString.FileEpubStyle, "{}");
+            _txtViewStyle = txtStyle == null ? new TxtViewStyle() : txtStyle;
+            _epubViewStyle = epubStyle == null ? new EpubViewStyle() : epubStyle;
+        }
+
+        public async void HistoryInit()
+        {
+            var history = await App.Tools.IO.GetLocalDataAsync<List<ReadHistory>>(StaticString.FileHistory);
+            HistoryList = history;
+        }
+
         private void CurrentShelf_Changed(object sender, EventArgs e)
         {
             DisplayBookCollection.Clear();
             if (TotalBookList.Count > 0)
             {
-                InitCurrentShelf();
+                CurrentShelfInit();
             }
         }
-        public void InitCurrentShelf()
+        public void CurrentShelfInit()
         {
             string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             var books = TotalBookList.Where(p => p.ShelfId == shelfId).ToList();

@@ -10,6 +10,7 @@
     d:DesignWidth="400">
 
     <Grid>
+        <Grid x:Name="BackgroundRect" CornerRadius="10" Width="150" Height="170"/>
         <controls:ImageEx x:Name="BackgroundImage" Stretch="UniformToFill" CornerRadius="10"
                           Width="150" Height="170"/>
         <Grid Background="{ThemeResource CoverBackground}" HorizontalAlignment="Stretch" x:Name="BackgroundMask"

@@ -12,7 +12,7 @@
     Background="{ThemeResource PageBackground}">
 
     <Grid>
-        <SplitView OpenPaneLength="340" DisplayMode="CompactInline"
+        <SplitView OpenPaneLength="300" DisplayMode="CompactInline"
                    IsPaneOpen="True">
             <SplitView.Pane>
                 <Grid>

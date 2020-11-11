@@ -1,7 +1,9 @@
 ﻿using Clean_Reader.Models.Core;
+using Lib.Share.Models;
 using Richasy.Controls.UWP.Models.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,6 +30,33 @@ namespace Clean_Reader.Pages
         public ShelfPage()
         {
             this.InitializeComponent();
+            vm.LastestReadCollection.CollectionChanged += LastestReadCollection_Changed;
+            vm.DisplayBookCollection.CollectionChanged += DisplayBookCollection_Changed;
+            LastestContainer.Visibility = vm.LastestReadCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            NoDataContainer.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void DisplayBookCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NoDataContainer.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void LastestReadCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            LastestContainer.Visibility = vm.LastestReadCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            ImportButton.IsEnabled = false;
+            await vm.ImportBooks();
+            ImportButton.IsEnabled = true;
+        }
+
+        private void BookView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var book = e.ClickedItem as Book;
+            vm.OpenReaderView(book);
         }
     }
 }

@@ -126,11 +126,17 @@
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>Find books</value>
   </data>
+  <data name="Control_ImportBookButton.Content" xml:space="preserve">
+    <value>Import Books</value>
+  </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
   </data>
   <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
     <value>Recently Read</value>
+  </data>
+  <data name="Control_NeedOpenBookTipBlock.Text" xml:space="preserve">
+    <value>The bookshelf is empty, let's open a book and read it~</value>
   </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="Tip_Shelf" xml:space="preserve">
     <value>Shelf</value>
+  </data>
+  <data name="Tip_ShelfSelection" xml:space="preserve">
+    <value>Choose a bookshelf</value>
   </data>
   <data name="Tip_Topic" xml:space="preserve">
     <value>Topic</value>

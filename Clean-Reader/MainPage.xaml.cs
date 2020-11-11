@@ -41,9 +41,16 @@ namespace Clean_Reader
 
         private async void RichasyPage_Loaded(object sender, RoutedEventArgs e)
         {
-            vm.CheckUpdate();
-            await vm.ShelfInit();
-            vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
+            if (!IsInit)
+            {
+                vm.CheckUpdate();
+                await vm.ShelfInit();
+                vm.ViewStyleInit();
+                vm.HistoryInit();
+                vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
+                IsInit = true;
+            }
+           
             // TODO
         }
 

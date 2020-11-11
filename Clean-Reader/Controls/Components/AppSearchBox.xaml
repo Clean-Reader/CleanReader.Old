@@ -10,8 +10,21 @@
     d:DesignWidth="400">
     <UserControl.Resources>
         <DataTemplate x:DataType="ui:SearchResult" x:Key="LocalTemplate">
-            <Grid Padding="15,10">
-                <TextBlock Text="{x:Bind Book.Name}"/>
+            <Grid Padding="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Width="50" StretchDirection="Both">
+                    <local:BookCover Data="{x:Bind Book}"/>
+                </Viewbox>
+                <StackPanel VerticalAlignment="Center" Margin="15,0,0,0" Grid.Column="1"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="{x:Bind Book.Name}" Style="{StaticResource BodyTextStyle}"
+                               MaxLines="1" ToolTipService.ToolTip="{x:Bind Book.Name}"/>
+                    <TextBlock Text="{x:Bind Book.Type}" Style="{StaticResource SmallTextStyle}"
+                               Margin="0,5,0,0"/>
+                </StackPanel>
             </Grid>
         </DataTemplate>
         <DataTemplate x:DataType="ui:SearchResult" x:Key="WebTemplate">

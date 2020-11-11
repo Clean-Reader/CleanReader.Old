@@ -10,6 +10,7 @@
         OneDriveAccessToken,
         OneDriveUserName,
         OneDriveExpiryTime,
-        LastShelfId
+        LastShelfId,
+        MaxLastestBookCount
     }
 }

@@ -17,11 +17,7 @@ namespace Clean_Reader.Controls.Layout
         private async void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             ImportButton.IsLoading = true;
-            var files = await App.Tools.IO.OpenLocalFilesAsync(".epub", ".txt");
-            if (files != null && files.Count > 0)
-            {
-                await App.VM.ImportBooks(files);
-            }
+            await App.VM.ImportBooks();
             ImportButton.IsLoading = false;
         }
     }

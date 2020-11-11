@@ -20,7 +20,7 @@ namespace Clean_Reader.Controls.Layout
             var files = await App.Tools.IO.OpenLocalFilesAsync(".epub", ".txt");
             if (files != null && files.Count > 0)
             {
-
+                await App.VM.ImportBooks(files);
             }
             ImportButton.IsLoading = false;
         }

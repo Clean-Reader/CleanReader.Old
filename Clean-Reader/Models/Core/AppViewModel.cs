@@ -12,8 +12,11 @@ namespace Clean_Reader.Models.Core
         {
             _yuenovClient = new YuenovClient();
             _yuenovClient.SetOpenToken("e89309f4-6cd8-4a45-90de-922e7d71455a");
+            CurrentShelfChanged += CurrentShelf_Changed;
         }
+
         
+
         public async Task OneDriveInit()
         {
             string token = App.Tools.App.GetLocalSetting(SettingNames.OneDriveAccessToken, "");

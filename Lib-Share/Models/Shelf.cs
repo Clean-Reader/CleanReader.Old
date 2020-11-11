@@ -31,6 +31,8 @@ namespace Lib.Share.Models
         {
             if (string.IsNullOrEmpty(id))
                 Id = Guid.NewGuid().ToString("N");
+            else
+                Id = id;
             Name = name;
         }
     }

@@ -7,6 +7,7 @@ using Richasy.Controls.UWP.Widgets;
 using Richasy.Font.UWP;
 using Richasy.Font.UWP.Enums;
 using System;
+using System.Linq;
 using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Animation;
@@ -50,6 +51,24 @@ namespace Clean_Reader.Models.Core
                 _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
         }
 
+        private void CurrentShelf_Changed(object sender, EventArgs e)
+        {
+            DisplayBookCollection.Clear();
+            if (TotalBookList.Count > 0)
+            {
+                InitCurrentShelf();
+            }
+        }
+        public void InitCurrentShelf()
+        {
+            string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
+            var books = TotalBookList.Where(p => p.ShelfId == shelfId).ToList();
+            foreach (var book in books)
+            {
+                if (!DisplayBookCollection.Contains(book))
+                    DisplayBookCollection.Add(book);
+            }
+        }
 
         public void ShowPopup(LanguageNames name, bool isError = false)
         {

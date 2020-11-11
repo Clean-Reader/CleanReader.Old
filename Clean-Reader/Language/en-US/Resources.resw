@@ -168,6 +168,9 @@
   <data name="Tip_Rank" xml:space="preserve">
     <value>Rank</value>
   </data>
+  <data name="Tip_RepeatBook" xml:space="preserve">
+    <value>Duplicate books already included</value>
+  </data>
   <data name="Tip_Setting" xml:space="preserve">
     <value>Settings</value>
   </data>

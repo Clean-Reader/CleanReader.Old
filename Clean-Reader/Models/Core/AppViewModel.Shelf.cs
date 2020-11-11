@@ -2,11 +2,13 @@
 using Lib.Share.Enums;
 using Lib.Share.Models;
 using Newtonsoft.Json;
+using Richasy.Controls.Reader.Models.Epub;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Clean_Reader.Models.Core
 {
@@ -16,7 +18,7 @@ namespace Clean_Reader.Models.Core
         {
             var books = await App.Tools.IO.GetLocalDataAsync<List<Book>>(StaticString.FileShelfList);
             var shelfs = await App.Tools.IO.GetLocalDataAsync<List<Shelf>>(StaticString.FileShelfIndex);
-            var defaultShelf = new Shelf(App.Tools.App.GetLocalizationTextFromResource(LanguageNames.DefaultShelf),"default");
+            var defaultShelf = new Shelf(App.Tools.App.GetLocalizationTextFromResource(LanguageNames.DefaultShelf), "default");
             if (books.Count > 0)
             {
                 foreach (var book in books)
@@ -27,7 +29,7 @@ namespace Clean_Reader.Models.Core
                         if (shelf == null)
                         {
                             book.ShelfId = "";
-                        }  
+                        }
                     }
                 }
             }
@@ -39,7 +41,34 @@ namespace Clean_Reader.Models.Core
             if (lastShelf != null)
                 CurrentShelf = lastShelf;
             else
-                CurrentShelf = shelfs.First();
+                CurrentShelf = ShelfCollection.First();
+        }
+
+        public async Task ImportBooks(IEnumerable<StorageFile> files, string shelfId = "")
+        {
+            if (files == null || files.Count() == 0)
+                return;
+            foreach (var file in files)
+            {
+                var book = new Book(file, shelfId);
+                if (TotalBookList.Contains(book))
+                {
+                    ShowPopup($"{App.Tools.App.GetLocalizationTextFromResource(LanguageNames.RepeatBook)}:{book.Name}", true);
+                    continue;
+                }
+                if (book.Type == BookType.Epub)
+                {
+                    var epub = await EpubReader.Read(file, Encoding.Default);
+                    var coverFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Covers",CreationCollisionOption.OpenIfExists);
+                    var coverFile = await coverFolder.CreateFileAsync(book.BookId + ".png", CreationCollisionOption.ReplaceExisting);
+                    await FileIO.WriteBytesAsync(coverFile, epub.CoverImage);
+                }
+                TotalBookList.Add(book);
+            }
+            string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
+            if (currentShelfId == shelfId)
+                InitCurrentShelf();
+            await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
         }
 
         public async Task SaveShelf()

@@ -14,6 +14,7 @@
         GetUserFailed,
         AuthorizationCanceled,
         OneDriveLogoutWarning,
-        NeedLogin
+        NeedLogin,
+        RepeatBook
     }
 }

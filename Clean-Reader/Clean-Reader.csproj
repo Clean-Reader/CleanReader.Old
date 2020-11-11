@@ -124,6 +124,9 @@
     <Compile Include="Controls\Components\AppSearchBox.xaml.cs">
       <DependentUpon>AppSearchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\BookCover.xaml.cs">
+      <DependentUpon>BookCover.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\NavigateMenu.xaml.cs">
       <DependentUpon>NavigateMenu.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\Components\AppSearchBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Components\BookCover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

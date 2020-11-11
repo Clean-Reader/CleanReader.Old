@@ -32,8 +32,26 @@ namespace Clean_Reader.Models.Core
         public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();
 
         public ObservableCollection<Shelf> ShelfCollection = new ObservableCollection<Shelf>();
-        public Shelf CurrentShelf;
+
+        private Shelf _currentShelf;
+        public Shelf CurrentShelf
+        {
+            get => _currentShelf;
+            set
+            {
+                if(_currentShelf==null || !_currentShelf.Equals(value))
+                {
+                    _currentShelf = value;
+                    CurrentShelfChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public ObservableCollection<Lib.Share.Models.Book> DisplayBookCollection = new ObservableCollection<Lib.Share.Models.Book>();
+        public ObservableCollection<Lib.Share.Models.Book> LastestReadCollection = new ObservableCollection<Lib.Share.Models.Book>();
 
         public List<Category> WebCategories = new List<Category>();
+
+        public event EventHandler CurrentShelfChanged;
     }
 }

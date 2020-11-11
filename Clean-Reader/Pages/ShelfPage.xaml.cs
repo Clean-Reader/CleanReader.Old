@@ -1,4 +1,5 @@
-﻿using Richasy.Controls.UWP.Models.UI;
+﻿using Clean_Reader.Models.Core;
+using Richasy.Controls.UWP.Models.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace Clean_Reader.Pages
     /// </summary>
     public sealed partial class ShelfPage : RichasyPage
     {
+        public AppViewModel vm = App.VM;
         public ShelfPage()
         {
             this.InitializeComponent();

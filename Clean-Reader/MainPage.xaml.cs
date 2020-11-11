@@ -39,9 +39,10 @@ namespace Clean_Reader
             base.OnNavigatedTo(e);
         }
 
-        private void RichasyPage_Loaded(object sender, RoutedEventArgs e)
+        private async void RichasyPage_Loaded(object sender, RoutedEventArgs e)
         {
             vm.CheckUpdate();
+            await vm.ShelfInit();
             vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
             // TODO
         }

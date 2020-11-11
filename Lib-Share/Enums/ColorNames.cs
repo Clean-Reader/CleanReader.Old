@@ -22,6 +22,8 @@
         MaskTextColor,
         ShadowColor,
         LineColor,
-        ProgressColor
+        ProgressColor,
+        TxtColor,
+        EpubColor
     }
 }

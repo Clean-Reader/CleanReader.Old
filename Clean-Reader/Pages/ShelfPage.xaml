@@ -5,9 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:models="using:Lib.Share.Models" xmlns:components="using:Clean_Reader.Controls.Components"
     mc:Ignorable="d"
     >
+
+    <ui:RichasyPage.Resources>
+        <DataTemplate x:DataType="models:Book" x:Key="BookItemTemplate">
+            <Grid Margin="0,0,15,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <components:BookCover Data="{x:Bind}"/>
+                <TextBlock Text="{x:Bind Name}" MaxWidth="150" Style="{StaticResource BodyTextStyle}"
+                           Foreground="{ThemeResource ImportantTextColor}" FontWeight="SemiBold"
+                           MaxLines="1" Grid.Row="1" Margin="0,10,0,5" TextAlignment="Center"/>
+                <TextBlock Text="{x:Bind Type}" Grid.Row="2" Style="{StaticResource SmallTextStyle}"
+                           TextAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </ui:RichasyPage.Resources>
 
     <ScrollViewer Style="{StaticResource BasicScrollViewer}"
                   VerticalScrollBarVisibility="Hidden"
@@ -29,8 +47,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" x:Uid="Control_LastestReadTipBlock"
                            HorizontalAlignment="Left"/>
-                <ListView Grid.Row="1" Grid.ColumnSpan="2"
-                          x:Name="LastestReadListView" IsItemClickEnabled="True"
+                <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource BookItemTemplate}"
+                          x:Name="LastestReadListView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.LastestReadCollection}"
                           Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                           ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"/>
             </Grid>
@@ -53,11 +71,11 @@
                     </interaction:ActionButton.Icon>
                 </interaction:ActionButton>
 
-                <controls:AdaptiveGridView Grid.Row="1" Grid.ColumnSpan="2" StretchContentForSingleRow="False"
-                          x:Name="ShelfBookGridView" IsItemClickEnabled="True"
+                <GridView Grid.Row="1" Grid.ColumnSpan="2"
+                          x:Name="ShelfBookGridView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.DisplayBookCollection}"
                           Style="{StaticResource NoScrollGridView}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"
-                                           DesiredWidth="160" ItemHeight="230"/>
+                          ItemTemplate="{StaticResource BookItemTemplate}"/>
             </Grid>
             
         </Grid>

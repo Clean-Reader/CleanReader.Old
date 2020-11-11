@@ -5,6 +5,7 @@
 
     <AcrylicBrush x:Key="SideBackground" BackgroundSource="HostBackdrop" TintColor="White" FallbackColor="#F4F4F6" TintOpacity="0.8"/>
     <AcrylicBrush x:Key="PaneBackground" BackgroundSource="Backdrop" TintColor="White" FallbackColor="#F4F4F6" TintOpacity="0.8"/>
+    <AcrylicBrush x:Key="CoverBackground" BackgroundSource="Backdrop" TintColor="White" FallbackColor="#F4F4F6" TintOpacity="0.6"/>
     <SolidColorBrush x:Key="MaskBackground" Color="White" Opacity="0.6"/>
     <SolidColorBrush x:Key="PopupBackground" Color="#f2f7fd"/>
     <SolidColorBrush x:Key="PageBackground" Color="White"/>
@@ -46,4 +47,18 @@
     <SolidColorBrush x:Key="ErrorColorOver" Color="#E32528"/>
 
     <SolidColorBrush x:Key="ExpandColor" Color="#E3E3F0"/>
+
+    <SolidColorBrush x:Key="CoverMaskColor" Color="#202020" Opacity="0.3"/>
+    <LinearGradientBrush x:Key="TxtColor" StartPoint="0,0" EndPoint="1,1">
+        <GradientStopCollection>
+            <GradientStop Color="#5AECEC" Offset="0"/>
+            <GradientStop Color="#38B1DD" Offset="1"/>
+        </GradientStopCollection>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="EpubColor" StartPoint="0,0" EndPoint="1,1">
+        <GradientStopCollection>
+            <GradientStop Color="#F0E130" Offset="0"/>
+            <GradientStop Color="#F8AC56" Offset="1"/>
+        </GradientStopCollection>
+    </LinearGradientBrush>
 </ResourceDictionary>

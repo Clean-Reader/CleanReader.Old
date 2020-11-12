@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Yuenov.SDK;
+using Yuenov.SDK.Models.Discovery;
 using Yuenov.SDK.Models.Share;
 
 namespace Clean_Reader.Models.Core
@@ -72,6 +73,7 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<ReaderColorConfig> ColorConfigCollection = new ObservableCollection<ReaderColorConfig>();
 
         public List<Category> WebCategories = new List<Category>();
+        public ObservableCollection<DiscoveryContainer> DiscoveryCollection = new ObservableCollection<DiscoveryContainer>();
         public ReaderStyle ReaderStyle;
 
         public event EventHandler CurrentShelfChanged;

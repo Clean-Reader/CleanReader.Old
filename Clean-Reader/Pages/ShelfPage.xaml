@@ -75,17 +75,9 @@
                 </interaction:ActionButton>
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Margin="0,35,0,0" x:Name="NoDataContainer">
-                        <uwp:FeatherIcon FontSize="100" Opacity="0.6"
-                                         Symbol="BookOpen" HorizontalAlignment="Center"
-                                         Foreground="{ThemeResource TipTextColor}"/>
-                        <TextBlock MaxWidth="300" TextAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource NormalTextColor}"
-                                   Margin="0,20,0,0" x:Uid="Control_NeedOpenBookTipBlock" Style="{StaticResource SubtitleTextStyle}" TextWrapping="Wrap"
-                                   LineHeight="35"/>
-                        <interaction:ExtraButton Style="{StaticResource PrimaryExtraButtonStyle}" x:Uid="Control_ImportBookButton"
-                                                 Margin="0,20,0,0" HorizontalAlignment="Center" x:Name="ImportButton" Click="ImportButton_Click"/>
-                    </StackPanel>
+                    <components:IconTextBlock Symbol="BookOpen" Click="ImportButton_Click"
+                                              Margin="0,35,0,0" x:Name="NoDataBlock"
+                                              x:Uid="Control_ShelfNoDataBlock"/>
                     <GridView x:Name="ShelfBookGridView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.DisplayBookCollection}"
                           Style="{StaticResource NoScrollGridView}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"

@@ -26,5 +26,26 @@ namespace Clean_Reader.Models.Core
                 }
             }
         }
+
+        public async Task DiscoveryInit()
+        {
+            DiscoveryCollection.Clear();
+            try
+            {
+                var discoveryResponse = await _yuenovClient.GetDiscoveryPageAsync();
+                if (discoveryResponse.Result.Code == ResultCode.Success)
+                {
+                    var data = discoveryResponse.Data.List;
+                    if (data != null)
+                        data.ForEach(p => DiscoveryCollection.Add(p));
+                }
+                else
+                    App.VM.ShowPopup($"{discoveryResponse.Result.Code}: {discoveryResponse.Result.Message}");
+            }
+            catch (Exception ex)
+            {
+                App.VM.ShowPopup(ex.Message, true);
+            }
+        }
     }
 }

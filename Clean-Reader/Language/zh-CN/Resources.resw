@@ -141,6 +141,12 @@
   <data name="Control_ColorTipBlock.Text" xml:space="preserve">
     <value>颜色</value>
   </data>
+  <data name="Control_ConnectFailedBlock.ButtonText" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
+    <value>服务器开了小差~ 请检查网络连接并重试</value>
+  </data>
   <data name="Control_FontFamilyListView.Header" xml:space="preserve">
     <value>字体</value>
   </data>
@@ -152,9 +158,6 @@
   </data>
   <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
     <value>前景色（文本）</value>
-  </data>
-  <data name="Control_ImportBookButton.Content" xml:space="preserve">
-    <value>导入书籍</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>导入书籍</value>
@@ -171,14 +174,17 @@
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>更多</value>
   </data>
-  <data name="Control_NeedOpenBookTipBlock.Text" xml:space="preserve">
-    <value>书架空空如也，快打开一本书阅读吧~</value>
-  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
   </data>
   <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
     <value>段间距</value>
+  </data>
+  <data name="Control_ShelfNoDataBlock.ButtonText" xml:space="preserve">
+    <value>导入书籍</value>
+  </data>
+  <data name="Control_ShelfNoDataBlock.Description" xml:space="preserve">
+    <value>书架空空如也，快打开一本书阅读吧~</value>
   </data>
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>行首缩进</value>

@@ -507,7 +507,7 @@
                 <ControlTemplate TargetType="GridView">
                     <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
                         <ScrollViewer Style="{StaticResource BasicScrollViewer}" x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
-                            <ItemsPresenter HorizontalAlignment="Center" Footer="{TemplateBinding Footer}" FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Padding="{TemplateBinding Padding}"/>
+                            <ItemsPresenter HorizontalAlignment="Stretch" Footer="{TemplateBinding Footer}" FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Padding="{TemplateBinding Padding}"/>
                         </ScrollViewer>
                     </Border>
                 </ControlTemplate>
@@ -701,10 +701,9 @@
         <Setter Property="IsHoldingEnabled" Value="True"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="Margin" Value="0,0,10,10"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="MinHeight" Value="0"/>
-        <Setter Property="MaxWidth" Value="500"/>
         <Setter Property="AllowDrop" Value="False"/>
         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
         <Setter Property="FocusVisualMargin" Value="-2"/>

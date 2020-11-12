@@ -141,6 +141,12 @@
   <data name="Control_ColorTipBlock.Text" xml:space="preserve">
     <value>Color</value>
   </data>
+  <data name="Control_ConnectFailedBlock.ButtonText" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
+    <value>The server is not responding~ Please check the network connection and try again</value>
+  </data>
   <data name="Control_FontFamilyListView.Header" xml:space="preserve">
     <value>Font family</value>
   </data>
@@ -152,9 +158,6 @@
   </data>
   <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
     <value>Foreground (text)</value>
-  </data>
-  <data name="Control_ImportBookButton.Content" xml:space="preserve">
-    <value>Import Books</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
@@ -171,14 +174,17 @@
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>More</value>
   </data>
-  <data name="Control_NeedOpenBookTipBlock.Text" xml:space="preserve">
-    <value>The bookshelf is empty, let's open a book and read it~</value>
-  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
   </data>
   <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
     <value>Segment spacing</value>
+  </data>
+  <data name="Control_ShelfNoDataBlock.ButtonText" xml:space="preserve">
+    <value>Import Books</value>
+  </data>
+  <data name="Control_ShelfNoDataBlock.Description" xml:space="preserve">
+    <value>The bookshelf is empty, let's open a book and read it~</value>
   </data>
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>Text indent</value>

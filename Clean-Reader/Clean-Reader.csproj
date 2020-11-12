@@ -18,7 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>19DE3251AB16B9B0D867892B047B3BB7FF135FF9</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>09845A784F504346A2D9453CAB0242C0E3AFBBA3</PackageCertificateThumbprint>
     <PackageCertificateKeyFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -139,6 +139,9 @@
     <Compile Include="Controls\Components\FontPanel.xaml.cs">
       <DependentUpon>FontPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\IconTextBlock.xaml.cs">
+      <DependentUpon>IconTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\NavigateMenu.xaml.cs">
       <DependentUpon>NavigateMenu.xaml</DependentUpon>
     </Compile>
@@ -148,11 +151,17 @@
     <Compile Include="Controls\Components\SyncAccountBlock.xaml.cs">
       <DependentUpon>SyncAccountBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\YuenovBookCard.xaml.cs">
+      <DependentUpon>YuenovBookCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogs\ConfirmDialog.xaml.cs">
       <DependentUpon>ConfirmDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Dialogs\ShelfSelectionDialog.xaml.cs">
       <DependentUpon>ShelfSelectionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Layout\HorizontalBookPanel.xaml.cs">
+      <DependentUpon>HorizontalBookPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Layout\SidePanel.xaml.cs">
       <DependentUpon>SidePanel.xaml</DependentUpon>
@@ -296,6 +305,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Components\IconTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\NavigateMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,11 +321,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Components\YuenovBookCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Dialogs\ConfirmDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\ShelfSelectionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Layout\HorizontalBookPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,7 +417,7 @@
       <Version>2.4.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.ReaderPanel">
-      <Version>1.0.2</Version>
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.UWP">
       <Version>1.1.3</Version>

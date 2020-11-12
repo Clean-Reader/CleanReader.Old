@@ -27,6 +27,7 @@ namespace Clean_Reader
     public sealed partial class MainPage : RichasyPage
     {
         public AppViewModel vm = App.VM;
+        public new static MainPage Current;
         public MainPage()
         {
             this.InitializeComponent();

@@ -44,7 +44,7 @@ namespace Clean_Reader.Controls.Components
 
         public void Navigate(MenuItem item)
         {
-            (MainPage.Current as MainPage).TitleBlock.Text = item.Name;
+            MainPage.Current.TitleBlock.Text = item.Name;
             if (MenuListView.SelectedItem != item)
                 MenuListView.SelectedItem = item;
             vm.NavigateToPage(item.Type);

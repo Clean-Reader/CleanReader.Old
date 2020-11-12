@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.YuenovBookCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Width="380" Height="185" CornerRadius="10">
+        <controls:ImageEx x:Name="BackgroundImage" Width="370" Height="175"
+                          CornerRadius="10" Stretch="UniformToFill"/>
+        <Grid Background="{ThemeResource CoverBackground}" Width="380" Height="185"
+              CornerRadius="10"/>
+
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center"
+               Padding="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <controls:ImageEx x:Name="CoverImage" Width="100" Stretch="Uniform"
+                              VerticalAlignment="Top" CornerRadius="6"/>
+            <Grid Grid.Column="1" Margin="25,0,0,0" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource SubtitleTextStyle}" FontSize="20" MaxLines="2"
+                           MaxWidth="170" HorizontalAlignment="Left" x:Name="NameBlock" Margin="0,0,0,5"/>
+                <TextBlock Grid.Row="1" x:Name="AuthorBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource ImportantTextColor}"/>
+                <TextBlock Grid.Row="2" x:Name="PropertyBlock" Margin="0,0,0,5" Style="{StaticResource MiniTextStyle}"/>
+                <TextBlock Grid.Row="3" x:Name="DescriptionBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource NormalTextColor}"/>
+                <Border Grid.Row="4" Background="{ThemeResource CardBackground}" CornerRadius="5" Padding="10,5"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock Style="{StaticResource MiniTextStyle}" Foreground="{ThemeResource NormalTextColor}"
+                               x:Name="StatusBlock"/>
+                </Border>
+            </Grid>
+            <interaction:ActionButton VerticalAlignment="Top" HorizontalAlignment="Right"
+                                      Style="{StaticResource DefaultActionButtonStyle}"
+                                      Background="{ThemeResource CardBackground}"
+                                      Grid.Column="1" x:Name="TagButton" Click="TagButton_Click"
+                                      Diameter="35" Margin="0,-10,-10,0"
+                                      >
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="Bookmark" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
+        </Grid>
+    </Grid>
+</UserControl>

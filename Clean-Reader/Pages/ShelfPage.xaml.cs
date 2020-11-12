@@ -36,14 +36,14 @@ namespace Clean_Reader.Pages
             vm.LastestReadCollection.CollectionChanged += LastestReadCollection_Changed;
             vm.DisplayBookCollection.CollectionChanged += DisplayBookCollection_Changed;
             LastestContainer.Visibility = vm.LastestReadCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
-            NoDataContainer.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            NoDataBlock.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             ToolTipService.SetToolTip(AddShelfButton,App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddShelf));
             ToolTipService.SetToolTip(ManageShelfButton, App.Tools.App.GetLocalizationTextFromResource(LanguageNames.ManageShelf));
         }
 
         private void DisplayBookCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NoDataContainer.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            NoDataBlock.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void LastestReadCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
@@ -53,9 +53,10 @@ namespace Clean_Reader.Pages
 
         private async void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            ImportButton.IsEnabled = false;
+            var btn = sender as Button;
+            btn.IsEnabled = false;
             await vm.ImportBooks();
-            ImportButton.IsEnabled = true;
+            btn.IsEnabled = true;
         }
 
         private void BookView_ItemClick(object sender, ItemClickEventArgs e)

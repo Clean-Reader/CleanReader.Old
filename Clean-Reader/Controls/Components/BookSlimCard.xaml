@@ -18,7 +18,7 @@
         <local:BookCover x:Name="Cover"/>
         <controls:DropShadowPanel BlurRadius="18"
                                   ShadowOpacity="0.7"
-                                  OffsetX="2"
+                                  OffsetX="2" Visibility="{x:Bind ProgressVisibility,Mode=OneWay}"
                                   OffsetY="2"
                                   Color="{ThemeResource ShadowColor}"
                                   IsMasked="True"
@@ -35,6 +35,6 @@
                            Foreground="{ThemeResource ImportantTextColor}"
                            MaxLines="1" Grid.Row="1" Margin="0,10,0,5" TextAlignment="Center"/>
         <TextBlock x:Name="TypeBlock" Grid.Row="2" Style="{StaticResource SmallTextStyle}"
-                           TextAlignment="Center"/>
+                           TextAlignment="Center" Visibility="{x:Bind TypeVisibility,Mode=OneWay}"/>
     </Grid>
 </UserControl>

@@ -120,11 +120,38 @@
   <data name="AppName" xml:space="preserve">
     <value>Clean Reader</value>
   </data>
+  <data name="Control_AddColorConfigTipBlock.Text" xml:space="preserve">
+    <value>Add current color configuration</value>
+  </data>
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>Add sync account</value>
   </data>
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>Find books</value>
+  </data>
+  <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="Control_ChapterTipBlock.Text" xml:space="preserve">
+    <value>Chapters</value>
+  </data>
+  <data name="Control_ColorConfigTipBlock.Text" xml:space="preserve">
+    <value>Color config</value>
+  </data>
+  <data name="Control_ColorTipBlock.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Control_FontFamilyListView.Header" xml:space="preserve">
+    <value>Font family</value>
+  </data>
+  <data name="Control_FontSizeSlider.Header" xml:space="preserve">
+    <value>Font size</value>
+  </data>
+  <data name="Control_FontTipBlock.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
+    <value>Foreground (text)</value>
   </data>
   <data name="Control_ImportBookButton.Content" xml:space="preserve">
     <value>Import Books</value>
@@ -132,14 +159,35 @@
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
   </data>
+  <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
+    <value>Acrylic background</value>
+  </data>
   <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
     <value>Recently Read</value>
+  </data>
+  <data name="Control_LineHeightSlider.Header" xml:space="preserve">
+    <value>Line height</value>
+  </data>
+  <data name="Control_MoreTipBlock.Text" xml:space="preserve">
+    <value>More</value>
   </data>
   <data name="Control_NeedOpenBookTipBlock.Text" xml:space="preserve">
     <value>The bookshelf is empty, let's open a book and read it~</value>
   </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
+  </data>
+  <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
+    <value>Segment spacing</value>
+  </data>
+  <data name="Control_TextIndentSlider.Header" xml:space="preserve">
+    <value>Text indent</value>
+  </data>
+  <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
+    <value>Typesetting</value>
+  </data>
+  <data name="Tip_AddShelf" xml:space="preserve">
+    <value>Add bookshelf</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>Authorization suspension</value>
@@ -164,6 +212,9 @@
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>Failed to acquire user</value>
+  </data>
+  <data name="Tip_ManageShelf" xml:space="preserve">
+    <value>Manage bookshelves</value>
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>Need Login</value>

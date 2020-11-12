@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.Globalization;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -79,19 +80,7 @@ namespace Clean_Reader.Models.Core
                 frame.GoBack(new EntranceNavigationTransitionInfo());
         }
 
-        public async void ViewStyleInit()
-        {
-            var txtStyle = await App.Tools.IO.GetLocalDataAsync<TxtViewStyle>(StaticString.FileTxtStyle, "{}");
-            var epubStyle = await App.Tools.IO.GetLocalDataAsync<EpubViewStyle>(StaticString.FileEpubStyle, "{}");
-            _txtViewStyle = txtStyle == null ? new TxtViewStyle() : txtStyle;
-            _epubViewStyle = epubStyle == null ? new EpubViewStyle() : epubStyle;
-        }
-
-        public async void HistoryInit()
-        {
-            var history = await App.Tools.IO.GetLocalDataAsync<List<ReadHistory>>(StaticString.FileHistory);
-            HistoryList = history;
-        }
+        
 
         private void CurrentShelf_Changed(object sender, EventArgs e)
         {
@@ -101,16 +90,7 @@ namespace Clean_Reader.Models.Core
                 CurrentShelfInit();
             }
         }
-        public void CurrentShelfInit()
-        {
-            string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
-            var books = TotalBookList.Where(p => p.ShelfId == shelfId).ToList();
-            foreach (var book in books)
-            {
-                if (!DisplayBookCollection.Contains(book))
-                    DisplayBookCollection.Add(book);
-            }
-        }
+        
 
         public void ShowPopup(LanguageNames name, bool isError = false)
         {
@@ -192,5 +172,6 @@ namespace Clean_Reader.Models.Core
             }
             ApplicationLanguages.PrimaryLanguageOverride = code;
         }
+        
     }
 }

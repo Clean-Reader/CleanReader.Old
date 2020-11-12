@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.BookSlimCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:BookCover x:Name="Cover"/>
+        <controls:DropShadowPanel BlurRadius="18"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="2"
+                                  OffsetY="2"
+                                  Color="{ThemeResource ShadowColor}"
+                                  IsMasked="True"
+                                  VerticalAlignment="Center" Margin="0,65,15,0" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" Padding="8" CornerRadius="6" Background="{ThemeResource CardBackground}">
+                <uwp:FeatherIcon Symbol="Clock" VerticalAlignment="Center" FontSize="{CustomResource BasicFontSize}"
+                                 Foreground="{ThemeResource TipTextColor}" Margin="0,0,6,0"/>
+                <TextBlock x:Name="ProgressBlock" VerticalAlignment="Center" Style="{StaticResource BodyTextStyle}"
+                           FontSize="{CustomResource SmallFontSize}"/>
+            </StackPanel>
+        </controls:DropShadowPanel>
+        
+        <TextBlock x:Name="NameBlock" MaxWidth="150" Style="{StaticResource BodyTextStyle}"
+                           Foreground="{ThemeResource ImportantTextColor}"
+                           MaxLines="1" Grid.Row="1" Margin="0,10,0,5" TextAlignment="Center"/>
+        <TextBlock x:Name="TypeBlock" Grid.Row="2" Style="{StaticResource SmallTextStyle}"
+                           TextAlignment="Center"/>
+    </Grid>
+</UserControl>

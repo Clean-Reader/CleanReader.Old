@@ -40,4 +40,8 @@
     <Style x:Key="CenterTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
+    <DataTemplate x:Key="TipHeader">
+        <TextBlock Style="{StaticResource SmallTextStyle}" Text="{Binding}" Margin="0,0,0,5"
+                   HorizontalAlignment="Left"/>
+    </DataTemplate>
 </ResourceDictionary>

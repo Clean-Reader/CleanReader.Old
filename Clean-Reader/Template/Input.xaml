@@ -23,10 +23,10 @@
         <Setter Property="Background" Value="{ThemeResource CardBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource LineColor}" />
         <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="FontFamily" Value="{CustomResource Basic}" />
-        <Setter Property="FontSize" Value="{CustomResource BodyFontSize}" />
+        <Setter Property="FontSize" Value="{CustomResource BasicFontSize}" />
         <Setter Property="PointerOverBackground" Value="{ThemeResource CardBackgroundOver}" />
         <Setter Property="PointerOverBorderBrush" Value="{ThemeResource LineColorOver}" />
         <Setter Property="PointerOverForeground" Value="{ThemeResource ImportantTextColor}" />

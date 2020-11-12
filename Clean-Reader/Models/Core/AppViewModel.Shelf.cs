@@ -3,7 +3,10 @@ using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Lib.Share.Models;
 using Newtonsoft.Json;
+using Richasy.Controls.Reader.Enums;
+using Richasy.Controls.Reader.Models;
 using Richasy.Controls.Reader.Models.Epub;
+using Richasy.Font.UWP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,5 +99,25 @@ namespace Clean_Reader.Models.Core
             var list = ShelfCollection.Where(p => p.Id != "default").ToList();
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfIndex, JsonConvert.SerializeObject(list));
         }
+
+        public async void HistoryInit()
+        {
+            var history = await App.Tools.IO.GetLocalDataAsync<List<ReadHistory>>(StaticString.FileHistory);
+            HistoryList = history;
+            ProgressChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void CurrentShelfInit()
+        {
+            string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
+            var books = TotalBookList.Where(p => p.ShelfId == shelfId).ToList();
+            foreach (var book in books)
+            {
+                if (!DisplayBookCollection.Contains(book))
+                    DisplayBookCollection.Add(book);
+            }
+        }
+
+        
     }
 }

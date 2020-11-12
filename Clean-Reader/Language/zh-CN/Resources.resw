@@ -120,11 +120,38 @@
   <data name="AppName" xml:space="preserve">
     <value>干净阅读</value>
   </data>
+  <data name="Control_AddColorConfigTipBlock.Text" xml:space="preserve">
+    <value>添加当前颜色配置</value>
+  </data>
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>添加同步账户</value>
   </data>
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>查找书籍</value>
+  </data>
+  <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
+    <value>背景色</value>
+  </data>
+  <data name="Control_ChapterTipBlock.Text" xml:space="preserve">
+    <value>目录</value>
+  </data>
+  <data name="Control_ColorConfigTipBlock.Text" xml:space="preserve">
+    <value>颜色配置</value>
+  </data>
+  <data name="Control_ColorTipBlock.Text" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="Control_FontFamilyListView.Header" xml:space="preserve">
+    <value>字体</value>
+  </data>
+  <data name="Control_FontSizeSlider.Header" xml:space="preserve">
+    <value>字体大小</value>
+  </data>
+  <data name="Control_FontTipBlock.Text" xml:space="preserve">
+    <value>字体</value>
+  </data>
+  <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
+    <value>前景色（文本）</value>
   </data>
   <data name="Control_ImportBookButton.Content" xml:space="preserve">
     <value>导入书籍</value>
@@ -132,14 +159,35 @@
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>导入书籍</value>
   </data>
+  <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
+    <value>亚克力背景</value>
+  </data>
   <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
     <value>最近阅读</value>
+  </data>
+  <data name="Control_LineHeightSlider.Header" xml:space="preserve">
+    <value>行高</value>
+  </data>
+  <data name="Control_MoreTipBlock.Text" xml:space="preserve">
+    <value>更多</value>
   </data>
   <data name="Control_NeedOpenBookTipBlock.Text" xml:space="preserve">
     <value>书架空空如也，快打开一本书阅读吧~</value>
   </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
+  </data>
+  <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
+    <value>段间距</value>
+  </data>
+  <data name="Control_TextIndentSlider.Header" xml:space="preserve">
+    <value>行首缩进</value>
+  </data>
+  <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
+    <value>排版</value>
+  </data>
+  <data name="Tip_AddShelf" xml:space="preserve">
+    <value>添加书架</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>授权中止</value>
@@ -164,6 +212,9 @@
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>获取用户失败</value>
+  </data>
+  <data name="Tip_ManageShelf" xml:space="preserve">
+    <value>管理书架</value>
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>未登录</value>

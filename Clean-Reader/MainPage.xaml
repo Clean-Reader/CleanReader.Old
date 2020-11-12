@@ -22,7 +22,7 @@
 
             <SplitView.Content>
                 <Grid Background="{ThemeResource PageBackground}"
-                      Padding="45,20">
+                      Padding="45,20,45,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>

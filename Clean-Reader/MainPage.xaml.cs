@@ -46,6 +46,7 @@ namespace Clean_Reader
                 vm.CheckUpdate();
                 await vm.ShelfInit();
                 vm.ViewStyleInit();
+                vm.ColorConfigInit();
                 vm.HistoryInit();
                 vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
                 IsInit = true;

@@ -26,6 +26,11 @@ namespace Clean_Reader.Models.Core
                 IsHistoryChanged = false;
                 await App.Tools.IO.SetLocalDataAsync(StaticString.FileHistory, JsonConvert.SerializeObject(HistoryList));
             }
+            if (_isStyleChanged)
+            {
+                _isStyleChanged = false;
+                await App.Tools.IO.SetLocalDataAsync(StaticString.FileReaderStyle, JsonConvert.SerializeObject(ReaderStyle));
+            }
         }
 
         public async Task OneDriveInit()

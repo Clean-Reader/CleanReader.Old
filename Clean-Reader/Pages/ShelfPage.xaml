@@ -12,19 +12,21 @@
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="models:Book" x:Key="BookItemTemplate">
             <Grid Margin="0,0,15,10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <components:BookCover Data="{x:Bind}"/>
-                <TextBlock Text="{x:Bind Name}" MaxWidth="150" Style="{StaticResource BodyTextStyle}"
-                           Foreground="{ThemeResource ImportantTextColor}"
-                           MaxLines="1" Grid.Row="1" Margin="0,10,0,5" TextAlignment="Center"/>
-                <TextBlock Text="{x:Bind Type}" Grid.Row="2" Style="{StaticResource SmallTextStyle}"
-                           TextAlignment="Center"/>
+                <components:BookSlimCard Data="{x:Bind}"/>
             </Grid>
         </DataTemplate>
+        <CommandBarFlyout x:Name="ShelfFlyout" Opened="ShelfFlyout_Opened">
+            <AppBarButton x:Name="AddShelfButton" Click="AddShelfButton_Click">
+                <AppBarButton.Icon>
+                    <uwp:FeatherIcon Symbol="Plus"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Name="ManageShelfButton" Click="ManageShelfButton_Click">
+                <AppBarButton.Icon>
+                    <uwp:FeatherIcon Symbol="Settings"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBarFlyout>
     </ui:RichasyPage.Resources>
 
     <ScrollViewer Style="{StaticResource BasicScrollViewer}"
@@ -50,7 +52,8 @@
                 <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource BookItemTemplate}" ItemClick="BookView_ItemClick"
                           x:Name="LastestReadListView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.LastestReadCollection}" Padding="-5,0,0,0"
                           Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left"
-                          ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"/>
+                          ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                          ItemsPanel="{StaticResource HorizontalListViewItemsPanel}"/>
             </Grid>
             
             <Grid Grid.Row="1">
@@ -65,9 +68,9 @@
                 <TextBlock Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" x:Name="ShelfNameBlock"
                            Text="全部书籍" HorizontalAlignment="Left"/>
                 <interaction:ActionButton Grid.Column="1" Style="{StaticResource DefaultActionButtonStyle}"
-                                          x:Name="ShelfButton">
+                                          x:Name="ShelfButton" Flyout="{StaticResource ShelfFlyout}">
                     <interaction:ActionButton.Icon>
-                        <uwp:FeatherIcon Symbol="Sliders" FontSize="{CustomResource BodyFontSize}"/>
+                        <uwp:FeatherIcon Symbol="List" FontSize="{CustomResource BodyFontSize}"/>
                     </interaction:ActionButton.Icon>
                 </interaction:ActionButton>
 

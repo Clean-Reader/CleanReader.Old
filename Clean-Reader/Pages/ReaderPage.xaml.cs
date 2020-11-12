@@ -17,6 +17,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml;
+using Richasy.Font.UWP;
+using Clean_Reader.Models.UI;
+using Newtonsoft.Json;
+using Clean_Reader.Controls.Components;
+using Windows.UI;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,19 +35,21 @@ namespace Clean_Reader.Pages
     {
         AppViewModel vm = App.VM;
         public ObservableCollection<Chapter> ChapterCollection = new ObservableCollection<Chapter>();
-        public ReaderPage():base()
+        Book _tempBook = null;
+        public ReaderPage() : base()
         {
             this.InitializeComponent();
+            IsInit = false;
             vm._reader = ReaderPanel;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null)
             {
-                if(e.Parameter is Book book)
+                if (e.Parameter is Book book)
                 {
-                    await HandleBook(book);
+                    _tempBook = book;
                 }
             }
             base.OnNavigatedTo(e);
@@ -50,6 +58,7 @@ namespace Clean_Reader.Pages
         private async Task HandleBook(Book book)
         {
             vm.CurrentBook = book;
+            BookTitleBlock.Text = book.Name;
             if (book.Type == BookType.Web)
             {
 
@@ -57,16 +66,41 @@ namespace Clean_Reader.Pages
             else
             {
                 var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(book.BookId);
-                if (book.Type == BookType.Epub)
-                    await ReaderPanel.OpenAsync(file, vm._epubViewStyle);
-                else
-                    await ReaderPanel.OpenAsync(file, vm._txtViewStyle);
+                try
+                {
+                    if (book.Type == BookType.Epub)
+                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
+                    else
+                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }
         }
 
-        private void ReaderPanel_OpenCompleted(object sender, System.EventArgs e)
+        private async void ReaderPanel_OpenCompleted(object sender, EventArgs e)
         {
             LoadingRing.IsActive = false;
+            if (!IsInit)
+                await Task.Delay(200);
+            var history = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
+            if (history != null)
+                ReaderPanel.LoadHistory(history.Hisotry);
+            else
+            {
+                try
+                {
+                    ReaderPanel.LoadChapter(ReaderPanel.Chapters.First());
+                }
+                catch (Exception)
+                {
+                    await Task.Delay(200);
+                    ReaderPanel.LoadChapter(ReaderPanel.Chapters.First());
+                }
+            }
         }
 
         private void ReaderPanel_OpenStarting(object sender, EventArgs e)
@@ -82,7 +116,8 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_ChapterChanged(object sender, Chapter e)
         {
-
+            ChapterListView.SelectedItem = e;
+            ChapterListView.ScrollIntoView(e, ScrollIntoViewAlignment.Leading);
         }
 
         private void ReaderPanel_SetContentStarting(object sender, EventArgs e)
@@ -95,7 +130,7 @@ namespace Clean_Reader.Pages
             LoadingRing.IsActive = false;
         }
 
-        private async void ReaderPanel_ImageTapped(object sender, Richasy.Controls.Reader.Models.ImageEventArgs e)
+        private async void ReaderPanel_ImageTapped(object sender, ImageEventArgs e)
         {
             var byteArray = Convert.FromBase64String(e.Base64);
             var stream = byteArray.AsBuffer().AsStream().AsRandomAccessStream();
@@ -107,7 +142,7 @@ namespace Clean_Reader.Pages
             }
         }
 
-        private async void ReaderPanel_LinkTapped(object sender, Richasy.Controls.Reader.Models.LinkEventArgs e)
+        private async void ReaderPanel_LinkTapped(object sender, LinkEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Link))
                 await Launcher.LaunchUriAsync(new Uri(e.Link));
@@ -131,11 +166,8 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_ViewLoaded(object sender, EventArgs e)
         {
-            var history = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
-            if (history != null)
-                ReaderPanel.LoadHistory(history.Hisotry);
-            else
-                ReaderPanel.LoadChapter(ReaderPanel.Chapters.First());
+            ReaderBar.Init();
+            IsInit = true;
         }
 
         private void ReaderPanel_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -146,7 +178,7 @@ namespace Clean_Reader.Pages
                 ReaderPanel.Next();
         }
 
-        private void ReaderPanel_ProgressChanged(object sender, Richasy.Controls.Reader.Models.History e)
+        private void ReaderPanel_ProgressChanged(object sender, History e)
         {
             var originHistory = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
             if (originHistory != null)
@@ -158,12 +190,37 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_TouchTapped(object sender, PositionEventArgs e)
         {
-
+            double width = this.ActualWidth;
+            if (e.Position.X > width / 3.0 && e.Position.X < width * 2 / 3.0)
+            {
+                ReaderBar.Toggle();
+            }
         }
 
         private void ChapterListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var chapter = e.ClickedItem as Chapter;
+            ReaderPanel.LoadChapter(chapter);
+        }
 
+        private async void ReaderPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_tempBook != null)
+            {
+                await HandleBook(_tempBook);
+                _tempBook = null;
+            }
+        }
+
+        private void ReaderBar_BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            vm.CloseReaderView();
+        }
+
+        private void ReaderBar_ChapterButtonClick(object sender, RoutedEventArgs e)
+        {
+            ReaderSplitView.IsPaneOpen = !ReaderSplitView.IsPaneOpen;
+            ReaderBar.Hide();
         }
     }
 }

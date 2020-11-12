@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.ReaderBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Flyout x:Name="FontFlyout" FlyoutPresenterStyle="{StaticResource BasicFlyoutStyle}">
+            <Grid Margin="10,0,10,0" Width="300">
+                <local:FontPanel x:Name="FontPanel"/>
+            </Grid>
+        </Flyout>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource BasicFlyoutStyle}">
+            <StackPanel Margin="15,6,15,10" Width="350">
+                <local:ColorConfigPanel x:Name="ColorConfigPanel"/>
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal" Visibility="Collapsed"
+                                Background="{ThemeResource PopupBackground}" CornerRadius="10,10,0,0" Padding="10" x:Name="MenuBar">
+        <animations:Implicit.ShowAnimations>
+            <animations:TranslationAnimation Duration="0:0:0.4" From="0, 70, 0" To="0" ></animations:TranslationAnimation>
+            <animations:OpacityAnimation Duration="0:0:0.4" From="0" To="1.0"></animations:OpacityAnimation>
+        </animations:Implicit.ShowAnimations>
+        <animations:Implicit.HideAnimations>
+            <animations:TranslationAnimation Duration="0:0:0.4" From="0" To="0,70,0" ></animations:TranslationAnimation>
+            <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0"></animations:OpacityAnimation>
+        </animations:Implicit.HideAnimations>
+        <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}" x:Name="BackButton"
+                                                  VerticalAlignment="Center" Click="BackButton_Click">
+            <interaction:ActionButton.Icon>
+                <uwp:FeatherIcon Symbol="ArrowLeft" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:ActionButton.Icon>
+        </interaction:ActionButton>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ChapterButton"
+                                                x:Uid="Control_ChapterTipBlock" Click="ChapterButton_Click" Background="Transparent"
+                                                GutterWidth="10">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="List" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="FontButton"
+                                                x:Uid="Control_FontTipBlock" Background="Transparent"
+                                                GutterWidth="10" Flyout="{StaticResource FontFlyout}">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="Type" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ColorButton"
+                                                x:Uid="Control_ColorTipBlock" Background="Transparent"
+                                                GutterWidth="10" Flyout="{StaticResource ColorFlyout}">
+            <interaction:IconButton.Icon>
+                <uwp:MaterialIcon Symbol="ColorLens" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="MoreButton"
+                                                x:Uid="Control_MoreTipBlock" Background="Transparent"
+                                                GutterWidth="10">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="MoreHorizontal" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
+    </StackPanel>
+</UserControl>

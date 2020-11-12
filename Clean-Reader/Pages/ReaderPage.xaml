@@ -5,29 +5,45 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:reader="using:Richasy.Controls.Reader" xmlns:models="using:Richasy.Controls.Reader.Models" xmlns:ui1="using:Clean_Reader.Models.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:reader="using:Richasy.Controls.Reader" xmlns:models="using:Richasy.Controls.Reader.Models" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:components="using:Clean_Reader.Controls.Components"
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
         <ui1:LevelMarginCovnerter x:Key="LevelMarginConverter"/>
+        <ui1:LevelFontWeightConverter x:Key="LevelFontWeightConverter"/>
         <DataTemplate x:DataType="models:Chapter" x:Key="ChapterItemTemplate">
-            <Grid Padding="10,5">
+            <Grid Padding="10" BorderBrush="{ThemeResource LineColor}" BorderThickness="0,0,0,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1F5;" VerticalAlignment="Center"
+                          Foreground="{ThemeResource TipTextColor}" FontSize="{CustomResource SmallFontSize}" Margin="{x:Bind Level,Converter={StaticResource LevelMarginConverter}}"/>
                 <TextBlock Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" FontFamily="{CustomResource Basic}"
-                           FontSize="{CustomResource BasicFontSize}"
+                           FontSize="{CustomResource BasicFontSize}" Grid.Column="1" FontWeight="{x:Bind Level,Converter={StaticResource LevelFontWeightConverter}}"
                            HorizontalAlignment="Left" ToolTipService.ToolTip="{x:Bind Title}"
-                           Margin="{x:Bind Level,Converter={StaticResource LevelMarginConverter}}"/>
+                           Margin="10,0,0,0"/>
             </Grid>
         </DataTemplate>
     </ui:RichasyPage.Resources>
     <Grid>
-        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource PaneBackground}"
-                   OpenPaneLength="300" IsPaneOpen="True">
+        <SplitView DisplayMode="CompactOverlay" PaneBackground="{ThemeResource PaneBackground}"
+                   OpenPaneLength="300" x:Name="ReaderSplitView" CompactPaneLength="0">
             <SplitView.Pane>
-                <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource SubtitleTextStyle}" HorizontalAlignment="Left" MaxWidth="300"
+                               x:Name="BookTitleBlock" Margin="15,15,0,15" Foreground="{ThemeResource PrimaryColor}"/>
+                    <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
                           ItemsSource="{x:Bind ChapterCollection}"
-                          ItemClick="ChapterListView_ItemClick"
-                          Style="{StaticResource BasicListView}"
-                          ItemContainerStyle="{StaticResource MenuListViewContainerStyle}"
+                          ItemClick="ChapterListView_ItemClick" Grid.Row="1"
+                          Style="{StaticResource BasicListView}" Padding="10"
+                          ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
                           ItemTemplate="{StaticResource ChapterItemTemplate}"/>
+                </Grid>
+
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
@@ -44,6 +60,7 @@
                             KeyDown="ReaderPanel_KeyDown"
                             ProgressChanged="ReaderPanel_ProgressChanged"
                             TouchTapped="ReaderPanel_TouchTapped"
+                            Loaded="ReaderPanel_Loaded"
                             >
                         <reader:ReaderPanel.Header>
                             <Grid/>
@@ -53,9 +70,12 @@
                         </reader:ReaderPanel.Footer>
                     </reader:ReaderPanel>
                     <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
+                    <components:ReaderBar x:Name="ReaderBar" BackButtonClick="ReaderBar_BackButtonClick"
+                                          ChapterButtonClick="ReaderBar_ChapterButtonClick" HorizontalAlignment="Center"
+                                          VerticalAlignment="Bottom"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
-        
+
     </Grid>
 </ui:RichasyPage>

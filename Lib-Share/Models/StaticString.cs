@@ -16,8 +16,8 @@
         public const string FileShelfList = "Shelf.json";
         public const string FileShelfIndex = "ShelfIndex.json";
         public const string FileLastestList = "LastestBooks.json";
-        public const string FileTxtStyle = "TxtViewStyle.json";
-        public const string FileEpubStyle = "EpubViewStyle.json";
+        public const string FileReaderStyle = "ReaderViewStyle.json";
         public const string FileHistory = "ReadHistory.json";
+        public const string FileColorConfig = "ColorConfig.json";
     }
 }

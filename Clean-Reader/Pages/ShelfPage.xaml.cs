@@ -1,6 +1,9 @@
 ﻿using Clean_Reader.Models.Core;
+using Lib.Share.Enums;
 using Lib.Share.Models;
 using Richasy.Controls.UWP.Models.UI;
+using Richasy.Font.UWP;
+using Richasy.Font.UWP.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -34,6 +37,8 @@ namespace Clean_Reader.Pages
             vm.DisplayBookCollection.CollectionChanged += DisplayBookCollection_Changed;
             LastestContainer.Visibility = vm.LastestReadCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             NoDataContainer.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            ToolTipService.SetToolTip(AddShelfButton,App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddShelf));
+            ToolTipService.SetToolTip(ManageShelfButton, App.Tools.App.GetLocalizationTextFromResource(LanguageNames.ManageShelf));
         }
 
         private void DisplayBookCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
@@ -57,6 +62,37 @@ namespace Clean_Reader.Pages
         {
             var book = e.ClickedItem as Book;
             vm.OpenReaderView(book);
+        }
+
+        private void AddShelfButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManageShelfButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShelfFlyout_Opened(object sender, object e)
+        {
+            ShelfFlyout.SecondaryCommands.Clear();
+            foreach (var shelf in vm.ShelfCollection)
+            {
+                var btn = new AppBarToggleButton();
+                btn.MinWidth = 200;
+                btn.Label = shelf.Name;
+                btn.Tag = shelf.Id;
+                btn.Click += (_s, _e) =>
+                {
+                    if (vm.CurrentShelf != shelf)
+                        vm.CurrentShelf = shelf;
+                    ShelfFlyout.Hide();
+                };
+                if (shelf.Id == vm.CurrentShelf.Id)
+                    btn.IsChecked = true;
+                ShelfFlyout.SecondaryCommands.Add(btn);
+            }
         }
     }
 }

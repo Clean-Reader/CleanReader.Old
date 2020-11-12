@@ -10,6 +10,7 @@
                 <ResourceDictionary x:Key="Dark" Source="ms-appx:///Theme/Dark.xaml"/>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="ms-appx:///Template/Buttons.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Template/Text.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Template/Single.xaml"/>

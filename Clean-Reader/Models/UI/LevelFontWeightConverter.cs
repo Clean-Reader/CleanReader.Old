@@ -1,15 +1,18 @@
 ﻿using System;
-using Windows.UI.Xaml;
+using Windows.UI.Text;
 using Windows.UI.Xaml.Data;
 
 namespace Clean_Reader.Models.UI
 {
-    public class LevelMarginCovnerter : IValueConverter
+    public class LevelFontWeightConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var level = (int)value;
-            return new Thickness(((level - 1) * 20) + 10, 0, 0, 0);
+            if (level == 1)
+                return FontWeights.Bold;
+            else
+                return FontWeights.Normal;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

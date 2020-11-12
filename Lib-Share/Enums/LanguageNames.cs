@@ -16,6 +16,9 @@
         OneDriveLogoutWarning,
         NeedLogin,
         RepeatBook,
-        ShelfSelection
+        ShelfSelection,
+        AddShelf,
+        ManageShelf,
+        RepeatColor
     }
 }

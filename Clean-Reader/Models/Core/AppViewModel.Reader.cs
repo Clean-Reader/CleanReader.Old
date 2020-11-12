@@ -1,4 +1,5 @@
 ﻿using Clean_Reader.Models.UI;
+using Clean_Reader.Pages;
 using Lib.Share.Models;
 using Richasy.Controls.Reader.Models;
 using Richasy.Font.UWP;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace Clean_Reader.Models.Core
 {
@@ -49,6 +51,7 @@ namespace Clean_Reader.Models.Core
                 ReaderStyle.Background = back;
             if (isAcrylic != null)
                 ReaderStyle.IsAcrylicBackground = Convert.ToBoolean(isAcrylic);
+            (ReaderPage.Current as ReaderPage).UpdateHeaderFooterStyle();
             UpdateStyle();
         }
 
@@ -56,6 +59,26 @@ namespace Clean_Reader.Models.Core
         {
             _reader.UpdateStyle(ReaderStyle);
             _isStyleChanged = true;
+        }
+
+        public Brush GetBackgroundBrush()
+        {
+            if (ReaderStyle.IsAcrylicBackground)
+            {
+                var opacity = Convert.ToInt32(ReaderStyle.Background.A) / 255.0;
+                var tempBackground = ReaderStyle.Background;
+                tempBackground.A = 255;
+                var acrylic = new AcrylicBrush()
+                {
+                    TintColor = tempBackground,
+                    TintOpacity = opacity,
+                    FallbackColor = ReaderStyle.Background,
+                    BackgroundSource = AcrylicBackgroundSource.HostBackdrop
+                };
+                return acrylic;
+            }
+            else
+                return new SolidColorBrush(ReaderStyle.Background);
         }
     }
 }

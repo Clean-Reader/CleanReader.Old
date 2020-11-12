@@ -222,6 +222,9 @@
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>Do you want to log out of OneDrive? Local reading records will not be synchronized after exiting</value>
   </data>
+  <data name="Tip_Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
   <data name="Tip_Rank" xml:space="preserve">
     <value>Rank</value>
   </data>

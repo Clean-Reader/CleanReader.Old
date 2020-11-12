@@ -19,6 +19,7 @@
         ShelfSelection,
         AddShelf,
         ManageShelf,
-        RepeatColor
+        RepeatColor,
+        Progress
     }
 }

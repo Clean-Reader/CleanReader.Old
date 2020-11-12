@@ -222,6 +222,9 @@
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>您是否要退出OneDrive？退出后本地阅读记录将不会同步</value>
   </data>
+  <data name="Tip_Progress" xml:space="preserve">
+    <value>进度</value>
+  </data>
   <data name="Tip_Rank" xml:space="preserve">
     <value>榜单</value>
   </data>

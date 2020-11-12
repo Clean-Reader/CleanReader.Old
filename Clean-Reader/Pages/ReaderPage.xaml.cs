@@ -52,6 +52,7 @@ namespace Clean_Reader.Pages
                     _tempBook = book;
                 }
             }
+            UpdateHeaderFooterStyle();
             base.OnNavigatedTo(e);
         }
 
@@ -79,6 +80,7 @@ namespace Clean_Reader.Pages
                 }
 
             }
+            ReaderPanel.Focus(FocusState.Programmatic);
         }
 
         private async void ReaderPanel_OpenCompleted(object sender, EventArgs e)
@@ -118,6 +120,7 @@ namespace Clean_Reader.Pages
         {
             ChapterListView.SelectedItem = e;
             ChapterListView.ScrollIntoView(e, ScrollIntoViewAlignment.Leading);
+            ChapterTitleBlock.Text = e.Title;
         }
 
         private void ReaderPanel_SetContentStarting(object sender, EventArgs e)
@@ -186,6 +189,7 @@ namespace Clean_Reader.Pages
             else
                 vm.HistoryList.Add(new ReadHistory(vm.CurrentBook.BookId, e));
             vm.IsHistoryChanged = true;
+            ProgressBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Progress) + ": " + e.Progress.ToString("0.0") + "%";
         }
 
         private void ReaderPanel_TouchTapped(object sender, PositionEventArgs e)
@@ -194,6 +198,7 @@ namespace Clean_Reader.Pages
             if (e.Position.X > width / 3.0 && e.Position.X < width * 2 / 3.0)
             {
                 ReaderBar.Toggle();
+                ReaderPanel.Focus(FocusState.Programmatic);
             }
         }
 
@@ -207,7 +212,8 @@ namespace Clean_Reader.Pages
         {
             if (_tempBook != null)
             {
-                await HandleBook(_tempBook);
+                if (_tempBook != vm.CurrentBook)
+                    await HandleBook(_tempBook);
                 _tempBook = null;
             }
         }
@@ -221,6 +227,12 @@ namespace Clean_Reader.Pages
         {
             ReaderSplitView.IsPaneOpen = !ReaderSplitView.IsPaneOpen;
             ReaderBar.Hide();
+            ReaderPanel.Focus(FocusState.Programmatic);
+        }
+
+        public void UpdateHeaderFooterStyle()
+        {
+            ReaderHeaderContainer.Background = ReaderFooterContainer.Background = vm.GetBackgroundBrush();
         }
     }
 }

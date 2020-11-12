@@ -63,10 +63,20 @@
                             Loaded="ReaderPanel_Loaded"
                             >
                         <reader:ReaderPanel.Header>
-                            <Grid/>
+                            <Grid Padding="20,10" x:Name="ReaderHeaderContainer">
+                                <TextBlock x:Name="ChapterTitleBlock" Style="{StaticResource BodyTextStyle}" VerticalAlignment="Center"
+                                           HorizontalAlignment="Left" Foreground="{ThemeResource TipTextColor}"/>
+                            </Grid>
                         </reader:ReaderPanel.Header>
                         <reader:ReaderPanel.Footer>
-                            <Grid/>
+                            <Grid Padding="20,10" x:Name="ReaderFooterContainer">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="ProgressBlock" Style="{StaticResource BodyTextStyle}" VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TipTextColor}"/>
+                            </Grid>
                         </reader:ReaderPanel.Footer>
                     </reader:ReaderPanel>
                     <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>

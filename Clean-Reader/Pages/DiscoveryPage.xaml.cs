@@ -1,4 +1,5 @@
 ﻿using Clean_Reader.Models.Core;
+using Lib.Share.Enums;
 using Richasy.Controls.UWP.Models.UI;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -15,7 +16,7 @@ namespace Clean_Reader.Pages
     public sealed partial class DiscoveryPage : RichasyPage
     {
         AppViewModel vm = App.VM;
-        public DiscoveryPage()
+        public DiscoveryPage():base()
         {
             this.InitializeComponent();
         }
@@ -35,6 +36,16 @@ namespace Clean_Reader.Pages
             else
                 NoDataBlock.Visibility = Visibility.Collapsed;
             LoadingRing.IsActive = false;
+        }
+
+        private void HorizonBookListView_ItemClick(object sender, Yuenov.SDK.Models.Share.Book e)
+        {
+            MainPage.Current.NavigateSubPage(typeof(SubPages.BookDetailPage),LanguageNames.BookDetail, e);
+        }
+
+        private void HorizonBookListView_AllButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

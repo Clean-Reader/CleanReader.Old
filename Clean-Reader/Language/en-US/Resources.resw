@@ -132,6 +132,9 @@
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>Background</value>
   </data>
+  <data name="Control_CategoryTipBlock.Text" xml:space="preserve">
+    <value>Categories</value>
+  </data>
   <data name="Control_ChapterTipBlock.Text" xml:space="preserve">
     <value>Chapters</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>More</value>
   </data>
+  <data name="Control_RankTipBlock.Text" xml:space="preserve">
+    <value>Rank</value>
+  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
   </data>
@@ -198,11 +204,14 @@
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>Authorization suspension</value>
   </data>
+  <data name="Tip_BookDetail" xml:space="preserve">
+    <value>Book Detail</value>
+  </data>
   <data name="Tip_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Tip_Category" xml:space="preserve">
-    <value>Category</value>
+    <value>Category &amp; Rank</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>

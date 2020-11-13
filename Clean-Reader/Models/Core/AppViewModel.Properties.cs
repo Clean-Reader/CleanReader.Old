@@ -19,6 +19,8 @@ namespace Clean_Reader.Models.Core
 {
     public partial class AppViewModel
     {
+        public double _narrowBreakpoint = 1000;
+
         public YuenovClient _yuenovClient;
         private DispatcherTimer _checkFileTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
 
@@ -72,8 +74,10 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<SystemFont> FontCollection = new ObservableCollection<SystemFont>();
         public ObservableCollection<ReaderColorConfig> ColorConfigCollection = new ObservableCollection<ReaderColorConfig>();
 
-        public List<Category> WebCategories = new List<Category>();
+        public ObservableCollection<Category> CategoryCollection = new ObservableCollection<Category>();
         public ObservableCollection<DiscoveryContainer> DiscoveryCollection = new ObservableCollection<DiscoveryContainer>();
+        public ObservableCollection<SpecialContainer> TopicCollection = new ObservableCollection<SpecialContainer>();
+        public ObservableCollection<Rank> RankCollection = new ObservableCollection<Rank>();
         public ReaderStyle ReaderStyle;
 
         public event EventHandler CurrentShelfChanged;

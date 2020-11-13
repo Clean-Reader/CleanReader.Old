@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Clean_Reader.Models.Enums;
 using Clean_Reader.Models.UI;
+using Lib.Share.Enums;
+using Windows.UI.Xaml.Media.Animation;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -52,14 +54,40 @@ namespace Clean_Reader
                 vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
                 IsInit = true;
             }
-           
+
             // TODO
         }
 
         private void RichasyPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             double width = e.NewSize.Width;
-            // TODO
+            if (width <= vm._narrowBreakpoint && AppSplitView.DisplayMode == SplitViewDisplayMode.CompactInline)
+            {
+                AppSplitView.DisplayMode = SplitViewDisplayMode.CompactOverlay;
+                SideMenuButton.Visibility = Visibility.Visible;
+                AppSearchBox.Width = 180;
+                Container.Padding = new Thickness(25, 10, 25, 0);
+            }
+            else if (width > vm._narrowBreakpoint && AppSplitView.DisplayMode == SplitViewDisplayMode.CompactOverlay)
+            {
+                AppSplitView.DisplayMode = SplitViewDisplayMode.CompactInline;
+                AppSplitView.IsPaneOpen = true;
+                SideMenuButton.Visibility = Visibility.Collapsed;
+                AppSearchBox.Width = 300;
+                Container.Padding = new Thickness(45, 20, 45, 0);
+            }
+        }
+
+        private void SideMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppSplitView.IsPaneOpen = !AppSplitView.IsPaneOpen;
+        }
+
+        public void NavigateSubPage(Type pageType, LanguageNames title, object para = null)
+        {
+            SubtitleBlock.Text = App.Tools.App.GetLocalizationTextFromResource(title);
+            SubFrame.Navigate(pageType, para, new DrillInNavigationTransitionInfo());
+            SecondarySplitView.IsPaneOpen = true;
         }
     }
 }

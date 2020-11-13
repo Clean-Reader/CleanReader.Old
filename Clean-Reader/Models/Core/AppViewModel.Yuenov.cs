@@ -15,13 +15,13 @@ namespace Clean_Reader.Models.Core
             var response = await _yuenovClient.GetTotalCategoriesAsync();
             if (response.Result.Code == ResultCode.Success)
             {
-                WebCategories.Clear();
+                CategoryCollection.Clear();
                 var categories = response.Data.Channels.SelectMany(p => p.Categories);
                 foreach (var cate in categories)
                 {
-                    if (!WebCategories.Any(p => p.CategoryName == cate.CategoryName))
+                    if (!CategoryCollection.Any(p => p.CategoryName == cate.CategoryName))
                     {
-                        WebCategories.Add(cate);
+                        CategoryCollection.Add(cate);
                     }
                 }
             }
@@ -41,6 +41,52 @@ namespace Clean_Reader.Models.Core
                 }
                 else
                     App.VM.ShowPopup($"{discoveryResponse.Result.Code}: {discoveryResponse.Result.Message}");
+            }
+            catch (Exception ex)
+            {
+                App.VM.ShowPopup(ex.Message, true);
+            }
+        }
+        public async Task TopicInit()
+        {
+            TopicCollection.Clear();
+            try
+            {
+                var specialResponse = await _yuenovClient.GetAllSpecialListAsync();
+                if (specialResponse.Result.Code == ResultCode.Success)
+                {
+                    var data = specialResponse.Data.SpecialList;
+                    if (data != null)
+                        data.ForEach(p => TopicCollection.Add(p));
+                }
+                else
+                    App.VM.ShowPopup($"{specialResponse.Result.Code}: {specialResponse.Result.Message}");
+            }
+            catch (Exception ex)
+            {
+                App.VM.ShowPopup(ex.Message, true);
+            }
+        }
+
+        public async Task RankInit()
+        {
+            RankCollection.Clear();
+            try
+            {
+                var response = await _yuenovClient.GetTotalRanksAsync();
+                if (response.Result.Code == ResultCode.Success)
+                {
+                    var ranks = response.Data.Channels.SelectMany(p => p.Ranks);
+                    foreach (var rank in ranks)
+                    {
+                        if (!RankCollection.Any(p => p.RankName == rank.RankName))
+                        {
+                            RankCollection.Add(rank);
+                        }
+                    }
+                }
+                else
+                    App.VM.ShowPopup($"{response.Result.Code}: {response.Result.Message}");
             }
             catch (Exception ex)
             {

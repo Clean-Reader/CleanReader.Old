@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.BookCategoryCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:ui="using:Clean_Reader.Models.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <ui:BookCoverLinkConverter x:Key="CoverConverter"/>
+        <DataTemplate x:DataType="x:String" x:Key="ImageTemplate">
+            <controls:ImageEx Width="35" Height="35" CornerRadius="20"
+                              Stretch="UniformToFill" DecodePixelWidth="40"
+                              Source="{x:Bind Converter={StaticResource CoverConverter}}"
+                              Margin="-10,0,0,0" BorderBrush="{ThemeResource CardBackground}"
+                              BorderThickness="3"
+                              />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Background="{ThemeResource CardBackground}" CornerRadius="10" Height="{x:Bind Height,Mode=OneWay}">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ItemsControl x:Name="CoverItems" HorizontalAlignment="Center" Margin="0,0,-10,0"
+                          ItemsSource="{x:Bind Images,Mode=OneWay}" ItemTemplate="{StaticResource ImageTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <TextBlock Text="{x:Bind Title,Mode=OneWay}" Style="{StaticResource BodyTextStyle}" Grid.Row="1"
+                       FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+        </Grid>
+    </Grid>
+</UserControl>

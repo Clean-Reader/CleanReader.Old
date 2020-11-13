@@ -9,20 +9,38 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Width="380" Height="185" CornerRadius="10">
-        <controls:ImageEx x:Name="BackgroundImage" Width="370" Height="175"
-                          CornerRadius="10" Stretch="UniformToFill"/>
-        <Grid Background="{ThemeResource CoverBackground}" Width="380" Height="185"
-              CornerRadius="10"/>
-
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center"
-               Padding="25">
+    <Grid Width="{x:Bind Width,Mode=OneWay}" Height="{x:Bind Height,Mode=OneWay}" CornerRadius="10" Background="{ThemeResource CoverBackground}">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch"
+               Padding="{x:Bind InnerPadding,Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <controls:ImageEx x:Name="CoverImage" Width="100" Stretch="Uniform"
-                              VerticalAlignment="Top" CornerRadius="6"/>
+            <controls:DropShadowPanel BlurRadius="25"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="6"
+                                  OffsetY="6" VerticalAlignment="Top"
+                                  Color="{ThemeResource ShadowColor}"
+                                  IsMasked="True" x:Name="CoverImageContainer">
+                <controls:ImageEx x:Name="CoverImage" Width="100" Stretch="Uniform" PlaceholderStretch="Uniform"
+                               CornerRadius="10" ImageExFailed="CoverImage_ImageExFailed"/>
+            </controls:DropShadowPanel>
+            <controls:DropShadowPanel BlurRadius="25"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="6"
+                                  OffsetY="6" Visibility="Collapsed"
+                                  Color="{ThemeResource ShadowColor}"
+                                  IsMasked="True" x:Name="SimpleCoverContainer">
+                <Grid x:Name="SimpleCover" CornerRadius="10"
+                  Width="100" Height="130" Background="{ThemeResource SecondaryColor}">
+                    <Grid Margin="0,15,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                      Background="{ThemeResource CoverMaskColor}" Padding="5">
+                        <TextBlock Style="{StaticResource SmallTextStyle}" HorizontalAlignment="Center"
+                               TextAlignment="Center" TextWrapping="Wrap" MaxLines="2"
+                               Foreground="White" x:Name="BookNameBlock"/>
+                    </Grid>
+                </Grid>
+            </controls:DropShadowPanel>
             <Grid Grid.Column="1" Margin="25,0,0,0" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -36,22 +54,17 @@
                 <TextBlock Grid.Row="1" x:Name="AuthorBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource ImportantTextColor}"/>
                 <TextBlock Grid.Row="2" x:Name="PropertyBlock" Margin="0,0,0,5" Style="{StaticResource MiniTextStyle}"/>
                 <TextBlock Grid.Row="3" x:Name="DescriptionBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource NormalTextColor}"/>
+                <StackPanel Grid.Row="3" x:Name="DetailChapterContainer">
+                    <TextBlock x:Name="ChapterNumberBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource NormalTextColor}"/>
+                    <TextBlock x:Name="LastestChapterBlock" Margin="0,0,0,5" Style="{StaticResource SmallTextStyle}" Foreground="{ThemeResource NormalTextColor}"
+                               MaxLines="1"/>
+                </StackPanel>
                 <Border Grid.Row="4" Background="{ThemeResource CardBackground}" CornerRadius="5" Padding="10,5"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="{ThemeResource LineColor}" BorderThickness="1">
                     <TextBlock Style="{StaticResource MiniTextStyle}" Foreground="{ThemeResource NormalTextColor}"
                                x:Name="StatusBlock"/>
                 </Border>
             </Grid>
-            <interaction:ActionButton VerticalAlignment="Top" HorizontalAlignment="Right"
-                                      Style="{StaticResource DefaultActionButtonStyle}"
-                                      Background="{ThemeResource CardBackground}"
-                                      Grid.Column="1" x:Name="TagButton" Click="TagButton_Click"
-                                      Diameter="35" Margin="0,-10,-10,0"
-                                      >
-                <interaction:ActionButton.Icon>
-                    <uwp:FeatherIcon Symbol="Bookmark" FontSize="{CustomResource BasicFontSize}"/>
-                </interaction:ActionButton.Icon>
-            </interaction:ActionButton>
         </Grid>
     </Grid>
 </UserControl>

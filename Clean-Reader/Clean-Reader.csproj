@@ -18,7 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>09845A784F504346A2D9453CAB0242C0E3AFBBA3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>19DE3251AB16B9B0D867892B047B3BB7FF135FF9</PackageCertificateThumbprint>
     <PackageCertificateKeyFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -124,6 +124,9 @@
     <Compile Include="Controls\Components\AppSearchBox.xaml.cs">
       <DependentUpon>AppSearchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\BookCategoryCard.xaml.cs">
+      <DependentUpon>BookCategoryCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\BookCover.xaml.cs">
       <DependentUpon>BookCover.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,9 @@
     <Compile Include="Controls\Dialogs\ShelfSelectionDialog.xaml.cs">
       <DependentUpon>ShelfSelectionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Layout\HorizonBookListView.xaml.cs">
+      <DependentUpon>HorizonBookListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Layout\HorizontalBookPanel.xaml.cs">
       <DependentUpon>HorizontalBookPanel.xaml</DependentUpon>
     </Compile>
@@ -176,6 +182,7 @@
     <Compile Include="Models\Core\AppViewModel.Shelf.cs" />
     <Compile Include="Models\Core\AppViewModel.Yuenov.cs" />
     <Compile Include="Models\Enums\MenuItemType.cs" />
+    <Compile Include="Models\UI\BookCoverLinkConverter.cs" />
     <Compile Include="Models\UI\BrushConverter.cs" />
     <Compile Include="Models\UI\CustomResourceLoader.cs" />
     <Compile Include="Models\UI\LevelFontWeightConverter.cs" />
@@ -185,14 +192,12 @@
     <Compile Include="Models\UI\SearchResult.cs" />
     <Compile Include="Models\UI\SearchResultSelector.cs" />
     <Compile Include="Models\UI\StaticUIExtension.cs" />
+    <Compile Include="Models\UI\WebBookCoverConverter.cs" />
     <Compile Include="Pages\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DiscoveryPage.xaml.cs">
       <DependentUpon>DiscoveryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RankPage.xaml.cs">
-      <DependentUpon>RankPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReaderPage.xaml.cs">
       <DependentUpon>ReaderPage.xaml</DependentUpon>
@@ -207,6 +212,9 @@
       <DependentUpon>TopicPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubPages\BookDetailPage.xaml.cs">
+      <DependentUpon>BookDetailPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -214,6 +222,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\coverholder-Dark.png" />
+    <Content Include="Assets\coverholder-Light.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\Logo\LargeTile.scale-100.png" />
     <Content Include="Assets\Logo\LargeTile.scale-125.png" />
@@ -285,6 +295,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Components\BookCategoryCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\BookCover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -333,6 +347,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Layout\HorizonBookListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Layout\HorizontalBookPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,10 +371,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RankPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\ReaderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -370,6 +384,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TopicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubPages\BookDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

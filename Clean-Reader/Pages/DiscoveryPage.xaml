@@ -8,47 +8,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:discovery="using:Yuenov.SDK.Models.Discovery" xmlns:layout="using:Clean_Reader.Controls.Layout" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:share="using:Yuenov.SDK.Models.Share" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
+        <DataTemplate x:DataType="discovery:DiscoveryContainer" x:Key="DiscoveryItemTemplate">
+            <layout:HorizonBookListView ItemsSource="{x:Bind}" Title="{x:Bind CategoryName}"
+                                        ItemClick="HorizonBookListView_ItemClick" Margin="0,0,0,20"
+                                        AllButtonClick="HorizonBookListView_AllButtonClick"/>
+        </DataTemplate>
     </ui:RichasyPage.Resources>
     <Grid>
         <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_ConnectFailedBlock"
                                   VerticalAlignment="Center" Symbol="WifiOff"
                                   HorizontalAlignment="Center" Visibility="Collapsed"/>
-        <Pivot x:Name="Pivot" ItemsSource="{x:Bind vm.DiscoveryCollection}" Margin="0,-20,0,0">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding CategoryName}" FontFamily="{CustomResource Basic}"
-                               FontSize="{CustomResource BodyFontSize}"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <Pivot.ItemTemplate>
-                <DataTemplate x:DataType="discovery:DiscoveryContainer">
-                    <PivotItem>
-                        <Grid>
-                            <controls:AdaptiveGridView ItemsSource="{x:Bind BookList}"
-                                      Style="{StaticResource BasicGridView}" DesiredWidth="390"
-                                      ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"
-                                      IsItemClickEnabled="False" Padding="-10,0"
-                                      SelectionMode="None" StretchContentForSingleRow="False"
-                                      >
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:DataType="share:Book">
-                                        <Viewbox Margin="10" MinWidth="300" MaxWidth="380">
-                                            <components:YuenovBookCard Data="{Binding}"/>
-                                        </Viewbox>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </controls:AdaptiveGridView>
-                        </Grid>
-                    </PivotItem>
-                </DataTemplate>
-            </Pivot.ItemTemplate>
-        </Pivot>
-        <!--<ListView Style="{StaticResource BasicListView}"
+        <ListView Style="{StaticResource BasicListView}"
                   ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
-                  ScrollViewer.HorizontalScrollMode="Disabled" Margin="0,0,-25,0"
-                  ItemTemplate="{StaticResource CategoryItemTemplate}" Padding="0,0,25,0"
+                  ScrollViewer.HorizontalScrollMode="Disabled" Margin="0,-20,-25,0"
+                  ItemTemplate="{StaticResource DiscoveryItemTemplate}" Padding="0,0,25,0"
                   SelectionMode="None" ItemsSource="{x:Bind vm.DiscoveryCollection}"
-                  />-->
+                  />
         <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
     </Grid>
 </ui:RichasyPage>

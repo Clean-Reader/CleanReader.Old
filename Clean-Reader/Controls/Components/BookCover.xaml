@@ -12,22 +12,35 @@
     <Grid>
         <Grid x:Name="BackgroundRect" CornerRadius="10" Width="150" Height="170"/>
         <controls:ImageEx x:Name="BackgroundImage" Stretch="UniformToFill" CornerRadius="10"
-                          Width="150" Height="170"/>
+                          Width="150" Height="170" PlaceholderStretch="UniformToFill"/>
         <Grid Background="{ThemeResource CoverBackground}" HorizontalAlignment="Stretch" x:Name="BackgroundMask"
                Width="160" Height="180" CornerRadius="10"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid x:Name="SimpleCover" CornerRadius="6"
+            <controls:DropShadowPanel BlurRadius="25"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="6"
+                                  OffsetY="6"
+                                  Color="{ThemeResource ShadowColor}"
+                                  IsMasked="True" x:Name="SimpleCoverContainer">
+                <Grid x:Name="SimpleCover" CornerRadius="10"
                   Width="100" Height="130">
-                <Grid Margin="0,15,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                    <Grid Margin="0,15,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                       Background="{ThemeResource CoverMaskColor}" Padding="5">
-                    <TextBlock Style="{StaticResource SmallTextStyle}" HorizontalAlignment="Center"
+                        <TextBlock Style="{StaticResource SmallTextStyle}" HorizontalAlignment="Center"
                                TextAlignment="Center" TextWrapping="Wrap" MaxLines="2"
                                Foreground="White" x:Name="BookNameBlock"/>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <controls:ImageEx x:Name="CoverImage" Stretch="Uniform"
-                          CornerRadius="6" Width="100" ImageExFailed="CoverImage_ImageExFailed"/>
-
+            </controls:DropShadowPanel>
+            <controls:DropShadowPanel BlurRadius="25"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="6"
+                                  OffsetY="6" x:Name="CoverImageContainer"
+                                  Color="{ThemeResource ShadowColor}"
+                                  IsMasked="True">
+                <controls:ImageEx x:Name="CoverImage" Stretch="Uniform" PlaceholderStretch="Uniform"
+                          CornerRadius="10" Width="100" ImageExFailed="CoverImage_ImageExFailed"/>
+            </controls:DropShadowPanel>
         </Grid>
         
     </Grid>

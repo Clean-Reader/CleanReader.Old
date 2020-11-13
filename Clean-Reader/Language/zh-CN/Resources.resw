@@ -132,6 +132,9 @@
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>背景色</value>
   </data>
+  <data name="Control_CategoryTipBlock.Text" xml:space="preserve">
+    <value>分类</value>
+  </data>
   <data name="Control_ChapterTipBlock.Text" xml:space="preserve">
     <value>目录</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>更多</value>
   </data>
+  <data name="Control_RankTipBlock.Text" xml:space="preserve">
+    <value>榜单</value>
+  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
   </data>
@@ -198,11 +204,14 @@
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>授权中止</value>
   </data>
+  <data name="Tip_BookDetail" xml:space="preserve">
+    <value>书籍详情</value>
+  </data>
   <data name="Tip_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
   <data name="Tip_Category" xml:space="preserve">
-    <value>分类</value>
+    <value>分类 &amp; 榜单</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>确认</value>

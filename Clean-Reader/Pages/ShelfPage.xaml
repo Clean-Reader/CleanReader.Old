@@ -38,7 +38,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="LastestContainer" Margin="0,0,0,35">
+            <Grid x:Name="LastestContainer" Margin="0,0,0,25">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -50,7 +50,7 @@
                 <TextBlock Style="{StaticResource SubtitleTextStyle}" VerticalAlignment="Center" x:Uid="Control_LastestReadTipBlock"
                            HorizontalAlignment="Left" Margin="0,0,0,20"/>
                 <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemTemplate="{StaticResource BookItemTemplate}" ItemClick="BookView_ItemClick"
-                          x:Name="LastestReadListView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.LastestReadCollection}" Padding="-5,0,0,0"
+                          x:Name="LastestReadListView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.LastestReadCollection}" Padding="0,0,0,0"
                           Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left"
                           ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
                           ItemsPanel="{StaticResource HorizontalListViewItemsPanel}"/>

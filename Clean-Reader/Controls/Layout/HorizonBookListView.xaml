@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Layout.HorizonBookListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Layout"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:share="using:Yuenov.SDK.Models.Share" xmlns:ui="using:Clean_Reader.Models.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <ui:WebBookCoverConverter x:Key="CoverConverter"/>
+        <DataTemplate x:DataType="share:Book" x:Key="BookItemTemplate">
+            <Viewbox StretchDirection="Both" Height="185" Margin="0,0,10,0">
+                <components:BookCover Data="{x:Bind Converter={StaticResource CoverConverter}}" ToolTipService.ToolTip="{x:Bind Title}"/>
+            </Viewbox>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Margin="0,0,0,10">
+            <TextBlock Style="{StaticResource SubtitleTextStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True" Text="{x:Bind Title,Mode=OneWay}"/>
+            <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                      x:Name="AllButton" Click="AllButton_Click" Margin="10,0,0,0"
+                                      RelativePanel.AlignVerticalCenterWithPanel="True" Diameter="35"
+                                      RelativePanel.AlignRightWithPanel="True">
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="Eye" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
+        </RelativePanel>
+        <ScrollViewer Style="{StaticResource BasicScrollViewer}" HorizontalScrollBarVisibility="Hidden"
+                      ViewChanged="ScrollViewer_ViewChanged" x:Name="ScrollViewer" Grid.Row="1"
+                      ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollMode="Disabled">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <interaction:ExtraButton Style="{StaticResource TransparentExtraButtonStyle}"
+                                         Click="ExtraButton_Click">
+                    <components:YuenovBookCard x:Name="FirstCard"/>
+                </interaction:ExtraButton>
+                
+                <ListView x:Name="OtherListView" ItemsPanel="{StaticResource HorizontalListViewItemsPanel}"
+                          Style="{StaticResource NoScrollListView}" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                          IsItemClickEnabled="True" ItemClick="OtherListView_ItemClick" Grid.Column="1"
+                          ItemTemplate="{StaticResource BookItemTemplate}" Margin="10,0,0,0"
+                          />
+                
+            </Grid>
+        </ScrollViewer>
+        <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                      x:Name="LeftButton" Click="LeftButton_Click" Grid.Row="1"
+                                      VerticalAlignment="Center" HorizontalAlignment="Left"
+                                      Background="{ThemeResource CardBackground}" Visibility="Collapsed">
+            <interaction:ActionButton.Icon>
+                <uwp:FeatherIcon Symbol="ChevronLeft"/>
+            </interaction:ActionButton.Icon>
+        </interaction:ActionButton>
+        <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                      x:Name="RightButton" Click="RightButton_Click" Grid.Row="1"
+                                      VerticalAlignment="Center" HorizontalAlignment="Right"
+                                      Background="{ThemeResource CardBackground}" Visibility="Collapsed">
+            <interaction:ActionButton.Icon>
+                <uwp:FeatherIcon Symbol="ChevronRight"/>
+            </interaction:ActionButton.Icon>
+        </interaction:ActionButton>
+    </Grid>
+</UserControl>

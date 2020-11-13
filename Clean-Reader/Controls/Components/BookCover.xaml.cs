@@ -13,6 +13,9 @@ namespace Clean_Reader.Controls.Components
         public BookCover()
         {
             this.InitializeComponent();
+            string theme = App.Current.RequestedTheme.ToString();
+            CoverImage.PlaceholderSource = new BitmapImage(new System.Uri($"ms-appx:///Assets/coverholder-{theme}.png")) { DecodePixelWidth = 120 };
+            BackgroundImage.PlaceholderSource = new BitmapImage(new System.Uri($"ms-appx:///Assets/coverholder-{theme}.png")) { DecodePixelWidth = 40 };
         }
 
         public Book Data
@@ -33,21 +36,21 @@ namespace Clean_Reader.Controls.Components
                 switch (data.Type)
                 {
                     case BookType.Txt:
-                        instance.CoverImage.Visibility = Visibility.Collapsed;
-                        instance.SimpleCover.Visibility = Visibility.Visible;
+                        instance.CoverImageContainer.Visibility = Visibility.Collapsed;
+                        instance.SimpleCoverContainer.Visibility = Visibility.Visible;
                         instance.BookNameBlock.Text = data.Name;
                         instance.SimpleCover.Background = instance.BackgroundRect.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.TxtColor);
                         break;
                     case BookType.Epub:
-                        instance.CoverImage.Visibility = Visibility.Visible;
-                        instance.SimpleCover.Visibility = Visibility.Collapsed;
+                        instance.CoverImageContainer.Visibility = Visibility.Visible;
+                        instance.SimpleCoverContainer.Visibility = Visibility.Collapsed;
                         instance.CoverImage.Source = new BitmapImage(new System.Uri(data.Cover)) { DecodePixelWidth = 140 };
                         if (instance.BackgroundImage.Visibility == Visibility.Visible)
                             instance.BackgroundImage.Source = new BitmapImage(new System.Uri(data.Cover)) { DecodePixelWidth = 40 };
                         break;
                     case BookType.Web:
-                        instance.CoverImage.Visibility = Visibility.Visible;
-                        instance.SimpleCover.Visibility = Visibility.Collapsed;
+                        instance.CoverImageContainer.Visibility = Visibility.Visible;
+                        instance.SimpleCoverContainer.Visibility = Visibility.Collapsed;
                         instance.CoverImage.Source = new BitmapImage(new System.Uri(App.VM._yuenovClient.GetImageUrl(data.Cover))) { DecodePixelWidth = 140 };
                         if (instance.BackgroundImage.Visibility == Visibility.Visible)
                             instance.BackgroundImage.Source = new BitmapImage(new System.Uri(App.VM._yuenovClient.GetImageUrl(data.Cover))) { DecodePixelWidth = 40 };
@@ -60,8 +63,8 @@ namespace Clean_Reader.Controls.Components
 
         private void CoverImage_ImageExFailed(object sender, Microsoft.Toolkit.Uwp.UI.Controls.ImageExFailedEventArgs e)
         {
-            CoverImage.Visibility = Visibility.Collapsed;
-            SimpleCover.Visibility = Visibility.Visible;
+            CoverImageContainer.Visibility = Visibility.Collapsed;
+            SimpleCoverContainer.Visibility = Visibility.Visible;
             BookNameBlock.Text = Data.Name;
             if (Data.Type == BookType.Epub)
                 SimpleCover.Background = BackgroundRect.Background = App.Tools.App.GetThemeBrushFromResource(ColorNames.EpubColor);

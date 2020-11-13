@@ -20,6 +20,7 @@
         AddShelf,
         ManageShelf,
         RepeatColor,
-        Progress
+        Progress,
+        BookDetail
     }
 }

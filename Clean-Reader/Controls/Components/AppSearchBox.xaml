@@ -40,7 +40,7 @@
                                  x:Key="SearchSelector"/>
     </UserControl.Resources>
     <Grid>
-        <AutoSuggestBox Style="{StaticResource BasicSearchBoxStyle}" Width="300"
+        <AutoSuggestBox Style="{StaticResource BasicSearchBoxStyle}" Width="{x:Bind Width,Mode=OneWay}"
                         x:Uid="Control_AppSearchBox" TextChanged="AutoSuggestBox_TextChanged"
                         ItemsSource="{x:Bind ResultCollection}" QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                         ItemTemplateSelector="{StaticResource SearchSelector}"/>

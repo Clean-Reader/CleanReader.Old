@@ -1,10 +1,6 @@
 ﻿using Clean_Reader.Models.Enums;
 using Richasy.Font.UWP.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Clean_Reader.Models.UI
 {
@@ -28,9 +24,6 @@ namespace Clean_Reader.Models.UI
                 case MenuItemType.Category:
                     Icon = FeatherSymbol.Grid;
                     break;
-                case MenuItemType.Rank:
-                    Icon = FeatherSymbol.TrendingUp;
-                    break;
                 case MenuItemType.Topic:
                     Icon = FeatherSymbol.Bookmark;
                     break;
@@ -49,7 +42,6 @@ namespace Clean_Reader.Models.UI
                 new MenuItem(MenuItemType.Shelf),
                 new MenuItem(MenuItemType.Discovery),
                 new MenuItem(MenuItemType.Category),
-                new MenuItem(MenuItemType.Rank),
                 new MenuItem(MenuItemType.Topic),
                 new MenuItem(MenuItemType.Setting)
             };

@@ -22,7 +22,6 @@ namespace Clean_Reader.Controls.Layout
 {
     public sealed partial class HorizontalBookPanel : UserControl
     {
-        private ObservableCollection<Book> BookCollection = new ObservableCollection<Book>();
         public HorizontalBookPanel()
         {
             this.InitializeComponent();
@@ -30,26 +29,18 @@ namespace Clean_Reader.Controls.Layout
         public event RoutedEventHandler AllButtonClick;
         public event EventHandler<Book> ItemClick;
 
-        public List<yuenov.Book> BookList
+
+        public object ItemsSource
         {
-            get { return (List < yuenov.Book>)GetValue(BookListProperty); }
-            set { SetValue(BookListProperty, value); }
+            get { return (object)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for BookList.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BookListProperty =
-            DependencyProperty.Register("BookList", typeof(List<yuenov.Book>), typeof(HorizontalBookPanel), new PropertyMetadata(null,new PropertyChangedCallback(BookList_Changed)));
+        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register("ItemsSource", typeof(object), typeof(HorizontalBookPanel), new PropertyMetadata(null));
 
-        private static void BookList_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if(e.NewValue !=null && e.NewValue is List<yuenov.Book> books)
-            {
-                var temp = books.Select(p => new Book(p));
-                var instance = d as HorizontalBookPanel;
-                instance.BookCollection.Clear();
-                temp.ToList().ForEach(p => instance.BookCollection.Add(p));
-            }
-        }
+
 
         public string Title
         {
@@ -60,6 +51,16 @@ namespace Clean_Reader.Controls.Layout
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(HorizontalBookPanel), new PropertyMetadata(""));
+
+        public DataTemplate ItemTemplate
+        {
+            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+            set { SetValue(ItemTemplateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemTemplate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemTemplateProperty =
+            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(HorizontalBookPanel), new PropertyMetadata(null));
 
 
 

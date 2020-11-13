@@ -5,7 +5,6 @@
         Shelf,
         Discovery,
         Category,
-        Rank,
         Topic,
         Setting,
         Reader

@@ -5,10 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:discovery="using:Yuenov.SDK.Models.Discovery" xmlns:layout="using:Clean_Reader.Controls.Layout" xmlns:components="using:Clean_Reader.Controls.Components"
     mc:Ignorable="d">
-
+    <ui:RichasyPage.Resources>
+        <DataTemplate x:DataType="discovery:SpecialContainer" x:Key="TopicItemTemplate">
+            <layout:HorizonBookListView ItemsSource="{x:Bind}" Title="{x:Bind Name}"
+                                        ItemClick="HorizonBookListView_ItemClick" Margin="0,0,0,20"
+                                        AllButtonClick="HorizonBookListView_AllButtonClick"/>
+        </DataTemplate>
+    </ui:RichasyPage.Resources>
     <Grid>
-
+        <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_ConnectFailedBlock"
+                                  VerticalAlignment="Center" Symbol="WifiOff"
+                                  HorizontalAlignment="Center" Visibility="Collapsed"/>
+        <ListView Style="{StaticResource BasicListView}"
+                  ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                  ScrollViewer.HorizontalScrollMode="Disabled" Margin="0,-20,-25,0"
+                  ItemTemplate="{StaticResource TopicItemTemplate}" Padding="0,0,25,0"
+                  SelectionMode="None" ItemsSource="{x:Bind vm.TopicCollection}"
+                  />
+        <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
     </Grid>
 </ui:RichasyPage>

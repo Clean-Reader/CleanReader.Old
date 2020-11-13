@@ -8,33 +8,26 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <UserControl.Resources>
-        <DataTemplate x:DataType="models:Book" x:Key="BookItemTemplate">
-            <Grid>
-                <components:BookSlimCard TypeVisibility="Collapsed" Data="{Binding}" Margin="0,0,10,0"/>
-            </Grid>
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource BodyTextStyle}" x:Name="TitleBlock"
+            <TextBlock Style="{StaticResource BodyTextStyle}" x:Name="TitleBlock" FontWeight="Bold"
                        VerticalAlignment="Center" Text="{x:Bind Title,Mode=OneWay}"/>
             <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
                                       x:Name="AllButton" Click="AllButton_Click" Margin="10,0,0,0"
-                                      VerticalAlignment="Center">
+                                      VerticalAlignment="Center" Diameter="35">
                 <interaction:ActionButton.Icon>
-                    <uwp:FeatherIcon Symbol="Eye"/>
+                    <uwp:FeatherIcon Symbol="Eye" FontSize="{CustomResource BasicFontSize}"/>
                 </interaction:ActionButton.Icon>
             </interaction:ActionButton>
         </StackPanel>
-        <ListView Grid.Row="1" ItemsPanel="{StaticResource HorizontalListViewItemsPanel}" Margin="0,15,0,0"
+        <ListView Grid.Row="1" ItemsPanel="{StaticResource HorizontalListViewItemsPanel}" Margin="0,5,0,0"
                   Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                  ScrollViewer.VerticalScrollMode="Disabled" ItemTemplate="{StaticResource BookItemTemplate}"
+                  ScrollViewer.VerticalScrollMode="Disabled" ItemTemplate="{x:Bind ItemTemplate,Mode=OneWay}"
                   IsItemClickEnabled="True" x:Name="BookListView" ItemClick="BookListView_ItemClick"
-                  ItemsSource="{x:Bind BookCollection}" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"/>
+                  ItemsSource="{x:Bind ItemsSource,Mode=OneWay}" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"/>
     </Grid>
 </UserControl>

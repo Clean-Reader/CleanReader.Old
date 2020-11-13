@@ -1,9 +1,11 @@
-﻿using Richasy.Controls.UWP.Models.UI;
+﻿using Clean_Reader.Models.Core;
+using Richasy.Controls.UWP.Models.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,10 +25,50 @@ namespace Clean_Reader.Pages
     /// </summary>
     public sealed partial class CategoryPage : RichasyPage
     {
-        public CategoryPage():base()
+        AppViewModel vm = App.VM;
+        public CategoryPage() : base()
         {
             this.InitializeComponent();
-            Current = this;
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (vm.CategoryCollection.Count == 0 || vm.RankCollection.Count == 0)
+                await PageInit();
+            base.OnNavigatedTo(e);
+        }
+
+        private async Task PageInit()
+        {
+            CategoryLoadingBar.Visibility = Visibility.Visible;
+            RankLoadingBar.Visibility = Visibility.Visible;
+
+            await vm.WebCategoriesInit();
+            if (vm.CategoryCollection.Count == 0)
+                CategoryNoDataBlock.Visibility = Visibility.Visible;
+            else
+                CategoryNoDataBlock.Visibility = Visibility.Collapsed;
+
+            CategoryLoadingBar.Visibility = Visibility.Collapsed;
+
+            await vm.RankInit();
+            if (vm.RankCollection.Count == 0)
+                RankNoDataBlock.Visibility = Visibility.Visible;
+            else
+                RankNoDataBlock.Visibility = Visibility.Collapsed;
+
+            RankLoadingBar.Visibility = Visibility.Collapsed;
+            
+        }
+
+        private void CategoryGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void RankGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Clean_Reader.Models.Core;
+using Lib.Share.Enums;
 using Richasy.Controls.UWP.Models.UI;
+using Richasy.Font.UWP.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -58,6 +60,17 @@ namespace Clean_Reader.SubPages
                 var detail = response.Data;
                 DetailCard.Data = detail;
                 DescriptionBlock.Text = detail.Description;
+                RecommendGridView.ItemsSource = detail.Recommend;
+                if (vm.TotalBookList.Any(p => p.BookId == _currentBook.BookId.ToString()))
+                {
+                    AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.OpenBook);
+                    AddButtonIcon.Symbol = FeatherSymbol.BookOpen;
+                }
+                else
+                {
+                    AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddToShelf);
+                    AddButtonIcon.Symbol = FeatherSymbol.Plus;
+                }
                 Container.Visibility = Visibility.Visible;
             }
             else
@@ -65,6 +78,19 @@ namespace Clean_Reader.SubPages
                 NoDataBlock.Visibility = Visibility.Visible;
             }
             LoadingRing.IsActive = false;
+        }
+
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var source = vm.TotalBookList.Where(p => p.BookId == _currentBook.BookId.ToString()).FirstOrDefault();
+            if (source!=null)
+            {
+                vm.OpenReaderView(source);
+            }
+            else
+            {
+                await vm.ImportBook(_currentBook);
+            }
         }
     }
 }

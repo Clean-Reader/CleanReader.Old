@@ -180,6 +180,9 @@
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>Rank</value>
   </data>
+  <data name="Control_RecommendGridView.Header" xml:space="preserve">
+    <value>Recommend books</value>
+  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="Tip_AddShelf" xml:space="preserve">
     <value>Add bookshelf</value>
+  </data>
+  <data name="Tip_AddToShelf" xml:space="preserve">
+    <value>Add to bookshelf</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>Authorization suspension</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>Do you want to log out of OneDrive? Local reading records will not be synchronized after exiting</value>
+  </data>
+  <data name="Tip_OpenBook" xml:space="preserve">
+    <value>Open book</value>
   </data>
   <data name="Tip_Progress" xml:space="preserve">
     <value>Progress</value>

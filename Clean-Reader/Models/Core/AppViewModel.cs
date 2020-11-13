@@ -5,6 +5,9 @@ using Richasy.Helper.UWP;
 using System.Threading.Tasks;
 using Lib.Share.Models;
 using Newtonsoft.Json;
+using Richasy.Controls.UWP.Popups;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 
 namespace Clean_Reader.Models.Core
 {
@@ -17,6 +20,11 @@ namespace Clean_Reader.Models.Core
             CurrentShelfChanged += CurrentShelf_Changed;
             _checkFileTimer.Tick += CheckFileTimer_Tick;
             _checkFileTimer.Start();
+            _waitPopup = new WaitingPopup(App.Tools);
+            _waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
+            _waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
+            _waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
+            _waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
         }
 
         private async void CheckFileTimer_Tick(object sender, object e)

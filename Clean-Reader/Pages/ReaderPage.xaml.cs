@@ -69,16 +69,20 @@ namespace Clean_Reader.Pages
                 var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(book.BookId);
                 try
                 {
+                    var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
                     if (book.Type == BookType.Epub)
                         await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
                     else
                         await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
+                    if (localChapters.Count == 0)
+                    {
+                        await App.VM.SetBookLocalChapters(book.BookId, ReaderPanel.Chapters, true);
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-
             }
             ReaderPanel.Focus(FocusState.Programmatic);
         }

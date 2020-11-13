@@ -5,25 +5,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.SubPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:share="using:Yuenov.SDK.Models.Share" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
-
-    <Grid>
-        <ProgressRing x:Name="LoadingRing" VerticalAlignment="Center" HorizontalAlignment="Center"
+    <ui:RichasyPage.Resources>
+        <ui1:WebBookCoverConverter x:Key="BookConverter"/>
+        <DataTemplate x:DataType="share:Book" x:Key="RecommendItemTemplate">
+            <Grid Margin="0,10,10,0">
+                <Viewbox StretchDirection="Both">
+                    <components:BookSlimCard Data="{Binding Converter={StaticResource BookConverter}}"
+                                             TypeVisibility="Collapsed" ProgressVisibility="Collapsed"
+                                             ToolTipService.ToolTip="{x:Bind Title}"/>
+                </Viewbox>
+            </Grid>
+        </DataTemplate>
+    </ui:RichasyPage.Resources>
+    <ScrollViewer Style="{StaticResource BasicScrollViewer}"
+                  VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled">
+        <Grid>
+            <ProgressRing x:Name="LoadingRing" VerticalAlignment="Center" HorizontalAlignment="Center"
                       Style="{StaticResource BasicProgressRingStyle}"/>
-        <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_ConnectFailedBlock"
+            <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_ConnectFailedBlock"
                                   VerticalAlignment="Center" Symbol="WifiOff" Grid.Row="1"
                                   HorizontalAlignment="Center" Visibility="Collapsed"/>
-        <Grid x:Name="Container">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <components:YuenovBookCard x:Name="DetailCard" Width="340" Height="160" InnerPadding="10"/>
-            <TextBlock Style="{StaticResource BodyTextStyle}" Foreground="{ThemeResource TipTextColor}" x:Name="DescriptionBlock" Grid.Row="1"
+            <Grid x:Name="Container">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <components:YuenovBookCard x:Name="DetailCard" Width="340" Height="160" InnerPadding="10"/>
+                <TextBlock Style="{StaticResource BodyTextStyle}" Foreground="{ThemeResource TipTextColor}" x:Name="DescriptionBlock" Grid.Row="1"
                    Margin="0,15" LineHeight="20" FontSize="{CustomResource SmallFontSize}"/>
+                <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="AddButton"
+                                    Grid.Row="2" Click="AddButton_Click" HorizontalAlignment="Stretch">
+                    <interaction:IconButton.Icon>
+                        <uwp:FeatherIcon Symbol="Plus" x:Name="AddButtonIcon" FontSize="{CustomResource BasicFontSize}"/>
+                    </interaction:IconButton.Icon>
+                </interaction:IconButton>
+                <controls:AdaptiveGridView Grid.Row="3" ItemTemplate="{StaticResource RecommendItemTemplate}"
+                                       x:Name="RecommendGridView" Style="{StaticResource NoScrollGridView}"
+                                       ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"
+                                       DesiredWidth="130" HeaderTemplate="{StaticResource TipHeader}"
+                                       x:Uid="Control_RecommendGridView" Margin="0,25"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
+    
     
 </ui:RichasyPage>

@@ -13,6 +13,7 @@ namespace Lib.Share.Models
         public string Cover { get; set; }
         public BookType Type { get; set; }
         public string BookId { get; set; }
+        public string CustomRegex { get; set; }
 
         public Book() { }
 

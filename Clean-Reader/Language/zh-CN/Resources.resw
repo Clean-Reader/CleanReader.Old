@@ -180,6 +180,9 @@
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>榜单</value>
   </data>
+  <data name="Control_RecommendGridView.Header" xml:space="preserve">
+    <value>相关推荐</value>
+  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="Tip_AddShelf" xml:space="preserve">
     <value>添加书架</value>
+  </data>
+  <data name="Tip_AddToShelf" xml:space="preserve">
+    <value>添加到书架</value>
   </data>
   <data name="Tip_AuthorizationCanceled" xml:space="preserve">
     <value>授权中止</value>
@@ -236,6 +242,9 @@
   </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>您是否要退出OneDrive？退出后本地阅读记录将不会同步</value>
+  </data>
+  <data name="Tip_OpenBook" xml:space="preserve">
+    <value>打开书籍</value>
   </data>
   <data name="Tip_Progress" xml:space="preserve">
     <value>进度</value>

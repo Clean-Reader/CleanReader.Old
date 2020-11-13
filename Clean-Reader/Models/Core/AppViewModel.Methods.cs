@@ -99,6 +99,15 @@ namespace Clean_Reader.Models.Core
             ColorNames color = isError ? ColorNames.ErrorColor : ColorNames.PrimaryColor;
             popup.Show(color);
         }
+        public void ShowWaitingPopup(LanguageNames content)
+        {
+            _waitPopup.Text = App.Tools.App.GetLocalizationTextFromResource(content);
+            _waitPopup.Show();
+        }
+        public void HideWaitingPopup()
+        {
+            _waitPopup.Hide();
+        }
         public async void CheckUpdate()
         {
             string localVersion = App.Tools.App.GetLocalSetting(SettingNames.AppVersion, "");

@@ -31,7 +31,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Style="{StaticResource TitleTextStyle}" HorizontalAlignment="Left"
-                                           x:Name="SubtitleBlock" LineHeight="0"/>
+                                           x:Name="SubtitleBlock" LineHeight="0" Margin="0,0,0,10"/>
                             <Frame x:Name="SubFrame" x:FieldModifier="public" Grid.Row="1"/>
                         </Grid>
                     </SplitView.Pane>

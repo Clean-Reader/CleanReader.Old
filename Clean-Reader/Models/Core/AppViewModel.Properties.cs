@@ -4,6 +4,7 @@ using Clean_Reader.Models.UI;
 using Lib.Share.Models;
 using Richasy.Controls.Reader;
 using Richasy.Controls.Reader.Models;
+using Richasy.Controls.UWP.Popups;
 using Richasy.Font.UWP;
 using Richasy.Helper.UWP;
 using System;
@@ -21,6 +22,7 @@ namespace Clean_Reader.Models.Core
     {
         public double _narrowBreakpoint = 1000;
 
+        private WaitingPopup _waitPopup;
         public YuenovClient _yuenovClient;
         private DispatcherTimer _checkFileTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(5) };
 
@@ -79,6 +81,8 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<SpecialContainer> TopicCollection = new ObservableCollection<SpecialContainer>();
         public ObservableCollection<Rank> RankCollection = new ObservableCollection<Rank>();
         public ReaderStyle ReaderStyle;
+
+        public List<ReaderChapter> CurrentBookChapterList = new List<ReaderChapter>();
 
         public event EventHandler CurrentShelfChanged;
         public event EventHandler ProgressChanged;

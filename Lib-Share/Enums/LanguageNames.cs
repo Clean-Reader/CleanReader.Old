@@ -21,6 +21,8 @@
         ManageShelf,
         RepeatColor,
         Progress,
-        BookDetail
+        BookDetail,
+        OpenBook,
+        AddToShelf
     }
 }

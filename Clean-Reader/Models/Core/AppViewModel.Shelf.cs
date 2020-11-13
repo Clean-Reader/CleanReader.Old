@@ -69,7 +69,9 @@ namespace Clean_Reader.Models.Core
                     if (shelfDialog.SelectedItem != null)
                         shelfId = shelfDialog.SelectedItem.Id == "default" ? "" : shelfDialog.SelectedItem.Id;
                 };
-                await shelfDialog.ShowAsync();
+                var cr = await shelfDialog.ShowAsync();
+                if (cr == Windows.UI.Xaml.Controls.ContentDialogResult.None)
+                    return;
             }
             foreach (var file in files)
             {
@@ -82,12 +84,41 @@ namespace Clean_Reader.Models.Core
                 if (book.Type == BookType.Epub)
                 {
                     var epub = await EpubReader.Read(file, Encoding.Default);
-                    var coverFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Covers",CreationCollisionOption.OpenIfExists);
+                    var coverFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Covers", CreationCollisionOption.OpenIfExists);
                     var coverFile = await coverFolder.CreateFileAsync(book.BookId + ".png", CreationCollisionOption.ReplaceExisting);
                     await FileIO.WriteBytesAsync(coverFile, epub.CoverImage);
                 }
                 TotalBookList.Add(book);
             }
+            string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
+            if (currentShelfId == shelfId)
+                CurrentShelfInit();
+            await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
+        }
+
+        public async Task ImportBook(Yuenov.SDK.Models.Share.Book web)
+        {
+            string shelfId = "";
+            var book = new Book(web);
+            if (TotalBookList.Contains(book))
+            {
+                ShowPopup($"{App.Tools.App.GetLocalizationTextFromResource(LanguageNames.RepeatBook)}:{book.Name}", true);
+                return;
+            }
+            if (ShelfCollection.Count > 1)
+            {
+                var shelfDialog = new ShelfSelectionDialog(CurrentShelf);
+                shelfDialog.PrimaryButtonClick += (_s, _e) =>
+                {
+                    if (shelfDialog.SelectedItem != null)
+                        shelfId = shelfDialog.SelectedItem.Id == "default" ? "" : shelfDialog.SelectedItem.Id;
+                };
+                var cr = await shelfDialog.ShowAsync();
+                if (cr == Windows.UI.Xaml.Controls.ContentDialogResult.None)
+                    return;
+            }
+            await SyncBookChapters(web.BookId);
+            TotalBookList.Add(book);
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
@@ -118,6 +149,6 @@ namespace Clean_Reader.Models.Core
             }
         }
 
-        
+
     }
 }

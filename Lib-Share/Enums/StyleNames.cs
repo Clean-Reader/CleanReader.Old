@@ -12,6 +12,7 @@
         SmallTextStyle,
         MiniTextStyle,
         BasicMarkdownTextBlock,
-        BasicCenterPopupStyle
+        BasicCenterPopupStyle,
+        BasicProgressRingStyle
     }
 }

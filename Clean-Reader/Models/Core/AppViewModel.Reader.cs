@@ -1,6 +1,7 @@
 ﻿using Clean_Reader.Models.UI;
 using Clean_Reader.Pages;
 using Lib.Share.Models;
+using Newtonsoft.Json;
 using Richasy.Controls.Reader.Models;
 using Richasy.Font.UWP;
 using System;
@@ -79,6 +80,37 @@ namespace Clean_Reader.Models.Core
             }
             else
                 return new SolidColorBrush(ReaderStyle.Background);
+        }
+
+        public async Task<List<Chapter>> GetBookLocalChapters(string bookId, bool setCurrent = false)
+        {
+            try
+            {
+                var localRecord = await App.Tools.IO.GetLocalDataAsync<List<ReaderChapter>>(bookId + ".json", folderName: "Chapters");
+                if (setCurrent)
+                    CurrentBookChapterList = localRecord;
+                return localRecord.Select(p => p.Chapter).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<Chapter>();
+            }
+        }
+
+        public async Task SetBookLocalChapters(string bookId, List<Chapter> chapters, bool setCurrent = false)
+        {
+            var list = new List<ReaderChapter>();
+            foreach (var item in chapters)
+            {
+                list.Add(new ReaderChapter
+                {
+                    Chapter = item
+                });
+            }
+            if (setCurrent)
+                CurrentBookChapterList = list;
+            await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(list), "Chapters");
+
         }
     }
 }

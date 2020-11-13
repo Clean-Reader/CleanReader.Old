@@ -126,6 +126,7 @@
     <Compile Include="Enums\SettingNames.cs" />
     <Compile Include="Enums\StyleNames.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\ReaderChapter.cs" />
     <Compile Include="Models\ReadHistory.cs" />
     <Compile Include="Models\Shelf.cs" />
     <Compile Include="Models\StaticString.cs" />

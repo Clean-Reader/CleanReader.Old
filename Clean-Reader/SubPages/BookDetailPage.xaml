@@ -35,7 +35,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <components:YuenovBookCard x:Name="DetailCard" Width="340" Height="160" InnerPadding="10"/>
-                <TextBlock Style="{StaticResource BodyTextStyle}" Foreground="{ThemeResource TipTextColor}" x:Name="DescriptionBlock" Grid.Row="1"
+                <TextBlock Style="{StaticResource BodyTextStyle}" Foreground="{ThemeResource NormalTextColor}" x:Name="DescriptionBlock" Grid.Row="1"
                    Margin="0,15" LineHeight="20" FontSize="{CustomResource SmallFontSize}"/>
                 <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="AddButton"
                                     Grid.Row="2" Click="AddButton_Click" HorizontalAlignment="Stretch">

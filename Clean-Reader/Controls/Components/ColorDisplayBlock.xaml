@@ -17,22 +17,23 @@
         <converters:BoolToVisibilityConverter x:Key="BoolConverter"/>
     </UserControl.Resources>
     <Grid Tapped="Grid_Tapped" ContextFlyout="{StaticResource CommandFlyout}">
-        <controls:DropShadowPanel BlurRadius="15"
+        <!--<controls:DropShadowPanel BlurRadius="15"
                                   OffsetX="3"
                                   OffsetY="3"
-                                  ShadowOpacity="0.4"
+                                  ShadowOpacity="0.4" HorizontalAlignment="Stretch"
                                   Color="{ThemeResource ShadowColor}"
                                   >
-            <Grid CornerRadius="8" Background="{Binding Background,Converter={StaticResource BrushConverter}}" Width="60" Height="60">
-                <TextBlock Text="A" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"
+            
+        </controls:DropShadowPanel>-->
+        <Grid CornerRadius="8" Background="{Binding Background,Converter={StaticResource BrushConverter}}" Width="{x:Bind Width,Mode=OneWay}" Height="{x:Bind Height,Mode=OneWay}">
+            <TextBlock Text="A" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"
                            FontFamily="{CustomResource Basic}" Foreground="{Binding Foreground,Converter={StaticResource BrushConverter}}"
                            FontWeight="Bold"
                            />
-                <Border x:Name="IsAcrylicContainer" Visibility="{Binding IsAcrylicBackground,Converter={StaticResource BoolConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top"
+            <Border x:Name="IsAcrylicContainer" Visibility="{Binding IsAcrylicBackground,Converter={StaticResource BoolConverter}}" HorizontalAlignment="Right" VerticalAlignment="Top"
                         Margin="0,5,5,0">
-                    <uwp:FeatherIcon Foreground="{ThemeResource SecondaryColor}" Symbol="Droplet" FontSize="{CustomResource SmallFontSize}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </Border>
-            </Grid>
-        </controls:DropShadowPanel>
+                <uwp:FeatherIcon Foreground="{ThemeResource SecondaryColor}" Symbol="Droplet" FontSize="{CustomResource SmallFontSize}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

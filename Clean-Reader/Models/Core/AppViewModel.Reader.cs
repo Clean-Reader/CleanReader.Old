@@ -40,7 +40,7 @@ namespace Clean_Reader.Models.Core
         {
             ReaderStyle.FontSize = size;
             ReaderStyle.HeaderFontSize = size * 1.6;
-            ReaderStyle.HeaderMargin = new Thickness(0, 0, 0, size);
+            ReaderStyle.HeaderMargin = new Thickness(0, 0, 0, size * 2);
             UpdateStyle();
         }
 
@@ -86,10 +86,10 @@ namespace Clean_Reader.Models.Core
         {
             try
             {
-                var localRecord = await App.Tools.IO.GetLocalDataAsync<List<ReaderChapter>>(bookId + ".json", folderName: "Chapters");
+                var localRecord = await App.Tools.IO.GetLocalDataAsync<List<Chapter>>(bookId + ".json", folderName: StaticString.FolderChapter);
                 if (setCurrent)
                     CurrentBookChapterList = localRecord;
-                return localRecord.Select(p => p.Chapter).ToList();
+                return localRecord;
             }
             catch (Exception)
             {
@@ -99,18 +99,50 @@ namespace Clean_Reader.Models.Core
 
         public async Task SetBookLocalChapters(string bookId, List<Chapter> chapters, bool setCurrent = false)
         {
-            var list = new List<ReaderChapter>();
-            foreach (var item in chapters)
-            {
-                list.Add(new ReaderChapter
-                {
-                    Chapter = item
-                });
-            }
             if (setCurrent)
-                CurrentBookChapterList = list;
-            await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(list), "Chapters");
+                CurrentBookChapterList = chapters;
+            await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(chapters), StaticString.FolderChapter);
+        }
 
+        public async Task<List<ChapterDetail>> GetBookLocalChapterDetails(string bookId, bool setCurrent = false)
+        {
+            try
+            {
+                var localRecord = await App.Tools.IO.GetLocalDataAsync<List<ChapterDetail>>(bookId + ".json", folderName: StaticString.FolderChapterDetail);
+                if (setCurrent)
+                    CurrentBookChapterDetailList = localRecord;
+                return localRecord;
+            }
+            catch (Exception)
+            {
+                return new List<ChapterDetail>();
+            }
+        }
+
+        public async Task<ChapterDetail> RequestChapterDetail(string bookId, Chapter target)
+        {
+            var result = CurrentBookChapterDetailList.Where(p => p.Index == target.Index).FirstOrDefault();
+            if (result != null)
+                return result;
+            try
+            {
+                var response = await _yuenovClient.DownloadChaptersAsync(Convert.ToInt32(bookId), Convert.ToInt64(target.Link));
+                if (response.Result.Code == Yuenov.SDK.Enums.ResultCode.Success)
+                {
+                    var detail = response.Data.List.First();
+                    var item = new ChapterDetail(target.Index, target.Title, detail.Content);
+                    CurrentBookChapterDetailList.Add(item);
+                    IsDetailChanged = true;
+                    return item;
+                }
+                else
+                    ShowPopup($"{response.Result.Code}: {response.Result.Message}");
+            }
+            catch (Exception ex)
+            {
+                ShowPopup(ex.Message, true);
+            }
+            return null;
         }
     }
 }

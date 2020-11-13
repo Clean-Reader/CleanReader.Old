@@ -48,6 +48,7 @@ namespace Clean_Reader.Models.Core
         }
 
         private bool _isStyleChanged = false;
+        public bool IsDetailChanged = false;
 
         public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();
 
@@ -82,7 +83,8 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<Rank> RankCollection = new ObservableCollection<Rank>();
         public ReaderStyle ReaderStyle;
 
-        public List<ReaderChapter> CurrentBookChapterList = new List<ReaderChapter>();
+        public List<Richasy.Controls.Reader.Models.Chapter> CurrentBookChapterList = new List<Richasy.Controls.Reader.Models.Chapter>();
+        public List<Richasy.Controls.Reader.Models.ChapterDetail> CurrentBookChapterDetailList = new List<Richasy.Controls.Reader.Models.ChapterDetail>();
 
         public event EventHandler CurrentShelfChanged;
         public event EventHandler ProgressChanged;

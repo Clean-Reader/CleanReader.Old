@@ -1,6 +1,7 @@
 ﻿using Clean_Reader.Models.UI;
 using Lib.Share.Models;
 using Newtonsoft.Json;
+using Richasy.Controls.Reader.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,15 +97,28 @@ namespace Clean_Reader.Models.Core
             }
         }
 
+        public Chapter GetChapterFromWeb(int index, Yuenov.SDK.Models.Share.Chapter chapter)
+        {
+            var c = new Chapter();
+            c.Hash = "";
+            c.HashIndex = 0;
+            c.Index = index;
+            c.Level = 1;
+            c.Link = chapter.Id.ToString();
+            c.Title = chapter.Name;
+            c.StartLength = 0;
+            return c;
+        }
+
         /// <summary>
         /// 同步书籍目录信息
         /// </summary>
         /// <param name="bookId">书籍ID</param>
         /// <param name="startChapterId">起始章节ID</param>
         /// <returns></returns>
-        public async Task<List<ReaderChapter>> SyncBookChapters(int bookId,long startChapterId=0)
+        public async Task<List<Chapter>> SyncBookChapters(int bookId, long startChapterId = 0)
         {
-            var result = new List<ReaderChapter>();
+            var result = new List<Chapter>();
             try
             {
                 var response = await _yuenovClient.GetBookChaptersAsync(bookId, startChapterId);
@@ -113,24 +127,20 @@ namespace Clean_Reader.Models.Core
                     var chapters = response.Data.Chapters;
                     for (int i = 0; i < chapters.Count; i++)
                     {
-                        result.Add(new ReaderChapter()
-                        {
-                            Content = "",
-                            Chapter = ReaderChapter.GetChapterFromWeb(i + 1, chapters[i])
-                        });
+                        result.Add(GetChapterFromWeb(i + 1, chapters[i]));
                     }
                     if (startChapterId > 0)
                     {
-                        var sourceList = await App.Tools.IO.GetLocalDataAsync<List<ReaderChapter>>(bookId + ".json", "[]", "Chapters");
-                        int lastIndex = sourceList.Last().Chapter.Index;
+                        var sourceList = await App.Tools.IO.GetLocalDataAsync<List<Chapter>>(bookId + ".json", "[]", StaticString.FolderChapter);
+                        int lastIndex = sourceList.Last().Index;
                         for (int i = 0; i < result.Count; i++)
                         {
-                            result[i].Chapter.Index += lastIndex;
+                            result[i].Index += lastIndex;
                             sourceList.Add(result[i]);
                         }
                         result = sourceList;
                     }
-                    await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(result), "Chapters");
+                    await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(result), StaticString.FolderChapter);
                     return result;
                 }
             }

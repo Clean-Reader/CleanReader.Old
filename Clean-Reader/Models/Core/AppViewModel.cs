@@ -20,11 +20,11 @@ namespace Clean_Reader.Models.Core
             CurrentShelfChanged += CurrentShelf_Changed;
             _checkFileTimer.Tick += CheckFileTimer_Tick;
             _checkFileTimer.Start();
-            _waitPopup = new WaitingPopup(App.Tools);
-            _waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
-            _waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
-            _waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
-            _waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
+            //_waitPopup = new WaitingPopup(App.Tools);
+            //_waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
+            //_waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
+            //_waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
+            //_waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
         }
 
         private async void CheckFileTimer_Tick(object sender, object e)
@@ -39,6 +39,14 @@ namespace Clean_Reader.Models.Core
                 _isStyleChanged = false;
                 await App.Tools.IO.SetLocalDataAsync(StaticString.FileReaderStyle, JsonConvert.SerializeObject(ReaderStyle));
             }
+            if (IsDetailChanged)
+                SaveDetailList();
+        }
+
+        public async void SaveDetailList()
+        {
+            IsDetailChanged = false;
+            await App.Tools.IO.SetLocalDataAsync(CurrentBook.BookId+".json", JsonConvert.SerializeObject(CurrentBookChapterDetailList),StaticString.FolderChapterDetail);
         }
 
         public async Task OneDriveInit()

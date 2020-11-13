@@ -61,16 +61,7 @@ namespace Clean_Reader.SubPages
                 DetailCard.Data = detail;
                 DescriptionBlock.Text = detail.Description;
                 RecommendGridView.ItemsSource = detail.Recommend;
-                if (vm.TotalBookList.Any(p => p.BookId == _currentBook.BookId.ToString()))
-                {
-                    AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.OpenBook);
-                    AddButtonIcon.Symbol = FeatherSymbol.BookOpen;
-                }
-                else
-                {
-                    AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddToShelf);
-                    AddButtonIcon.Symbol = FeatherSymbol.Plus;
-                }
+                CheckButtonStatus();
                 Container.Visibility = Visibility.Visible;
             }
             else
@@ -78,6 +69,20 @@ namespace Clean_Reader.SubPages
                 NoDataBlock.Visibility = Visibility.Visible;
             }
             LoadingRing.IsActive = false;
+        }
+
+        private void CheckButtonStatus()
+        {
+            if (vm.TotalBookList.Any(p => p.BookId == _currentBook.BookId.ToString()))
+            {
+                AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.OpenBook);
+                AddButtonIcon.Symbol = FeatherSymbol.BookOpen;
+            }
+            else
+            {
+                AddButton.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddToShelf);
+                AddButtonIcon.Symbol = FeatherSymbol.Plus;
+            }
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
@@ -89,7 +94,10 @@ namespace Clean_Reader.SubPages
             }
             else
             {
+                AddButton.IsLoading = true;
                 await vm.ImportBook(_currentBook);
+                AddButton.IsLoading = false;
+                CheckButtonStatus();
             }
         }
     }

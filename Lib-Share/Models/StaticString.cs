@@ -19,5 +19,7 @@
         public const string FileReaderStyle = "ReaderViewStyle.json";
         public const string FileHistory = "ReadHistory.json";
         public const string FileColorConfig = "ColorConfig.json";
+        public const string FolderChapter = "Chapters";
+        public const string FolderChapterDetail = "ChapterDetails";
     }
 }

@@ -23,6 +23,7 @@ using Clean_Reader.Models.UI;
 using Newtonsoft.Json;
 using Clean_Reader.Controls.Components;
 using Windows.UI;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -52,36 +53,66 @@ namespace Clean_Reader.Pages
                     _tempBook = book;
                 }
             }
+            Window.Current.Activated += OnWindowActivated;
             UpdateHeaderFooterStyle();
             base.OnNavigatedTo(e);
+        }
+
+        private void OnWindowActivated(object sender, WindowActivatedEventArgs e)
+        {
+            if (e.WindowActivationState != CoreWindowActivationState.Deactivated)
+                ReaderPanel.Focus(FocusState.Programmatic);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Window.Current.Activated -= OnWindowActivated;
+            try
+            {
+                if (vm.IsDetailChanged)
+                    vm.SaveDetailList();
+            }
+            catch (Exception) { }
+
+            base.OnNavigatingFrom(e);
         }
 
         private async Task HandleBook(Book book)
         {
             vm.CurrentBook = book;
             BookTitleBlock.Text = book.Name;
+            var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
             if (book.Type == BookType.Web)
             {
-
+                if (localChapters.Count == 0)
+                {
+                    var chapters = await vm.SyncBookChapters(Convert.ToInt32(book.BookId));
+                    if (chapters.Count == 0)
+                    {
+                        vm.CloseReaderView();
+                        return;
+                    }
+                    vm.CurrentBookChapterList = localChapters;
+                    localChapters = chapters;
+                }
+                var details = await vm.GetBookLocalChapterDetails(book.BookId, true);
+                ReaderPanel.LoadCustomView(localChapters, vm.ReaderStyle, details);
             }
             else
             {
                 var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(book.BookId);
                 try
                 {
-                    var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
                     if (book.Type == BookType.Epub)
-                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
+                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle, localChapters);
                     else
-                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle);
+                        await ReaderPanel.OpenAsync(file, vm.ReaderStyle, localChapters);
                     if (localChapters.Count == 0)
-                    {
                         await App.VM.SetBookLocalChapters(book.BookId, ReaderPanel.Chapters, true);
-                    }
                 }
                 catch (Exception ex)
                 {
-
+                    vm.ShowPopup(ex.Message, true);
                 }
             }
             ReaderPanel.Focus(FocusState.Programmatic);
@@ -107,6 +138,7 @@ namespace Clean_Reader.Pages
                     ReaderPanel.LoadChapter(ReaderPanel.Chapters.First());
                 }
             }
+            ReaderPanel.Focus(FocusState.Programmatic);
         }
 
         private void ReaderPanel_OpenStarting(object sender, EventArgs e)
@@ -125,6 +157,7 @@ namespace Clean_Reader.Pages
             ChapterListView.SelectedItem = e;
             ChapterListView.ScrollIntoView(e, ScrollIntoViewAlignment.Leading);
             ChapterTitleBlock.Text = e.Title;
+            ReaderPanel.Focus(FocusState.Programmatic);
         }
 
         private void ReaderPanel_SetContentStarting(object sender, EventArgs e)
@@ -237,6 +270,52 @@ namespace Clean_Reader.Pages
         public void UpdateHeaderFooterStyle()
         {
             ReaderHeaderContainer.Background = ReaderFooterContainer.Background = vm.GetBackgroundBrush();
+        }
+
+        private async void ReaderPanel_CustomContentRequest(object sender, CustomRequestEventArgs e)
+        {
+            LoadingRing.IsActive = true;
+            var detail = await vm.RequestChapterDetail(vm.CurrentBook.BookId, e.RequestChapter);
+            if (detail != null)
+            {
+                ReaderPanel.CustomChapterDetailList.Add(detail);
+                ReaderPanel.SetCustomContent(detail, e.StartMode, e.AddonLength);
+            }
+            LoadingRing.IsActive = false;
+            ReaderPanel.Focus(FocusState.Programmatic);
+            RequestOtherChapters();
+        }
+
+        public async void RequestOtherChapters()
+        {
+            var currentChapter = ReaderPanel.CurrentChapter;
+            var tempChapters = new List<Chapter>();
+            int sign = 0;
+            for (int i = currentChapter.Index; i < vm.CurrentBookChapterList.Count; i++)
+            {
+                if (sign > 2)
+                    break;
+                sign++;
+                tempChapters.Add(vm.CurrentBookChapterList[i]);
+            }
+            sign = 0;
+            for (int i = currentChapter.Index - 2; i >= 0; i--)
+            {
+                if (sign > 2)
+                    break;
+                sign++;
+                tempChapters.Add(vm.CurrentBookChapterList[i]);
+            }
+            var tasks = new List<Task>();
+            foreach (var item in tempChapters)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    await vm.RequestChapterDetail(vm.CurrentBook.BookId, item);
+                }));
+            }
+            await Task.WhenAll(tasks.ToArray());
+            ReaderPanel.Focus(FocusState.Programmatic);
         }
     }
 }

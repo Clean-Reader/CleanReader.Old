@@ -11,7 +11,7 @@
         <ui1:LevelMarginCovnerter x:Key="LevelMarginConverter"/>
         <ui1:LevelFontWeightConverter x:Key="LevelFontWeightConverter"/>
         <DataTemplate x:DataType="models:Chapter" x:Key="ChapterItemTemplate">
-            <Grid Padding="10" BorderBrush="{ThemeResource LineColor}" BorderThickness="0,0,0,1">
+            <Grid Padding="0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -39,7 +39,7 @@
                     <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
                           ItemsSource="{x:Bind ChapterCollection}"
                           ItemClick="ChapterListView_ItemClick" Grid.Row="1"
-                          Style="{StaticResource BasicListView}" Padding="10"
+                          Style="{StaticResource BasicListView}" Padding="10,0"
                           ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
                           ItemTemplate="{StaticResource ChapterItemTemplate}"/>
                 </Grid>
@@ -61,6 +61,7 @@
                             ProgressChanged="ReaderPanel_ProgressChanged"
                             TouchTapped="ReaderPanel_TouchTapped"
                             Loaded="ReaderPanel_Loaded"
+                            CustomContentRequest="ReaderPanel_CustomContentRequest"
                             >
                         <reader:ReaderPanel.Header>
                             <Grid Padding="20,10" x:Name="ReaderHeaderContainer">

@@ -37,6 +37,8 @@ namespace Clean_Reader.SubPages
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.NavigationMode == NavigationMode.Back)
+                return;
             if (e.Parameter != null)
             {
                 if (e.Parameter is Book webBook)
@@ -99,6 +101,17 @@ namespace Clean_Reader.SubPages
                 AddButton.IsLoading = false;
                 CheckButtonStatus();
             }
+        }
+
+        private void RichasyPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainPage.Current.SetSubtitle(LanguageNames.BookDetail);
+        }
+
+        private async void RecommendGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var book = e.ClickedItem as Book;
+            await PageInit(book);
         }
     }
 }

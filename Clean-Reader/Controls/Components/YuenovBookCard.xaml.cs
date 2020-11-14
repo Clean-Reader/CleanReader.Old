@@ -82,17 +82,20 @@ namespace Clean_Reader.Controls.Components
                     instance.DescriptionBlock.Visibility = Visibility.Collapsed;
                     instance.ChapterNumberBlock.Text = $"共{detail.ChapterNumber}章";
                     if (detail.Update != null)
+                    {
                         instance.LastestChapterBlock.Text = $"最新章节：{detail.Update.ChapterName}";
+                        instance.StatusBlock.Text = detail.Update.ChapterStatus == Yuenov.SDK.Enums.ChapterStatus.Serialize ? "连载中" : "已完结";
+                    }
                 }
                 else
                 {
                     instance.DetailChapterContainer.Visibility = Visibility.Collapsed;
                     instance.DescriptionBlock.Visibility = Visibility.Visible;
                     instance.DescriptionBlock.Text = book.Description;
+                    instance.StatusBlock.Text = book.ChapterStatus == Yuenov.SDK.Enums.ChapterStatus.Serialize ? "连载中" : "已完结";
                 }
 
                 ToolTipService.SetToolTip(instance.DescriptionBlock, book.Description);
-                instance.StatusBlock.Text = book.ChapterStatus == Yuenov.SDK.Enums.ChapterStatus.Serialize ? "连载中" : "已完结";
             }
         }
 

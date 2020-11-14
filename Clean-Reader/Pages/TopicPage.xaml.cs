@@ -51,7 +51,7 @@ namespace Clean_Reader.Pages
 
         private void HorizonBookListView_ItemClick(object sender, Yuenov.SDK.Models.Share.Book e)
         {
-            MainPage.Current.NavigateSubPage(typeof(SubPages.BookDetailPage), LanguageNames.BookDetail, e);
+            MainPage.Current.NavigateSubPage(typeof(SubPages.BookDetailPage), e);
         }
 
         private void HorizonBookListView_AllButtonClick(object sender, RoutedEventArgs e)

@@ -21,7 +21,7 @@ namespace Clean_Reader.Models.UI
                 case MenuItemType.Discovery:
                     Icon = FeatherSymbol.Compass;
                     break;
-                case MenuItemType.Category:
+                case MenuItemType.CateAndRank:
                     Icon = FeatherSymbol.Grid;
                     break;
                 case MenuItemType.Topic:
@@ -41,7 +41,7 @@ namespace Clean_Reader.Models.UI
             {
                 new MenuItem(MenuItemType.Shelf),
                 new MenuItem(MenuItemType.Discovery),
-                new MenuItem(MenuItemType.Category),
+                new MenuItem(MenuItemType.CateAndRank),
                 new MenuItem(MenuItemType.Topic),
                 new MenuItem(MenuItemType.Setting)
             };

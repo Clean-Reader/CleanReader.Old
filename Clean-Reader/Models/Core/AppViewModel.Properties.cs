@@ -83,6 +83,8 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<Rank> RankCollection = new ObservableCollection<Rank>();
         public ReaderStyle ReaderStyle;
 
+        public List<Tuple<Type, object>> SubFrameHistoryList { get; set; } = new List<Tuple<Type, object>>();
+
         public List<Richasy.Controls.Reader.Models.Chapter> CurrentBookChapterList = new List<Richasy.Controls.Reader.Models.Chapter>();
         public List<Richasy.Controls.Reader.Models.ChapterDetail> CurrentBookChapterDetailList = new List<Richasy.Controls.Reader.Models.ChapterDetail>();
 

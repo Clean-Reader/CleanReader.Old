@@ -54,7 +54,6 @@ namespace Clean_Reader.Pages
                 }
             }
             Window.Current.Activated += OnWindowActivated;
-            UpdateHeaderFooterStyle();
             base.OnNavigatedTo(e);
         }
 
@@ -267,11 +266,6 @@ namespace Clean_Reader.Pages
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 
-        public void UpdateHeaderFooterStyle()
-        {
-            ReaderHeaderContainer.Background = ReaderFooterContainer.Background = vm.GetBackgroundBrush();
-        }
-
         private async void ReaderPanel_CustomContentRequest(object sender, CustomRequestEventArgs e)
         {
             LoadingRing.IsActive = true;
@@ -315,6 +309,11 @@ namespace Clean_Reader.Pages
                 }));
             }
             await Task.WhenAll(tasks.ToArray());
+            ReaderPanel.Focus(FocusState.Programmatic);
+        }
+
+        private void ReaderContainer_GotFocus(object sender, RoutedEventArgs e)
+        {
             ReaderPanel.Focus(FocusState.Programmatic);
         }
     }

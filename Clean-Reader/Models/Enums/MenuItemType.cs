@@ -4,7 +4,7 @@
     {
         Shelf,
         Discovery,
-        Category,
+        CateAndRank,
         Topic,
         Setting,
         Reader

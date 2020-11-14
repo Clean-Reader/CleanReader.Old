@@ -52,7 +52,6 @@ namespace Clean_Reader.Models.Core
                 ReaderStyle.Background = back;
             if (isAcrylic != null)
                 ReaderStyle.IsAcrylicBackground = Convert.ToBoolean(isAcrylic);
-            (ReaderPage.Current as ReaderPage).UpdateHeaderFooterStyle();
             UpdateStyle();
         }
 

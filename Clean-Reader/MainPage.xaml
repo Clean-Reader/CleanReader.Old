@@ -30,8 +30,19 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Style="{StaticResource TitleTextStyle}" HorizontalAlignment="Left"
-                                           x:Name="SubtitleBlock" LineHeight="0" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                              x:Name="SideBackButton" Visibility="Collapsed"
+                                              VerticalAlignment="Center" Margin="0,0,10,0"
+                                              Click="SideBackButton_Click">
+                                    <interaction:ActionButton.Icon>
+                                        <uwp:FeatherIcon Symbol="ChevronLeft" FontSize="{CustomResource BasicFontSize}"/>
+                                    </interaction:ActionButton.Icon>
+                                </interaction:ActionButton>
+                                <TextBlock Style="{StaticResource TitleTextStyle}" HorizontalAlignment="Left"
+                                           x:Name="SubtitleBlock" LineHeight="0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            
                             <Frame x:Name="SubFrame" x:FieldModifier="public" Grid.Row="1"/>
                         </Grid>
                     </SplitView.Pane>

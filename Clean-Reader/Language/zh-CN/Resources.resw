@@ -150,6 +150,9 @@
   <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
     <value>服务器开了小差~ 请检查网络连接并重试</value>
   </data>
+  <data name="Control_EndComboItem.Content" xml:space="preserve">
+    <value>完本</value>
+  </data>
   <data name="Control_FontFamilyListView.Header" xml:space="preserve">
     <value>字体</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
     <value>前景色（文本）</value>
+  </data>
+  <data name="Control_HotComboItem.Content" xml:space="preserve">
+    <value>热门</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>导入书籍</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>更多</value>
+  </data>
+  <data name="Control_NewestComboItem.Content" xml:space="preserve">
+    <value>最新</value>
   </data>
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>榜单</value>
@@ -216,8 +225,11 @@
   <data name="Tip_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="Tip_Category" xml:space="preserve">
+  <data name="Tip_CateAndRank" xml:space="preserve">
     <value>分类 &amp; 榜单</value>
+  </data>
+  <data name="Tip_Category" xml:space="preserve">
+    <value>分类</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>确认</value>

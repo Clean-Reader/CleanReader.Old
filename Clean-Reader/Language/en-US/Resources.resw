@@ -150,6 +150,9 @@
   <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
     <value>The server is not responding~ Please check the network connection and try again</value>
   </data>
+  <data name="Control_EndComboItem.Content" xml:space="preserve">
+    <value>Finish</value>
+  </data>
   <data name="Control_FontFamilyListView.Header" xml:space="preserve">
     <value>Font family</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
     <value>Foreground (text)</value>
+  </data>
+  <data name="Control_HotComboItem.Content" xml:space="preserve">
+    <value>Hot</value>
   </data>
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>More</value>
+  </data>
+  <data name="Control_NewestComboItem.Content" xml:space="preserve">
+    <value>Newest</value>
   </data>
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>Rank</value>
@@ -216,8 +225,11 @@
   <data name="Tip_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="Tip_Category" xml:space="preserve">
+  <data name="Tip_CateAndRank" xml:space="preserve">
     <value>Category &amp; Rank</value>
+  </data>
+  <data name="Tip_Category" xml:space="preserve">
+    <value>Category</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>

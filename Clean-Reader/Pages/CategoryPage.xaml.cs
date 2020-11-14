@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Yuenov.SDK.Models.Share;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -63,12 +64,14 @@ namespace Clean_Reader.Pages
 
         private void CategoryGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            var cate = e.ClickedItem as Category;
+            MainPage.Current.NavigateSubPage(typeof(SubPages.CategoryDetailPage), cate);
         }
 
         private void RankGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            var rank = e.ClickedItem as Rank;
+            MainPage.Current.NavigateSubPage(typeof(SubPages.RankDetailPage), rank);
         }
     }
 }

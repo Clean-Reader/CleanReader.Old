@@ -1,23 +1,14 @@
 ﻿using Richasy.Controls.UWP.Models.UI;
 using Clean_Reader.Models.Core;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Clean_Reader.Models.Enums;
 using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Windows.UI.Xaml.Media.Animation;
+using System.Linq;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -83,11 +74,29 @@ namespace Clean_Reader
             AppSplitView.IsPaneOpen = !AppSplitView.IsPaneOpen;
         }
 
-        public void NavigateSubPage(Type pageType, LanguageNames title, object para = null)
+        public void NavigateSubPage(Type pageType, object para = null)
         {
-            SubtitleBlock.Text = App.Tools.App.GetLocalizationTextFromResource(title);
+            vm.SubFrameHistoryList.RemoveAll(p => p.Item1.Equals(pageType));
+            vm.SubFrameHistoryList.Add(new Tuple<Type, object>(pageType, para));
             SubFrame.Navigate(pageType, para, new DrillInNavigationTransitionInfo());
             SecondarySplitView.IsPaneOpen = true;
+            SideBackButton.Visibility = vm.SubFrameHistoryList.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public void SetSubtitle(LanguageNames title)
+        {
+            SubtitleBlock.Text = App.Tools.App.GetLocalizationTextFromResource(title);
+        }
+
+        private void SideBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (vm.SubFrameHistoryList.Count > 1)
+            {
+                var last = vm.SubFrameHistoryList[vm.SubFrameHistoryList.Count-2];
+                SubFrame.Navigate(last.Item1, last.Item2);
+                vm.SubFrameHistoryList.RemoveAt(vm.SubFrameHistoryList.Count - 1);
+            }
+            SideBackButton.Visibility = vm.SubFrameHistoryList.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

@@ -3,7 +3,7 @@
     x:Class="Clean_Reader.SubPages.BookDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Clean_Reader.SubPages"
+    xmlns:local="using:Clean_Reader.SubPages" Loaded="RichasyPage_Loaded"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:share="using:Yuenov.SDK.Models.Share" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
@@ -46,8 +46,8 @@
                 <controls:AdaptiveGridView Grid.Row="3" ItemTemplate="{StaticResource RecommendItemTemplate}"
                                        x:Name="RecommendGridView" Style="{StaticResource NoScrollGridView}"
                                        ItemContainerStyle="{StaticResource TransparentGridViewItemContainerStyle}"
-                                       DesiredWidth="130" HeaderTemplate="{StaticResource TipHeader}"
-                                       x:Uid="Control_RecommendGridView" Margin="0,25"/>
+                                       DesiredWidth="130" HeaderTemplate="{StaticResource TipHeader}" IsItemClickEnabled="True"
+                                       x:Uid="Control_RecommendGridView" Margin="0,25" ItemClick="RecommendGridView_ItemClick"/>
             </Grid>
         </Grid>
     </ScrollViewer>

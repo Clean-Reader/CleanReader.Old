@@ -38,7 +38,7 @@ namespace Clean_Reader.Models.Core
                 case MenuItemType.Discovery:
                     pageType = typeof(DiscoveryPage);
                     break;
-                case MenuItemType.Category:
+                case MenuItemType.CateAndRank:
                     pageType = typeof(CategoryPage);
                     break;
                 case MenuItemType.Topic:

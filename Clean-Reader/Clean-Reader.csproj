@@ -215,6 +215,12 @@
     <Compile Include="SubPages\BookDetailPage.xaml.cs">
       <DependentUpon>BookDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubPages\CategoryDetailPage.xaml.cs">
+      <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubPages\RankDetailPage.xaml.cs">
+      <DependentUpon>RankDetailPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -391,6 +397,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SubPages\CategoryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubPages\RankDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Template\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -435,7 +449,7 @@
       <Version>2.4.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.ReaderPanel">
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.UWP">
       <Version>1.1.3</Version>

@@ -64,13 +64,13 @@
                             CustomContentRequest="ReaderPanel_CustomContentRequest"
                             >
                         <reader:ReaderPanel.Header>
-                            <Grid Padding="20,10" x:Name="ReaderHeaderContainer">
+                            <Grid Padding="20,10" GotFocus="ReaderContainer_GotFocus">
                                 <TextBlock x:Name="ChapterTitleBlock" Style="{StaticResource BodyTextStyle}" VerticalAlignment="Center"
                                            HorizontalAlignment="Left" Foreground="{ThemeResource TipTextColor}"/>
                             </Grid>
                         </reader:ReaderPanel.Header>
                         <reader:ReaderPanel.Footer>
-                            <Grid Padding="20,10" x:Name="ReaderFooterContainer">
+                            <Grid Padding="20,0,20,10" GotFocus="ReaderContainer_GotFocus">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>

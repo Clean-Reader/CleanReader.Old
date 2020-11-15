@@ -83,6 +83,10 @@ namespace Clean_Reader
             SideBackButton.Visibility = vm.SubFrameHistoryList.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        public void SetSubtitle(string title)
+        {
+            SubtitleBlock.Text = title;
+        }
         public void SetSubtitle(LanguageNames title)
         {
             SubtitleBlock.Text = App.Tools.App.GetLocalizationTextFromResource(title);

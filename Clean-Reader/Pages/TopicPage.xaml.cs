@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Yuenov.SDK.Models.Discovery;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,7 +57,8 @@ namespace Clean_Reader.Pages
 
         private void HorizonBookListView_AllButtonClick(object sender, RoutedEventArgs e)
         {
-
+            var data = (sender as FrameworkElement).DataContext as SpecialContainer;
+            MainPage.Current.NavigateSubPage(typeof(SubPages.TopicDetailPage), data);
         }
     }
 }

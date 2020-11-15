@@ -218,8 +218,14 @@
     <Compile Include="SubPages\CategoryDetailPage.xaml.cs">
       <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubPages\DiscoveryDetailPage.xaml.cs">
+      <DependentUpon>DiscoveryDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubPages\RankDetailPage.xaml.cs">
       <DependentUpon>RankDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubPages\TopicDetailPage.xaml.cs">
+      <DependentUpon>TopicDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -401,7 +407,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SubPages\DiscoveryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SubPages\RankDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubPages\TopicDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

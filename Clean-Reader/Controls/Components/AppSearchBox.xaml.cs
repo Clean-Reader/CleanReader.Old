@@ -77,10 +77,12 @@ namespace Clean_Reader.Controls.Components
                 if (item.Book == null)
                 {
                     //search in web
+                    MainPage.Current.NavigateSubPage(typeof(SubPages.SearchDetailPage), item.SearchText);
                 }
                 else
                 {
                     // open the book
+                    App.VM.OpenReaderView(item.Book);
                 }
             }
         }

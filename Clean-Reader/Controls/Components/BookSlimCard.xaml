@@ -8,8 +8,13 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
-    <Grid>
+    <UserControl.Resources>
+        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource BasicMenuFlyoutStyle}"
+                    x:Name="CardFlyout">
+            
+        </MenuFlyout>
+    </UserControl.Resources>
+    <Grid ContextFlyout="{StaticResource CardFlyout}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

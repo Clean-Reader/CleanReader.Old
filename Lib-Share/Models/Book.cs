@@ -1,4 +1,5 @@
 ﻿using Lib.Share.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Windows.Storage;
@@ -14,6 +15,8 @@ namespace Lib.Share.Models
         public BookType Type { get; set; }
         public string BookId { get; set; }
         public string CustomRegex { get; set; }
+        public DateTime CreateTime { get; set; }
+        public long LastChapterId { get; set; }
 
         public Book() { }
 
@@ -27,15 +30,18 @@ namespace Lib.Share.Models
             BookId = id;
             if (Type == BookType.Epub)
                 Cover = $"ms-appdata:///local/Covers/{id}.png";
+            CreateTime = DateTime.Now;
         }
 
-        public Book(Yuenov.SDK.Models.Share.Book web, string shelfId = "")
+        public Book(Yuenov.SDK.Models.Share.Book web, string shelfId = "", long lastChapterId = 0)
         {
             ShelfId = shelfId;
             Name = web.Title;
             Cover = web.CoverImg;
             Type = BookType.Web;
             BookId = web.BookId.ToString();
+            CreateTime = DateTime.Now;
+            LastChapterId = lastChapterId;
         }
         public override bool Equals(object obj)
         {

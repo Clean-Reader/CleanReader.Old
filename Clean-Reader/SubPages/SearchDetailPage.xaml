@@ -1,0 +1,31 @@
+﻿<ui:RichasyPage
+    xmlns:ui="using:Richasy.Controls.UWP.Models.UI"
+    x:Class="Clean_Reader.SubPages.SearchDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.SubPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:share="using:Yuenov.SDK.Models.Share" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:layout="using:Richasy.Controls.UWP.Layout"
+    mc:Ignorable="d">
+    <ui:RichasyPage.Resources>
+        <DataTemplate x:DataType="share:Book" x:Key="BookItemTemplate">
+            <Grid Margin="0,5,10,0">
+                <Viewbox Width="330" StretchDirection="Both">
+                    <components:YuenovBookCard x:Name="DetailCard" Width="360" Height="160" InnerPadding="10,15"
+                                           Data="{Binding}"/>
+                </Viewbox>
+
+            </Grid>
+        </DataTemplate>
+    </ui:RichasyPage.Resources>
+    <Grid>
+        <layout:CustomListView x:Name="DetailListView" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                               Style="{StaticResource BasicListView}" ArriveBottom="DetailListView_ArriveBottom"
+                               IsItemClickEnabled="True" ItemClick="DetailListView_ItemClick"
+                               ItemTemplate="{StaticResource BookItemTemplate}" ItemsSource="{x:Bind DisplayCollection}"
+                               ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+        <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
+        <ProgressBar IsIndeterminate="True" Foreground="{ThemeResource PrimaryColor}" VerticalAlignment="Bottom"
+                     HorizontalAlignment="Stretch" Visibility="Collapsed" x:Name="LoadingBar"/>
+    </Grid>
+</ui:RichasyPage>

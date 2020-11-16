@@ -93,7 +93,7 @@ namespace Clean_Reader.Models.Core
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
-            await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
+            _isShelfChanged = true;
         }
 
         public async Task ImportBook(Yuenov.SDK.Models.Share.Book web)
@@ -117,12 +117,12 @@ namespace Clean_Reader.Models.Core
                 if (cr == Windows.UI.Xaml.Controls.ContentDialogResult.None)
                     return;
             }
-            await SyncBookChapters(web.BookId);
             TotalBookList.Add(book);
+            await SyncBookChapters(web.BookId);
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
-            await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
+            _isShelfChanged = true;
         }
 
         public async Task SaveShelf()
@@ -141,7 +141,7 @@ namespace Clean_Reader.Models.Core
         public void CurrentShelfInit()
         {
             string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
-            var books = TotalBookList.Where(p => p.ShelfId == shelfId).ToList();
+            var books = TotalBookList.Where(p => p.ShelfId == shelfId).OrderByDescending(p => p.CreateTime).ToList();
             foreach (var book in books)
             {
                 if (!DisplayBookCollection.Contains(book))
@@ -149,6 +149,26 @@ namespace Clean_Reader.Models.Core
             }
         }
 
-
+        public async Task RemoveBook(string bookId, bool showDialog = true)
+        {
+            if (showDialog)
+            {
+                var dialog = new ConfirmDialog(LanguageNames.RemoveBookWarning);
+                var result = await dialog.ShowAsync();
+                if (result != Windows.UI.Xaml.Controls.ContentDialogResult.Primary)
+                    return;
+            }
+            var source = TotalBookList.Where(p => p.BookId == bookId).FirstOrDefault();
+            if (source != null)
+            {
+                TotalBookList.Remove(source);
+                if (DisplayBookCollection.Contains(source))
+                    DisplayBookCollection.Remove(source);
+                await App.Tools.IO.SetLocalDataAsync(bookId + ".json", "[]", StaticString.FolderChapter);
+                HistoryList.RemoveAll(p => p.BookId == bookId);
+                _isHistoryChanged = true;
+                _isShelfChanged = true;
+            }
+        }
     }
 }

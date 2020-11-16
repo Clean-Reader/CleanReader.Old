@@ -41,6 +41,11 @@ namespace Clean_Reader.Models.Core
             }
             if (IsDetailChanged)
                 SaveDetailList();
+            if (_isShelfChanged)
+            {
+                _isShelfChanged = false;
+                await App.Tools.IO.SetLocalDataAsync(StaticString.FileShelfList, JsonConvert.SerializeObject(TotalBookList));
+            }
         }
 
         public async void SaveDetailList()

@@ -12,7 +12,7 @@
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="models:Book" x:Key="BookItemTemplate">
             <Grid Margin="0,0,15,10">
-                <components:BookSlimCard Data="{x:Bind}"/>
+                <components:BookSlimCard Data="{x:Bind}" IsShowFlyout="True"/>
             </Grid>
         </DataTemplate>
         <CommandBarFlyout x:Name="ShelfFlyout" Opened="ShelfFlyout_Opened">

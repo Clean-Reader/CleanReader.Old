@@ -23,6 +23,12 @@
         Progress,
         BookDetail,
         OpenBook,
-        AddToShelf
+        AddToShelf,
+        SearchResult,
+        UpdateChapter,
+        RemoveBookWarning,
+        Move,
+        Delete,
+        Remove
     }
 }

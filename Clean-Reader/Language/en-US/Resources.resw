@@ -264,8 +264,14 @@
   <data name="Tip_Rank" xml:space="preserve">
     <value>Rank</value>
   </data>
+  <data name="Tip_RemoveBookWarning" xml:space="preserve">
+    <value>Do you want to remove this book? After removal, the book will be deleted from the current shelf. If it is a local book, it will not affect the actual file</value>
+  </data>
   <data name="Tip_RepeatBook" xml:space="preserve">
     <value>Duplicate books already included</value>
+  </data>
+  <data name="Tip_SearchResult" xml:space="preserve">
+    <value>Search result</value>
   </data>
   <data name="Tip_Setting" xml:space="preserve">
     <value>Settings</value>

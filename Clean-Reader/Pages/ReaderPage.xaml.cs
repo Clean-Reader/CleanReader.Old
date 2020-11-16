@@ -242,6 +242,7 @@ namespace Clean_Reader.Pages
         {
             var chapter = e.ClickedItem as Chapter;
             ReaderPanel.LoadChapter(chapter);
+            ReaderSplitView.IsPaneOpen = false;
         }
 
         private async void ReaderPanel_Loaded(object sender, RoutedEventArgs e)

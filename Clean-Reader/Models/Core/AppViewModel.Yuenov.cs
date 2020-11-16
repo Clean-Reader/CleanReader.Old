@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yuenov.SDK.Enums;
+using Yuenov.SDK.Models.Shelf;
 
 namespace Clean_Reader.Models.Core
 {
@@ -121,6 +122,7 @@ namespace Clean_Reader.Models.Core
             var result = new List<Chapter>();
             try
             {
+                var sourceBook = TotalBookList.Where(p => p.BookId == bookId.ToString()).FirstOrDefault();
                 var response = await _yuenovClient.GetBookChaptersAsync(bookId, startChapterId);
                 if (response.Result.Code == ResultCode.Success)
                 {
@@ -140,15 +142,50 @@ namespace Clean_Reader.Models.Core
                         }
                         result = sourceList;
                     }
+                    if (sourceBook != null)
+                    {
+                        sourceBook.LastChapterId = chapters.Last().Id;
+                        _isShelfChanged = true;
+                    }   
                     await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(result), StaticString.FolderChapter);
                     return result;
                 }
+                else
+                    App.VM.ShowPopup($"{response.Result.Code}: {response.Result.Message}");
             }
             catch (Exception ex)
             {
                 App.VM.ShowPopup(ex.Message, true);
             }
             return result;
+        }
+
+        public async Task UpdateBooks(params Book[] books)
+        {
+            var items = new List<CheckUpdateItem>();
+            foreach (var book in books)
+            {
+                items.Add(new CheckUpdateItem(Convert.ToInt32(book.BookId), book.LastChapterId));
+            }
+            var response = await _yuenovClient.CheckUpdateAsync(items.ToArray());
+            if (response.Result.Code == ResultCode.Success)
+            {
+                if (response.Data.Count > 0)
+                {
+                    var tasks = new List<Task>();
+                    foreach (var up in response.Data)
+                    {
+                        tasks.Add(Task.Run(async () =>
+                        {
+                            var source = books.Where(p => p.BookId == up.BookId.ToString()).FirstOrDefault();
+                            await SyncBookChapters(up.BookId, source.LastChapterId);
+                        }));
+                    }
+                    await Task.WhenAll(tasks.ToArray());
+                }
+            }
+            else
+                App.VM.ShowPopup($"{response.Result.Code}: {response.Result.Message}");
         }
     }
 }

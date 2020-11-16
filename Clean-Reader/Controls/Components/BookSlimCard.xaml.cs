@@ -1,5 +1,9 @@
-﻿using Lib.Share.Models;
+﻿using Lib.Share.Enums;
+using Lib.Share.Models;
+using Richasy.Font.UWP;
+using Richasy.Font.UWP.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,6 +18,18 @@ namespace Clean_Reader.Controls.Components
         {
             this.InitializeComponent();
         }
+
+        public bool IsShowFlyout
+        {
+            get { return (bool)GetValue(IsShowFlyoutProperty); }
+            set { SetValue(IsShowFlyoutProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsShowFlyout.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsShowFlyoutProperty =
+            DependencyProperty.Register("IsShowFlyout", typeof(bool), typeof(BookSlimCard), new PropertyMetadata(false));
+
+
 
         public Book Data
         {
@@ -35,6 +51,7 @@ namespace Clean_Reader.Controls.Components
                 instance.Cover.Data = data;
                 App.VM.ProgressChanged -= instance.OnProgressChanged;
                 App.VM.ProgressChanged += instance.OnProgressChanged;
+                instance.FlyoutInit();
                 instance.UpdateProgress();
             }
         }
@@ -75,6 +92,55 @@ namespace Clean_Reader.Controls.Components
                 ProgressBlock.Text = history.Hisotry.Progress.ToString("0") + "%";
             else
                 ProgressBlock.Text = "0%";
+        }
+
+        private void FlyoutInit()
+        {
+            CardFlyout.Items.Clear();
+            if (IsShowFlyout)
+                ContextFlyout = CardFlyout;
+            else
+            {
+                ContextFlyout = null;
+                return;
+            }
+            if (Data.Type == BookType.Web)
+            {
+                var update = new MenuFlyoutItem()
+                {
+                    Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.UpdateChapter),
+                    Icon = new FeatherIcon(FeatherSymbol.Cloud)
+                };
+                update.Click += async(_s, _e) =>
+                {
+                    await App.VM.UpdateBooks(Data);
+                };
+                CardFlyout.Items.Add(update);
+            }
+            if (App.VM.ShelfCollection.Count > 1)
+            {
+                var move = new MenuFlyoutItem()
+                {
+                    Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Move),
+                    Icon = new FeatherIcon(FeatherSymbol.Repeat)
+                };
+                move.Click += (_s, _e) =>
+                {
+                    //转移书籍
+                };
+                CardFlyout.Items.Add(move);
+            }
+            var delete = new MenuFlyoutItem()
+            {
+                Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Remove),
+                Icon = new FeatherIcon(FeatherSymbol.Trash2) { Foreground = App.Tools.App.GetThemeBrushFromResource(ColorNames.ErrorColor) }
+            };
+            delete.Click += async (_s, _e) =>
+            {
+                await App.VM.RemoveBook(Data.BookId);
+            };
+            CardFlyout.Items.Add(delete);
+            
         }
     }
 }

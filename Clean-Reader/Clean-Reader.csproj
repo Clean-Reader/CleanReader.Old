@@ -18,7 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>09845A784F504346A2D9453CAB0242C0E3AFBBA3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>19DE3251AB16B9B0D867892B047B3BB7FF135FF9</PackageCertificateThumbprint>
     <PackageCertificateKeyFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -224,6 +224,9 @@
     <Compile Include="SubPages\RankDetailPage.xaml.cs">
       <DependentUpon>RankDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubPages\SearchDetailPage.xaml.cs">
+      <DependentUpon>SearchDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubPages\TopicDetailPage.xaml.cs">
       <DependentUpon>TopicDetailPage.xaml</DependentUpon>
     </Compile>
@@ -412,6 +415,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubPages\RankDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubPages\SearchDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

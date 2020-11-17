@@ -5,10 +5,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:uwp="using:Richasy.Font.UWP" xmlns:interaction="using:Richasy.Controls.UWP.Interaction"
     mc:Ignorable="d">
+    <ui:RichasyPage.Resources>
+        <DataTemplate x:DataType="uwp:SystemFont" x:Key="FontItemTemplate">
+            <Grid Padding="0,10">
+                <TextBlock FontFamily="{x:Bind FontFamily}" Text="{x:Bind Name}" TextTrimming="CharacterEllipsis"
+                           FontSize="{CustomResource BasicFontSize}" HorizontalAlignment="Left"/>
+            </Grid>
+        </DataTemplate>
+    </ui:RichasyPage.Resources>
+    <ScrollViewer Style="{StaticResource BasicScrollViewer}"
+                  VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollMode="Disabled">
+        <StackPanel>
+            
+            <ComboBox Style="{StaticResource BasicComboBoxStyle}" Width="200"
+                              ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
+                              x:Name="ThemeComboBox" SelectionChanged="ThemeComboBox_SelectionChanged"
+                              HeaderTemplate="{StaticResource TipHeader}" x:Uid="Control_ThemeComboBox">
+                <ComboBoxItem Tag="System" x:Uid="Control_WithSystemComboBoxItem"/>
+                <ComboBoxItem Tag="Light" x:Uid="Control_LightComboBoxItem"/>
+                <ComboBoxItem Tag="Dark" x:Uid="Control_DarkComboBoxItem"/>
+            </ComboBox>
 
-    <Grid>
+            <ComboBox Style="{StaticResource BasicComboBoxStyle}" Margin="0,15,0,0" Width="200"
+                              ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
+                              x:Name="LanguageComboBox" SelectionChanged="LanguageComboBox_SelectionChanged"
+                              HeaderTemplate="{StaticResource TipHeader}" x:Uid="Control_LanguageComboBox">
+                <ComboBoxItem Tag="zh_CN" Content="简体中文"/>
+                <ComboBoxItem Tag="en_US" Content="English"/>
+            </ComboBox>
 
-    </Grid>
+            <ComboBox Style="{StaticResource BasicComboBoxStyle}" Margin="0,15,0,0" Width="200"
+                      ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
+                      x:Name="FontComboBox" SelectionChanged="FontComboBox_SelectionChanged"
+                      HeaderTemplate="{StaticResource TipHeader}" x:Uid="Control_AppFontComboBox"
+                      ItemsSource="{x:Bind vm.FontCollection}" ItemTemplate="{StaticResource FontItemTemplate}"/>
+
+            <interaction:NumberBox x:Uid="Control_BasicFontSizeBox" Minimum="13" Maximum="22" BoxWidth="200"
+                                   Step="1" ValueChanged="FontSizeBox_ValueChanged"  x:Name="FontSizeBox"
+                                   Margin="0,15,0,0" TextBoxStyle="{StaticResource BasicTextBoxStyle}"
+                                   HeaderTemplate="{StaticResource TipHeader}" HorizontalAlignment="Left"
+                                   PopupBackground="{ThemeResource PopupBackground}">
+                <interaction:NumberBox.UpButtonIcon>
+                    <uwp:FeatherIcon Symbol="ChevronUp" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:NumberBox.UpButtonIcon>
+                <interaction:NumberBox.DownButtonIcon>
+                    <uwp:FeatherIcon Symbol="ChevronDown" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:NumberBox.DownButtonIcon>
+            </interaction:NumberBox>
+
+            <ComboBox Style="{StaticResource BasicComboBoxStyle}" Margin="0,15,0,0" Width="200"
+                              ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
+                              x:Name="SearchEngineComboBox" SelectionChanged="SearchEngineComboBox_SelectionChanged"
+                              HeaderTemplate="{StaticResource TipHeader}" x:Uid="Control_SearchEngineComboBox">
+                <ComboBoxItem Tag="Google" x:Uid="Control_GoogleComboBoxItem"/>
+                <ComboBoxItem Tag="Bing" x:Uid="Control_BingComboBoxItem"/>
+                <ComboBoxItem Tag="Baidu" x:Uid="Control_BaiduComboBoxItem"/>
+            </ComboBox>
+        </StackPanel>
+    </ScrollViewer>
+    
 </ui:RichasyPage>

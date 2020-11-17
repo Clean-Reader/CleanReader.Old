@@ -11,6 +11,7 @@
         OneDriveUserName,
         OneDriveExpiryTime,
         LastShelfId,
-        MaxLastestBookCount
+        MaxLastestBookCount,
+        SearchEngine
     }
 }

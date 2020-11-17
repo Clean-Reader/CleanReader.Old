@@ -29,6 +29,7 @@
         RemoveBookWarning,
         Move,
         Delete,
-        Remove
+        Remove,
+        NeedRestart
     }
 }

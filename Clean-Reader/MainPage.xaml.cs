@@ -43,6 +43,7 @@ namespace Clean_Reader
                 vm.ColorConfigInit();
                 vm.HistoryInit();
                 vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
+                await vm._yuenovClient.WarmUpAsync();
                 IsInit = true;
             }
 

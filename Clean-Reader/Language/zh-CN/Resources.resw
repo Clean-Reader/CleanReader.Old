@@ -126,11 +126,23 @@
   <data name="Control_AddSyncAccountTipBlock.Text" xml:space="preserve">
     <value>添加同步账户</value>
   </data>
+  <data name="Control_AppFontComboBox.Header" xml:space="preserve">
+    <value>应用字体</value>
+  </data>
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>查找书籍</value>
   </data>
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>背景色</value>
+  </data>
+  <data name="Control_BaiduComboBoxItem.Content" xml:space="preserve">
+    <value>百度</value>
+  </data>
+  <data name="Control_BasicFontSizeBox.Header" xml:space="preserve">
+    <value>基准字体大小（重启应用生效）</value>
+  </data>
+  <data name="Control_BingComboBoxItem.Content" xml:space="preserve">
+    <value>必应</value>
   </data>
   <data name="Control_CategoryTipBlock.Text" xml:space="preserve">
     <value>分类</value>
@@ -150,6 +162,9 @@
   <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
     <value>服务器开了小差~ 请检查网络连接并重试</value>
   </data>
+  <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
+    <value>暗色主题</value>
+  </data>
   <data name="Control_EndComboItem.Content" xml:space="preserve">
     <value>完本</value>
   </data>
@@ -165,6 +180,9 @@
   <data name="Control_ForegroundTipBlock.Text" xml:space="preserve">
     <value>前景色（文本）</value>
   </data>
+  <data name="Control_GoogleComboBoxItem.Content" xml:space="preserve">
+    <value>谷歌</value>
+  </data>
   <data name="Control_HotComboItem.Content" xml:space="preserve">
     <value>热门</value>
   </data>
@@ -174,8 +192,14 @@
   <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
     <value>亚克力背景</value>
   </data>
+  <data name="Control_LanguageComboBox.Header" xml:space="preserve">
+    <value>语言</value>
+  </data>
   <data name="Control_LastestReadTipBlock.Text" xml:space="preserve">
     <value>最近阅读</value>
+  </data>
+  <data name="Control_LightComboBoxItem.Content" xml:space="preserve">
+    <value>亮色主题</value>
   </data>
   <data name="Control_LineHeightSlider.Header" xml:space="preserve">
     <value>行高</value>
@@ -192,6 +216,9 @@
   <data name="Control_RecommendGridView.Header" xml:space="preserve">
     <value>相关推荐</value>
   </data>
+  <data name="Control_SearchEngineComboBox.Header" xml:space="preserve">
+    <value>默认搜索引擎</value>
+  </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
   </data>
@@ -207,8 +234,14 @@
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>行首缩进</value>
   </data>
+  <data name="Control_ThemeComboBox.Header" xml:space="preserve">
+    <value>主题</value>
+  </data>
   <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
     <value>排版</value>
+  </data>
+  <data name="Control_WithSystemComboBoxItem.Content" xml:space="preserve">
+    <value>跟随系统</value>
   </data>
   <data name="Tip_AddShelf" xml:space="preserve">
     <value>添加书架</value>
@@ -257,6 +290,9 @@
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>未登录</value>
+  </data>
+  <data name="Tip_NeedRestart" xml:space="preserve">
+    <value>您更改了静态资源，重启后将获得更好地体验，是否重启应用？</value>
   </data>
   <data name="Tip_OneDriveLogoutWarning" xml:space="preserve">
     <value>您是否要退出OneDrive？退出后本地阅读记录将不会同步</value>

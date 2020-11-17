@@ -1,4 +1,5 @@
-﻿using Clean_Reader.Models.Enums;
+﻿using Clean_Reader.Controls.Dialogs;
+using Clean_Reader.Models.Enums;
 using Clean_Reader.Pages;
 using Lib.Share.Enums;
 using Lib.Share.Models;
@@ -11,6 +12,7 @@ using Richasy.Font.UWP.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Core;
 using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI;
@@ -178,6 +180,15 @@ namespace Clean_Reader.Models.Core
             }
             ApplicationLanguages.PrimaryLanguageOverride = code;
         }
-        
+
+        public async void ShowRestartDialog()
+        {
+            var dialog = new ConfirmDialog(LanguageNames.NeedRestart);
+            dialog.PrimaryButtonClick += async (_s, _e) =>
+            {
+                await CoreApplication.RequestRestartAsync("restart");
+            };
+            await dialog.ShowAsync();
+        }
     }
 }

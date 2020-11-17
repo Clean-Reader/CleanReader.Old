@@ -85,6 +85,10 @@ namespace Clean_Reader.Controls.Components
                     App.VM.OpenReaderView(item.Book);
                 }
             }
+            else if(!string.IsNullOrEmpty(args.QueryText))
+            {
+                MainPage.Current.NavigateSubPage(typeof(SubPages.SearchDetailPage), item.SearchText);
+            }
         }
     }
 }

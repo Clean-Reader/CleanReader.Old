@@ -32,9 +32,9 @@ namespace Clean_Reader
             VM.LanguageInit();
             this.Suspending += OnSuspending;
             this.UnhandledException += OnUnhandledException;
-            //string theme = Tools.App.GetLocalSetting(SettingNames.Theme, StaticString.ThemeSystem);
-            //if (theme != StaticString.ThemeSystem)
-            //    RequestedTheme = theme == StaticString.ThemeLight ? ApplicationTheme.Light : ApplicationTheme.Dark;
+            string theme = Tools.App.GetLocalSetting(SettingNames.Theme, StaticString.ThemeSystem);
+            if (theme != StaticString.ThemeSystem)
+                RequestedTheme = theme == StaticString.ThemeLight ? ApplicationTheme.Light : ApplicationTheme.Dark;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             CustomXamlResourceLoader.Current = new CustomResourceLoader();
         }

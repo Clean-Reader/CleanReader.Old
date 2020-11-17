@@ -21,5 +21,9 @@
         public const string FileColorConfig = "ColorConfig.json";
         public const string FolderChapter = "Chapters";
         public const string FolderChapterDetail = "ChapterDetails";
+
+        public const string SearchBing = "Bing";
+        public const string SearchGoogle = "Google";
+        public const string SearchBaidu = "Baidu";
     }
 }

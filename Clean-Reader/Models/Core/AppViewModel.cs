@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Richasy.Controls.UWP.Popups;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using Richasy.Font.UWP;
+using System.Linq;
 
 namespace Clean_Reader.Models.Core
 {
@@ -20,6 +22,7 @@ namespace Clean_Reader.Models.Core
             CurrentShelfChanged += CurrentShelf_Changed;
             _checkFileTimer.Tick += CheckFileTimer_Tick;
             _checkFileTimer.Start();
+            
             //_waitPopup = new WaitingPopup(App.Tools);
             //_waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
             //_waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);

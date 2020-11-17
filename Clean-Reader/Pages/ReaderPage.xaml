@@ -70,7 +70,7 @@
                             </Grid>
                         </reader:ReaderPanel.Header>
                         <reader:ReaderPanel.Footer>
-                            <Grid Padding="20,0,20,10" GotFocus="ReaderContainer_GotFocus">
+                            <Grid Padding="20,5" GotFocus="ReaderContainer_GotFocus">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>

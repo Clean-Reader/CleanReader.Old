@@ -30,6 +30,8 @@
         Move,
         Delete,
         Remove,
-        NeedRestart
+        NeedRestart,
+        LoadingChapter,
+        AddSuccess
     }
 }

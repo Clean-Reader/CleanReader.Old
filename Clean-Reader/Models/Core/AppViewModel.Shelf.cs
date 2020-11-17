@@ -118,11 +118,13 @@ namespace Clean_Reader.Models.Core
                     return;
             }
             TotalBookList.Add(book);
+            ShowPopup(LanguageNames.LoadingChapter);
             await SyncBookChapters(web.BookId);
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
             _isShelfChanged = true;
+            ShowPopup(LanguageNames.AddSuccess);
         }
 
         public async Task SaveShelf()

@@ -104,7 +104,7 @@ namespace Clean_Reader.Models.Core
             c.Hash = "";
             c.HashIndex = 0;
             c.Index = index;
-            c.Level = 1;
+            c.Level = 0;
             c.Link = chapter.Id.ToString();
             c.Title = chapter.Name;
             c.StartLength = 0;

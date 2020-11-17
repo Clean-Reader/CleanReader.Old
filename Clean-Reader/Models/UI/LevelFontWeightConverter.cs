@@ -9,7 +9,7 @@ namespace Clean_Reader.Models.UI
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var level = (int)value;
-            if (level == 1)
+            if (level <= 1)
                 return FontWeights.Bold;
             else
                 return FontWeights.Normal;

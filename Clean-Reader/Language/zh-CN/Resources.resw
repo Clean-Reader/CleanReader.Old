@@ -246,6 +246,9 @@
   <data name="Tip_AddShelf" xml:space="preserve">
     <value>添加书架</value>
   </data>
+  <data name="Tip_AddSuccess" xml:space="preserve">
+    <value>书籍已添加</value>
+  </data>
   <data name="Tip_AddToShelf" xml:space="preserve">
     <value>添加到书架</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>获取用户失败</value>
+  </data>
+  <data name="Tip_LoadingChapter" xml:space="preserve">
+    <value>正在同步章节</value>
   </data>
   <data name="Tip_ManageShelf" xml:space="preserve">
     <value>管理书架</value>

@@ -21,8 +21,8 @@
 
     <SolidColorBrush x:Key="LineColor" Color="#3a3e55"/>
     <SolidColorBrush x:Key="LineColorOver" Color="#424761"/>
-    <SolidColorBrush x:Key="ProgressColor" Color="#252a40" Opacity="0.45"/>
-    <SolidColorBrush x:Key="ProgressColorOver" Color="#252a40" Opacity="0.7"/>
+    <SolidColorBrush x:Key="ProgressColor" Color="#5B689E" Opacity="0.75"/>
+    <SolidColorBrush x:Key="ProgressColorOver" Color="#414A70" Opacity="0.7"/>
     <Color x:Key="ShadowColor">#111111</Color>
 
     <SolidColorBrush x:Key="PrimaryColorOpacity" Color="#156FB2" Opacity="0.1"/>

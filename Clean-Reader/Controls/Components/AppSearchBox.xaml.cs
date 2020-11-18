@@ -87,7 +87,7 @@ namespace Clean_Reader.Controls.Components
             }
             else if(!string.IsNullOrEmpty(args.QueryText))
             {
-                MainPage.Current.NavigateSubPage(typeof(SubPages.SearchDetailPage), item.SearchText);
+                MainPage.Current.NavigateSubPage(typeof(SubPages.SearchDetailPage), args.QueryText);
             }
         }
     }

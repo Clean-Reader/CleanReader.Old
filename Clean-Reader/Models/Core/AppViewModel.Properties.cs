@@ -1,6 +1,7 @@
 ﻿using Clean_Reader.Controls.Components;
 using Clean_Reader.Controls.Layout;
 using Clean_Reader.Models.UI;
+using Lib.Share.Enums;
 using Lib.Share.Models;
 using Richasy.Controls.Reader;
 using Richasy.Controls.Reader.Models;
@@ -48,7 +49,7 @@ namespace Clean_Reader.Models.Core
         }
 
         private bool _isStyleChanged = false;
-        private bool _isShelfChanged = false;
+        public bool IsShelfChanged = false;
         public bool IsDetailChanged = false;
 
         public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();
@@ -64,6 +65,7 @@ namespace Clean_Reader.Models.Core
                 if (_currentShelf == null || !_currentShelf.Equals(value))
                 {
                     _currentShelf = value;
+                    App.Tools.App.WriteLocalSetting(SettingNames.LastShelfId, value.Id);
                     CurrentShelfChanged?.Invoke(this, EventArgs.Empty);
                 }
             }

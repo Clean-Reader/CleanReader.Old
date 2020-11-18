@@ -32,6 +32,12 @@
         Remove,
         NeedRestart,
         LoadingChapter,
-        AddSuccess
+        AddSuccess,
+        FieldEmpty,
+        UncateBookList,
+        ShelfBookList,
+        ShelfNameRepeat,
+        Waiting,
+        DefaultShelfManageWarning
     }
 }

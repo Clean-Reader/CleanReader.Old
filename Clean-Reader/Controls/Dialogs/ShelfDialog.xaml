@@ -1,0 +1,35 @@
+﻿<ContentDialog
+    x:Class="Clean_Reader.Controls.Dialogs.ShelfDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:models="using:Lib.Share.Models" xmlns:components="using:Clean_Reader.Controls.Components"
+    mc:Ignorable="d"
+    Style="{StaticResource BasicDialogStyle}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    <ContentDialog.Resources>
+        <DataTemplate x:DataType="models:Book" x:Key="BookTemplate">
+            <Grid Padding="15">
+                <components:BookSlimBlock Data="{x:Bind}"/>
+            </Grid>
+        </DataTemplate>
+    </ContentDialog.Resources>
+    <StackPanel MaxWidth="400">
+        <interaction:ExtraTextBox Style="{StaticResource BasicTextBoxStyle}"
+                                  x:Name="ShelfNameBox" x:Uid="Control_ShelfNameBox"
+                                  HeaderTemplate="{StaticResource TipHeader}"/>
+        <Grid Margin="0,15,0,0">
+            <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_NoBookBlock"
+                                  VerticalAlignment="Center" Symbol="BookOpen"
+                                  HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <ListView SelectionMode="Multiple" x:Name="BookListView"
+                  ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                  Style="{StaticResource BasicListView}" MaxHeight="400"
+                  ItemTemplate="{StaticResource BookTemplate}" HeaderTemplate="{StaticResource TipHeader}"
+                  ItemsSource="{x:Bind BookCollection}" Loaded="BookListView_Loaded"
+                  />
+        </Grid>
+    </StackPanel>
+</ContentDialog>

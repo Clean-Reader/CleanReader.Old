@@ -52,7 +52,7 @@ namespace Clean_Reader.Models.Core
                 default:
                     break;
             }
-            if(_rootFrame.Content==null || !_rootFrame.Content.GetType().Equals(pageType))
+            if (_rootFrame.Content == null || !_rootFrame.Content.GetType().Equals(pageType))
                 _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
         }
 
@@ -60,13 +60,13 @@ namespace Clean_Reader.Models.Core
         {
             if (book == null)
                 return;
-            if(LastestReadCollection.Contains(book))
+            if (LastestReadCollection.Contains(book))
                 LastestReadCollection.Remove(book);
             LastestReadCollection.Insert(0, book);
             int maxCount = Convert.ToInt32(App.Tools.App.GetLocalSetting(SettingNames.MaxLastestBookCount, "12"));
             if (LastestReadCollection.Count > maxCount)
                 LastestReadCollection.RemoveAt(LastestReadCollection.Count - 1);
-            
+
             var frame = Window.Current.Content as Frame;
             frame.Navigate(typeof(ReaderPage), book, new DrillInNavigationTransitionInfo());
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileLastestList, JsonConvert.SerializeObject(LastestReadCollection.Select(p => p.BookId)));
@@ -79,7 +79,7 @@ namespace Clean_Reader.Models.Core
                 frame.GoBack(new EntranceNavigationTransitionInfo());
         }
 
-        
+
 
         private void CurrentShelf_Changed(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace Clean_Reader.Models.Core
                 CurrentShelfInit();
             }
         }
-        
+
 
         public void ShowPopup(LanguageNames name, bool isError = false)
         {
@@ -99,7 +99,7 @@ namespace Clean_Reader.Models.Core
         {
             var popup = new TipPopup(App.Tools, msg);
             ColorNames color = isError ? ColorNames.ErrorColor : ColorNames.PrimaryColor;
-            popup.Show(color);
+            popup.Show(color, 2);
         }
         public void ShowWaitingPopup(LanguageNames content)
         {

@@ -1,4 +1,5 @@
-﻿using Clean_Reader.Models.Core;
+﻿using Clean_Reader.Controls.Dialogs;
+using Clean_Reader.Models.Core;
 using Lib.Share.Enums;
 using Lib.Share.Models;
 using Richasy.Controls.UWP.Models.UI;
@@ -37,8 +38,15 @@ namespace Clean_Reader.Pages
             vm.DisplayBookCollection.CollectionChanged += DisplayBookCollection_Changed;
             LastestContainer.Visibility = vm.LastestReadCollection.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             NoDataBlock.Visibility = vm.DisplayBookCollection.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            ToolTipService.SetToolTip(AddShelfButton,App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddShelf));
+            ToolTipService.SetToolTip(AddShelfButton, App.Tools.App.GetLocalizationTextFromResource(LanguageNames.AddShelf));
             ToolTipService.SetToolTip(ManageShelfButton, App.Tools.App.GetLocalizationTextFromResource(LanguageNames.ManageShelf));
+            vm.CurrentShelfChanged += CurrentShelfChanged;
+            ShelfNameBlock.Text = vm.CurrentShelf?.Name ?? "--";
+        }
+
+        private void CurrentShelfChanged(object sender, EventArgs e)
+        {
+            ShelfNameBlock.Text = vm.CurrentShelf?.Name ?? "--";
         }
 
         private void DisplayBookCollection_Changed(object sender, NotifyCollectionChangedEventArgs e)
@@ -65,14 +73,27 @@ namespace Clean_Reader.Pages
             vm.OpenReaderView(book);
         }
 
-        private void AddShelfButton_Click(object sender, RoutedEventArgs e)
+        private async void AddShelfButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ShelfFlyout.Hide();
+            var dialog = new ShelfDialog();
+            var result = await dialog.ShowAsync();
+            if (result != ContentDialogResult.Secondary)
+                vm.CurrentShelfInit();
         }
 
-        private void ManageShelfButton_Click(object sender, RoutedEventArgs e)
+        private async void ManageShelfButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (vm.CurrentShelf.Id == "default")
+            {
+                vm.ShowPopup(LanguageNames.DefaultShelfManageWarning);
+                return;
+            }
+            ShelfFlyout.Hide();
+            var dialog = new ShelfDialog(vm.CurrentShelf);
+            var result = await dialog.ShowAsync();
+            if (result != ContentDialogResult.Secondary)
+                vm.CurrentShelfInit();
         }
 
         private void ShelfFlyout_Opened(object sender, object e)

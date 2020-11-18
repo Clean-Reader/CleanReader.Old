@@ -18,7 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>19DE3251AB16B9B0D867892B047B3BB7FF135FF9</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>09845A784F504346A2D9453CAB0242C0E3AFBBA3</PackageCertificateThumbprint>
     <PackageCertificateKeyFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -130,6 +130,9 @@
     <Compile Include="Controls\Components\BookCover.xaml.cs">
       <DependentUpon>BookCover.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\BookSlimBlock.xaml.cs">
+      <DependentUpon>BookSlimBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\BookSlimCard.xaml.cs">
       <DependentUpon>BookSlimCard.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,9 @@
     </Compile>
     <Compile Include="Controls\Components\YuenovBookCard.xaml.cs">
       <DependentUpon>YuenovBookCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dialogs\ShelfDialog.xaml.cs">
+      <DependentUpon>ShelfDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Dialogs\ConfirmDialog.xaml.cs">
       <DependentUpon>ConfirmDialog.xaml</DependentUpon>
@@ -318,6 +324,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Components\BookSlimBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\BookSlimCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -351,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Components\YuenovBookCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialogs\ShelfDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

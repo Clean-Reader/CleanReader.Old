@@ -49,7 +49,7 @@ namespace Clean_Reader.Models.Core
         }
 
         private bool _isStyleChanged = false;
-        public bool IsShelfChanged = false;
+        public bool IsBookListChanged = false;
         public bool IsDetailChanged = false;
 
         public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();

@@ -95,7 +95,7 @@ namespace Clean_Reader.Models.Core
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
-            IsShelfChanged = true;
+            IsBookListChanged = true;
         }
 
         public async Task ImportBook(Yuenov.SDK.Models.Share.Book web)
@@ -125,7 +125,7 @@ namespace Clean_Reader.Models.Core
             string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
-            IsShelfChanged = true;
+            IsBookListChanged = true;
             ShowPopup(LanguageNames.AddSuccess);
         }
 
@@ -171,7 +171,7 @@ namespace Clean_Reader.Models.Core
                 await App.Tools.IO.SetLocalDataAsync(bookId + ".json", "[]", StaticString.FolderChapter);
                 HistoryList.RemoveAll(p => p.BookId == bookId);
                 _isHistoryChanged = true;
-                IsShelfChanged = true;
+                IsBookListChanged = true;
             }
         }
     }

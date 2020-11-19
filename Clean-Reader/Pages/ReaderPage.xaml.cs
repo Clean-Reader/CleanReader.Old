@@ -18,11 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml;
-using Richasy.Font.UWP;
-using Clean_Reader.Models.UI;
-using Newtonsoft.Json;
 using Clean_Reader.Controls.Components;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.ApplicationModel.DataTransfer;
 using System.Net;
@@ -38,10 +34,13 @@ namespace Clean_Reader.Pages
     {
         AppViewModel vm = App.VM;
         public ObservableCollection<Chapter> ChapterCollection = new ObservableCollection<Chapter>();
+        public ObservableCollection<InsideSearchItem> SearchCollection = new ObservableCollection<InsideSearchItem>();
         Book _tempBook = null;
+        public static new ReaderPage Current;
         public ReaderPage() : base()
         {
             this.InitializeComponent();
+            Current = this;
             IsInit = false;
             vm._reader = ReaderPanel;
         }
@@ -149,8 +148,14 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_ChapterLoaded(object sender, List<Chapter> e)
         {
+            vm.CurrentBookChapterList = e;
+            LoadChapters();
+        }
+
+        public void LoadChapters()
+        {
             ChapterCollection.Clear();
-            e.ForEach(p => ChapterCollection.Add(p));
+            vm.CurrentBookChapterList.ForEach(p => ChapterCollection.Add(p));
         }
 
         private void ReaderPanel_ChapterChanged(object sender, Chapter e)
@@ -207,6 +212,8 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_ViewLoaded(object sender, EventArgs e)
         {
+            double maxWidth = Convert.ToDouble(App.Tools.App.GetLocalSetting(SettingNames.MaxSingleColumnWidth, "900"));
+            ReaderPanel.SingleColumnMaxWidth = maxWidth;
             ReaderBar.Init();
             IsInit = true;
         }
@@ -341,7 +348,14 @@ namespace Clean_Reader.Pages
 
         private void InsideSearchButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrEmpty(ReaderPanel.SelectedText))
+            {
+                ReaderFlyout.Hide();
+                return;
+            }
+            ShowSearchContainer();
+            SearchPanel.Init(ReaderPanel.SelectedText);
+            ReaderFlyout.Hide();
         }
 
         private async void QueryButton_Click(object sender, RoutedEventArgs e)
@@ -372,6 +386,66 @@ namespace Clean_Reader.Pages
             {
                 await Launcher.LaunchUriAsync(new Uri(url));
             }
+        }
+
+        private async void SearchPanel_QuerySubmit(object sender, string e)
+        {
+            if (!string.IsNullOrEmpty(e))
+            {
+                SearchPanel.IsLoading = true;
+                SearchPanel.NoDataVisibility = Visibility.Collapsed;
+                SearchCollection.Clear();
+                try
+                {
+                    var result = await ReaderPanel.GetInsideSearchResultAsync(e);
+                    if (result.Count > 0)
+                    {
+                        result.ForEach(p => SearchCollection.Add(p));
+                    }
+                    else
+                    {
+                        SearchPanel.NoDataVisibility = Visibility.Visible;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.VM.ShowPopup(ex.Message, true);
+                }
+                SearchPanel.IsLoading = false;
+            }
+        }
+
+        private void SearchPanel_ItemClick(object sender, InsideSearchItem e)
+        {
+            HideSearchContainer();
+            ReaderPanel.LoadSearchItem(e);
+        }
+
+        private void ReaderBar_SearchButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowSearchContainer();
+        }
+
+        private void SearchContainer_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if(e.OriginalSource is Grid grid && grid.Name == "SearchContainer")
+            {
+                HideSearchContainer();
+            }
+        }
+
+        private void ShowSearchContainer()
+        {
+            SearchContainer.Visibility = Visibility.Visible;
+            SearchPanel.Visibility = Visibility.Visible;
+        }
+
+        private void HideSearchContainer()
+        {
+            SearchPanel.Reset();
+            SearchCollection.Clear();
+            SearchContainer.Visibility = Visibility.Collapsed;
+            SearchPanel.Visibility = Visibility.Collapsed;
         }
     }
 }

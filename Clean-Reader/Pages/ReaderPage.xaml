@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:reader="using:Richasy.Controls.Reader" xmlns:models="using:Richasy.Controls.Reader.Models" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:components="using:Clean_Reader.Controls.Components"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:reader="using:Richasy.Controls.Reader" xmlns:models="using:Richasy.Controls.Reader.Models" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:layout="using:Clean_Reader.Controls.Layout"
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
         <ui1:LevelMarginCovnerter x:Key="LevelMarginConverter"/>
@@ -111,10 +111,17 @@
                     <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
                     <components:ReaderBar x:Name="ReaderBar" BackButtonClick="ReaderBar_BackButtonClick"
                                           ChapterButtonClick="ReaderBar_ChapterButtonClick" HorizontalAlignment="Center"
-                                          VerticalAlignment="Bottom"/>
+                                          VerticalAlignment="Bottom" SearchButtonClick="ReaderBar_SearchButtonClick"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
+        <Grid x:Name="SearchContainer" Background="{ThemeResource TransparentBackground}"
+              VerticalAlignment="Stretch" Tapped="SearchContainer_Tapped" Visibility="Collapsed">
 
+            <layout:InsideSearchPanel x:Name="SearchPanel" QuerySubmit="SearchPanel_QuerySubmit" Width="340"
+                                      ItemClick="SearchPanel_ItemClick" HorizontalAlignment="Right"
+                                      Background="{ThemeResource PaneBackground}"
+                                      ItemsSource="{x:Bind SearchCollection}" Padding="20"/>
+        </Grid>
     </Grid>
 </ui:RichasyPage>

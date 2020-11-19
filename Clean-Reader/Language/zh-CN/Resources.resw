@@ -171,6 +171,9 @@
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>暗色主题</value>
   </data>
+  <data name="Control_DivideChapterRegexTipBlock.Text" xml:space="preserve">
+    <value>自定义分章正则表达式</value>
+  </data>
   <data name="Control_EndComboItem.Content" xml:space="preserve">
     <value>完本</value>
   </data>
@@ -198,8 +201,14 @@
   <data name="Control_InsideSearchAppButton.Label" xml:space="preserve">
     <value>文内搜索</value>
   </data>
+  <data name="Control_InsideSearchTipBlock.Text" xml:space="preserve">
+    <value>内部搜索</value>
+  </data>
   <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
     <value>亚克力背景</value>
+  </data>
+  <data name="Control_KeywordSearchBox.PlaceholderText" xml:space="preserve">
+    <value>输入关键词查询</value>
   </data>
   <data name="Control_LanguageComboBox.Header" xml:space="preserve">
     <value>语言</value>
@@ -213,6 +222,9 @@
   <data name="Control_LineHeightSlider.Header" xml:space="preserve">
     <value>行高</value>
   </data>
+  <data name="Control_MaxSingleColumnWidthSlider.Header" xml:space="preserve">
+    <value>最大单栏宽度</value>
+  </data>
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>更多</value>
   </data>
@@ -221,6 +233,9 @@
   </data>
   <data name="Control_NoBookBlock.Description" xml:space="preserve">
     <value>暂无书籍</value>
+  </data>
+  <data name="Control_NoMatchBlock.Description" xml:space="preserve">
+    <value>没有匹配的查询结果</value>
   </data>
   <data name="Control_NoSelectedTextBlock.Description" xml:space="preserve">
     <value>没有选中文本</value>
@@ -239,6 +254,9 @@
   </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>在书城中查询</value>
+  </data>
+  <data name="Control_SearchTipBlock.Text" xml:space="preserve">
+    <value>查询</value>
   </data>
   <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
     <value>段间距</value>

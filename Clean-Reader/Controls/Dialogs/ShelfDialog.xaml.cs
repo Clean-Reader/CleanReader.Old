@@ -95,7 +95,7 @@ namespace Clean_Reader.Controls.Dialogs
                 }
                 App.VM.ShelfCollection.Add(shelf);
             }
-            App.VM.IsShelfChanged = true;
+            App.VM.IsBookListChanged = true;
             await App.VM.SaveShelf();
             IsPrimaryButtonEnabled = false;
             PrimaryButtonText = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Confirm);

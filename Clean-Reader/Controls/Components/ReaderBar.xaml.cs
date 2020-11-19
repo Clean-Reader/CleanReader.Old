@@ -1,10 +1,13 @@
 ﻿using Clean_Reader.Models.Core;
+using Lib.Share.Enums;
+using Richasy.Controls.UWP.Interaction;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,6 +27,7 @@ namespace Clean_Reader.Controls.Components
         AppViewModel vm = App.VM;
         public event RoutedEventHandler BackButtonClick;
         public event RoutedEventHandler ChapterButtonClick;
+        public event RoutedEventHandler SearchButtonClick;
         public ReaderBar()
         {
             this.InitializeComponent();
@@ -32,6 +36,7 @@ namespace Clean_Reader.Controls.Components
         {
             ColorConfigPanel.Init();
             FontPanel.Init();
+            OtherConfigPanel.Init();
         }
         public void Show()
         {
@@ -54,6 +59,31 @@ namespace Clean_Reader.Controls.Components
         {
             MenuBar.Visibility = Visibility.Collapsed;
             BackButtonClick?.Invoke(this, e);
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            MenuBar.Visibility = Visibility.Collapsed;
+            SearchButtonClick?.Invoke(this, e);
+        }
+
+        private void OtherConfigPanel_MaxSingleColumnChanged(object sender, double e)
+        {
+            App.VM._reader.SingleColumnMaxWidth = e;
+            App.Tools.App.WriteLocalSetting(SettingNames.MaxSingleColumnWidth, e.ToString());
+        }
+
+        private async void OtherConfigPanel_CustomRegexSubmit(object sender, Regex e)
+        {
+            var btn = sender as ActionButton;
+            btn.IsLoading = true;
+            await App.VM.RebuildChapter(e);
+            btn.IsLoading = false;
+        }
+
+        private void OtherFlyout_Opened(object sender, object e)
+        {
+            OtherConfigPanel.Init();
         }
     }
 }

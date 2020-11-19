@@ -145,7 +145,7 @@ namespace Clean_Reader.Models.Core
                     if (sourceBook != null)
                     {
                         sourceBook.LastChapterId = chapters.Last().Id;
-                        IsShelfChanged = true;
+                        IsBookListChanged = true;
                     }   
                     await App.Tools.IO.SetLocalDataAsync(bookId + ".json", JsonConvert.SerializeObject(result), StaticString.FolderChapter);
                     return result;

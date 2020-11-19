@@ -19,6 +19,14 @@
                 <local:ColorConfigPanel x:Name="ColorConfigPanel"/>
             </StackPanel>
         </Flyout>
+        <Flyout x:Name="OtherFlyout" FlyoutPresenterStyle="{StaticResource BasicFlyoutStyle}"
+                Opened="OtherFlyout_Opened">
+            <StackPanel Margin="15,10" Width="300">
+                <local:OtherOptionPanel x:Name="OtherConfigPanel"
+                                        MaxSingleColumnChanged="OtherConfigPanel_MaxSingleColumnChanged"
+                                        CustomRegexSubmit="OtherConfigPanel_CustomRegexSubmit"/>
+            </StackPanel>
+        </Flyout>
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal" Visibility="Collapsed"
                                 Background="{ThemeResource PopupBackground}" CornerRadius="10,10,0,0" Padding="10" x:Name="MenuBar">
@@ -57,9 +65,16 @@
                 <uwp:MaterialIcon Symbol="ColorLens" FontSize="{CustomResource BasicFontSize}"/>
             </interaction:IconButton.Icon>
         </interaction:IconButton>
+        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="SearchButton"
+                                                x:Uid="Control_SearchTipBlock" Background="Transparent"
+                                                GutterWidth="10" Click="SearchButton_Click">
+            <interaction:IconButton.Icon>
+                <uwp:FeatherIcon Symbol="Search" FontSize="{CustomResource BasicFontSize}"/>
+            </interaction:IconButton.Icon>
+        </interaction:IconButton>
         <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="MoreButton"
                                                 x:Uid="Control_MoreTipBlock" Background="Transparent"
-                                                GutterWidth="10">
+                                                GutterWidth="10" Flyout="{StaticResource OtherFlyout}">
             <interaction:IconButton.Icon>
                 <uwp:FeatherIcon Symbol="MoreHorizontal" FontSize="{CustomResource BasicFontSize}"/>
             </interaction:IconButton.Icon>

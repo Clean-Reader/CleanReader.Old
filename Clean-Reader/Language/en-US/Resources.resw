@@ -171,6 +171,9 @@
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="Control_DivideChapterRegexTipBlock.Text" xml:space="preserve">
+    <value>Custom chapter regular expression</value>
+  </data>
   <data name="Control_EndComboItem.Content" xml:space="preserve">
     <value>Finish</value>
   </data>
@@ -198,8 +201,14 @@
   <data name="Control_InsideSearchAppButton.Label" xml:space="preserve">
     <value>Search in Book</value>
   </data>
+  <data name="Control_InsideSearchTipBlock.Text" xml:space="preserve">
+    <value>Inside Search</value>
+  </data>
   <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
     <value>Acrylic background</value>
+  </data>
+  <data name="Control_KeywordSearchBox.PlaceholderText" xml:space="preserve">
+    <value>Enter keyword query</value>
   </data>
   <data name="Control_LanguageComboBox.Header" xml:space="preserve">
     <value>Language</value>
@@ -213,6 +222,9 @@
   <data name="Control_LineHeightSlider.Header" xml:space="preserve">
     <value>Line height</value>
   </data>
+  <data name="Control_MaxSingleColumnWidthSlider.Header" xml:space="preserve">
+    <value>Max single column width</value>
+  </data>
   <data name="Control_MoreTipBlock.Text" xml:space="preserve">
     <value>More</value>
   </data>
@@ -221,6 +233,9 @@
   </data>
   <data name="Control_NoBookBlock.Description" xml:space="preserve">
     <value>No books</value>
+  </data>
+  <data name="Control_NoMatchBlock.Description" xml:space="preserve">
+    <value>No matching query results</value>
   </data>
   <data name="Control_NoSelectedTextBlock.Description" xml:space="preserve">
     <value>No selected text</value>
@@ -239,6 +254,9 @@
   </data>
   <data name="Control_SearchFromWeb.Text" xml:space="preserve">
     <value>Search in Bookstore</value>
+  </data>
+  <data name="Control_SearchTipBlock.Text" xml:space="preserve">
+    <value>Query</value>
   </data>
   <data name="Control_SegmentSpacingSlider.Header" xml:space="preserve">
     <value>Segment spacing</value>

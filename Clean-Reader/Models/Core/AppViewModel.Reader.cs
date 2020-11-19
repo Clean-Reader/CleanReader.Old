@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -142,6 +143,32 @@ namespace Clean_Reader.Models.Core
                 ShowPopup(ex.Message, true);
             }
             return null;
+        }
+        
+        public async Task RebuildChapter(Regex reg)
+        {
+            var source = App.VM.TotalBookList.Where(p => p.BookId == App.VM.CurrentBook.BookId).FirstOrDefault();
+            List<Chapter> chapters = new List<Chapter>();
+            if (reg == null)
+            {
+                if (!string.IsNullOrEmpty(source.CustomRegex))
+                {
+                    source.CustomRegex = "";
+                    chapters = App.VM._reader.RegenerateTxtChapters(new Regex(@"第(.{1,9})[章节卷集部篇回幕计](\s{0})(.*)($\s*)"), source.Name, true);
+                    App.VM.IsBookListChanged = true;
+                }
+            }
+            else
+            {
+                source.CustomRegex = reg.ToString();
+                chapters = App.VM._reader.RegenerateTxtChapters(reg, source.Name, true);
+                App.VM.IsBookListChanged = true;
+            }
+            if (chapters.Count > 0)
+            {
+                await SetBookLocalChapters(CurrentBook.BookId, chapters, true);
+                ReaderPage.Current.LoadChapters();
+            }
         }
     }
 }

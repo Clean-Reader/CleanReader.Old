@@ -12,6 +12,7 @@
         OneDriveExpiryTime,
         LastShelfId,
         MaxLastestBookCount,
-        SearchEngine
+        SearchEngine,
+        MaxSingleColumnWidth
     }
 }

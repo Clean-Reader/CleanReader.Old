@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.OtherOptionPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Style="{StaticResource SmallTextStyle}" x:Uid="Control_DivideChapterRegexTipBlock"
+                       Margin="0,0,0,5"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <interaction:ExtraTextBox Style="{StaticResource BasicTextBoxStyle}"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                          x:Name="RegexBox"/>
+                <interaction:ActionButton Grid.Column="1" Diameter="30" x:Name="RegexTestButton"
+                                          Click="RegexTestButton_Click" VerticalAlignment="Center"
+                                          Margin="10,0,0,0" Style="{StaticResource SecondaryActionButtonStyle}">
+                    <interaction:ActionButton.Icon>
+                        <uwp:FeatherIcon Symbol="Check" FontSize="15"/>
+                    </interaction:ActionButton.Icon>
+                </interaction:ActionButton>
+            </Grid>
+        </StackPanel>
+        <Slider Minimum="100" Maximum="9999" HeaderTemplate="{StaticResource TipHeader}"
+                x:Uid="Control_MaxSingleColumnWidthSlider" StepFrequency="5"
+                x:Name="MaxSingleColumnWidthSlider" ValueChanged="MaxSingleColumnWidthSlider_ValueChanged"
+                Margin="0,20,0,0" Style="{StaticResource BasicSliderStyle}"/>
+    </StackPanel>
+</UserControl>

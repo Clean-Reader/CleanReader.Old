@@ -24,6 +24,8 @@ using Newtonsoft.Json;
 using Clean_Reader.Controls.Components;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.ApplicationModel.DataTransfer;
+using System.Net;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -316,6 +318,60 @@ namespace Clean_Reader.Pages
         private void ReaderContainer_GotFocus(object sender, RoutedEventArgs e)
         {
             ReaderPanel.Focus(FocusState.Programmatic);
+        }
+
+        private void ReaderFlyout_Opened(object sender, object e)
+        {
+           iCiBaBlock.SelectedText = ReaderPanel.SelectedText;
+        }
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(ReaderPanel.SelectedText))
+            {
+                ReaderFlyout.Hide();
+                return;
+            }
+            var package = new DataPackage();
+            package.SetText(ReaderPanel.SelectedText);
+            Clipboard.SetContent(package);
+            App.VM.ShowPopup(LanguageNames.Copied);
+            ReaderFlyout.Hide();
+        }
+
+        private void InsideSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void QueryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(ReaderPanel.SelectedText))
+            {
+                ReaderFlyout.Hide();
+                return;
+            }   
+            string searchEngine = App.Tools.App.GetLocalSetting(SettingNames.SearchEngine, StaticString.SearchBing);
+            string content = WebUtility.UrlEncode(ReaderPanel.SelectedText);
+            string url = "";
+            switch (searchEngine)
+            {
+                case StaticString.SearchGoogle:
+                    url = $"https://www.google.com/search?q={content}";
+                    break;
+                case StaticString.SearchBaidu:
+                    url = $"https://www.baidu.com/s?wd={content}";
+                    break;
+                case StaticString.SearchBing:
+                    url = $"https://cn.bing.com/search?q={content}";
+                    break;
+                default:
+                    break;
+            }
+            if (!string.IsNullOrEmpty(url))
+            {
+                await Launcher.LaunchUriAsync(new Uri(url));
+            }
         }
     }
 }

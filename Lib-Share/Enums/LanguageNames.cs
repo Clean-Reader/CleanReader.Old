@@ -38,6 +38,7 @@
         ShelfBookList,
         ShelfNameRepeat,
         Waiting,
-        DefaultShelfManageWarning
+        DefaultShelfManageWarning,
+        Copied
     }
 }

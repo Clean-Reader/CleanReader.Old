@@ -135,6 +135,9 @@
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>背景色</value>
   </data>
+  <data name="Control_BaiduBaikeButton.Content" xml:space="preserve">
+    <value>百度百科</value>
+  </data>
   <data name="Control_BaiduComboBoxItem.Content" xml:space="preserve">
     <value>百度</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
     <value>服务器开了小差~ 请检查网络连接并重试</value>
+  </data>
+  <data name="Control_CopyAppButton.Label" xml:space="preserve">
+    <value>复制</value>
   </data>
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>暗色主题</value>
@@ -189,6 +195,9 @@
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>导入书籍</value>
   </data>
+  <data name="Control_InsideSearchAppButton.Label" xml:space="preserve">
+    <value>文内搜索</value>
+  </data>
   <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
     <value>亚克力背景</value>
   </data>
@@ -212,6 +221,12 @@
   </data>
   <data name="Control_NoBookBlock.Description" xml:space="preserve">
     <value>暂无书籍</value>
+  </data>
+  <data name="Control_NoSelectedTextBlock.Description" xml:space="preserve">
+    <value>没有选中文本</value>
+  </data>
+  <data name="Control_QueryAppButton.Label" xml:space="preserve">
+    <value>网络搜索</value>
   </data>
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>榜单</value>
@@ -246,6 +261,9 @@
   <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
     <value>排版</value>
   </data>
+  <data name="Control_WikiButton.Content" xml:space="preserve">
+    <value>维基百科</value>
+  </data>
   <data name="Control_WithSystemComboBoxItem.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>确认</value>
+  </data>
+  <data name="Tip_Copied" xml:space="preserve">
+    <value>已复制</value>
   </data>
   <data name="Tip_DefaultShelf" xml:space="preserve">
     <value>默认书架</value>

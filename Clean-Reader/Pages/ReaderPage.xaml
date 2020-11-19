@@ -24,6 +24,33 @@
                            Margin="10,0,0,0"/>
             </Grid>
         </DataTemplate>
+        <CommandBarFlyout x:Name="ReaderFlyout" Opened="ReaderFlyout_Opened">
+            <AppBarButton x:Uid="Control_InsideSearchAppButton" ToolTipService.ToolTip="文内搜索" x:Name="InsideSearchButton" Click="InsideSearchButton_Click" >
+                <AppBarButton.Icon>
+                    <uwp:FeatherIcon Symbol="Search"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="Control_QueryAppButton" ToolTipService.ToolTip="网络搜索" x:Name="QueryButton" Click="QueryButton_Click">
+                <AppBarButton.Icon>
+                    <uwp:FeatherIcon Symbol="Globe"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton x:Name="CopyButton" x:Uid="Control_CopyAppButton"
+                  Click="CopyButton_Click" ToolTipService.ToolTip="复制">
+                <AppBarButton.Icon>
+                    <uwp:FeatherIcon Symbol="Copy"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBarFlyout.SecondaryCommands>
+                <AppBarElementContainer>
+                    <Grid Padding="15,10" Width="280">
+                        <components:iCiBaTranslateBlock x:Name="iCiBaBlock"/>
+                    </Grid>
+                </AppBarElementContainer>
+            </CommandBarFlyout.SecondaryCommands>
+            
+        </CommandBarFlyout>
     </ui:RichasyPage.Resources>
     <Grid>
         <SplitView DisplayMode="CompactOverlay" PaneBackground="{ThemeResource PaneBackground}"
@@ -62,6 +89,7 @@
                             TouchTapped="ReaderPanel_TouchTapped"
                             Loaded="ReaderPanel_Loaded"
                             CustomContentRequest="ReaderPanel_CustomContentRequest"
+                            ReaderFlyout="{StaticResource ReaderFlyout}"
                             >
                         <reader:ReaderPanel.Header>
                             <Grid Padding="20,10" GotFocus="ReaderContainer_GotFocus">

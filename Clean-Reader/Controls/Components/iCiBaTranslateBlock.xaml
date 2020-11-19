@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.iCiBaTranslateBlock"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel Padding="{x:Bind Padding,Mode=OneWay}" x:Name="DetailContainer">
+            <TextBlock Style="{StaticResource SubtitleTextStyle}" MaxWidth="250" TextWrapping="Wrap" x:Name="SearchTextBlock"/>
+            <StackPanel x:Name="EnglishPhoneticContainer" Margin="0,5,0,0" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource SmallTextStyle}" MaxWidth="250">
+                                <Run Text="["/>
+                                <Run x:Name="PhoneticBlock"/>
+                                <Run Text="]"/>
+                </TextBlock>
+                <interaction:ActionButton Style="{StaticResource PrimaryGhostActionButtonStyle}" BorderThickness="0" VerticalAlignment="Center"
+                                    x:Name="SoundButton" Click="SoundButton_Click" Diameter="25" Padding="0" Margin="5,-3,0,0">
+                    <interaction:ActionButton.Icon>
+                        <uwp:FeatherIcon Symbol="Volume2" FontSize="{CustomResource MiniFontSize}"/>
+                    </interaction:ActionButton.Icon>
+                </interaction:ActionButton>
+            </StackPanel>
+            <Grid Margin="0,10">
+                <ProgressBar IsIndeterminate="True" Visibility="Collapsed" HorizontalAlignment="Stretch" Foreground="{ThemeResource PrimaryColor}" x:Name="TranslateLoadingBar"/>
+                <TextBlock MaxWidth="250" Style="{StaticResource BodyTextStyle}" TextWrapping="Wrap" x:Name="ExplainBlock"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <HyperlinkButton x:Uid="Control_BaiduBaikeButton" Tag="Baidu" Click="HyperlinkButton_Click" Foreground="{ThemeResource NormalTextColor}" FontSize="{CustomResource SmallFontSize}" FontFamily="{CustomResource Basic}"/>
+                <HyperlinkButton x:Uid="Control_WikiButton" Tag="Wiki" Click="HyperlinkButton_Click" Foreground="{ThemeResource NormalTextColor}" Margin="15,0,0,0" FontSize="{CustomResource SmallFontSize}" FontFamily="{CustomResource Basic}"/>
+            </StackPanel>
+        </StackPanel>
+        <local:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_NoSelectedTextBlock" IconSize="40"
+                                  VerticalAlignment="Center" Symbol="Type" ButtonVisibility="Collapsed"
+                                  HorizontalAlignment="Center" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

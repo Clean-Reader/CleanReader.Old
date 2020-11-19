@@ -145,6 +145,9 @@
     <Compile Include="Controls\Components\FontPanel.xaml.cs">
       <DependentUpon>FontPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Components\iCiBaTranslateBlock.xaml.cs">
+      <DependentUpon>iCiBaTranslateBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Components\IconTextBlock.xaml.cs">
       <DependentUpon>IconTextBlock.xaml</DependentUpon>
     </Compile>
@@ -344,6 +347,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Components\iCiBaTranslateBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Components\IconTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -493,7 +500,7 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Helper.UWP">
-      <Version>1.0.9</Version>
+      <Version>1.1.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

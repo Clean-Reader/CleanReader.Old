@@ -67,6 +67,17 @@ namespace Clean_Reader.Controls.Components
         public static readonly DependencyProperty ButtonVisibilityProperty =
             DependencyProperty.Register("ButtonVisibility", typeof(Visibility), typeof(IconTextBlock), new PropertyMetadata(Visibility.Collapsed));
 
+        public double IconSize
+        {
+            get { return (double)GetValue(IconSizeProperty); }
+            set { SetValue(IconSizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconSizeProperty =
+            DependencyProperty.Register("IconSize", typeof(double), typeof(IconTextBlock), new PropertyMetadata(100d));
+
+
         private void ExtraButton_Click(object sender, RoutedEventArgs e)
         {
             Click?.Invoke(sender, e);

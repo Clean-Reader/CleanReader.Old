@@ -11,14 +11,14 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <uwp:FeatherIcon FontSize="100" Opacity="0.6"
+            <uwp:FeatherIcon FontSize="{x:Bind IconSize,Mode=OneWay}" Opacity="0.6"
                              Symbol="{x:Bind Symbol,Mode=OneWay}" HorizontalAlignment="Center"
                              Foreground="{ThemeResource TipTextColor}"/>
             <TextBlock MaxWidth="300" TextAlignment="Center" HorizontalAlignment="Center" Foreground="{ThemeResource NormalTextColor}"
                                    Margin="0,20,0,0" Text="{x:Bind Description,Mode=OneWay}"  Style="{StaticResource SubtitleTextStyle}" TextWrapping="Wrap"
                                    LineHeight="35"/>
             <interaction:ExtraButton Style="{StaticResource PrimaryExtraButtonStyle}" Content="{x:Bind ButtonText,Mode=OneWay}"
-                                     Margin="0,20,0,0" HorizontalAlignment="Center" Click="ExtraButton_Click"/>
+                                     Margin="0,20,0,0" HorizontalAlignment="Center" Click="ExtraButton_Click" Visibility="{x:Bind ButtonVisibility,Mode=OneWay}"/>
         </StackPanel>
     </Grid>
 </UserControl>

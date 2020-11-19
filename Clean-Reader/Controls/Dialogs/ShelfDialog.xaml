@@ -21,8 +21,8 @@
                                   x:Name="ShelfNameBox" x:Uid="Control_ShelfNameBox"
                                   HeaderTemplate="{StaticResource TipHeader}"/>
         <Grid Margin="0,15,0,0">
-            <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_NoBookBlock"
-                                  VerticalAlignment="Center" Symbol="BookOpen"
+            <components:IconTextBlock x:Name="NoDataBlock" x:Uid="Control_NoBookBlock" IconSize="40"
+                                  VerticalAlignment="Center" Symbol="BookOpen" ButtonVisibility="Collapsed"
                                   HorizontalAlignment="Center" Visibility="Collapsed"/>
             <ListView SelectionMode="Multiple" x:Name="BookListView"
                   ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"

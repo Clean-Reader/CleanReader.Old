@@ -135,6 +135,9 @@
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>Background</value>
   </data>
+  <data name="Control_BaiduBaikeButton.Content" xml:space="preserve">
+    <value>Baidu Baike</value>
+  </data>
   <data name="Control_BaiduComboBoxItem.Content" xml:space="preserve">
     <value>Baidu</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Control_ConnectFailedBlock.Description" xml:space="preserve">
     <value>The server is not responding~ Please check the network connection and try again</value>
+  </data>
+  <data name="Control_CopyAppButton.Label" xml:space="preserve">
+    <value>Copy</value>
   </data>
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>Dark</value>
@@ -189,6 +195,9 @@
   <data name="Control_ImportBookTipBlock.Text" xml:space="preserve">
     <value>Import Book</value>
   </data>
+  <data name="Control_InsideSearchAppButton.Label" xml:space="preserve">
+    <value>Search in Book</value>
+  </data>
   <data name="Control_IsAcrylicBackgroundCheckBox.Content" xml:space="preserve">
     <value>Acrylic background</value>
   </data>
@@ -212,6 +221,12 @@
   </data>
   <data name="Control_NoBookBlock.Description" xml:space="preserve">
     <value>No books</value>
+  </data>
+  <data name="Control_NoSelectedTextBlock.Description" xml:space="preserve">
+    <value>No selected text</value>
+  </data>
+  <data name="Control_QueryAppButton.Label" xml:space="preserve">
+    <value>Search on Web</value>
   </data>
   <data name="Control_RankTipBlock.Text" xml:space="preserve">
     <value>Rank</value>
@@ -246,6 +261,9 @@
   <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
     <value>Typesetting</value>
   </data>
+  <data name="Control_WikiButton.Content" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
   <data name="Control_WithSystemComboBoxItem.Content" xml:space="preserve">
     <value>System</value>
   </data>
@@ -275,6 +293,9 @@
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>
+  </data>
+  <data name="Tip_Copied" xml:space="preserve">
+    <value>Copied</value>
   </data>
   <data name="Tip_DefaultShelf" xml:space="preserve">
     <value>Default Shelf</value>

@@ -168,6 +168,11 @@ namespace Clean_Reader.Models.Core
                 TotalBookList.Remove(source);
                 if (DisplayBookCollection.Contains(source))
                     DisplayBookCollection.Remove(source);
+                if (LastestReadCollection.Contains(source))
+                {
+                    LastestReadCollection.Remove(source);
+                    await App.Tools.IO.SetLocalDataAsync(StaticString.FileLastestList, JsonConvert.SerializeObject(LastestReadCollection.Select(p => p.BookId)));
+                }
                 await App.Tools.IO.SetLocalDataAsync(bookId + ".json", "[]", StaticString.FolderChapter);
                 HistoryList.RemoveAll(p => p.BookId == bookId);
                 _isHistoryChanged = true;

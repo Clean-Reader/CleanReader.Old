@@ -1,5 +1,6 @@
 ﻿using Clean_Reader.Controls.Dialogs;
 using Clean_Reader.Models.Enums;
+using Clean_Reader.Models.UI;
 using Clean_Reader.Pages;
 using Lib.Share.Enums;
 using Lib.Share.Models;
@@ -11,14 +12,18 @@ using Richasy.Font.UWP;
 using Richasy.Font.UWP.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Globalization;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Clean_Reader.Models.Core
 {
@@ -189,6 +194,64 @@ namespace Clean_Reader.Models.Core
                 await CoreApplication.RequestRestartAsync("restart");
             };
             await dialog.ShowAsync();
+        }
+
+        public async Task BackgroundImageInit()
+        {
+            var list = await App.Tools.IO.GetLocalDataAsync<List<string>>(StaticString.FileImage);
+            if (list.Count == 0)
+            {
+                list.Add("ms-appx:///Assets/Images/desert-castle.jpg");
+                list.Add("ms-appx:///Assets/Images/lake.jpg");
+                list.Add("ms-appx:///Assets/Images/leaf.jpg");
+                list.Add("ms-appx:///Assets/Images/snow-mountain.jpg");
+            }
+            list.ForEach(p => BackgroundImageCollection.Add(p));
+            BackgroundImageToggle();
+        }
+
+        public async Task AddBackgroundImage(StorageFile file)
+        {
+            if (file == null)
+                return;
+            string guid = Guid.NewGuid().ToString("N");
+            string extension = Path.GetExtension(file.Path);
+            var folder = ApplicationData.Current.LocalFolder;
+            string fileName = $"{guid}.{extension}";
+            await file.CopyAsync(folder, fileName, NameCollisionOption.ReplaceExisting);
+            BackgroundImageCollection.Add($"ms-appdata:///local/{fileName}");
+            await App.Tools.IO.SetLocalDataAsync(StaticString.FileImage, JsonConvert.SerializeObject(BackgroundImageCollection.ToList()));
+        }
+
+        public async Task RemoveBackgroundImage(string image)
+        {
+            BackgroundImageCollection.Remove(image);
+            await App.Tools.IO.SetLocalDataAsync(StaticString.FileImage, JsonConvert.SerializeObject(BackgroundImageCollection.ToList()));
+        }
+
+        public void BackgroundImageToggle()
+        {
+            bool isShow = App.Tools.App.GetBoolSetting(SettingNames.EnabledBackgroundImage, false);
+            if (isShow)
+            {
+                string source = App.Tools.App.GetLocalSetting(SettingNames.BackgroundImage, "");
+                string color = App.Tools.App.GetLocalSetting(SettingNames.BackgroundMaskColor, App.Current.RequestedTheme == ApplicationTheme.Light ? "#22FFFFFF" : "#22000000");
+                if (!string.IsNullOrEmpty(source))
+                {
+                    MainPage.Current.BackgroundImage.Visibility = Visibility.Visible;
+                    MainPage.Current.BackgroundMask.Visibility = Visibility.Visible;
+                    MainPage.Current.BackgroundImage.Source = new BitmapImage(new Uri(source));
+                    if (!string.IsNullOrEmpty(color))
+                    {
+                        MainPage.Current.BackgroundMask.Background = new SolidColorBrush(color.Hex16toRGB());
+                    }
+                }
+            }
+            else
+            {
+                MainPage.Current.BackgroundImage.Visibility = Visibility.Collapsed;
+                MainPage.Current.BackgroundMask.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

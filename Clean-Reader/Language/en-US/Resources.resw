@@ -132,6 +132,9 @@
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>Find books</value>
   </data>
+  <data name="Control_BackgroundImageListTipBlock.Text" xml:space="preserve">
+    <value>Background image</value>
+  </data>
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>Background</value>
   </data>

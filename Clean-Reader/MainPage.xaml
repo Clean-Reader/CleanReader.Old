@@ -21,58 +21,61 @@
             </SplitView.Pane>
 
             <SplitView.Content>
-                <SplitView x:Name="SecondarySplitView" DisplayMode="CompactOverlay"
+                <Grid Background="{ThemeResource PageBackground}">
+                    <Image x:Name="BackgroundImage" Stretch="UniformToFill" Visibility="Collapsed" x:FieldModifier="public"/>
+                    <Grid x:Name="BackgroundMask" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:FieldModifier="public"/>
+                    <SplitView x:Name="SecondarySplitView" DisplayMode="CompactOverlay"
                                OpenPaneLength="400" PaneBackground="{ThemeResource PaneBackground}"
                                PanePlacement="Right" CompactPaneLength="0" Grid.Row="1">
-                    <SplitView.Pane>
-                        <Grid Padding="30,25,30,0">
+                        <SplitView.Pane>
+                            <Grid Padding="30,25,30,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
+                                              x:Name="SideBackButton" Visibility="Collapsed"
+                                              VerticalAlignment="Center" Margin="0,0,10,0"
+                                              Click="SideBackButton_Click">
+                                        <interaction:ActionButton.Icon>
+                                            <uwp:FeatherIcon Symbol="ChevronLeft" FontSize="{CustomResource BasicFontSize}"/>
+                                        </interaction:ActionButton.Icon>
+                                    </interaction:ActionButton>
+                                    <TextBlock Style="{StaticResource TitleTextStyle}" HorizontalAlignment="Left"
+                                           x:Name="SubtitleBlock" LineHeight="0" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <Frame x:Name="SubFrame" x:FieldModifier="public" Grid.Row="1"/>
+                            </Grid>
+                        </SplitView.Pane>
+                        <Grid
+                      Padding="45,20,45,0" x:Name="Container">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}"
-                                              x:Name="SideBackButton" Visibility="Collapsed"
-                                              VerticalAlignment="Center" Margin="0,0,10,0"
-                                              Click="SideBackButton_Click">
-                                    <interaction:ActionButton.Icon>
-                                        <uwp:FeatherIcon Symbol="ChevronLeft" FontSize="{CustomResource BasicFontSize}"/>
-                                    </interaction:ActionButton.Icon>
-                                </interaction:ActionButton>
-                                <TextBlock Style="{StaticResource TitleTextStyle}" HorizontalAlignment="Left"
-                                           x:Name="SubtitleBlock" LineHeight="0" VerticalAlignment="Center"/>
-                            </StackPanel>
-                            
-                            <Frame x:Name="SubFrame" x:FieldModifier="public" Grid.Row="1"/>
-                        </Grid>
-                    </SplitView.Pane>
-                    <Grid Background="{ThemeResource PageBackground}"
-                      Padding="45,20,45,0" x:Name="Container">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Style="{StaticResource LargeTextStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource LargeTextStyle}" VerticalAlignment="Top" HorizontalAlignment="Left"
                                    x:Name="TitleBlock" x:FieldModifier="public" LineHeight="0"/>
-                            <components:AppSearchBox Grid.Column="1" VerticalAlignment="Top" Width="300" x:Name="AppSearchBox"/>
-                        </Grid>
-                        <Frame x:Name="MainFrame" Grid.Row="1" Margin="0,35,0,0"/>
-                        <interaction:ActionButton Style="{StaticResource PrimaryActionButtonStyle}"
+                                <components:AppSearchBox Grid.Column="1" VerticalAlignment="Top" Width="300" x:Name="AppSearchBox"/>
+                            </Grid>
+                            <Frame x:Name="MainFrame" Grid.Row="1" Margin="0,35,0,0"/>
+                            <interaction:ActionButton Style="{StaticResource PrimaryActionButtonStyle}"
                                               x:Name="SideMenuButton" Visibility="Collapsed"
                                               HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                               Margin="0,0,0,20" Grid.RowSpan="2" Click="SideMenuButton_Click">
-                            <interaction:ActionButton.Icon>
-                                <uwp:FeatherIcon Symbol="Menu" Foreground="White" FontSize="{CustomResource BasicFontSize}"/>
-                            </interaction:ActionButton.Icon>
-                        </interaction:ActionButton>
-                    </Grid>
-                </SplitView>
-                
+                                <interaction:ActionButton.Icon>
+                                    <uwp:FeatherIcon Symbol="Menu" Foreground="White" FontSize="{CustomResource BasicFontSize}"/>
+                                </interaction:ActionButton.Icon>
+                            </interaction:ActionButton>
+                        </Grid>
+                    </SplitView>
+                </Grid>
             </SplitView.Content>
         </SplitView>
     </Grid>

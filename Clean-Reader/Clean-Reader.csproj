@@ -200,6 +200,7 @@
     <Compile Include="Models\Core\AppViewModel.Shelf.cs" />
     <Compile Include="Models\Core\AppViewModel.Yuenov.cs" />
     <Compile Include="Models\Enums\MenuItemType.cs" />
+    <Compile Include="Models\UI\BackgroundImageSourceConverter.cs" />
     <Compile Include="Models\UI\BookCoverLinkConverter.cs" />
     <Compile Include="Models\UI\BrushConverter.cs" />
     <Compile Include="Models\UI\CustomResourceLoader.cs" />
@@ -257,6 +258,10 @@
   <ItemGroup>
     <Content Include="Assets\coverholder-Dark.png" />
     <Content Include="Assets\coverholder-Light.png" />
+    <Content Include="Assets\Images\desert-castle.jpg" />
+    <Content Include="Assets\Images\lake.jpg" />
+    <Content Include="Assets\Images\leaf.jpg" />
+    <Content Include="Assets\Images\snow-mountain.jpg" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\Logo\LargeTile.scale-100.png" />
     <Content Include="Assets\Logo\LargeTile.scale-125.png" />

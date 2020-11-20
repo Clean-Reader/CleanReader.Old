@@ -13,6 +13,9 @@
         LastShelfId,
         MaxLastestBookCount,
         SearchEngine,
-        MaxSingleColumnWidth
+        MaxSingleColumnWidth,
+        EnabledBackgroundImage,
+        BackgroundImage,
+        BackgroundMaskColor
     }
 }

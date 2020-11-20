@@ -76,6 +76,7 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<Lib.Share.Models.Book> DisplayBookCollection = new ObservableCollection<Lib.Share.Models.Book>();
         public ObservableCollection<Lib.Share.Models.Book> LastestReadCollection = new ObservableCollection<Lib.Share.Models.Book>();
         public List<ReadHistory> HistoryList = new List<ReadHistory>();
+        public ObservableCollection<string> BackgroundImageCollection = new ObservableCollection<string>();
 
         public ObservableCollection<SystemFont> FontCollection = new ObservableCollection<SystemFont>();
         public ObservableCollection<ReaderColorConfig> ColorConfigCollection = new ObservableCollection<ReaderColorConfig>();

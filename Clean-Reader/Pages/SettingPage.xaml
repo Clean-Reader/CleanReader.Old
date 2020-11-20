@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:uwp="using:Richasy.Font.UWP" xmlns:interaction="using:Richasy.Controls.UWP.Interaction"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:uwp="using:Richasy.Font.UWP" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="uwp:SystemFont" x:Key="FontItemTemplate">
@@ -14,6 +14,35 @@
                            FontSize="{CustomResource BasicFontSize}" HorizontalAlignment="Left"/>
             </Grid>
         </DataTemplate>
+        <ui1:BackgroundImageSourceConverter x:Key="ImageConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="VisConverter"/>
+        <CommandBarFlyout x:Name="ImageFlyout">
+            <AppBarButton Icon="ZoomIn" Tag="Zoom" ToolTipService.ToolTip="大图" Click="OnElementClicked" />
+            <AppBarButton Icon="Delete" Tag="Delete" ToolTipService.ToolTip="删除" Click="OnElementClicked" />
+        </CommandBarFlyout>
+        <DataTemplate x:DataType="x:String" x:Key="BackgroundImageTemplate">
+            <Grid ContextFlyout="{StaticResource ImageFlyout}" Margin="0,0,15,0">
+                <controls:ImageEx Width="50" Height="50" CornerRadius="10" Stretch="Fill"
+                                  Source="{x:Bind Converter={StaticResource ImageConverter}}"/>
+                <Grid Width="80" Height="80" Background="{ThemeResource CoverBackground}"
+                      CornerRadius="10"/>
+                <controls:ImageEx Source="{x:Bind Converter={StaticResource ImageConverter}}"
+                                  Width="60" Height="60" CornerRadius="8" Stretch="Fill"
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+        <Flyout x:Key="ColorFlyout">
+            <ColorPicker Style="{StaticResource BasicColorPickerStyle}"
+                        x:Name="MaskColorPicker"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        IsColorSliderVisible="True"
+                        ColorChanged="MaskColorPicker_ColorChanged"
+                        IsHexInputVisible="True"
+                        IsAlphaEnabled="True"
+                        IsAlphaSliderVisible="True"
+                        />
+        </Flyout>
     </ui:RichasyPage.Resources>
     <ScrollViewer Style="{StaticResource BasicScrollViewer}"
                   VerticalScrollBarVisibility="Hidden"
@@ -64,6 +93,35 @@
                 <ComboBoxItem Tag="Bing" x:Uid="Control_BingComboBoxItem"/>
                 <ComboBoxItem Tag="Baidu" x:Uid="Control_BaiduComboBoxItem"/>
             </ComboBox>
+
+            <StackPanel Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,5">
+                    <TextBlock Style="{StaticResource SmallTextStyle}" VerticalAlignment="Center"
+                           x:Uid="Control_BackgroundImageListTipBlock" HorizontalAlignment="Left"/>
+                    <interaction:ActionButton x:Name="AddImageButton" VerticalAlignment="Center"
+                                              Margin="5,0,0,0" Diameter="30" Click="AddImageButton_Click"
+                                              Style="{StaticResource DefaultActionButtonStyle}">
+                        <interaction:ActionButton.Icon>
+                            <uwp:FeatherIcon Symbol="Plus" FontSize="14"/>
+                        </interaction:ActionButton.Icon>
+                    </interaction:ActionButton>
+                </StackPanel>
+                <ToggleSwitch x:Name="EnableBackgroundImageToggleSwitch" Style="{StaticResource BasicToggleSwitchStyle}" Toggled="EnableBackgroundImageToggleSwitch_Toggled"/>
+                <ListView x:Name="ImageListView" ItemTemplate="{StaticResource BackgroundImageTemplate}"
+                          ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
+                          Style="{StaticResource BasicListView}" ItemsPanel="{StaticResource HorizontalListViewItemsPanel}"
+                          ItemsSource="{x:Bind vm.BackgroundImageCollection}" ScrollViewer.VerticalScrollMode="Disabled"
+                          IsItemClickEnabled="True" ItemClick="ImageListView_ItemClick" Margin="0,15,0,0"
+                          Visibility="{x:Bind EnableBackgroundImageToggleSwitch.IsOn,Mode=OneWay,Converter={StaticResource VisConverter}}"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0" x:Name="MaskContainer" Visibility="{x:Bind EnableBackgroundImageToggleSwitch.IsOn,Mode=OneWay,Converter={StaticResource VisConverter}}">
+                <TextBlock Style="{StaticResource SmallTextStyle}" Margin="0,0,0,10" x:Uid="Control_BackgroundMaskTipBlock"/>
+                <interaction:ExtraButton Style="{StaticResource TransparentExtraButtonStyle}" Flyout="{StaticResource ColorFlyout}" BorderBrush="{ThemeResource LineColorOver}" BorderThickness="2" CornerRadius="4"
+                                         PointerOverBorderBrush="{ThemeResource PrimaryColor}">
+                    <Border Width="80" Height="30" x:Name="MaskDisplay" CornerRadius="2"/>
+                </interaction:ExtraButton>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
     

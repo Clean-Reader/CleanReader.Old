@@ -132,6 +132,12 @@
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>查找书籍</value>
   </data>
+  <data name="Control_BackgroundImageListTipBlock.Text" xml:space="preserve">
+    <value>背景图片</value>
+  </data>
+  <data name="Control_BackgroundMaskTipBlock.Text" xml:space="preserve">
+    <value>背景遮罩色</value>
+  </data>
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>背景色</value>
   </data>

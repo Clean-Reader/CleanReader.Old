@@ -1,12 +1,18 @@
 ﻿using Clean_Reader.Models.Core;
+using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Lib.Share.Models;
 using Richasy.Controls.UWP.Models.UI;
 using Richasy.Font.UWP;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -19,6 +25,7 @@ namespace Clean_Reader.Pages
     public sealed partial class SettingPage : RichasyPage
     {
         AppViewModel vm = App.VM;
+        public ObservableCollection<string> BackgroundCollection = new ObservableCollection<string>();
         public SettingPage() : base()
         {
             IsInit = false;
@@ -85,6 +92,10 @@ namespace Clean_Reader.Pages
                 default:
                     break;
             }
+            bool isEnableImage = App.Tools.App.GetBoolSetting(SettingNames.EnabledBackgroundImage, false);
+            EnableBackgroundImageToggleSwitch.IsOn = isEnableImage;
+            var color = App.Tools.App.GetLocalSetting(SettingNames.BackgroundMaskColor, App.Current.RequestedTheme == ApplicationTheme.Light ? "#22FFFFFF" : "#22000000").Hex16toRGB();
+            MaskColorPicker.Color = color;
             await Task.Delay(100);
             IsInit = true;
         }
@@ -134,6 +145,56 @@ namespace Clean_Reader.Pages
                 var item = SearchEngineComboBox.SelectedItem as ComboBoxItem;
                 App.Tools.App.WriteLocalSetting(SettingNames.SearchEngine, item.Tag.ToString());
             }
+        }
+
+        private async void AddImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddImageButton.IsLoading = true;
+            var image = await App.Tools.IO.OpenLocalFileAsync(".png", ".jpg", ".bmp", ".jpeg", ".gif");
+            await vm.AddBackgroundImage(image);
+            AddImageButton.IsLoading = false;
+        }
+
+        private void ImageListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (IsInit)
+            {
+                var source = e.ClickedItem as string;
+                App.Tools.App.WriteLocalSetting(SettingNames.BackgroundImage, source);
+                vm.BackgroundImageToggle();
+            }
+        }
+
+        private async void OnElementClicked(object sender, RoutedEventArgs e)
+        {
+            string source = (sender as FrameworkElement).DataContext as string;
+            if ((sender as AppBarButton).Tag.ToString() == "Zoom")
+            {
+                var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(source));
+                await Launcher.LaunchFileAsync(file);
+            }
+            else
+            {
+                await vm.RemoveBackgroundImage(source);
+            }
+        }
+
+        private void EnableBackgroundImageToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (IsInit)
+            {
+                App.Tools.App.WriteLocalSetting(SettingNames.EnabledBackgroundImage, EnableBackgroundImageToggleSwitch.IsOn.ToString());
+                vm.BackgroundImageToggle();
+            }   
+        }
+
+        private void MaskColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
+        {
+            if (!IsInit)
+                return;
+            MaskDisplay.Background = new SolidColorBrush(args.NewColor);
+            App.Tools.App.WriteLocalSetting(SettingNames.BackgroundMaskColor, args.NewColor.ToString());
+            vm.BackgroundImageToggle();
         }
     }
 }

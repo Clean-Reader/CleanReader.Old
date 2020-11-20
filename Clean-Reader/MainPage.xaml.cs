@@ -37,6 +37,7 @@ namespace Clean_Reader
         {
             if (!IsInit)
             {
+                await vm.BackgroundImageInit();
                 vm.CheckUpdate();
                 await vm.ShelfInit();
                 vm.ViewStyleInit();

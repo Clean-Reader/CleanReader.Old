@@ -39,6 +39,8 @@
         ShelfNameRepeat,
         Waiting,
         DefaultShelfManageWarning,
-        Copied
+        Copied,
+        UpdateBookSuccess,
+        SyncBookSuccess
     }
 }

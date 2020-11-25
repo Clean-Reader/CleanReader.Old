@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <DataTemplate x:DataType="ui:MenuItem" x:Key="MenuItemTemplate">
             <Grid Padding="20,15" BorderBrush="{ThemeResource LineColor}"
-                  BorderThickness="0,0,0,1">
+                  BorderThickness="0,0,0,1" x:Name="Container">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>

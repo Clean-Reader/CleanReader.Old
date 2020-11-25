@@ -57,6 +57,8 @@ namespace Clean_Reader.Controls.Components
             var last = items.Last();
             first.CornerRadius = new CornerRadius(10, 10, 0, 0);
             last.CornerRadius = new CornerRadius(0, 0, 10, 10);
+            var lastContainer = last.VisualTreeFindName<Grid>("Container");
+            lastContainer.BorderThickness = new Thickness(0);
         }
     }
 }

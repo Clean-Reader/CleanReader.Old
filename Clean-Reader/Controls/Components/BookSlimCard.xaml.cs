@@ -124,9 +124,9 @@ namespace Clean_Reader.Controls.Components
                     Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Move),
                     Icon = new FeatherIcon(FeatherSymbol.Repeat)
                 };
-                move.Click += (_s, _e) =>
+                move.Click += async(_s, _e) =>
                 {
-                    //转移书籍
+                    await App.VM.MoveBook(Data.BookId);
                 };
                 CardFlyout.Items.Add(move);
             }

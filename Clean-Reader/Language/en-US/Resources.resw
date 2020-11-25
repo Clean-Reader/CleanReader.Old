@@ -129,6 +129,9 @@
   <data name="Control_AppFontComboBox.Header" xml:space="preserve">
     <value>App font family</value>
   </data>
+  <data name="Control_AppNameTipBlock.Text" xml:space="preserve">
+    <value>Clean Reader</value>
+  </data>
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>Find books</value>
   </data>
@@ -384,11 +387,17 @@
   <data name="Tip_ShelfSelection" xml:space="preserve">
     <value>Choose a bookshelf</value>
   </data>
+  <data name="Tip_SyncBookSuccess" xml:space="preserve">
+    <value>Book chapters acquisition completed</value>
+  </data>
   <data name="Tip_Topic" xml:space="preserve">
     <value>Topic</value>
   </data>
   <data name="Tip_UncateBookList" xml:space="preserve">
     <value>List of Uncategorized Books</value>
+  </data>
+  <data name="Tip_UpdateBookSuccess" xml:space="preserve">
+    <value>Online book has been updated</value>
   </data>
   <data name="Tip_UpdateTitle" xml:space="preserve">
     <value>Update Information</value>

@@ -1,4 +1,5 @@
 ﻿using Clean_Reader.Models.UI;
+using Lib.Share.Enums;
 using Lib.Share.Models;
 using Newtonsoft.Json;
 using Richasy.Controls.Reader.Models;
@@ -138,7 +139,8 @@ namespace Clean_Reader.Models.Core
                         for (int i = 0; i < result.Count; i++)
                         {
                             result[i].Index += lastIndex;
-                            sourceList.Add(result[i]);
+                            if(!sourceList.Any(predicate=>predicate.Link==result[i].Link))
+                                sourceList.Add(result[i]);
                         }
                         result = sourceList;
                     }
@@ -170,10 +172,11 @@ namespace Clean_Reader.Models.Core
             var response = await _yuenovClient.CheckUpdateAsync(items.ToArray());
             if (response.Result.Code == ResultCode.Success)
             {
-                if (response.Data.Count > 0)
+                ShowPopup(LanguageNames.SyncBookSuccess);
+                if (response.Data.UpdateList.Count > 0)
                 {
                     var tasks = new List<Task>();
-                    foreach (var up in response.Data)
+                    foreach (var up in response.Data.UpdateList)
                     {
                         tasks.Add(Task.Run(async () =>
                         {
@@ -182,6 +185,7 @@ namespace Clean_Reader.Models.Core
                         }));
                     }
                     await Task.WhenAll(tasks.ToArray());
+                    ShowPopup(LanguageNames.UpdateBookSuccess);
                 }
             }
             else

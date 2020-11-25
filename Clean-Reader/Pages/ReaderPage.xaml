@@ -89,6 +89,7 @@
                             TouchTapped="ReaderPanel_TouchTapped"
                             Loaded="ReaderPanel_Loaded"
                             CustomContentRequest="ReaderPanel_CustomContentRequest"
+                            SpeechCueChanged="ReaderPanel_SpeechCueChanged"
                             ReaderFlyout="{StaticResource ReaderFlyout}"
                             >
                         <reader:ReaderPanel.Header>

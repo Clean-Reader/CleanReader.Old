@@ -106,7 +106,7 @@
     <Style x:Key="MenuListViewContainerStyle" TargetType="ListViewItem">
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
         <Setter Property="Background" Value="{ThemeResource CardBackground}"/>
-        <Setter Property="Foreground" Value="{ThemeResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{ThemeResource NormalTextColor}"/>
         <Setter Property="TabNavigation" Value="Local"/>
         <Setter Property="IsHoldingEnabled" Value="True"/>
         <Setter Property="Padding" Value="0,0"/>
@@ -137,7 +137,7 @@
                                            Control.IsTemplateFocusTarget="True" 
                                            PressedBackground="{ThemeResource PrimaryColorOpacity}"
                                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" 
-                                           PointerOverForeground="{ThemeResource PrimaryColorOver}" 
+                                           PointerOverForeground="{ThemeResource ImportantTextColor}" 
                                            PointerOverBackground="{ThemeResource PrimaryColorOpacity}" 
                                            RevealBorderThickness="0" 
                                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" 

@@ -38,6 +38,32 @@
             <animations:TranslationAnimation Duration="0:0:0.4" From="0" To="0,70,0" ></animations:TranslationAnimation>
             <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0"></animations:OpacityAnimation>
         </animations:Implicit.HideAnimations>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ChapterButton.Text" Value="" />
+                        <Setter Target="FontButton.Text" Value="" />
+                        <Setter Target="ColorButton.Text" Value="" />
+                        <Setter Target="SearchButton.Text" Value="" />
+                        <Setter Target="MoreButton.Text" Value="" />
+                        <Setter Target="ChapterButton.GutterWidth" Value="0" />
+                        <Setter Target="FontButton.GutterWidth" Value="0" />
+                        <Setter Target="ColorButton.GutterWidth" Value="0" />
+                        <Setter Target="SearchButton.GutterWidth" Value="0" />
+                        <Setter Target="MoreButton.GutterWidth" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Default">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}" x:Name="BackButton"
                                                   VerticalAlignment="Center" Click="BackButton_Click">
             <interaction:ActionButton.Icon>

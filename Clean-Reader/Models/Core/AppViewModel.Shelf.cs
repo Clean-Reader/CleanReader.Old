@@ -179,5 +179,27 @@ namespace Clean_Reader.Models.Core
                 IsBookListChanged = true;
             }
         }
+
+        public async Task MoveBook(string bookId)
+        {
+            var source = TotalBookList.Where(p => p.BookId == bookId).FirstOrDefault();
+            if (source != null)
+            {
+                var parentShelf = ShelfCollection.Where(p => p.Id == source.ShelfId).FirstOrDefault();
+                var dialog = new ShelfSelectionDialog(parentShelf);
+                dialog.PrimaryButtonClick += (_s, _e) =>
+                {
+                    var selectedShelf = dialog.SelectedItem;
+                    if (selectedShelf != parentShelf)
+                    {
+                        dialog.IsPrimaryButtonEnabled = false;
+                        source.ShelfId = selectedShelf.Id;
+                        CurrentShelfInit();
+                        IsBookListChanged = true;
+                    }
+                };
+                await dialog.ShowAsync();
+            }
+        }
     }
 }

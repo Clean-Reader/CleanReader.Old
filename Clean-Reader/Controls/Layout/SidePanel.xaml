@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Controls.Layout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -17,12 +17,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!--同步账户-->
-        <components:SyncAccountBlock/>
+
+        <StackPanel Orientation="Horizontal">
+            <controls:ImageEx Source="ms-appx:///Assets/logo.png" DecodePixelWidth="60" Width="30"
+                              Stretch="Uniform" VerticalAlignment="Center"/>
+            <TextBlock x:Uid="Control_AppNameTipBlock" Style="{StaticResource BasicTextStyle}"
+                       FontWeight="Bold" FontSize="18" Margin="15,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
         <!--导入按钮-->
         <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" CornerRadius="10"
                                 x:Name="ImportButton" HorizontalAlignment="Stretch"
-                                Foreground="{ThemeResource PrimaryColor}" Margin="0,25,0,0"
+                                Margin="0,25,0,0"
                                 x:Uid="Control_ImportBookTipBlock" Click="ImportButton_Click"
                                 Grid.Row="1">
             <interaction:IconButton.Icon>
@@ -33,5 +38,7 @@
         <components:NavigateMenu Grid.Row="2" Margin="0,25,0,0" x:Name="NavigateMenu"
                                  />
         <!--朗读控制器-->
+        <!--同步账户-->
+        <components:SyncAccountBlock Grid.Row="3"/>
     </Grid>
 </UserControl>

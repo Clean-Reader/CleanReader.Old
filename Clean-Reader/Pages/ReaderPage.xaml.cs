@@ -22,6 +22,7 @@ using Clean_Reader.Controls.Components;
 using Windows.UI.Core;
 using Windows.ApplicationModel.DataTransfer;
 using System.Net;
+using Richasy.Controls.Reader.Enums;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -446,6 +447,14 @@ namespace Clean_Reader.Pages
             SearchCollection.Clear();
             SearchContainer.Visibility = Visibility.Collapsed;
             SearchPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ReaderPanel_SpeechCueChanged(object sender, SpeechCueEventArgs e)
+        {
+            if (e.Type == SpeechCueType.Word)
+            {
+                ReaderPanel.CheckCurrentReaderIndex(e.SpeechCue.StartPositionInInput);
+            }
         }
     }
 }

@@ -28,8 +28,7 @@
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal" Visibility="Collapsed"
-                                Background="{ThemeResource PopupBackground}" CornerRadius="10,10,0,0" Padding="10" x:Name="MenuBar">
+    <StackPanel Visibility="Collapsed" x:Name="MenuContainer">
         <animations:Implicit.ShowAnimations>
             <animations:TranslationAnimation Duration="0:0:0.4" From="0, 70, 0" To="0" ></animations:TranslationAnimation>
             <animations:OpacityAnimation Duration="0:0:0.4" From="0" To="1.0"></animations:OpacityAnimation>
@@ -64,46 +63,68 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}" x:Name="BackButton"
+        <local:MusicPlayer x:Name="MusicPlayer" Margin="0,0,0,20" HorizontalAlignment="Center"
+                           Visibility="Collapsed" MediaEnded="MusicPlayer_MediaEnded">
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0, 20, 0" To="0" ></animations:TranslationAnimation>
+                <animations:OpacityAnimation Duration="0:0:0.4" From="0" To="1.0"></animations:OpacityAnimation>
+            </animations:Implicit.ShowAnimations>
+            <animations:Implicit.HideAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0" To="0,20,0" ></animations:TranslationAnimation>
+                <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0"></animations:OpacityAnimation>
+            </animations:Implicit.HideAnimations>
+        </local:MusicPlayer>
+        <StackPanel Orientation="Horizontal" 
+                Background="{ThemeResource PopupBackground}" CornerRadius="10,10,0,0" Padding="10" x:Name="MenuBar">
+
+            <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}" x:Name="BackButton"
                                                   VerticalAlignment="Center" Click="BackButton_Click">
-            <interaction:ActionButton.Icon>
-                <uwp:FeatherIcon Symbol="ArrowLeft" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:ActionButton.Icon>
-        </interaction:ActionButton>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ChapterButton"
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="ArrowLeft" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
+            <interaction:ActionButton Style="{StaticResource DefaultActionButtonStyle}" x:Name="SpeechButton"
+                                                  VerticalAlignment="Center" Click="SpeechButton_Click"  Margin="10,0">
+                <interaction:ActionButton.Icon>
+                    <uwp:FeatherIcon Symbol="Headphones" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:ActionButton.Icon>
+            </interaction:ActionButton>
+            <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ChapterButton"
                                                 x:Uid="Control_ChapterTipBlock" Click="ChapterButton_Click" Background="Transparent"
                                                 GutterWidth="10">
-            <interaction:IconButton.Icon>
-                <uwp:FeatherIcon Symbol="List" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="FontButton"
+                <interaction:IconButton.Icon>
+                    <uwp:FeatherIcon Symbol="List" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:IconButton.Icon>
+            </interaction:IconButton>
+            <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="FontButton"
                                                 x:Uid="Control_FontTipBlock" Background="Transparent"
                                                 GutterWidth="10" Flyout="{StaticResource FontFlyout}">
-            <interaction:IconButton.Icon>
-                <uwp:FeatherIcon Symbol="Type" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ColorButton"
+                <interaction:IconButton.Icon>
+                    <uwp:FeatherIcon Symbol="Type" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:IconButton.Icon>
+            </interaction:IconButton>
+            <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="ColorButton"
                                                 x:Uid="Control_ColorTipBlock" Background="Transparent"
                                                 GutterWidth="10" Flyout="{StaticResource ColorFlyout}">
-            <interaction:IconButton.Icon>
-                <uwp:MaterialIcon Symbol="ColorLens" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="SearchButton"
+                <interaction:IconButton.Icon>
+                    <uwp:MaterialIcon Symbol="ColorLens" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:IconButton.Icon>
+            </interaction:IconButton>
+            <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="SearchButton"
                                                 x:Uid="Control_SearchTipBlock" Background="Transparent"
                                                 GutterWidth="10" Click="SearchButton_Click">
-            <interaction:IconButton.Icon>
-                <uwp:FeatherIcon Symbol="Search" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
-        <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="MoreButton"
+                <interaction:IconButton.Icon>
+                    <uwp:FeatherIcon Symbol="Search" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:IconButton.Icon>
+            </interaction:IconButton>
+            <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" x:Name="MoreButton"
                                                 x:Uid="Control_MoreTipBlock" Background="Transparent"
                                                 GutterWidth="10" Flyout="{StaticResource OtherFlyout}">
-            <interaction:IconButton.Icon>
-                <uwp:FeatherIcon Symbol="MoreHorizontal" FontSize="{CustomResource BasicFontSize}"/>
-            </interaction:IconButton.Icon>
-        </interaction:IconButton>
+                <interaction:IconButton.Icon>
+                    <uwp:FeatherIcon Symbol="MoreHorizontal" FontSize="{CustomResource BasicFontSize}"/>
+                </interaction:IconButton.Icon>
+            </interaction:IconButton>
+        </StackPanel>
     </StackPanel>
+    
 </UserControl>

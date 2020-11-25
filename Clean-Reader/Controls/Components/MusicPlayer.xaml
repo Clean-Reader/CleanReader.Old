@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="Clean_Reader.Controls.Components.MusicPlayer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Controls.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:ui="using:Clean_Reader.Models.UI"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Padding="15,15,15,0" CornerRadius="10" Background="{ThemeResource PopupBackground}"
+          MaxWidth="300">
+        <MediaPlayerElement x:Name="MPE" AreTransportControlsEnabled="True"
+                            AutoPlay="True">
+            <MediaPlayerElement.TransportControls>
+                <ui:SpeechTransportControls x:Name="TransportControls"
+                                            IsPlaybackRateButtonVisible="True"
+                                            SaveButtonClick="TransportControls_SaveButtonClick"
+                                            ShowAndHideAutomatically="False"
+                                            Loaded="TransportControls_Loaded"
+                                            IsPlaybackRateEnabled="True"
+                                            />
+            </MediaPlayerElement.TransportControls>
+        </MediaPlayerElement>
+        <interaction:ActionButton Style="{StaticResource SecondaryGhostActionButtonStyle}"
+                                  Diameter="25" x:Name="StopButton" Click="StopButton_Click"
+                                  HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0">
+            <interaction:ActionButton.Icon>
+                <uwp:FeatherIcon Symbol="X" FontSize="10"/>
+            </interaction:ActionButton.Icon>
+        </interaction:ActionButton>
+    </Grid>
+</UserControl>

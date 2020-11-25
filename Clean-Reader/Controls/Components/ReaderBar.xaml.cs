@@ -8,8 +8,11 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,9 +31,15 @@ namespace Clean_Reader.Controls.Components
         public event RoutedEventHandler BackButtonClick;
         public event RoutedEventHandler ChapterButtonClick;
         public event RoutedEventHandler SearchButtonClick;
+
         public ReaderBar()
         {
             this.InitializeComponent();
+            App.VM._readerBar = this;
+        }
+        public bool IsContainPlayer
+        {
+            get => MenuContainer.Children.Contains(App.VM._musicPlayer);
         }
         public void Init()
         {
@@ -40,15 +49,15 @@ namespace Clean_Reader.Controls.Components
         }
         public void Show()
         {
-            MenuBar.Visibility = Visibility.Visible;
+            MenuContainer.Visibility = Visibility.Visible;
         }
         public void Hide()
         {
-            MenuBar.Visibility = Visibility.Collapsed;
+            MenuContainer.Visibility = Visibility.Collapsed;
         }
         public void Toggle()
         {
-            MenuBar.Visibility = MenuBar.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            MenuContainer.Visibility = MenuContainer.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
         private void ChapterButton_Click(object sender, RoutedEventArgs e)
         {
@@ -57,13 +66,13 @@ namespace Clean_Reader.Controls.Components
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuBar.Visibility = Visibility.Collapsed;
+            MenuContainer.Visibility = Visibility.Collapsed;
             BackButtonClick?.Invoke(this, e);
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuBar.Visibility = Visibility.Collapsed;
+            MenuContainer.Visibility = Visibility.Collapsed;
             SearchButtonClick?.Invoke(this, e);
         }
 
@@ -79,11 +88,57 @@ namespace Clean_Reader.Controls.Components
             btn.IsLoading = true;
             await App.VM.RebuildChapter(e);
             btn.IsLoading = false;
+            App.VM.ShowPopup(LanguageNames.RebuildSuccess);
         }
 
         private void OtherFlyout_Opened(object sender, object e)
         {
             OtherConfigPanel.Init();
+        }
+
+        private async void SpeechButton_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadSpeech();
+        }
+
+        public async Task LoadSpeech()
+        {
+            SpeechButton.IsLoading = true;
+            var reader = App.VM._reader;
+            var syn = new SpeechSynthesizer();
+            string id = App.Tools.App.GetLocalSetting(SettingNames.SpeechVoice, SpeechSynthesizer.DefaultVoice.Id);
+            var voice = SpeechSynthesizer.AllVoices.Where(p => p.Id == id).FirstOrDefault();
+            if (voice != null)
+                syn.Voice = voice;
+            else
+                syn.Voice = SpeechSynthesizer.DefaultVoice;
+            var source = await reader.GetChapterVoiceAsync(reader.CurrentChapter, true, syn);
+            MusicPlayer.Source = source;
+            if (MusicPlayer.Visibility == Visibility.Collapsed)
+                MusicPlayer.Visibility = Visibility.Visible;
+            SpeechButton.IsLoading = false;
+        }
+
+        private void MusicPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            bool isAutoNext = App.Tools.App.GetBoolSetting(SettingNames.IsSpeechAutoNext);
+            if (isAutoNext)
+            {
+                if(this.IsContainPlayer)
+                    App.VM._reader.Next();
+            }
+            else
+                MusicPlayer.Visibility = Visibility.Collapsed;
+        }
+
+        public void RemovePlayer()
+        {
+            MenuContainer.Children.Remove(App.VM._musicPlayer);
+        }
+
+        public void InsertPlayer()
+        {
+            MenuContainer.Children.Insert(0, App.VM._musicPlayer);
         }
     }
 }

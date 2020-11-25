@@ -16,6 +16,8 @@
         MaxSingleColumnWidth,
         EnabledBackgroundImage,
         BackgroundImage,
-        BackgroundMaskColor
+        BackgroundMaskColor,
+        SpeechVoice,
+        IsSpeechAutoNext
     }
 }

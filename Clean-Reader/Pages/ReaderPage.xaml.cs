@@ -82,6 +82,9 @@ namespace Clean_Reader.Pages
         {
             vm.CurrentBook = book;
             BookTitleBlock.Text = book.Name;
+            
+            if (vm._musicPlayer != null)
+                vm._musicPlayer.Check();
             var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
             if (book.Type == BookType.Web)
             {
@@ -159,11 +162,13 @@ namespace Clean_Reader.Pages
             vm.CurrentBookChapterList.ForEach(p => ChapterCollection.Add(p));
         }
 
-        private void ReaderPanel_ChapterChanged(object sender, Chapter e)
+        private async void ReaderPanel_ChapterChanged(object sender, Chapter e)
         {
             ChapterListView.SelectedItem = e;
             ChapterListView.ScrollIntoView(e, ScrollIntoViewAlignment.Leading);
             ChapterTitleBlock.Text = e.Title;
+            if (App.VM._musicPlayer != null && App.VM._musicPlayer.IsMediaEnded)
+                await ReaderBar.LoadSpeech();
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 
@@ -259,8 +264,14 @@ namespace Clean_Reader.Pages
         {
             if (_tempBook != null)
             {
+                if (vm._sidePanel.ContainPlayer)
+                {
+                    vm._sidePanel.RemovePlayer();
+                    vm._readerBar.InsertPlayer();
+                }
                 if (_tempBook != vm.CurrentBook)
                     await HandleBook(_tempBook);
+                
                 _tempBook = null;
             }
         }

@@ -20,5 +20,22 @@ namespace Clean_Reader.Controls.Layout
             await App.VM.ImportBooks();
             ImportButton.IsLoading = false;
         }
+
+        public bool ContainPlayer
+        {
+            get => Container.Children.Contains(App.VM._musicPlayer);
+        }
+
+        public void InsertPlayer()
+        {
+            Container.Children.Add(App.VM._musicPlayer);
+            Grid.SetRow(App.VM._musicPlayer, 3);
+        }
+
+        public void RemovePlayer()
+        {
+            Grid.SetRow(App.VM._musicPlayer, 0);
+            Container.Children.Remove(App.VM._musicPlayer);
+        }
     }
 }

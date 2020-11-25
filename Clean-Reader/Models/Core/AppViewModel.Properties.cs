@@ -11,6 +11,7 @@ using Richasy.Helper.UWP;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Yuenov.SDK;
@@ -31,10 +32,14 @@ namespace Clean_Reader.Models.Core
         public SidePanel _sidePanel;
         public NavigateMenu _menu;
         public Frame _rootFrame;
+        public MusicPlayer _musicPlayer;
+        public ReaderBar _readerBar;
 
         private const string _clientId = "4ce94634-4e8d-4e7a-9967-18c59afd1dc7";
         private string[] _scopes = new string[] { "Files.ReadWrite.AppFolder", "User.Read" };
         public OneDriveHelper _onedrive;
+
+        public MediaPlayer _player = null;
 
         private bool _isHistoryChanged;
         public bool IsHistoryChanged

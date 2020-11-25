@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Globalization;
+using Windows.Media.Playback;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -75,13 +76,21 @@ namespace Clean_Reader.Models.Core
             var frame = Window.Current.Content as Frame;
             frame.Navigate(typeof(ReaderPage), book, new DrillInNavigationTransitionInfo());
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileLastestList, JsonConvert.SerializeObject(LastestReadCollection.Select(p => p.BookId)));
+            
         }
 
         public void CloseReaderView()
         {
             var frame = Window.Current.Content as Frame;
             if (frame.CanGoBack)
+            {
                 frame.GoBack(new EntranceNavigationTransitionInfo());
+                if(_player!=null && _player.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
+                {
+                    _readerBar.RemovePlayer();
+                    _sidePanel.InsertPlayer();
+                }
+            } 
         }
 
 

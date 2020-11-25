@@ -1,4 +1,5 @@
-﻿<UserControl
+﻿
+    <UserControl
     x:Class="Clean_Reader.Controls.Components.BookCategoryCard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

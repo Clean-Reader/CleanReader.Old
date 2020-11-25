@@ -10,15 +10,16 @@
     d:DesignWidth="400">
 
     <Grid Background="{ThemeResource SideBackground}"
-          Padding="30">
+          Padding="30" x:Name="Container">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="0,-10,0,0">
             <controls:ImageEx Source="ms-appx:///Assets/logo.png" DecodePixelWidth="60" Width="30"
                               Stretch="Uniform" VerticalAlignment="Center"/>
             <TextBlock x:Uid="Control_AppNameTipBlock" Style="{StaticResource BasicTextStyle}"
@@ -27,7 +28,7 @@
         <!--导入按钮-->
         <interaction:IconButton Style="{StaticResource DefaultIconButtonStyle}" CornerRadius="10"
                                 x:Name="ImportButton" HorizontalAlignment="Stretch"
-                                Margin="0,25,0,0"
+                                Margin="0,20,0,0"
                                 x:Uid="Control_ImportBookTipBlock" Click="ImportButton_Click"
                                 Grid.Row="1">
             <interaction:IconButton.Icon>
@@ -35,10 +36,11 @@
             </interaction:IconButton.Icon>
         </interaction:IconButton>
         <!--导航栏-->
-        <components:NavigateMenu Grid.Row="2" Margin="0,25,0,0" x:Name="NavigateMenu"
+        <components:NavigateMenu Grid.Row="2" Margin="0,25,0,15" x:Name="NavigateMenu"
                                  />
         <!--朗读控制器-->
+        
         <!--同步账户-->
-        <components:SyncAccountBlock Grid.Row="3"/>
+        <components:SyncAccountBlock Grid.Row="4"/>
     </Grid>
 </UserControl>

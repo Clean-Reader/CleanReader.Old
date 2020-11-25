@@ -138,6 +138,9 @@
   <data name="Control_BackgroundImageListTipBlock.Text" xml:space="preserve">
     <value>Background image</value>
   </data>
+  <data name="Control_BackgroundMaskTipBlock.Text" xml:space="preserve">
+    <value>Background mask</value>
+  </data>
   <data name="Control_BackgroundTipBlock.Text" xml:space="preserve">
     <value>Background</value>
   </data>
@@ -327,6 +330,9 @@
   <data name="Tip_DefaultShelfManageWarning" xml:space="preserve">
     <value>Please switch to a custom bookshelf and manage the books</value>
   </data>
+  <data name="Tip_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="Tip_Discovery" xml:space="preserve">
     <value>Discovery</value>
   </data>
@@ -344,6 +350,9 @@
   </data>
   <data name="Tip_ManageShelf" xml:space="preserve">
     <value>Manage bookshelves</value>
+  </data>
+  <data name="Tip_Move" xml:space="preserve">
+    <value>Move</value>
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>Need Login</value>
@@ -363,11 +372,20 @@
   <data name="Tip_Rank" xml:space="preserve">
     <value>Rank</value>
   </data>
+  <data name="Tip_RebuildSuccess" xml:space="preserve">
+    <value>Regenerate successfully</value>
+  </data>
+  <data name="Tip_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="Tip_RemoveBookWarning" xml:space="preserve">
     <value>Do you want to remove this book? After removal, the book will be deleted from the current shelf. If it is a local book, it will not affect the actual file</value>
   </data>
   <data name="Tip_RepeatBook" xml:space="preserve">
     <value>Duplicate books already included</value>
+  </data>
+  <data name="Tip_SaveSuccess" xml:space="preserve">
+    <value>Saved successfully</value>
   </data>
   <data name="Tip_SearchResult" xml:space="preserve">
     <value>Search result</value>
@@ -398,6 +416,9 @@
   </data>
   <data name="Tip_UpdateBookSuccess" xml:space="preserve">
     <value>Online book has been updated</value>
+  </data>
+  <data name="Tip_UpdateChapter" xml:space="preserve">
+    <value>Update chapters</value>
   </data>
   <data name="Tip_UpdateTitle" xml:space="preserve">
     <value>Update Information</value>

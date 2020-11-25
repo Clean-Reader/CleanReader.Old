@@ -146,6 +146,7 @@ namespace Clean_Reader.Models.Core
         {
             string shelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
             var books = TotalBookList.Where(p => p.ShelfId == shelfId).OrderByDescending(p => p.CreateTime).ToList();
+            DisplayBookCollection.Clear();
             foreach (var book in books)
             {
                 if (!DisplayBookCollection.Contains(book))

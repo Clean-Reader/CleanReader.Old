@@ -9,7 +9,8 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
+    <Grid Background="{ThemeResource CardBackground}" CornerRadius="10"
+          Padding="15,10">
         <Grid x:Name="DetailContainer">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -17,14 +18,14 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <PersonPicture x:Name="Avatar" Width="40" Height="40"
+                <PersonPicture x:Name="Avatar" Width="35" Height="35"
                        VerticalAlignment="Center" Style="{StaticResource BasicPersonPictureStyle}"/>
                 <ProgressRing x:Name="LoadingRing" VerticalAlignment="Center" HorizontalAlignment="Center"
                               Style="{StaticResource BasicProgressRingStyle}" Width="25" Height="25"/>
             </Grid>
             
             <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Left"
-                    Margin="20,0,0,0">
+                    Margin="10,0,0,0">
                 <TextBlock x:Name="UserNameBlock" Style="{StaticResource BodyTextStyle}"
                        Foreground="{ThemeResource PrimaryColor}" FontWeight="SemiBold"/>
                 <TextBlock Text="OneDrive" x:Name="SyncTypeBlock" Style="{StaticResource SmallTextStyle}"

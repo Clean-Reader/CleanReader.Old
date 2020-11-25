@@ -41,6 +41,8 @@
         DefaultShelfManageWarning,
         Copied,
         UpdateBookSuccess,
-        SyncBookSuccess
+        SyncBookSuccess,
+        SaveSuccess,
+        RebuildSuccess
     }
 }

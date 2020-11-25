@@ -1466,7 +1466,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Ellipse Fill="{ThemeResource CardBackground}" Height="{TemplateBinding Height}" StrokeThickness="0" Stroke="{ThemeResource SystemColorButtonTextColor}" Width="{TemplateBinding Width}"/>
+                        <Ellipse Fill="{ThemeResource CardBackgroundOver}" Height="{TemplateBinding Height}" StrokeThickness="0" Stroke="{ThemeResource SystemColorButtonTextColor}" Width="{TemplateBinding Width}"/>
                         <TextBlock x:Name="InitialsTextBlock" AutomationProperties.AccessibilityView="Raw" FontWeight="{TemplateBinding FontWeight}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" FontSize="36" HorizontalAlignment="Center" IsTextScaleFactorEnabled="False" TextLineBounds="Tight" VerticalAlignment="Center"/>
                         <Ellipse x:Name="PersonPictureEllipse" FlowDirection="LeftToRight" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" x:DeferLoadStrategy="Lazy"/>
                         <Grid x:Name="BadgeGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed">

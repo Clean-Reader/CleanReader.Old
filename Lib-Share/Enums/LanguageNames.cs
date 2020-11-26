@@ -44,6 +44,8 @@
         SyncBookSuccess,
         SaveSuccess,
         RebuildSuccess,
-        ChooseReadHistory
+        ChooseReadHistory,
+        NeedOpenNotification,
+        LastUpdateTime
     }
 }

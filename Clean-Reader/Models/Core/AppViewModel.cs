@@ -16,6 +16,8 @@ using Windows.System;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
 using Clean_Reader.Controls.Dialogs;
+using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.ApplicationModel.Background;
 
 namespace Clean_Reader.Models.Core
 {
@@ -131,6 +133,12 @@ namespace Clean_Reader.Models.Core
             _waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
             _waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
         }
+        public async void BackgroundTaskInit()
+        {
+            bool isEnableCheckUpdate = App.Tools.App.GetBoolSetting(SettingNames.IsEnableAutoCheckUpdate, false);
+            if (isEnableCheckUpdate)
+                await RegisterBackgroundTask(StaticString.TaskAutoCheck);
+        }
         public ReadHistory GetCloudHistory(Book book)
         {
             var cloudHistory = CloudHistoryList.Where(p => p.BookId == CurrentBook.BookId || (p.BookName == book.Name && p.Type == book.Type)).FirstOrDefault();
@@ -160,6 +168,40 @@ namespace Clean_Reader.Models.Core
                 cloud.Hisotry = history.Hisotry;
             else
                 CloudHistoryList.Add(history);
+        }
+        /// <summary>
+        /// 注册后台任务
+        /// </summary>
+        /// <param name="taskName">注册类型</param>
+        /// <returns></returns>
+        public async Task<bool> RegisterBackgroundTask(string taskName)
+        {
+            string backgroundTaskName = taskName;
+
+            if (BackgroundTaskHelper.IsBackgroundTaskRegistered(backgroundTaskName))
+            {
+                return true;
+            }
+            var status = await BackgroundExecutionManager.RequestAccessAsync();
+            if (status.ToString().Contains("Allowed"))
+            {
+                BackgroundTaskHelper.Register(backgroundTaskName, $"Lib.Notification.{taskName}", new TimeTrigger(15, false), false, true, new SystemCondition(SystemConditionType.InternetAvailable));
+                return true;
+            }
+            else
+            {
+                ShowPopup(LanguageNames.NeedOpenNotification, true);
+                return false;
+            }
+        }
+        /// <summary>
+        /// 注销后台任务
+        /// </summary>
+        /// <param name="taskName">类型</param>
+        public void UnRegisterBackgroundTask(string taskName)
+        {
+            if (BackgroundTaskHelper.IsBackgroundTaskRegistered(taskName))
+                BackgroundTaskHelper.Unregister(taskName);
         }
     }
 }

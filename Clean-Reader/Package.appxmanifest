@@ -47,6 +47,15 @@
         </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\Logo\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Lib.Notification.AutoCheckUpdateTask">
+          <BackgroundTasks>
+            <Task Type="pushNotification"/>
+            <Task Type="timer"/>
+            <Task Type="systemEvent"/>
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
 

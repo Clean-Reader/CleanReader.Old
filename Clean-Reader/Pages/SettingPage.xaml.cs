@@ -96,6 +96,13 @@ namespace Clean_Reader.Pages
             EnableBackgroundImageToggleSwitch.IsOn = isEnableImage;
             var color = App.Tools.App.GetLocalSetting(SettingNames.BackgroundMaskColor, App.Current.RequestedTheme == ApplicationTheme.Light ? "#22FFFFFF" : "#22000000").Hex16toRGB();
             MaskColorPicker.Color = color;
+            bool isAutoOpenLastBook = App.Tools.App.GetBoolSetting(SettingNames.IsAutoOpenLastBook, false);
+            AutoOpenLastBookSwitch.IsOn = isAutoOpenLastBook;
+            bool isAutoCheckUpdate = App.Tools.App.GetBoolSetting(SettingNames.IsEnableAutoCheckUpdate, false);
+            AutoCheckWebBookSwitch.IsOn = isAutoCheckUpdate;
+            int lastUpdateSec = Convert.ToInt32(App.Tools.App.GetLocalSetting(SettingNames.LastBackgroundSyncTime, "0"));
+            string time = lastUpdateSec == 0 ? "--" : App.Tools.App.TimeStampToDate(lastUpdateSec).ToString("yyyy/MM/dd HH:mm");
+            LastUpdateTimeBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.LastUpdateTime) + time;
             await Task.Delay(100);
             IsInit = true;
         }
@@ -185,7 +192,7 @@ namespace Clean_Reader.Pages
             {
                 App.Tools.App.WriteLocalSetting(SettingNames.EnabledBackgroundImage, EnableBackgroundImageToggleSwitch.IsOn.ToString());
                 vm.BackgroundImageToggle();
-            }   
+            }
         }
 
         private void MaskColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
@@ -195,6 +202,24 @@ namespace Clean_Reader.Pages
             MaskDisplay.Background = new SolidColorBrush(args.NewColor);
             App.Tools.App.WriteLocalSetting(SettingNames.BackgroundMaskColor, args.NewColor.ToString());
             vm.BackgroundImageToggle();
+        }
+
+        private void AutoOpenLastBookSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!IsInit)
+                return;
+            App.Tools.App.WriteLocalSetting(SettingNames.IsAutoOpenLastBook, AutoOpenLastBookSwitch.IsOn.ToString());
+        }
+
+        private async void AutoCheckWebBookSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!IsInit)
+                return;
+            App.Tools.App.WriteLocalSetting(SettingNames.IsEnableAutoCheckUpdate, AutoCheckWebBookSwitch.IsOn.ToString());
+            if (AutoCheckWebBookSwitch.IsOn)
+                await vm.RegisterBackgroundTask(StaticString.TaskAutoCheck);
+            else
+                vm.UnRegisterBackgroundTask(StaticString.TaskAutoCheck);
         }
     }
 }

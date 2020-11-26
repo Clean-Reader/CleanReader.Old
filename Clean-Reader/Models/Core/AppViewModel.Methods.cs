@@ -96,6 +96,7 @@ namespace Clean_Reader.Models.Core
 
             var frame = Window.Current.Content as Frame;
             frame.Navigate(typeof(ReaderPage), book, new DrillInNavigationTransitionInfo());
+            App.Tools.App.WriteLocalSetting(SettingNames.LastBookId, book.BookId);
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileLastestList, JsonConvert.SerializeObject(LastestReadCollection.Select(p => p.BookId)));
             
         }

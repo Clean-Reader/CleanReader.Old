@@ -27,5 +27,7 @@
         public const string SearchBing = "Bing";
         public const string SearchGoogle = "Google";
         public const string SearchBaidu = "Baidu";
+
+        public const string TaskAutoCheck = "AutoCheckUpdateTask";
     }
 }

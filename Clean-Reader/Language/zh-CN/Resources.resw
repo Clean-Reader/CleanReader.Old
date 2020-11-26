@@ -135,6 +135,12 @@
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>查找书籍</value>
   </data>
+  <data name="Control_AutoCheckWebBookUpdate.Header" xml:space="preserve">
+    <value>自动检测网络书籍章节更新（后台任务）</value>
+  </data>
+  <data name="Control_AutoOpenLastBookSwitch.Header" xml:space="preserve">
+    <value>自动打开最后一次阅读的书籍</value>
+  </data>
   <data name="Control_BackgroundImageListTipBlock.Text" xml:space="preserve">
     <value>背景图片</value>
   </data>
@@ -354,6 +360,9 @@
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>获取用户失败</value>
   </data>
+  <data name="Tip_LastUpdateTime" xml:space="preserve">
+    <value>上次同步时间：</value>
+  </data>
   <data name="Tip_LoadingChapter" xml:space="preserve">
     <value>正在同步章节</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>未登录</value>
+  </data>
+  <data name="Tip_NeedOpenNotification" xml:space="preserve">
+    <value>需要开启后台任务权限</value>
   </data>
   <data name="Tip_NeedRestart" xml:space="preserve">
     <value>您更改了静态资源，重启后将获得更好地体验，是否重启应用？</value>

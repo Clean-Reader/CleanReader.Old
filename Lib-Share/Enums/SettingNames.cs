@@ -18,6 +18,11 @@
         BackgroundImage,
         BackgroundMaskColor,
         SpeechVoice,
-        IsSpeechAutoNext
+        IsSpeechAutoNext,
+        IsAutoOpenLastBook,
+        LastBookId,
+        LastBackgroundSyncTime,
+        DisableXboxScale,
+        IsEnableAutoCheckUpdate
     }
 }

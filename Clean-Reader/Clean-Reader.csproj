@@ -551,6 +551,10 @@
     <PRIResource Include="Language\zh-CN\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lib-Notification\Lib-Notification.csproj">
+      <Project>{d9eb925c-fd69-45ac-8823-ce80e76f61d4}</Project>
+      <Name>Lib-Notification</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lib-Share\Lib-Share.csproj">
       <Project>{97121158-1b5a-4470-8c60-eaf99118daf2}</Project>
       <Name>Lib-Share</Name>

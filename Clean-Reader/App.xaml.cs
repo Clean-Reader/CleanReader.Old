@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Resources;
 using Lib.Share.Models;
 using Lib.Share.Enums;
 using System.Text;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Clean_Reader
 {
@@ -28,7 +29,12 @@ namespace Clean_Reader
         public App()
         {
             this.InitializeComponent();
-            RequestedTheme = ApplicationTheme.Light;
+            bool isDisableScale = Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
+            if (SystemInformation.DeviceFamily == "Windows.Xbox" && isDisableScale)
+            {
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(Windows.UI.ViewManagement.ApplicationViewBoundsMode.UseCoreWindow);
+                Windows.UI.ViewManagement.ApplicationViewScaling.TrySetDisableLayoutScaling(true);
+            }
             VM.LanguageInit();
             this.Suspending += OnSuspending;
             this.UnhandledException += OnUnhandledException;

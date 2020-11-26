@@ -135,6 +135,12 @@
   <data name="Control_AppSearchBox.PlaceholderText" xml:space="preserve">
     <value>Find books</value>
   </data>
+  <data name="Control_AutoCheckWebBookUpdate.Header" xml:space="preserve">
+    <value>Automatic detection of online book chapter updates (background tasks)</value>
+  </data>
+  <data name="Control_AutoOpenLastBookSwitch.Header" xml:space="preserve">
+    <value>Automatically open the last read book</value>
+  </data>
   <data name="Control_BackgroundImageListTipBlock.Text" xml:space="preserve">
     <value>Background image</value>
   </data>
@@ -354,6 +360,9 @@
   <data name="Tip_GetUserFailed" xml:space="preserve">
     <value>Failed to acquire user</value>
   </data>
+  <data name="Tip_LastUpdateTime" xml:space="preserve">
+    <value>Last sync time:</value>
+  </data>
   <data name="Tip_LoadingChapter" xml:space="preserve">
     <value>Syncing chapters</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="Tip_NeedLogin" xml:space="preserve">
     <value>Need Login</value>
+  </data>
+  <data name="Tip_NeedOpenNotification" xml:space="preserve">
+    <value>Need to open background task permissions</value>
   </data>
   <data name="Tip_NeedRestart" xml:space="preserve">
     <value>You have changed the static resources and you will get a better experience after restarting. Do you want to restart the application?</value>

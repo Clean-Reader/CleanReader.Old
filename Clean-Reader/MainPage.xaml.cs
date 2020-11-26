@@ -47,7 +47,19 @@ namespace Clean_Reader
                 vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
                 await vm._yuenovClient.WarmUpAsync();
                 Window.Current.Dispatcher.AcceleratorKeyActivated += vm.AccelertorKeyActivedHandle;
+                vm.BackgroundTaskInit();
                 IsInit = true;
+                bool isAutoOpen = App.Tools.App.GetBoolSetting(SettingNames.IsAutoOpenLastBook, false);
+                if (isAutoOpen)
+                {
+                    string lastId = App.Tools.App.GetLocalSetting(SettingNames.LastBookId, "");
+                    if(!string.IsNullOrEmpty(lastId))
+                    {
+                        var book = vm.TotalBookList.Where(p => p.BookId == lastId).FirstOrDefault();
+                        if (book != null)
+                            vm.OpenReaderView(book);
+                    }
+                }
             }
 
             // TODO

@@ -43,6 +43,7 @@
         UpdateBookSuccess,
         SyncBookSuccess,
         SaveSuccess,
-        RebuildSuccess
+        RebuildSuccess,
+        ChooseReadHistory
     }
 }

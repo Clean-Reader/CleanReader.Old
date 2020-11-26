@@ -15,6 +15,7 @@ using Windows.UI.Core;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
+using Clean_Reader.Controls.Dialogs;
 
 namespace Clean_Reader.Models.Core
 {
@@ -27,15 +28,9 @@ namespace Clean_Reader.Models.Core
             CurrentShelfChanged += CurrentShelf_Changed;
             _checkFileTimer.Tick += CheckFileTimer_Tick;
             _checkFileTimer.Start();
-            Window.Current.Dispatcher.AcceleratorKeyActivated += AccelertorKeyActivedHandle;
-            //_waitPopup = new WaitingPopup(App.Tools);
-            //_waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
-            //_waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
-            //_waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
-            //_waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
         }
 
-        private async void AccelertorKeyActivedHandle(CoreDispatcher sender, AcceleratorKeyEventArgs args)
+        public async void AccelertorKeyActivedHandle(CoreDispatcher sender, AcceleratorKeyEventArgs args)
         {
             if (args.EventType.ToString().Contains("Down"))
             {
@@ -48,20 +43,20 @@ namespace Clean_Reader.Models.Core
                     {
                         CloseReaderView();
                     }
-                    else if (ctrl.HasFlag(CoreVirtualKeyStates.Down))
+                }
+                else if (ctrl.HasFlag(CoreVirtualKeyStates.Down))
+                {
+                    if (args.VirtualKey == VirtualKey.Q)
                     {
-                        if (args.VirtualKey == VirtualKey.Q)
+                        IList<AppDiagnosticInfo> infos = await AppDiagnosticInfo.RequestInfoForAppAsync();
+                        IList<AppResourceGroupInfo> resourceInfos = infos[0].GetResourceGroups();
+                        await resourceInfos[0].StartSuspendAsync();
+                    }
+                    else if (args.VirtualKey == VirtualKey.F)
+                    {
+                        if (IsReaderPage)
                         {
-                            IList<AppDiagnosticInfo> infos = await AppDiagnosticInfo.RequestInfoForAppAsync();
-                            IList<AppResourceGroupInfo> resourceInfos = infos[0].GetResourceGroups();
-                            await resourceInfos[0].StartSuspendAsync();
-                        }
-                        else if (args.VirtualKey == VirtualKey.F)
-                        {
-                            if (IsReaderPage)
-                            {
-                                Pages.ReaderPage.Current.ShowSearchPanel();
-                            }
+                            Pages.ReaderPage.Current.ShowSearchPanel();
                         }
                     }
                 }
@@ -73,6 +68,8 @@ namespace Clean_Reader.Models.Core
             if (IsHistoryChanged)
             {
                 IsHistoryChanged = false;
+                if (IsOneDriveInit && !string.IsNullOrEmpty(_oneDriveHistoryFileId))
+                    await _onedrive.UpdateFileAsync(_oneDriveHistoryFileId, JsonConvert.SerializeObject(CloudHistoryList));
                 await App.Tools.IO.SetLocalDataAsync(StaticString.FileHistory, JsonConvert.SerializeObject(HistoryList));
             }
             if (_isStyleChanged)
@@ -92,11 +89,12 @@ namespace Clean_Reader.Models.Core
         public async void SaveDetailList()
         {
             IsDetailChanged = false;
-            await App.Tools.IO.SetLocalDataAsync(CurrentBook.BookId+".json", JsonConvert.SerializeObject(CurrentBookChapterDetailList),StaticString.FolderChapterDetail);
+            await App.Tools.IO.SetLocalDataAsync(CurrentBook.BookId + ".json", JsonConvert.SerializeObject(CurrentBookChapterDetailList), StaticString.FolderChapterDetail);
         }
 
         public async Task OneDriveInit()
         {
+            IsOneDriveInit = false;
             string token = App.Tools.App.GetLocalSetting(SettingNames.OneDriveAccessToken, "");
             if (string.IsNullOrEmpty(token))
                 _onedrive = new OneDriveHelper(_clientId, _scopes);
@@ -112,15 +110,56 @@ namespace Clean_Reader.Models.Core
                         var result = await _onedrive.RefreshTokenAsync();
                         if (result != null)
                         {
+                            IsOneDriveInit = true;
                             App.Tools.App.WriteLocalSetting(SettingNames.OneDriveAccessToken, result.AccessToken);
                             App.Tools.App.WriteLocalSetting(SettingNames.OneDriveExpiryTime, App.Tools.App.DateToTimeStamp(result.ExpiresOn.DateTime).ToString());
                         }
                     }
                     catch (Exception)
-                    {}
-                    
+                    { }
                 }
+                else
+                    IsOneDriveInit = true;
             }
+        }
+
+        public void WaitingPopupInit()
+        {
+            _waitPopup = new WaitingPopup(App.Tools);
+            _waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
+            _waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
+            _waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
+            _waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
+        }
+        public ReadHistory GetCloudHistory(Book book)
+        {
+            var cloudHistory = CloudHistoryList.Where(p => p.BookId == CurrentBook.BookId || (p.BookName == book.Name && p.Type == book.Type)).FirstOrDefault();
+            return cloudHistory;
+        }
+
+        public async Task<ReadHistory> GetNeedToLoadHistory(ReadHistory local, ReadHistory cloud)
+        {
+            if (cloud == null || cloud.Hisotry.Time <= local.Hisotry.Time)
+                return local;
+            else
+            {
+                ReadHistory history = local;
+                var dialog = new ConfirmDialog(LanguageNames.ChooseReadHistory);
+                dialog.PrimaryButtonClick += (_s, _e) =>
+                {
+                    history = cloud;
+                };
+                await dialog.ShowAsync();
+                return history;
+            }
+        }
+        public void UpdateCloudHistory(Book book, ReadHistory history)
+        {
+            var cloud = GetCloudHistory(book);
+            if (cloud != null)
+                cloud.Hisotry = history.Hisotry;
+            else
+                CloudHistoryList.Add(history);
         }
     }
 }

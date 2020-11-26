@@ -279,6 +279,9 @@
   <data name="Control_ShelfNoDataBlock.Description" xml:space="preserve">
     <value>The bookshelf is empty, let's open a book and read it~</value>
   </data>
+  <data name="Control_SpeechVoiceWarningTipBlock.Text" xml:space="preserve">
+    <value>Please select a voice that matches the language of the current book, otherwise it will not be able to generate a suitable reading voice</value>
+  </data>
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>Text indent</value>
   </data>
@@ -287,6 +290,9 @@
   </data>
   <data name="Control_TypeSettingTipBlock.Text" xml:space="preserve">
     <value>Typesetting</value>
+  </data>
+  <data name="Control_VoiceComboBox.Header" xml:space="preserve">
+    <value>Speaking voice selection</value>
   </data>
   <data name="Control_WikiButton.Content" xml:space="preserve">
     <value>Wikipedia</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="Tip_Category" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="Tip_ChooseReadHistory" xml:space="preserve">
+    <value>There is a newer reading history in the cloud. Is the progress in the cloud loaded?</value>
   </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>

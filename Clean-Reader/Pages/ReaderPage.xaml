@@ -66,7 +66,8 @@
                     <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
                           ItemsSource="{x:Bind ChapterCollection}"
                           ItemClick="ChapterListView_ItemClick" Grid.Row="1"
-                          Style="{StaticResource BasicListView}" Padding="10,0"
+                          Style="{StaticResource BasicListView}" Padding="10,0" ScrollViewer.HorizontalScrollMode="Disabled"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                           ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
                           ItemTemplate="{StaticResource ChapterItemTemplate}"/>
                 </Grid>

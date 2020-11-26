@@ -4,11 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Clean_Reader.Controls.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:speechsynthesis="using:Windows.Media.SpeechSynthesis"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <DataTemplate x:DataType="speechsynthesis:VoiceInformation" x:Key="VoiceItemTemplate">
+            <Grid Padding="10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource BodyTextStyle}" Text="{x:Bind DisplayName}"
+                           MaxLines="1" HorizontalAlignment="Left"/>
+                <TextBlock Style="{StaticResource SmallTextStyle}" Text="{x:Bind Description}"
+                           MaxLines="2" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="1"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
     <StackPanel>
         <StackPanel>
             <TextBlock Style="{StaticResource SmallTextStyle}" x:Uid="Control_DivideChapterRegexTipBlock"
@@ -34,5 +47,12 @@
                 x:Uid="Control_MaxSingleColumnWidthSlider" StepFrequency="5"
                 x:Name="MaxSingleColumnWidthSlider" ValueChanged="MaxSingleColumnWidthSlider_ValueChanged"
                 Margin="0,20,0,0" Style="{StaticResource BasicSliderStyle}"/>
+        <ComboBox Style="{StaticResource BasicComboBoxStyle}" x:Name="VoiceComboBox"
+                  ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
+                  ItemTemplate="{StaticResource VoiceItemTemplate}"
+                  SelectionChanged="VoiceComboBox_SelectionChanged" HeaderTemplate="{StaticResource TipHeader}"
+                  x:Uid="Control_VoiceComboBox" Margin="0,20,0,0" HorizontalAlignment="Stretch"/>
+        <TextBlock x:Uid="Control_SpeechVoiceWarningTipBlock" Style="{StaticResource SmallTextStyle}"
+                   TextWrapping="Wrap" HorizontalAlignment="Left" Margin="0,5,0,0"/>
     </StackPanel>
 </UserControl>

@@ -37,6 +37,7 @@ namespace Clean_Reader
         {
             if (!IsInit)
             {
+                vm.WaitingPopupInit();
                 await vm.BackgroundImageInit();
                 vm.CheckUpdate();
                 await vm.ShelfInit();
@@ -45,6 +46,7 @@ namespace Clean_Reader
                 vm.HistoryInit();
                 vm._menu.Navigate(new MenuItem(MenuItemType.Shelf));
                 await vm._yuenovClient.WarmUpAsync();
+                Window.Current.Dispatcher.AcceleratorKeyActivated += vm.AccelertorKeyActivedHandle;
                 IsInit = true;
             }
 

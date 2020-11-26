@@ -62,6 +62,27 @@ namespace Clean_Reader.Models.Core
                 _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
         }
 
+        public async Task SyncOneDriveHistory()
+        {
+            if (IsOneDriveInit)
+            {
+                if (string.IsNullOrEmpty(_oneDriveHistoryFileId))
+                {
+                    bool isHistoryExist = await _onedrive.IsFileExistAsync(StaticString.FileHistory);
+                    if (!isHistoryExist)
+                        await _onedrive.CreateFileAsync(StaticString.FileHistory, "[]");
+                    string historyId = await _onedrive.GetFileIdFromPathAsync(StaticString.FileHistory);
+                    _oneDriveHistoryFileId = historyId;
+                }
+                string historyString = await _onedrive.GetFileContentAsync(StaticString.FileHistory);
+                if (!string.IsNullOrEmpty(historyString))
+                {
+                    var historyList = JsonConvert.DeserializeObject<List<ReadHistory>>(historyString);
+                    CloudHistoryList = historyList;
+                }
+            }
+        }
+
         public async void OpenReaderView(Book book)
         {
             if (book == null)

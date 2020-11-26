@@ -59,8 +59,11 @@ namespace Clean_Reader.Models.Core
         }
 
         private bool _isStyleChanged = false;
+        public bool IsOneDriveInit = false;
         public bool IsBookListChanged = false;
         public bool IsDetailChanged = false;
+
+        private string _oneDriveHistoryFileId = "";
 
         public List<Lib.Share.Models.Book> TotalBookList = new List<Lib.Share.Models.Book>();
 
@@ -86,6 +89,7 @@ namespace Clean_Reader.Models.Core
         public ObservableCollection<Lib.Share.Models.Book> DisplayBookCollection = new ObservableCollection<Lib.Share.Models.Book>();
         public ObservableCollection<Lib.Share.Models.Book> LastestReadCollection = new ObservableCollection<Lib.Share.Models.Book>();
         public List<ReadHistory> HistoryList = new List<ReadHistory>();
+        public List<ReadHistory> CloudHistoryList = new List<ReadHistory>();
         public ObservableCollection<string> BackgroundImageCollection = new ObservableCollection<string>();
 
         public ObservableCollection<SystemFont> FontCollection = new ObservableCollection<SystemFont>();

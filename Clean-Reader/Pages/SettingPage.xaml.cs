@@ -74,7 +74,7 @@ namespace Clean_Reader.Pages
                 var fonts = SystemFont.GetSystemFonts().OrderBy(p => p.Name).ToList();
                 fonts.ForEach(p => vm.FontCollection.Add(p));
             }
-            FontComboBox.SelectedItem = vm.FontCollection.Where(p => p.Name == vm.ReaderStyle.FontFamily).FirstOrDefault();
+            FontComboBox.SelectedItem = vm.FontCollection.Where(p => p.Name == appFont).FirstOrDefault();
             double fontSize = Convert.ToDouble(App.Tools.App.GetLocalSetting(SettingNames.FontSize, "14"));
             FontSizeBox.Value = fontSize;
             string searchEngine = App.Tools.App.GetLocalSetting(SettingNames.SearchEngine, StaticString.SearchBing);

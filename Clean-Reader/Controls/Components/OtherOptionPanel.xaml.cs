@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,7 +40,22 @@ namespace Clean_Reader.Controls.Components
                 RegexBox.IsEnabled = false;
                 RegexTestButton.IsEnabled = false;
             }
+            else
+            {
+                RegexBox.IsEnabled = true;
+                RegexTestButton.IsEnabled = true;
+            }
             RegexBox.Text = App.VM.CurrentBook.CustomRegex ?? "";
+            VoiceComboBox.ItemsSource = SpeechSynthesizer.AllVoices.ToList();
+            string voiceId = App.Tools.App.GetLocalSetting(SettingNames.SpeechVoice, SpeechSynthesizer.DefaultVoice.Id);
+            for (int i = 0; i < SpeechSynthesizer.AllVoices.Count; i++)
+            {
+                if (SpeechSynthesizer.AllVoices[i].Id == voiceId)
+                {
+                    VoiceComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
             _isInit = true;
         }
         private void RegexTestButton_Click(object sender, RoutedEventArgs e)
@@ -65,6 +81,13 @@ namespace Clean_Reader.Controls.Components
             if (!_isInit)
                 return;
             MaxSingleColumnChanged?.Invoke(this, e.NewValue);
+        }
+
+        private void VoiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInit)
+                return;
+            App.Tools.App.WriteLocalSetting(SettingNames.SpeechVoice, (VoiceComboBox.SelectedItem as VoiceInformation).Id);
         }
     }
 }

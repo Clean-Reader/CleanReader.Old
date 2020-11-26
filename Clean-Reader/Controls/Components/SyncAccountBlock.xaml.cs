@@ -69,6 +69,7 @@ namespace Clean_Reader.Controls.Components
             Avatar.Visibility = Visibility.Visible;
             LoadingRing.IsActive = false;
             UserNameBlock.Text = name;
+            await App.VM.SyncOneDriveHistory();
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -79,6 +80,7 @@ namespace Clean_Reader.Controls.Components
                 var result = await App.VM._onedrive.AuthorizationAsync();
                 if (result != null)
                 {
+                    App.VM.IsOneDriveInit = true;
                     App.Tools.App.WriteLocalSetting(SettingNames.OneDriveAccessToken, result.AccessToken);
                     App.Tools.App.WriteLocalSetting(SettingNames.OneDriveExpiryTime, App.Tools.App.DateToTimeStamp(result.ExpiresOn.DateTime).ToString());
                     await Init();

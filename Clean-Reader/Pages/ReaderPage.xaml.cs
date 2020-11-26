@@ -23,6 +23,7 @@ using Windows.UI.Core;
 using Windows.ApplicationModel.DataTransfer;
 using System.Net;
 using Richasy.Controls.Reader.Enums;
+using Clean_Reader.Controls.Dialogs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -82,7 +83,7 @@ namespace Clean_Reader.Pages
         {
             vm.CurrentBook = book;
             BookTitleBlock.Text = book.Name;
-            
+
             if (vm._musicPlayer != null)
                 vm._musicPlayer.Check();
             var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
@@ -122,12 +123,16 @@ namespace Clean_Reader.Pages
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 
+        
+
         private async void ReaderPanel_OpenCompleted(object sender, EventArgs e)
         {
             LoadingRing.IsActive = false;
             if (!IsInit)
                 await Task.Delay(200);
-            var history = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
+            var localhistory = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
+            var cloudHistory = vm.GetCloudHistory(vm.CurrentBook);
+            var history = await vm.GetNeedToLoadHistory(localhistory, cloudHistory);
             if (history != null)
                 ReaderPanel.LoadHistory(history.Hisotry);
             else
@@ -236,9 +241,16 @@ namespace Clean_Reader.Pages
         {
             var originHistory = vm.HistoryList.Where(p => p.BookId == vm.CurrentBook.BookId).FirstOrDefault();
             if (originHistory != null)
+            {
                 originHistory.Hisotry = e;
+                vm.UpdateCloudHistory(vm.CurrentBook, originHistory);
+            }
             else
-                vm.HistoryList.Add(new ReadHistory(vm.CurrentBook.BookId, e));
+            {
+                var history = new ReadHistory(vm.CurrentBook.BookId, vm.CurrentBook.Name, vm.CurrentBook.Type, e);
+                vm.HistoryList.Add(history);
+                vm.UpdateCloudHistory(vm.CurrentBook, history);
+            }
             vm.IsHistoryChanged = true;
             ProgressBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Progress) + ": " + e.Progress.ToString("0.0") + "%";
         }
@@ -271,7 +283,7 @@ namespace Clean_Reader.Pages
                 }
                 if (_tempBook != vm.CurrentBook)
                     await HandleBook(_tempBook);
-                
+
                 _tempBook = null;
             }
         }
@@ -341,7 +353,7 @@ namespace Clean_Reader.Pages
 
         private void ReaderFlyout_Opened(object sender, object e)
         {
-           iCiBaBlock.SelectedText = ReaderPanel.SelectedText;
+            iCiBaBlock.SelectedText = ReaderPanel.SelectedText;
         }
 
         private void CopyButton_Click(object sender, RoutedEventArgs e)
@@ -381,7 +393,7 @@ namespace Clean_Reader.Pages
             {
                 ReaderFlyout.Hide();
                 return;
-            }   
+            }
             string searchEngine = App.Tools.App.GetLocalSetting(SettingNames.SearchEngine, StaticString.SearchBing);
             string content = WebUtility.UrlEncode(ReaderPanel.SelectedText);
             string url = "";
@@ -445,7 +457,7 @@ namespace Clean_Reader.Pages
 
         private void SearchContainer_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(e.OriginalSource is Grid grid && grid.Name == "SearchContainer")
+            if (e.OriginalSource is Grid grid && grid.Name == "SearchContainer")
             {
                 HideSearchContainer();
             }
@@ -469,7 +481,12 @@ namespace Clean_Reader.Pages
         {
             if (e.Type == SpeechCueType.Word)
             {
-                ReaderPanel.CheckCurrentReaderIndex(e.SpeechCue.StartPositionInInput);
+                try
+                {
+                    ReaderPanel.CheckCurrentReaderIndex(e.SpeechCue.StartPositionInInput);
+                }
+                catch (Exception)
+                {}
             }
         }
     }

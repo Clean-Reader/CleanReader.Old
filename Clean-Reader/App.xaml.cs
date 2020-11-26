@@ -12,6 +12,8 @@ using Lib.Share.Models;
 using Lib.Share.Enums;
 using System.Text;
 using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.Storage;
+using Clean_Reader.Controls.Dialogs;
 
 namespace Clean_Reader
 {
@@ -50,6 +52,11 @@ namespace Clean_Reader
             e.Handled = true;
             VM.ShowPopup(e.Message, true);
         }
+
+        protected override void OnFileActivated(FileActivatedEventArgs args)
+        {
+            OnLaunchedOrActivated(args);
+        }
         protected override void OnActivated(IActivatedEventArgs args)
         {
             OnLaunchedOrActivated(args);
@@ -63,7 +70,7 @@ namespace Clean_Reader
         {
             OnLaunchedOrActivated(e);
         }
-        private void OnLaunchedOrActivated(IActivatedEventArgs e)
+        private async void OnLaunchedOrActivated(IActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
             Tools = new Instance(StaticString.AppName);
@@ -98,6 +105,27 @@ namespace Clean_Reader
                 if (rootFrame.Content == null)
                 {
                     rootFrame.Navigate(typeof(MainPage), arg);
+                }
+            }
+            else if(e is FileActivatedEventArgs fileArgs)
+            {
+                var file = fileArgs.Files[0];
+                if (file is StorageFile sf)
+                {
+                    if (rootFrame.Content == null)
+                    {
+                        rootFrame.Navigate(typeof(MainPage), file);
+                    }
+                    else
+                    {
+                        var dialog = new ConfirmDialog(LanguageNames.OpenFileWarning);
+                        dialog.PrimaryButtonClick += async(_s, _e) =>
+                        {
+                            var book = await VM.ImportBook(sf);
+                            VM.OpenReaderView(book);
+                        };
+                        await dialog.ShowAsync();
+                    }
                 }
             }
             else if (e.Kind == ActivationKind.StartupTask)

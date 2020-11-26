@@ -46,6 +46,7 @@
         RebuildSuccess,
         ChooseReadHistory,
         NeedOpenNotification,
-        LastUpdateTime
+        LastUpdateTime,
+        OpenFileWarning
     }
 }

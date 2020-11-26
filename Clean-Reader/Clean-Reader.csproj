@@ -262,6 +262,7 @@
   <ItemGroup>
     <Content Include="Assets\coverholder-Dark.png" />
     <Content Include="Assets\coverholder-Light.png" />
+    <Content Include="Assets\EPUB.png" />
     <Content Include="Assets\Images\desert-castle.jpg" />
     <Content Include="Assets\Images\lake.jpg" />
     <Content Include="Assets\Images\leaf.jpg" />
@@ -317,8 +318,10 @@
     <Content Include="Assets\Logo\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Logo\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Logo\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Txt.png" />
     <Content Include="Misc\Update_en_US.txt" />
     <Content Include="Misc\Update_zh_CN.txt" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

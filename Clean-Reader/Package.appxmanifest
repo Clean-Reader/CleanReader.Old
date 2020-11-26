@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="2902fd5a-1992-48f4-b694-ba8125aa3b46"
+    Name="60520B029E250.379646A52FC24"
     Publisher="CN=9EFA2047-A580-400B-A5B2-0C7ABB0DB5C0"
-    Version="1.0.0.0" />
+    Version="0.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="2902fd5a-1992-48f4-b694-ba8125aa3b46" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="c87165ce-5816-425c-a202-d82188165f14" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Clean-Reader</DisplayName>
-    <PublisherDisplayName>richasy</PublisherDisplayName>
+    <DisplayName>干净阅读</DisplayName>
+    <PublisherDisplayName>云之幻</PublisherDisplayName>
     <Logo>Assets\Logo\StoreLogo.png</Logo>
   </Properties>
 
@@ -55,6 +55,26 @@
             <Task Type="systemEvent"/>
           </BackgroundTasks>
         </Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="epub">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.epub</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:DisplayName>Epub Book</uap:DisplayName>
+            <uap:Logo>Assets\EPUB.png</uap:Logo>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="txt">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.txt</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:DisplayName>TXT File</uap:DisplayName>
+            <uap:Logo>Assets\Txt.png</uap:Logo>
+            <uap:EditFlags OpenIsSafe="true"/>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>

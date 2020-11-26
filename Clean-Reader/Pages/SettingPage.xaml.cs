@@ -94,7 +94,7 @@ namespace Clean_Reader.Pages
             }
             bool isEnableImage = App.Tools.App.GetBoolSetting(SettingNames.EnabledBackgroundImage, false);
             EnableBackgroundImageToggleSwitch.IsOn = isEnableImage;
-            var color = App.Tools.App.GetLocalSetting(SettingNames.BackgroundMaskColor, App.Current.RequestedTheme == ApplicationTheme.Light ? "#22FFFFFF" : "#22000000").Hex16toRGB();
+            var color = App.Tools.App.GetLocalSetting(SettingNames.BackgroundMaskColor, App.Current.RequestedTheme == ApplicationTheme.Light ? "#C7FFFFFF" : "#C7000000").Hex16toRGB();
             MaskColorPicker.Color = color;
             bool isAutoOpenLastBook = App.Tools.App.GetBoolSetting(SettingNames.IsAutoOpenLastBook, false);
             AutoOpenLastBookSwitch.IsOn = isAutoOpenLastBook;

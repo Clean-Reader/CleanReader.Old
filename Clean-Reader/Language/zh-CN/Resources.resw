@@ -387,6 +387,9 @@
   <data name="Tip_OpenBook" xml:space="preserve">
     <value>打开书籍</value>
   </data>
+  <data name="Tip_OpenFileWarning" xml:space="preserve">
+    <value>有外部书籍将导入应用，是否继续？</value>
+  </data>
   <data name="Tip_Progress" xml:space="preserve">
     <value>进度</value>
   </data>

@@ -9,6 +9,7 @@ using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Windows.UI.Xaml.Media.Animation;
 using System.Linq;
+using Windows.Storage;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -21,6 +22,7 @@ namespace Clean_Reader
     {
         public AppViewModel vm = App.VM;
         public new static MainPage Current;
+        private StorageFile _tempFile = null;
         public MainPage()
         {
             this.InitializeComponent();
@@ -30,6 +32,8 @@ namespace Clean_Reader
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.Parameter != null && e.Parameter is StorageFile file)
+                _tempFile = file;
             base.OnNavigatedTo(e);
         }
 
@@ -48,18 +52,27 @@ namespace Clean_Reader
                 await vm._yuenovClient.WarmUpAsync();
                 Window.Current.Dispatcher.AcceleratorKeyActivated += vm.AccelertorKeyActivedHandle;
                 vm.BackgroundTaskInit();
-                IsInit = true;
-                bool isAutoOpen = App.Tools.App.GetBoolSetting(SettingNames.IsAutoOpenLastBook, false);
-                if (isAutoOpen)
+                if (_tempFile != null)
                 {
-                    string lastId = App.Tools.App.GetLocalSetting(SettingNames.LastBookId, "");
-                    if(!string.IsNullOrEmpty(lastId))
+                    var book = await vm.ImportBook(_tempFile);
+                    vm.OpenReaderView(book);
+                    _tempFile = null;
+                }
+                else
+                {
+                    bool isAutoOpen = App.Tools.App.GetBoolSetting(SettingNames.IsAutoOpenLastBook, false);
+                    if (isAutoOpen)
                     {
-                        var book = vm.TotalBookList.Where(p => p.BookId == lastId).FirstOrDefault();
-                        if (book != null)
-                            vm.OpenReaderView(book);
+                        string lastId = App.Tools.App.GetLocalSetting(SettingNames.LastBookId, "");
+                        if (!string.IsNullOrEmpty(lastId))
+                        {
+                            var book = vm.TotalBookList.Where(p => p.BookId == lastId).FirstOrDefault();
+                            if (book != null)
+                                vm.OpenReaderView(book);
+                        }
                     }
                 }
+                IsInit = true;
             }
 
             // TODO

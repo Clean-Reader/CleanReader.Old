@@ -78,7 +78,7 @@ namespace Clean_Reader.Models.Core
             foreach (var file in files)
             {
                 var book = new Book(file, shelfId);
-                if (TotalBookList.Contains(book))
+                if (TotalBookList.Any(p=>p.Name.Equals(book.Name)))
                 {
                     ShowPopup($"{App.Tools.App.GetLocalizationTextFromResource(LanguageNames.RepeatBook)}:{book.Name}", true);
                     continue;
@@ -96,6 +96,29 @@ namespace Clean_Reader.Models.Core
             if (currentShelfId == shelfId)
                 CurrentShelfInit();
             IsBookListChanged = true;
+        }
+
+        public async Task<Book> ImportBook(StorageFile file)
+        {
+            string shelfId = "";
+            var book = new Book(file, shelfId);
+            if (TotalBookList.Any(p => p.Name.Equals(book.Name)))
+            {
+                return TotalBookList.Where(p => p.Name == book.Name).FirstOrDefault();
+            }
+            if (book.Type == BookType.Epub)
+            {
+                var epub = await EpubReader.Read(file, Encoding.Default);
+                var coverFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Covers", CreationCollisionOption.OpenIfExists);
+                var coverFile = await coverFolder.CreateFileAsync(book.BookId + ".png", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteBytesAsync(coverFile, epub.CoverImage);
+            }
+            TotalBookList.Add(book);
+            string currentShelfId = CurrentShelf.Id == "default" ? "" : CurrentShelf.Id;
+            if (currentShelfId == shelfId)
+                CurrentShelfInit();
+            IsBookListChanged = true;
+            return book;
         }
 
         public async Task ImportBook(Yuenov.SDK.Models.Share.Book web)

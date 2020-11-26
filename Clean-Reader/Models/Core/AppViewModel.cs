@@ -10,6 +10,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Richasy.Font.UWP;
 using System.Linq;
+using Windows.UI.Xaml;
+using Windows.UI.Core;
+using Windows.System;
+using Windows.UI.Xaml.Controls;
+using System.Collections.Generic;
 
 namespace Clean_Reader.Models.Core
 {
@@ -22,12 +27,45 @@ namespace Clean_Reader.Models.Core
             CurrentShelfChanged += CurrentShelf_Changed;
             _checkFileTimer.Tick += CheckFileTimer_Tick;
             _checkFileTimer.Start();
-            
+            Window.Current.Dispatcher.AcceleratorKeyActivated += AccelertorKeyActivedHandle;
             //_waitPopup = new WaitingPopup(App.Tools);
             //_waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
             //_waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
             //_waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
             //_waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
+        }
+
+        private async void AccelertorKeyActivedHandle(CoreDispatcher sender, AcceleratorKeyEventArgs args)
+        {
+            if (args.EventType.ToString().Contains("Down"))
+            {
+                var esc = Window.Current.CoreWindow.GetKeyState(VirtualKey.Escape);
+                var ctrl = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
+                var shift = Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift);
+                if (esc.HasFlag(CoreVirtualKeyStates.Down))
+                {
+                    if (IsReaderPage)
+                    {
+                        CloseReaderView();
+                    }
+                    else if (ctrl.HasFlag(CoreVirtualKeyStates.Down))
+                    {
+                        if (args.VirtualKey == VirtualKey.Q)
+                        {
+                            IList<AppDiagnosticInfo> infos = await AppDiagnosticInfo.RequestInfoForAppAsync();
+                            IList<AppResourceGroupInfo> resourceInfos = infos[0].GetResourceGroups();
+                            await resourceInfos[0].StartSuspendAsync();
+                        }
+                        else if (args.VirtualKey == VirtualKey.F)
+                        {
+                            if (IsReaderPage)
+                            {
+                                Pages.ReaderPage.Current.ShowSearchPanel();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private async void CheckFileTimer_Tick(object sender, object e)

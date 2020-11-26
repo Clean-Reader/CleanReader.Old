@@ -53,6 +53,11 @@ namespace Clean_Reader.Models.Core
             }
         }
 
+        public bool IsReaderPage
+        {
+            get => (Window.Current.Content as Frame).Content is Pages.ReaderPage;
+        }
+
         private bool _isStyleChanged = false;
         public bool IsBookListChanged = false;
         public bool IsDetailChanged = false;

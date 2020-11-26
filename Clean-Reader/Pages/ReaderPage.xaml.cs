@@ -360,6 +360,11 @@ namespace Clean_Reader.Pages
 
         private void InsideSearchButton_Click(object sender, RoutedEventArgs e)
         {
+            ShowSearchPanel();
+        }
+
+        public void ShowSearchPanel()
+        {
             if (string.IsNullOrEmpty(ReaderPanel.SelectedText))
             {
                 ReaderFlyout.Hide();

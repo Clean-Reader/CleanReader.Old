@@ -1,4 +1,5 @@
-﻿using Clean_Reader.Controls.Dialogs;
+﻿using Clean_Reader.Controls.Components;
+using Clean_Reader.Controls.Dialogs;
 using Clean_Reader.Models.Enums;
 using Clean_Reader.Models.UI;
 using Clean_Reader.Pages;
@@ -136,6 +137,13 @@ namespace Clean_Reader.Models.Core
             var popup = new TipPopup(App.Tools, msg);
             ColorNames color = isError ? ColorNames.ErrorColor : ColorNames.PrimaryColor;
             popup.Show(color, 2);
+        }
+        public async void ShowImagePopup(string base64)
+        {
+            if (_imgPopup == null)
+                _imgPopup = new ImagePopup();
+            await _imgPopup.SetSource(base64);
+            _imgPopup.Show();
         }
         public void ShowWaitingPopup(LanguageNames content)
         {

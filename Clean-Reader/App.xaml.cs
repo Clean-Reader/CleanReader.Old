@@ -14,6 +14,7 @@ using System.Text;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Windows.Storage;
 using Clean_Reader.Controls.Dialogs;
+using Clean_Reader.Pages;
 
 namespace Clean_Reader
 {
@@ -96,7 +97,18 @@ namespace Clean_Reader
             {
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(MainPage), (e as LaunchActivatedEventArgs).Arguments);
+                    bool needCheck = Tools.App.GetBoolSetting(SettingNames.IsFirstRun);
+                    if (needCheck)
+                    {
+                        bool isOld = await ApplicationData.Current.LocalFolder.FileExistsAsync("History.json");
+                        if (isOld)
+                            rootFrame.Navigate(typeof(WelcomePage));
+                        else
+                            rootFrame.Navigate(typeof(MainPage), (e as LaunchActivatedEventArgs).Arguments);
+                        Tools.App.WriteLocalSetting(SettingNames.IsFirstRun, "False");
+                    }
+                    else
+                        rootFrame.Navigate(typeof(MainPage), (e as LaunchActivatedEventArgs).Arguments);
                 }
             }
             else if (e is ProtocolActivatedEventArgs protocalArgs)

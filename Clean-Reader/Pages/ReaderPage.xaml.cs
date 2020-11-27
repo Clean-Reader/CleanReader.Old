@@ -83,7 +83,7 @@ namespace Clean_Reader.Pages
         {
             vm.CurrentBook = book;
             BookTitleBlock.Text = book.Name;
-
+            vm.ShowWaitingPopup(LanguageNames.Waiting);
             if (vm._musicPlayer != null)
                 vm._musicPlayer.Check();
             var localChapters = await App.VM.GetBookLocalChapters(book.BookId, true);
@@ -120,6 +120,7 @@ namespace Clean_Reader.Pages
                     vm.ShowPopup(ex.Message, true);
                 }
             }
+            vm.HideWaitingPopup();
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 
@@ -187,16 +188,9 @@ namespace Clean_Reader.Pages
             LoadingRing.IsActive = false;
         }
 
-        private async void ReaderPanel_ImageTapped(object sender, ImageEventArgs e)
+        private void ReaderPanel_ImageTapped(object sender, ImageEventArgs e)
         {
-            var byteArray = Convert.FromBase64String(e.Base64);
-            var stream = byteArray.AsBuffer().AsStream().AsRandomAccessStream();
-            using (stream)
-            {
-                var bitmap = new BitmapImage();
-                await bitmap.SetSourceAsync(stream);
-                // do other thing
-            }
+            vm.ShowImagePopup(e.Base64);
         }
 
         private async void ReaderPanel_LinkTapped(object sender, LinkEventArgs e)

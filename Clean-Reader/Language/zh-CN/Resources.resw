@@ -183,8 +183,14 @@
   <data name="Control_CopyAppButton.Label" xml:space="preserve">
     <value>复制</value>
   </data>
+  <data name="Control_CopyItem.Text" xml:space="preserve">
+    <value>复制</value>
+  </data>
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>暗色主题</value>
+  </data>
+  <data name="Control_DisableXboxScaleSwitch.Header" xml:space="preserve">
+    <value>在XBOX上禁用缩放</value>
   </data>
   <data name="Control_DivideChapterRegexTipBlock.Text" xml:space="preserve">
     <value>自定义分章正则表达式</value>
@@ -264,6 +270,9 @@
   <data name="Control_RecommendGridView.Header" xml:space="preserve">
     <value>相关推荐</value>
   </data>
+  <data name="Control_SaveItem.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
   <data name="Control_SearchEngineComboBox.Header" xml:space="preserve">
     <value>默认搜索引擎</value>
   </data>
@@ -288,6 +297,9 @@
   <data name="Control_SpeechVoiceWarningTipBlock.Text" xml:space="preserve">
     <value>请选择与当前书籍语言匹配的语音，否则将无法生成合适的朗读语音</value>
   </data>
+  <data name="Control_StartButton.Content" xml:space="preserve">
+    <value>开始体验！</value>
+  </data>
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>行首缩进</value>
   </data>
@@ -299,6 +311,13 @@
   </data>
   <data name="Control_VoiceComboBox.Header" xml:space="preserve">
     <value>朗读语音选择</value>
+  </data>
+  <data name="Control_WelcomeDescriptionBlock.Text" xml:space="preserve">
+    <value>干净阅读已经全面升级，内部的数据结构也发生了较大变化，换用了其它的在线服务，这导致旧版的阅读历史将无法在新版中使用，所以目前您需要重新导入书籍。
+我知道这有些麻烦，不过相信我，这一切都是值得的</value>
+  </data>
+  <data name="Control_WelcomeTitleBlock.Text" xml:space="preserve">
+    <value>全新版本的干净阅读</value>
   </data>
   <data name="Control_WikiButton.Content" xml:space="preserve">
     <value>维基百科</value>

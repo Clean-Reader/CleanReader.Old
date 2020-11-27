@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using Clean_Reader.Controls.Dialogs;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Windows.ApplicationModel.Background;
+using Clean_Reader.Controls.Components;
 
 namespace Clean_Reader.Models.Core
 {
@@ -127,11 +128,17 @@ namespace Clean_Reader.Models.Core
 
         public void WaitingPopupInit()
         {
+            _imgPopup = new ImagePopup();
             _waitPopup = new WaitingPopup(App.Tools);
             _waitPopup.PopupBackground = new SolidColorBrush(Colors.Transparent);
             _waitPopup.PresenterBackground = App.Tools.App.GetThemeBrushFromResource(ColorNames.PopupBackground);
             _waitPopup.ProgressRingStyle = App.Tools.App.GetStyleFromResource(StyleNames.BasicProgressRingStyle);
             _waitPopup.TextStyle = App.Tools.App.GetStyleFromResource(StyleNames.BodyTextStyle);
+            _waitPopup.HorizontalAlignment = HorizontalAlignment.Center;
+            _waitPopup.VerticalAlignment = VerticalAlignment.Center;
+            _waitPopup.PopupMaxWidth = 150;
+            _waitPopup.PopupMaxHeight = 120;
+            _waitPopup.CornerRadius = new CornerRadius(10);
         }
         public async void BackgroundTaskInit()
         {

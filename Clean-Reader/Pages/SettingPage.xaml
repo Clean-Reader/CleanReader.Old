@@ -98,6 +98,11 @@
             <TextBlock Style="{StaticResource SmallTextStyle}" x:Name="LastUpdateTimeBlock" Margin="0,10,0,0"
                        Visibility="{x:Bind AutoCheckWebBookSwitch.IsOn,Mode=OneWay,Converter={StaticResource VisConverter}}"/>
 
+            <ToggleSwitch HeaderTemplate="{StaticResource TipHeader}" Margin="0,20,0,0"
+                          Style="{StaticResource BasicToggleSwitchStyle}"
+                          x:Uid="Control_DisableXboxScaleSwitch" x:Name="DisableXboxScaleSwitch"
+                          Toggled="DisableXboxScaleSwitch_Toggled"/>
+
             <ComboBox Style="{StaticResource BasicComboBoxStyle}" Margin="0,15,0,0" Width="200"
                               ItemContainerStyle="{StaticResource BasicComboBoxItemContainerStyle}"
                               x:Name="SearchEngineComboBox" SelectionChanged="SearchEngineComboBox_SelectionChanged"

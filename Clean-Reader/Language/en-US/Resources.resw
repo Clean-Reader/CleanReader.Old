@@ -183,8 +183,14 @@
   <data name="Control_CopyAppButton.Label" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="Control_CopyItem.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="Control_DarkComboBoxItem.Content" xml:space="preserve">
     <value>Dark</value>
+  </data>
+  <data name="Control_DisableXboxScaleSwitch.Header" xml:space="preserve">
+    <value>Disable zoom on XBOX</value>
   </data>
   <data name="Control_DivideChapterRegexTipBlock.Text" xml:space="preserve">
     <value>Custom chapter regular expression</value>
@@ -264,6 +270,9 @@
   <data name="Control_RecommendGridView.Header" xml:space="preserve">
     <value>Recommend books</value>
   </data>
+  <data name="Control_SaveItem.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Control_SearchEngineComboBox.Header" xml:space="preserve">
     <value>Default search engine</value>
   </data>
@@ -288,6 +297,9 @@
   <data name="Control_SpeechVoiceWarningTipBlock.Text" xml:space="preserve">
     <value>Please select a voice that matches the language of the current book, otherwise it will not be able to generate a suitable reading voice</value>
   </data>
+  <data name="Control_StartButton.Content" xml:space="preserve">
+    <value>Start experiencing!</value>
+  </data>
   <data name="Control_TextIndentSlider.Header" xml:space="preserve">
     <value>Text indent</value>
   </data>
@@ -299,6 +311,13 @@
   </data>
   <data name="Control_VoiceComboBox.Header" xml:space="preserve">
     <value>Speaking voice selection</value>
+  </data>
+  <data name="Control_WelcomeDescriptionBlock.Text" xml:space="preserve">
+    <value>Clean Reader has been fully upgraded, and the internal data structure has also undergone major changes. Other online services have been used. This has caused the old version of the reading history to be unavailable in the new version, so currently you need to re-import the book. 
+I know it’s a bit troublesome, but believe me, it’s all worth it</value>
+  </data>
+  <data name="Control_WelcomeTitleBlock.Text" xml:space="preserve">
+    <value>New version of Clean Reader</value>
   </data>
   <data name="Control_WikiButton.Content" xml:space="preserve">
     <value>Wikipedia</value>

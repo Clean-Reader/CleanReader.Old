@@ -32,6 +32,7 @@ namespace Clean_Reader.Models.UI
                 new ReaderColorConfig("#171717".Hex16toRGB(),"#F1E5C9".Hex16toRGB()),
                 new ReaderColorConfig("#1a2430".Hex16toRGB(),"#f2f2f4".Hex16toRGB()),
                 new ReaderColorConfig("#0d1f45".Hex16toRGB(),"#fdd3e7".Hex16toRGB()),
+                new ReaderColorConfig("#121212".Hex16toRGB(),"#A2AEC9".Hex16toRGB())
             };
             return list;
         }

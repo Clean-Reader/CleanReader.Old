@@ -23,6 +23,7 @@
         LastBookId,
         LastBackgroundSyncTime,
         DisableXboxScale,
-        IsEnableAutoCheckUpdate
+        IsEnableAutoCheckUpdate,
+        IsFirstRun
     }
 }

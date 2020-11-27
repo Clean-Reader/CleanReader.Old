@@ -1,0 +1,25 @@
+﻿<ui:RichasyPage
+    xmlns:ui="using:Richasy.Controls.UWP.Models.UI"
+    x:Class="Clean_Reader.Pages.WelcomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Clean_Reader.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:interaction="using:Richasy.Controls.UWP.Interaction"
+    mc:Ignorable="d"
+    Background="{ThemeResource PageBackground}">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <controls:ImageEx Source="ms-appx:///Assets/logo.png" DecodePixelWidth="60"
+                              HorizontalAlignment="Center"/>
+            <TextBlock x:Uid="Control_WelcomeTitleBlock" Style="{StaticResource SubtitleTextStyle}"
+                       TextAlignment="Center" Margin="0,15" HorizontalAlignment="Center"/>
+            <TextBlock x:Uid="Control_WelcomeDescriptionBlock" Style="{StaticResource SmallTextStyle}"
+                       TextAlignment="Center" Margin="0,0,0,15" HorizontalAlignment="Center"
+                       MaxWidth="200"/>
+            <interaction:ExtraButton x:Uid="Control_StartButton" Style="{StaticResource PrimaryExtraButtonStyle}"
+                                     HorizontalAlignment="Center" x:Name="StartButton" Click="StartButton_Click"/>
+        </StackPanel>
+    </Grid>
+</ui:RichasyPage>

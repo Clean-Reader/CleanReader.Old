@@ -2,6 +2,7 @@
 using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Lib.Share.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 using Richasy.Controls.UWP.Models.UI;
 using Richasy.Font.UWP;
 using System;
@@ -101,8 +102,12 @@ namespace Clean_Reader.Pages
             bool isAutoCheckUpdate = App.Tools.App.GetBoolSetting(SettingNames.IsEnableAutoCheckUpdate, false);
             AutoCheckWebBookSwitch.IsOn = isAutoCheckUpdate;
             int lastUpdateSec = Convert.ToInt32(App.Tools.App.GetLocalSetting(SettingNames.LastBackgroundSyncTime, "0"));
-            string time = lastUpdateSec == 0 ? "--" : App.Tools.App.TimeStampToDate(lastUpdateSec).ToString("yyyy/MM/dd HH:mm");
+            var date = DateTimeOffset.FromUnixTimeSeconds(lastUpdateSec);
+            string time = lastUpdateSec == 0 ? "--" : date.ToString("yyyy/MM/dd HH:mm");
             LastUpdateTimeBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.LastUpdateTime) + time;
+            bool isDisableScale = App.Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
+            DisableXboxScaleSwitch.IsOn = isDisableScale;
+            DisableXboxScaleSwitch.IsEnabled = SystemInformation.DeviceFamily == "Windows.Xbox";
             await Task.Delay(100);
             IsInit = true;
         }
@@ -220,6 +225,15 @@ namespace Clean_Reader.Pages
                 await vm.RegisterBackgroundTask(StaticString.TaskAutoCheck);
             else
                 vm.UnRegisterBackgroundTask(StaticString.TaskAutoCheck);
+        }
+
+        private void DisableXboxScaleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (IsInit)
+            {
+                App.Tools.App.WriteLocalSetting(SettingNames.DisableXboxScale, DisableXboxScaleSwitch.IsOn.ToString());
+                vm.ShowRestartDialog();
+            }
         }
     }
 }

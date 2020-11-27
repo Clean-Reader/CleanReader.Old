@@ -25,14 +25,16 @@ namespace Clean_Reader.Controls.Components
         }
         public void Check()
         {
-            if (Book != App.VM.CurrentBook && Book!=null)
+            if (Book != App.VM.CurrentBook && Book != null)
             {
                 Close();
             }
         }
 
-        private void Close()
+        public void Close()
         {
+            if (App.VM._player == null)
+                return;
             App.VM._player.Pause();
             IsMediaEnded = false;
             try
@@ -128,6 +130,12 @@ namespace Clean_Reader.Controls.Components
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width > 30)
+                TransportControls.MaxWidth = e.NewSize.Width - 30;
         }
     }
 }

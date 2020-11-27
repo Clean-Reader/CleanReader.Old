@@ -576,7 +576,7 @@
                                                    Margin="0,5,0,0"/>
                                     </StackPanel>
                                 </Grid>
-                                <TextBlock Style="{StaticResource BodyTextStyle}" MaxLines="1" x:Name="ChapterNameBlock"
+                                <TextBlock Style="{StaticResource BodyTextStyle}" MaxLines="1" x:Name="ChapterNameBlock" MaxWidth="{TemplateBinding MaxWidth}"
                                            Text="{TemplateBinding ChapterName}" Foreground="{ThemeResource ImportantTextColor}"
                                            Grid.Row="2" Margin="0,15" HorizontalAlignment="Left" FontWeight="Bold"/>
                                 <Border x:Name="MediaTransportControls_Timeline_Border" Grid.ColumnSpan="3" Grid.Row="3">

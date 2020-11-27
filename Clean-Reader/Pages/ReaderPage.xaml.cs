@@ -177,8 +177,13 @@ namespace Clean_Reader.Pages
             ChapterListView.SelectedItem = e;
             ChapterListView.ScrollIntoView(e, ScrollIntoViewAlignment.Leading);
             ChapterTitleBlock.Text = e.Title;
-            if (App.VM._musicPlayer != null && App.VM._musicPlayer.IsMediaEnded)
-                await ReaderBar.LoadSpeech();
+            if (App.VM._musicPlayer != null)
+            {
+                if (App.VM._musicPlayer.IsMediaEnded)
+                    await ReaderBar.LoadSpeech();
+                else
+                    App.VM._musicPlayer.Close();
+            }
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 

@@ -24,6 +24,8 @@ using Windows.ApplicationModel.DataTransfer;
 using System.Net;
 using Richasy.Controls.Reader.Enums;
 using Clean_Reader.Controls.Dialogs;
+using Windows.Foundation;
+using Windows.UI.Xaml.Controls.Primitives;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,8 +39,10 @@ namespace Clean_Reader.Pages
         AppViewModel vm = App.VM;
         public ObservableCollection<Chapter> ChapterCollection = new ObservableCollection<Chapter>();
         public ObservableCollection<InsideSearchItem> SearchCollection = new ObservableCollection<InsideSearchItem>();
+        private Point _lastTouchPoint = new Point(0, 0);
         Book _tempBook = null;
         public static new ReaderPage Current;
+        private bool _isTouchItem = false;
         public ReaderPage() : base()
         {
             this.InitializeComponent();
@@ -124,7 +128,7 @@ namespace Clean_Reader.Pages
             ReaderPanel.Focus(FocusState.Programmatic);
         }
 
-        
+
 
         private async void ReaderPanel_OpenCompleted(object sender, EventArgs e)
         {
@@ -190,11 +194,13 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_ImageTapped(object sender, ImageEventArgs e)
         {
+            _isTouchItem = true;
             vm.ShowImagePopup(e.Base64);
         }
 
         private async void ReaderPanel_LinkTapped(object sender, LinkEventArgs e)
         {
+            _isTouchItem = true;
             if (!string.IsNullOrEmpty(e.Link))
                 await Launcher.LaunchUriAsync(new Uri(e.Link));
             else
@@ -202,12 +208,16 @@ namespace Clean_Reader.Pages
                 if (!string.IsNullOrEmpty(e.Id))
                 {
                     var node = ReaderPanel.GetSpecificIdNode(e.Id, e.FileName);
-                    if (node.Name == "body")
+                    if (node.Name == "body" || node.Name.Contains("h", StringComparison.OrdinalIgnoreCase))
                         ReaderPanel.LocateToSpecificFile(e.FileName);
                     else
                     {
                         var tip = ReaderPanel.GetSpecificIdContent(node, e.Id);
-                        await new MessageDialog(tip.Description, tip.Title).ShowAsync();
+                        TipTitleBlock.Text = tip.Title;
+                        TipDescriptionBlock.Text = tip.Description;
+                        var opt = new FlyoutShowOptions();
+                        opt.Position = _lastTouchPoint;
+                        TipFlyout.ShowAt(ReaderPanel, opt);
                     }
                 }
                 else if (!string.IsNullOrEmpty(e.FileName))
@@ -252,6 +262,12 @@ namespace Clean_Reader.Pages
         private void ReaderPanel_TouchTapped(object sender, PositionEventArgs e)
         {
             double width = this.ActualWidth;
+            _lastTouchPoint = e.Position;
+            if (_isTouchItem)
+            {
+                _isTouchItem = false;
+                return;
+            }
             if (e.Position.X > width / 3.0 && e.Position.X < width * 2 / 3.0)
             {
                 ReaderBar.Toggle();
@@ -480,8 +496,13 @@ namespace Clean_Reader.Pages
                     ReaderPanel.CheckCurrentReaderIndex(e.SpeechCue.StartPositionInInput);
                 }
                 catch (Exception)
-                {}
+                { }
             }
+        }
+
+        private void ReaderPanel_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            _lastTouchPoint = e.GetCurrentPoint(ReaderPanel).Position;
         }
     }
 }

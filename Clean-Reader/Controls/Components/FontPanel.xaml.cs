@@ -1,6 +1,7 @@
 ﻿using Clean_Reader.Models.Core;
 using Richasy.Font.UWP;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
@@ -28,7 +29,11 @@ namespace Clean_Reader.Controls.Components
                 var fonts = SystemFont.GetSystemFonts().OrderBy(p => p.Name).ToList();
                 fonts.ForEach(p => vm.FontCollection.Add(p));
             }
-            FontListView.SelectedItem = vm.FontCollection.Where(p => p.Name == vm.ReaderStyle.FontFamily).FirstOrDefault();
+            var item = vm.FontCollection.Where(p => p.Name == vm.ReaderStyle.FontFamily).FirstOrDefault();
+            if (item != null)
+            {
+                FontListView.SelectedItem = item;
+            }
             IsInit = true;
         }
         private void FontListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -71,6 +76,11 @@ namespace Clean_Reader.Controls.Components
                 vm.ReaderStyle.SegmentSpacing = e.NewValue;
                 vm.UpdateStyle();
             }
+        }
+
+        private void FontListView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            FontListView.ScrollIntoView(vm.FontCollection.Where(p => p.Name == vm.ReaderStyle.FontFamily).FirstOrDefault(),ScrollIntoViewAlignment.Leading);
         }
     }
 }

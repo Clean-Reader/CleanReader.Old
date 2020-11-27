@@ -49,7 +49,23 @@
                     </Grid>
                 </AppBarElementContainer>
             </CommandBarFlyout.SecondaryCommands>
-            
+
+        </CommandBarFlyout>
+        <CommandBarFlyout x:Name="TipFlyout">
+            <CommandBarFlyout.SecondaryCommands>
+                <AppBarElementContainer>
+                    <Grid Padding="15,10" Width="280">
+                        <StackPanel>
+                            <TextBlock x:Name="TipTitleBlock" Style="{StaticResource SubtitleTextStyle}"/>
+                            <ScrollViewer Style="{StaticResource BasicScrollViewer}" HorizontalScrollMode="Disabled"
+                                          HorizontalScrollBarVisibility="Hidden" Margin="0,10,0,0">
+                                <TextBlock Style="{StaticResource BodyTextStyle}" x:Name="TipDescriptionBlock"
+                                           />
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                </AppBarElementContainer>
+            </CommandBarFlyout.SecondaryCommands>
         </CommandBarFlyout>
     </ui:RichasyPage.Resources>
     <Grid>
@@ -91,6 +107,7 @@
                             Loaded="ReaderPanel_Loaded"
                             CustomContentRequest="ReaderPanel_CustomContentRequest"
                             SpeechCueChanged="ReaderPanel_SpeechCueChanged"
+                            PointerMoved="ReaderPanel_PointerMoved"
                             ReaderFlyout="{StaticResource ReaderFlyout}"
                             >
                         <reader:ReaderPanel.Header>

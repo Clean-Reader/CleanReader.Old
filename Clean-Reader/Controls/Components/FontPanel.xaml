@@ -29,6 +29,7 @@
                       Style="{StaticResource BasicListView}"
                       ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
                       ItemClick="FontListView_ItemClick" MaxHeight="400"
+                              Loaded="FontListView_Loaded"
                       />
                 </Grid>
             </PivotItem>

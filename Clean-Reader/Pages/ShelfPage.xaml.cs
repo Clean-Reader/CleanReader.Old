@@ -63,7 +63,15 @@ namespace Clean_Reader.Pages
         {
             var btn = sender as Button;
             btn.IsEnabled = false;
-            await vm.ImportBooks();
+            try
+            {
+                await vm.ImportBooks();
+            }
+            catch (Exception ex)
+            {
+                vm.ShowPopup(ex.Message, true);
+            }
+            
             btn.IsEnabled = true;
         }
 

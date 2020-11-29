@@ -17,7 +17,14 @@ namespace Clean_Reader.Controls.Layout
         private async void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             ImportButton.IsLoading = true;
-            await App.VM.ImportBooks();
+            try
+            {
+                await App.VM.ImportBooks();
+            }
+            catch (System.Exception ex)
+            {
+                App.VM.ShowPopup(ex.Message, true);
+            }
             ImportButton.IsLoading = false;
         }
 

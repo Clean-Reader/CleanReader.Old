@@ -44,8 +44,13 @@
             </AppBarButton>
             <CommandBarFlyout.SecondaryCommands>
                 <AppBarElementContainer>
-                    <Grid Padding="15,10" Width="280">
-                        <components:iCiBaTranslateBlock x:Name="iCiBaBlock"/>
+                    <Grid Padding="15,10" Width="280" MaxHeight="200">
+                        <ScrollViewer Style="{StaticResource BasicScrollViewer}"
+                                      HorizontalScrollMode="Disabled"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <components:iCiBaTranslateBlock x:Name="iCiBaBlock"/>
+                        </ScrollViewer>
                     </Grid>
                 </AppBarElementContainer>
             </CommandBarFlyout.SecondaryCommands>

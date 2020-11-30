@@ -1,8 +1,10 @@
 ﻿You have upgraded to a new version of Clean Reader.
 
+*Don’t panic when importing Epub books throw error, please send the Epub file to [thansy@foxmail.com](mailto:thansy@foxmail.com) and provide reproducing steps. I will fix the corresponding problem as soon as possible*
+
 This is the update:
 
-1. Fix the problem that the button status is not restored due to an error in the process of importing books
+1. Fix some problems in the parsing process of Epub books
 
 More exciting, welcome to experience.
 

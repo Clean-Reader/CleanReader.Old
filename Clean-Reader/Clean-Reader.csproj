@@ -554,7 +554,7 @@
       <Version>2.4.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.ReaderPanel">
-      <Version>1.1.2</Version>
+      <Version>1.1.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.UWP">
       <Version>1.1.3</Version>

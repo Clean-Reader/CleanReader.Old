@@ -65,7 +65,7 @@
                             <ScrollViewer Style="{StaticResource BasicScrollViewer}" HorizontalScrollMode="Disabled"
                                           HorizontalScrollBarVisibility="Hidden" Margin="0,10,0,0">
                                 <TextBlock Style="{StaticResource BodyTextStyle}" x:Name="TipDescriptionBlock"
-                                           />
+                                           TextWrapping="Wrap" MaxWidth="250"/>
                             </ScrollViewer>
                         </StackPanel>
                     </Grid>

@@ -352,6 +352,9 @@
   <data name="Tip_ChooseReadHistory" xml:space="preserve">
     <value>云端有更新的阅读历史，是否加载云端进度？</value>
   </data>
+  <data name="Tip_Comment" xml:space="preserve">
+    <value>注释</value>
+  </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>确认</value>
   </data>

@@ -200,7 +200,18 @@ namespace Clean_Reader.Pages
         private void ReaderPanel_ImageTapped(object sender, ImageEventArgs e)
         {
             _isTouchItem = true;
-            vm.ShowImagePopup(e.Base64);
+            if (string.IsNullOrEmpty(e.Tip))
+            {
+                vm.ShowImagePopup(e.Base64);
+            }
+            else
+            {
+                TipTitleBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.Comment);
+                TipDescriptionBlock.Text = e.Tip;
+                var opt = new FlyoutShowOptions();
+                opt.Position = _lastTouchPoint;
+                TipFlyout.ShowAt(ReaderPanel, opt);
+            }
         }
 
         private async void ReaderPanel_LinkTapped(object sender, LinkEventArgs e)

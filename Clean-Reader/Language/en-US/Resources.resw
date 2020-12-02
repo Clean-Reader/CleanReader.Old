@@ -352,6 +352,9 @@ I know it’s a bit troublesome, but believe me, it’s all worth it</value>
   <data name="Tip_ChooseReadHistory" xml:space="preserve">
     <value>There is a newer reading history in the cloud. Is the progress in the cloud loaded?</value>
   </data>
+  <data name="Tip_Comment" xml:space="preserve">
+    <value>Tip</value>
+  </data>
   <data name="Tip_Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>

@@ -47,6 +47,7 @@
         ChooseReadHistory,
         NeedOpenNotification,
         LastUpdateTime,
-        OpenFileWarning
+        OpenFileWarning,
+        Comment
     }
 }

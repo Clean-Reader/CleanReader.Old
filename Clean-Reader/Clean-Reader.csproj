@@ -18,12 +18,12 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>19DE3251AB16B9B0D867892B047B3BB7FF135FF9</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>0472FDD4BB05B3503ACAE6F7548393ABD6F9B77C</PackageCertificateThumbprint>
     <PackageCertificateKeyFile />
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>E:\Package\Clean Reader\</AppxPackageDir>
+    <AppxPackageDir>D:\Package\Clean Reader\</AppxPackageDir>
     <GenerateTestArtifacts>False</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm|arm64</AppxBundlePlatforms>
@@ -335,6 +335,7 @@
     <Content Include="Assets\Txt.png" />
     <Content Include="Misc\Update_en_US.txt" />
     <Content Include="Misc\Update_zh_CN.txt" />
+    <None Include="Clean-Reader_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -554,7 +555,7 @@
       <Version>2.4.3</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.ReaderPanel">
-      <Version>1.1.3</Version>
+      <Version>1.1.5</Version>
     </PackageReference>
     <PackageReference Include="Richasy.Controls.UWP">
       <Version>1.1.3</Version>

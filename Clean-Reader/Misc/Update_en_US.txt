@@ -4,8 +4,8 @@
 
 This is the update:
 
-1. Fix the problem of error report caused by page turning in 1909 version
-2. When you click on the picture with the comment, the comment will pop up instead of the picture
+1. Modify the selection method of cloud history and local history
+2. Add F11 as a shortcut key for full screen switching
 
 More exciting, welcome to experience.
 

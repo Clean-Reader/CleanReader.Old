@@ -19,6 +19,7 @@ using Clean_Reader.Controls.Dialogs;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Windows.ApplicationModel.Background;
 using Clean_Reader.Controls.Components;
+using Windows.UI.ViewManagement;
 
 namespace Clean_Reader.Models.Core
 {
@@ -37,9 +38,11 @@ namespace Clean_Reader.Models.Core
         {
             if (args.EventType.ToString().Contains("Down"))
             {
-                var esc = Window.Current.CoreWindow.GetKeyState(VirtualKey.Escape);
-                var ctrl = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
-                var shift = Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift);
+                var win = Window.Current.CoreWindow;
+                var esc = win.GetKeyState(VirtualKey.Escape);
+                var ctrl = win.GetKeyState(VirtualKey.Control);
+                var shift = win.GetKeyState(VirtualKey.Shift);
+                var f11 = win.GetKeyState(VirtualKey.F11);
                 if (esc.HasFlag(CoreVirtualKeyStates.Down))
                 {
                     if (IsReaderPage)
@@ -62,6 +65,14 @@ namespace Clean_Reader.Models.Core
                             Pages.ReaderPage.Current.ShowSearchPanel();
                         }
                     }
+                }
+                else if (f11.HasFlag(CoreVirtualKeyStates.Down))
+                {
+                    var view = ApplicationView.GetForCurrentView();
+                    if (view.IsFullScreenMode)
+                        view.ExitFullScreenMode();
+                    else
+                        view.TryEnterFullScreenMode();
                 }
             }
         }
@@ -154,7 +165,9 @@ namespace Clean_Reader.Models.Core
 
         public async Task<ReadHistory> GetNeedToLoadHistory(ReadHistory local, ReadHistory cloud)
         {
-            if (cloud == null || cloud.Hisotry.Time <= local.Hisotry.Time)
+            if (local == null)
+                return cloud;
+            else if (cloud == null || cloud.Hisotry.Chapter.Index <= local.Hisotry.Chapter.Index)
                 return local;
             else
             {

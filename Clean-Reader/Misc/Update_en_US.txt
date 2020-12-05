@@ -4,8 +4,7 @@
 
 This is the update:
 
-1. Modify the selection method of cloud history and local history
-2. Add F11 as a shortcut key for full screen switching
+1. Fix the problems encountered in parsing EPUB
 
 More exciting, welcome to experience.
 

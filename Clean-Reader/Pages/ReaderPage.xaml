@@ -85,8 +85,8 @@
                     <TextBlock Style="{StaticResource SubtitleTextStyle}" HorizontalAlignment="Left" MaxWidth="300"
                                x:Name="BookTitleBlock" Margin="15,15,0,15" Foreground="{ThemeResource PrimaryColor}"/>
                     <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
-                          ItemsSource="{x:Bind ChapterCollection}"
-                          ItemClick="ChapterListView_ItemClick" Grid.Row="1"
+                          ItemsSource="{x:Bind ChapterCollection}" RequiresPointer="WhenEngaged"
+                          ItemClick="ChapterListView_ItemClick" Grid.Row="1" IsFocusEngagementEnabled="True"
                           Style="{StaticResource BasicListView}" Padding="10,0" ScrollViewer.HorizontalScrollMode="Disabled"
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                           ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
@@ -114,6 +114,7 @@
                             SpeechCueChanged="ReaderPanel_SpeechCueChanged"
                             PointerMoved="ReaderPanel_PointerMoved"
                             ReaderFlyout="{StaticResource ReaderFlyout}"
+                                        
                             >
                         <reader:ReaderPanel.Header>
                             <Grid Padding="20,10" GotFocus="ReaderContainer_GotFocus">

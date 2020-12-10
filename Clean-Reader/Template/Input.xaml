@@ -611,7 +611,7 @@
                             Description="{TemplateBinding Description}"
                             ScrollViewer.BringIntoViewOnFocusChange="False"
                             Canvas.ZIndex="0"
-                            Margin="0"
+                            Margin="0" InputScope="Search"
                                  CornerRadius="{TemplateBinding CornerRadius}"
                                  Height="{TemplateBinding Height}"
                                  Background="{TemplateBinding Background}"

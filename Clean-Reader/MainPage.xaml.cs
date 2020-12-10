@@ -10,6 +10,7 @@ using Lib.Share.Enums;
 using Windows.UI.Xaml.Media.Animation;
 using System.Linq;
 using Windows.Storage;
+using System.Diagnostics;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -109,6 +110,7 @@ namespace Clean_Reader
             vm.SubFrameHistoryList.Add(new Tuple<Type, object>(pageType, para));
             SubFrame.Navigate(pageType, para, new DrillInNavigationTransitionInfo());
             SecondarySplitView.IsPaneOpen = true;
+            SubFrame.Focus(FocusState.Programmatic);
             SideBackButton.Visibility = vm.SubFrameHistoryList.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -130,6 +132,11 @@ namespace Clean_Reader
                 vm.SubFrameHistoryList.RemoveAt(vm.SubFrameHistoryList.Count - 1);
             }
             SideBackButton.Visibility = vm.SubFrameHistoryList.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void RichasyPage_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            Debug.WriteLine(e.Key);
         }
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using Windows.Storage;
 using Clean_Reader.Controls.Dialogs;
 using Clean_Reader.Pages;
+using Windows.UI.ViewManagement;
 
 namespace Clean_Reader
 {
@@ -33,17 +34,18 @@ namespace Clean_Reader
         {
             this.InitializeComponent();
             bool isDisableScale = Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
-            if (SystemInformation.DeviceFamily == "Windows.Xbox" && isDisableScale)
-            {
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(Windows.UI.ViewManagement.ApplicationViewBoundsMode.UseCoreWindow);
-                Windows.UI.ViewManagement.ApplicationViewScaling.TrySetDisableLayoutScaling(true);
-            }
             VM.LanguageInit();
             this.Suspending += OnSuspending;
             this.UnhandledException += OnUnhandledException;
             string theme = Tools.App.GetLocalSetting(SettingNames.Theme, StaticString.ThemeSystem);
             if (theme != StaticString.ThemeSystem)
                 RequestedTheme = theme == StaticString.ThemeLight ? ApplicationTheme.Light : ApplicationTheme.Dark;
+            if (SystemInformation.DeviceFamily == "Windows.Xbox")
+            {
+                RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+                this.FocusVisualKind = FocusVisualKind.Reveal;
+            }
+                
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             CustomXamlResourceLoader.Current = new CustomResourceLoader();
         }
@@ -161,6 +163,14 @@ namespace Clean_Reader
             }
             Window.Current.Activate();
             Tools.App.SetTitleBarColor();
+            bool isDisableScale = Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
+            if (SystemInformation.DeviceFamily == "Windows.Xbox")
+            {
+                var view = ApplicationView.GetForCurrentView();
+                view.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+                if (isDisableScale)
+                    ApplicationViewScaling.TrySetDisableLayoutScaling(true);
+            }
         }
         /// <summary>
         /// 导航到特定页失败时调用

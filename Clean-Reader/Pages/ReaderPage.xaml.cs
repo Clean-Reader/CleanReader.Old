@@ -26,6 +26,7 @@ using Richasy.Controls.Reader.Enums;
 using Clean_Reader.Controls.Dialogs;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls.Primitives;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -49,6 +50,10 @@ namespace Clean_Reader.Pages
             Current = this;
             IsInit = false;
             vm._reader = ReaderPanel;
+            if (SystemInformation.DeviceFamily == "Windows.Xbox")
+            {
+                this.RequiresPointer = RequiresPointer.Never;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -60,8 +65,15 @@ namespace Clean_Reader.Pages
                     _tempBook = book;
                 }
             }
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackReuqest;
             Window.Current.Activated += OnWindowActivated;
             base.OnNavigatedTo(e);
+        }
+
+        private void BackReuqest(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            vm.CloseReaderView();
         }
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e)
@@ -73,6 +85,7 @@ namespace Clean_Reader.Pages
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             Window.Current.Activated -= OnWindowActivated;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackReuqest;
             try
             {
                 if (vm.IsDetailChanged)
@@ -251,10 +264,17 @@ namespace Clean_Reader.Pages
 
         private void ReaderPanel_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == VirtualKey.Left)
+            if (e.Key == VirtualKey.Left || e.Key == VirtualKey.GamepadDPadLeft || e.Key == VirtualKey.GamepadLeftThumbstickLeft)
                 ReaderPanel.Previous();
-            else if (e.Key == VirtualKey.Right)
+            else if (e.Key == VirtualKey.Right || e.Key == VirtualKey.GamepadDPadRight || e.Key == VirtualKey.GamepadLeftThumbstickRight)
                 ReaderPanel.Next();
+            else if (e.Key == VirtualKey.GamepadMenu)
+                ReaderSplitView.IsPaneOpen = !ReaderSplitView.IsPaneOpen;
+            else if(e.Key==VirtualKey.GamepadView)
+            {
+                ReaderBar.Toggle();
+                ReaderPanel.Focus(FocusState.Programmatic);
+            }
         }
 
         private void ReaderPanel_ProgressChanged(object sender, History e)
@@ -313,6 +333,7 @@ namespace Clean_Reader.Pages
                 _tempBook = null;
             }
         }
+
 
         private void ReaderBar_BackButtonClick(object sender, RoutedEventArgs e)
         {

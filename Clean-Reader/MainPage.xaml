@@ -6,8 +6,8 @@
     xmlns:local="using:Clean_Reader"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:layout="using:Clean_Reader.Controls.Layout" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
-    mc:Ignorable="d"
-    Loaded="RichasyPage_Loaded"
+    mc:Ignorable="d" KeyDown="RichasyPage_KeyDown"
+    Loaded="RichasyPage_Loaded" RequiresPointer="WhenFocused"
     SizeChanged="RichasyPage_SizeChanged"
     Background="{ThemeResource PageBackground}">
 

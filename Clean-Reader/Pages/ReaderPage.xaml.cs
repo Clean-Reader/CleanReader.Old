@@ -320,6 +320,7 @@ namespace Clean_Reader.Pages
 
         private async void ReaderPanel_Loaded(object sender, RoutedEventArgs e)
         {
+            ReaderPanel.OpenBeta();
             if (_tempBook != null)
             {
                 if (vm._sidePanel.ContainPlayer)

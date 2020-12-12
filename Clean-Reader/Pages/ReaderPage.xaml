@@ -110,6 +110,7 @@
                             ProgressChanged="ReaderPanel_ProgressChanged"
                             TouchTapped="ReaderPanel_TouchTapped"
                             Loaded="ReaderPanel_Loaded"
+                                         RequiresPointer="WhenEngaged"
                             CustomContentRequest="ReaderPanel_CustomContentRequest"
                             SpeechCueChanged="ReaderPanel_SpeechCueChanged"
                             PointerMoved="ReaderPanel_PointerMoved"
@@ -134,7 +135,7 @@
                         </reader:ReaderPanel.Footer>
                     </reader:ReaderPanel>
                     <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
-                    <components:ReaderBar x:Name="ReaderBar" BackButtonClick="ReaderBar_BackButtonClick"
+                    <components:ReaderBar x:Name="ReaderBar" BackButtonClick="ReaderBar_BackButtonClick" RequiresPointer="WhenEngaged"
                                           ChapterButtonClick="ReaderBar_ChapterButtonClick" HorizontalAlignment="Center"
                                           VerticalAlignment="Bottom" SearchButtonClick="ReaderBar_SearchButtonClick"/>
                 </Grid>

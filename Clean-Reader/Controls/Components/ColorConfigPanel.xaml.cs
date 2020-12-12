@@ -90,5 +90,17 @@ namespace Clean_Reader.Controls.Components
             vm.ColorConfigCollection.Remove(e.Color);
             await App.Tools.IO.SetLocalDataAsync(StaticString.FileColorConfig, JsonConvert.SerializeObject(vm.ColorConfigCollection.ToList()));
         }
+
+        private void ColorConfigGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (vm.IsXbox)
+            {
+                var data = e.ClickedItem as ReaderColorConfig;
+                ForegroundColorPicker.Color = data.Foreground;
+                BackgroundColorPicker.Color = data.Background;
+                IsAcrylicBackground.IsChecked = data.IsAcrylicBackground;
+                vm.ChangeReaderColor(data.Foreground, data.Background, data.IsAcrylicBackground);
+            }
+        }
     }
 }

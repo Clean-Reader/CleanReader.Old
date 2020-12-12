@@ -218,6 +218,7 @@
     <Compile Include="Models\UI\BookCoverLinkConverter.cs" />
     <Compile Include="Models\UI\BrushConverter.cs" />
     <Compile Include="Models\UI\CustomResourceLoader.cs" />
+    <Compile Include="Models\UI\DeviceFamilyTrigger.cs" />
     <Compile Include="Models\UI\LevelFontWeightConverter.cs" />
     <Compile Include="Models\UI\LevelMarginConverter.cs" />
     <Compile Include="Models\UI\MenuItem.cs" />

@@ -5,7 +5,7 @@
     xmlns:local="using:Clean_Reader.Controls.Layout"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d" Loaded="UserControl_Loaded"
     d:DesignHeight="300"
     d:DesignWidth="400">
 

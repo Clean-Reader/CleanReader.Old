@@ -36,12 +36,14 @@ namespace Clean_Reader.Pages
         {
             if (vm.TopicCollection.Count == 0)
                 await PageInit();
+            Focus(FocusState.Programmatic);
             base.OnNavigatedTo(e);
         }
 
         private async Task PageInit()
         {
             LoadingRing.IsActive = true;
+            NoDataBlock.Visibility = Visibility.Collapsed;
             await vm.TopicInit();
             if (vm.TopicCollection.Count == 0)
                 NoDataBlock.Visibility = Visibility.Visible;

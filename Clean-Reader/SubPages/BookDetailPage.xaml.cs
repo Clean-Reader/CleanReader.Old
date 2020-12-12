@@ -47,6 +47,7 @@ namespace Clean_Reader.SubPages
                         await PageInit(webBook);
                 }
             }
+            Focus(FocusState.Programmatic);
             base.OnNavigatedTo(e);
         }
 

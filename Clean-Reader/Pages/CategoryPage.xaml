@@ -9,11 +9,11 @@
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="share:Category" x:Key="CategoryItemTemplate">
-            <components:BookCategoryCard Height="90" Margin="0,0,10,10" Title="{x:Bind CategoryName}"
+            <components:BookCategoryCard Height="90" Title="{x:Bind CategoryName}"
                                          Images="{x:Bind CoverImgs}"/>
         </DataTemplate>
         <DataTemplate x:DataType="share:Rank" x:Key="RankItemTemplate">
-            <components:BookCategoryCard Height="90" Margin="0,0,10,10" Title="{x:Bind RankName}"
+            <components:BookCategoryCard Height="90" Title="{x:Bind RankName}"
                                          Images="{x:Bind CoverImgs}"/>
         </DataTemplate>
     </ui:RichasyPage.Resources>

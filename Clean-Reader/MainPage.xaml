@@ -7,16 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:layout="using:Clean_Reader.Controls.Layout" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP"
     mc:Ignorable="d" KeyDown="RichasyPage_KeyDown"
-    Loaded="RichasyPage_Loaded" RequiresPointer="WhenFocused"
+    Loaded="RichasyPage_Loaded"
     SizeChanged="RichasyPage_SizeChanged"
     Background="{ThemeResource PageBackground}">
 
     <Grid>
-        <SplitView OpenPaneLength="300" DisplayMode="CompactInline"
-                   IsPaneOpen="True" x:Name="AppSplitView" CompactPaneLength="0">
+        <SplitView OpenPaneLength="300" DisplayMode="CompactInline" PaneOpened="AppSplitView_PaneOpened"
+                   x:Name="AppSplitView" CompactPaneLength="0" x:FieldModifier="public">
             <SplitView.Pane>
                 <Grid>
-                    <layout:SidePanel/>
+                    <layout:SidePanel x:Name="SidePanel"/>
                 </Grid>
             </SplitView.Pane>
 

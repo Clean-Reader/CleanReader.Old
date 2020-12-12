@@ -50,10 +50,6 @@ namespace Clean_Reader.Pages
             Current = this;
             IsInit = false;
             vm._reader = ReaderPanel;
-            if (SystemInformation.DeviceFamily == "Windows.Xbox")
-            {
-                this.RequiresPointer = RequiresPointer.Never;
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -64,6 +60,10 @@ namespace Clean_Reader.Pages
                 {
                     _tempBook = book;
                 }
+            }
+            if (vm.IsXbox)
+            {
+                CheckPadStatus();
             }
             SystemNavigationManager.GetForCurrentView().BackRequested += BackReuqest;
             Window.Current.Activated += OnWindowActivated;
@@ -270,9 +270,21 @@ namespace Clean_Reader.Pages
                 ReaderPanel.Next();
             else if (e.Key == VirtualKey.GamepadMenu)
                 ReaderSplitView.IsPaneOpen = !ReaderSplitView.IsPaneOpen;
-            else if(e.Key==VirtualKey.GamepadView)
+            else if (e.Key == VirtualKey.GamepadView)
             {
                 ReaderBar.Toggle();
+                CheckPadStatus();
+            }
+        }
+
+        public void CheckPadStatus()
+        {
+            if (ReaderBar.IsShow)
+            {
+                ReaderBar.Focus(FocusState.Programmatic);
+            }
+            else
+            {
                 ReaderPanel.Focus(FocusState.Programmatic);
             }
         }
@@ -307,7 +319,7 @@ namespace Clean_Reader.Pages
             if (e.Position.X > width / 3.0 && e.Position.X < width * 2 / 3.0)
             {
                 ReaderBar.Toggle();
-                ReaderPanel.Focus(FocusState.Programmatic);
+                CheckPadStatus();
             }
         }
 
@@ -316,6 +328,11 @@ namespace Clean_Reader.Pages
             var chapter = e.ClickedItem as Chapter;
             ReaderPanel.LoadChapter(chapter);
             ReaderSplitView.IsPaneOpen = false;
+            if (ReaderBar.IsShow)
+            {
+                ReaderBar.Hide();
+                CheckPadStatus();
+            }
         }
 
         private async void ReaderPanel_Loaded(object sender, RoutedEventArgs e)
@@ -344,8 +361,11 @@ namespace Clean_Reader.Pages
         private void ReaderBar_ChapterButtonClick(object sender, RoutedEventArgs e)
         {
             ReaderSplitView.IsPaneOpen = !ReaderSplitView.IsPaneOpen;
-            ReaderBar.Hide();
-            ReaderPanel.Focus(FocusState.Programmatic);
+            if (!vm.IsXbox)
+            {
+                ReaderBar.Hide();
+                ReaderPanel.Focus(FocusState.Programmatic);
+            }  
         }
 
         private async void ReaderPanel_CustomContentRequest(object sender, CustomRequestEventArgs e)

@@ -29,6 +29,13 @@ namespace Clean_Reader
             this.InitializeComponent();
             Current = this;
             vm._rootFrame = MainFrame;
+            if (vm.IsXbox)
+            {
+                AppSearchBox.TabIndex = -1;
+                AppSplitView.IsPaneOpen = false;
+            }
+            else
+                AppSplitView.IsPaneOpen = true;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -137,6 +144,20 @@ namespace Clean_Reader
         private void RichasyPage_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             Debug.WriteLine(e.Key);
+            if (e.Key == Windows.System.VirtualKey.GamepadView)
+            {
+                AppSplitView.IsPaneOpen = !AppSplitView.IsPaneOpen;
+            }
+            else if (e.Key == Windows.System.VirtualKey.GamepadY)
+            {
+                AppSearchBox.Focus(FocusState.Programmatic);
+            }
+        }
+
+        private void AppSplitView_PaneOpened(SplitView sender, object args)
+        {
+            if (SidePanel != null)
+                SidePanel.Focus(FocusState.Programmatic);
         }
     }
 }

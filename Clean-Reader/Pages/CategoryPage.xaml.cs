@@ -36,6 +36,7 @@ namespace Clean_Reader.Pages
         {
             if (vm.CategoryCollection.Count == 0 || vm.RankCollection.Count == 0)
                 await PageInit();
+            Focus(FocusState.Programmatic);
             base.OnNavigatedTo(e);
         }
 
@@ -43,7 +44,7 @@ namespace Clean_Reader.Pages
         {
             CategoryLoadingBar.Visibility = Visibility.Visible;
             RankLoadingBar.Visibility = Visibility.Visible;
-
+            CategoryNoDataBlock.Visibility = Visibility.Collapsed;
             await vm.WebCategoriesInit();
             if (vm.CategoryCollection.Count == 0)
                 CategoryNoDataBlock.Visibility = Visibility.Visible;

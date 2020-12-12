@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
-        <CommandBarFlyout x:Key="CommandFlyout">
+        <CommandBarFlyout x:Name="CommandFlyout">
             <AppBarButton Label="Apply" Icon="View" ToolTipService.ToolTip="应用" Click="AppBarButton_Click"/>
             <AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="删除" Click="AppBarButton_Click"/>
         </CommandBarFlyout>

@@ -11,7 +11,7 @@
 
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="models:Book" x:Key="BookItemTemplate">
-            <Grid Margin="0,0,15,10">
+            <Grid>
                 <components:BookSlimCard Data="{x:Bind}" IsShowFlyout="True"/>
             </Grid>
         </DataTemplate>
@@ -53,7 +53,7 @@
                           x:Name="LastestReadListView" IsItemClickEnabled="True" ItemsSource="{x:Bind vm.LastestReadCollection}" Padding="0,0,0,0"
                           Style="{StaticResource BasicListView}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left"
                           ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource TransparentListViewContainerStyle}"
-                          ItemsPanel="{StaticResource HorizontalListViewItemsPanel}"/>
+                          ItemsPanel="{StaticResource HorizontalListViewItemsPanel}" Loaded="LastestReadListView_Loaded"/>
             </Grid>
             
             <Grid Grid.Row="1">

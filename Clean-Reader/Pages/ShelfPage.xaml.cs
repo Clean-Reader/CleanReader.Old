@@ -43,6 +43,11 @@ namespace Clean_Reader.Pages
             vm.CurrentShelfChanged += CurrentShelfChanged;
             ShelfNameBlock.Text = vm.CurrentShelf?.Name ?? "--";
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Focus(FocusState.Programmatic);
+            base.OnNavigatedTo(e);
+        }
 
         private void CurrentShelfChanged(object sender, EventArgs e)
         {
@@ -123,6 +128,11 @@ namespace Clean_Reader.Pages
                     btn.IsChecked = true;
                 ShelfFlyout.SecondaryCommands.Add(btn);
             }
+        }
+
+        private void LastestReadListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            LastestReadListView.Focus(FocusState.Programmatic);
         }
     }
 }

@@ -60,7 +60,11 @@ namespace Clean_Reader.Models.Core
                     break;
             }
             if (_rootFrame.Content == null || !_rootFrame.Content.GetType().Equals(pageType))
+            {
                 _rootFrame.Navigate(pageType, paramter, new DrillInNavigationTransitionInfo());
+                if(IsXbox)
+                    MainPage.Current.AppSplitView.IsPaneOpen = false;
+            }
         }
 
         public async Task SyncOneDriveHistory()
@@ -176,9 +180,10 @@ namespace Clean_Reader.Models.Core
                 main.ActionButtonClick += (_s, _e) =>
                 {
                     popup.Hide();
-                    App.Tools.App.WriteLocalSetting(SettingNames.AppVersion, VersionBlock.Version);
                 };
                 popup.Show();
+                popup.Focus(FocusState.Programmatic);
+                App.Tools.App.WriteLocalSetting(SettingNames.AppVersion, VersionBlock.Version);
             }
         }
         /// <summary>

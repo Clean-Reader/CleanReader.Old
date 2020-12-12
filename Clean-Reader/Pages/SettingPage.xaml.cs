@@ -36,6 +36,7 @@ namespace Clean_Reader.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Init();
+            Focus(FocusState.Programmatic);
             base.OnNavigatedTo(e);
         }
 
@@ -105,7 +106,7 @@ namespace Clean_Reader.Pages
             var date = DateTimeOffset.FromUnixTimeSeconds(lastUpdateSec);
             string time = lastUpdateSec == 0 ? "--" : date.ToString("yyyy/MM/dd HH:mm");
             LastUpdateTimeBlock.Text = App.Tools.App.GetLocalizationTextFromResource(LanguageNames.LastUpdateTime) + time;
-            bool isDisableScale = App.Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
+            bool isDisableScale = App.Tools.App.GetBoolSetting(SettingNames.DisableXboxScale,false);
             DisableXboxScaleSwitch.IsOn = isDisableScale;
             DisableXboxScaleSwitch.IsEnabled = SystemInformation.DeviceFamily == "Windows.Xbox";
             await Task.Delay(100);

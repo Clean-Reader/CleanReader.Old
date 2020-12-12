@@ -70,6 +70,7 @@ namespace Clean_Reader.SubPages
                     await RequestData();
                 }
             }
+            Focus(FocusState.Programmatic);
             base.OnNavigatedTo(e);
         }
 

@@ -40,12 +40,12 @@ namespace Clean_Reader
             string theme = Tools.App.GetLocalSetting(SettingNames.Theme, StaticString.ThemeSystem);
             if (theme != StaticString.ThemeSystem)
                 RequestedTheme = theme == StaticString.ThemeLight ? ApplicationTheme.Light : ApplicationTheme.Dark;
-            if (SystemInformation.DeviceFamily == "Windows.Xbox")
+            if (VM.IsXbox)
             {
                 RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
                 this.FocusVisualKind = FocusVisualKind.Reveal;
             }
-                
+
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             CustomXamlResourceLoader.Current = new CustomResourceLoader();
         }
@@ -121,7 +121,7 @@ namespace Clean_Reader
                     rootFrame.Navigate(typeof(MainPage), arg);
                 }
             }
-            else if(e is FileActivatedEventArgs fileArgs)
+            else if (e is FileActivatedEventArgs fileArgs)
             {
                 var file = fileArgs.Files[0];
                 if (file is StorageFile sf)
@@ -133,7 +133,7 @@ namespace Clean_Reader
                     else
                     {
                         var dialog = new ConfirmDialog(LanguageNames.OpenFileWarning);
-                        dialog.PrimaryButtonClick += async(_s, _e) =>
+                        dialog.PrimaryButtonClick += async (_s, _e) =>
                         {
                             var book = await VM.ImportBook(sf);
                             VM.OpenReaderView(book);
@@ -163,8 +163,8 @@ namespace Clean_Reader
             }
             Window.Current.Activate();
             Tools.App.SetTitleBarColor();
-            bool isDisableScale = Tools.App.GetBoolSetting(SettingNames.DisableXboxScale);
-            if (SystemInformation.DeviceFamily == "Windows.Xbox")
+            bool isDisableScale = Tools.App.GetBoolSetting(SettingNames.DisableXboxScale, false);
+            if (VM.IsXbox)
             {
                 var view = ApplicationView.GetForCurrentView();
                 view.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);

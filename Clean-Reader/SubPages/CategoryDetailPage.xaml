@@ -10,7 +10,7 @@
     <ui:RichasyPage.Resources>
         <DataTemplate x:DataType="share:Book" x:Key="BookItemTemplate">
             <Grid Margin="0,5,10,0">
-                <Viewbox Width="330" StretchDirection="Both">
+                <Viewbox StretchDirection="Both">
                     <components:YuenovBookCard x:Name="DetailCard" Width="360" Height="160" InnerPadding="10,15"
                                            Data="{Binding}"/>
                 </Viewbox>

@@ -3,6 +3,7 @@ using Clean_Reader.Controls.Layout;
 using Clean_Reader.Models.UI;
 using Lib.Share.Enums;
 using Lib.Share.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 using Richasy.Controls.Reader;
 using Richasy.Controls.Reader.Models;
 using Richasy.Controls.UWP.Popups;
@@ -11,6 +12,7 @@ using Richasy.Helper.UWP;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.Devices.Enumeration;
 using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -57,6 +59,11 @@ namespace Clean_Reader.Models.Core
         public bool IsReaderPage
         {
             get => (Window.Current.Content as Frame).Content is Pages.ReaderPage;
+        }
+
+        public bool IsXbox
+        {
+            get => SystemInformation.DeviceFamily == "Windows.Xbox";
         }
 
         private bool _isStyleChanged = false;

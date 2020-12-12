@@ -31,7 +31,10 @@ namespace Clean_Reader.Controls.Components
         public event RoutedEventHandler BackButtonClick;
         public event RoutedEventHandler ChapterButtonClick;
         public event RoutedEventHandler SearchButtonClick;
-
+        public bool IsShow
+        {
+            get => MenuContainer.Visibility == Visibility.Visible;
+        }
         public ReaderBar()
         {
             this.InitializeComponent();
@@ -139,6 +142,12 @@ namespace Clean_Reader.Controls.Components
         public void InsertPlayer()
         {
             MenuContainer.Children.Insert(0, App.VM._musicPlayer);
+        }
+
+        private async void BasicFlyout_Opened(object sender, object e)
+        {
+            (sender as Flyout).AllowFocusOnInteraction = true;
+            await FocusManager.TryFocusAsync((sender as Flyout), FocusState.Programmatic);
         }
     }
 }

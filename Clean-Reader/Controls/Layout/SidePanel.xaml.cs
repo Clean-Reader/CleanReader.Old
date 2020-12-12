@@ -44,5 +44,10 @@ namespace Clean_Reader.Controls.Layout
             Grid.SetRow(App.VM._musicPlayer, 0);
             Container.Children.Remove(App.VM._musicPlayer);
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Focus(FocusState.Programmatic);
+        }
     }
 }

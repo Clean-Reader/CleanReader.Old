@@ -10,7 +10,7 @@
     <ui:RichasyPage.Resources>
         <ui1:WebBookCoverConverter x:Key="BookConverter"/>
         <DataTemplate x:DataType="share:Book" x:Key="RecommendItemTemplate">
-            <Grid Margin="0,10,10,0">
+            <Grid>
                 <Viewbox StretchDirection="Both">
                     <components:BookSlimCard Data="{Binding Converter={StaticResource BookConverter}}"
                                              TypeVisibility="Collapsed" ProgressVisibility="Collapsed"

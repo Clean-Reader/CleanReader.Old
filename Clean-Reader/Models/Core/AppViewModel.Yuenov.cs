@@ -181,7 +181,7 @@ namespace Clean_Reader.Models.Core
                         tasks.Add(Task.Run(async () =>
                         {
                             var source = books.Where(p => p.BookId == up.BookId.ToString()).FirstOrDefault();
-                            await SyncBookChapters(up.BookId, source.LastChapterId);
+                            await SyncBookChapters(up.BookId);
                         }));
                     }
                     await Task.WhenAll(tasks.ToArray());

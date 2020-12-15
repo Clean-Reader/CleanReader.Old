@@ -152,7 +152,14 @@ namespace Clean_Reader.Pages
             var cloudHistory = vm.GetCloudHistory(vm.CurrentBook);
             var history = await vm.GetNeedToLoadHistory(localhistory, cloudHistory);
             if (history != null)
-                ReaderPanel.LoadHistory(history.Hisotry);
+            {
+                try
+                {
+                    ReaderPanel.LoadHistory(history.Hisotry);
+                }
+                catch (Exception)
+                {}
+            }  
             else
             {
                 try

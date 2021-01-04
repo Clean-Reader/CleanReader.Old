@@ -5,7 +5,6 @@
 This is the update:
 
 1. Fix some rendering issues of epub files
-2. Provide support for some operations of Xbox Gamepad
 
 More exciting, welcome to experience.
 

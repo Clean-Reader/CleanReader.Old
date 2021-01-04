@@ -1,55 +1,89 @@
 ﻿<ui:RichasyPage
-    xmlns:ui="using:Richasy.Controls.UWP.Models.UI"
     x:Class="Clean_Reader.Pages.ReaderPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Clean_Reader.Pages"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:components="using:Clean_Reader.Controls.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:reader="using:Richasy.Controls.Reader" xmlns:models="using:Richasy.Controls.Reader.Models" xmlns:ui1="using:Clean_Reader.Models.UI" xmlns:interaction="using:Richasy.Controls.UWP.Interaction" xmlns:uwp="using:Richasy.Font.UWP" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:components="using:Clean_Reader.Controls.Components" xmlns:layout="using:Clean_Reader.Controls.Layout"
+    xmlns:interaction="using:Richasy.Controls.UWP.Interaction"
+    xmlns:layout="using:Clean_Reader.Controls.Layout"
+    xmlns:local="using:Clean_Reader.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Richasy.Controls.Reader.Models"
+    xmlns:reader="using:Richasy.Controls.Reader"
+    xmlns:ui="using:Richasy.Controls.UWP.Models.UI"
+    xmlns:ui1="using:Clean_Reader.Models.UI"
+    xmlns:uwp="using:Richasy.Font.UWP"
     mc:Ignorable="d">
     <ui:RichasyPage.Resources>
-        <ui1:LevelMarginCovnerter x:Key="LevelMarginConverter"/>
-        <ui1:LevelFontWeightConverter x:Key="LevelFontWeightConverter"/>
-        <DataTemplate x:DataType="models:Chapter" x:Key="ChapterItemTemplate">
+        <ui1:LevelMarginCovnerter x:Key="LevelMarginConverter" />
+        <ui1:LevelFontWeightConverter x:Key="LevelFontWeightConverter" />
+        <DataTemplate x:Key="ChapterItemTemplate" x:DataType="models:Chapter">
             <Grid Padding="0,10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1F5;" VerticalAlignment="Center"
-                          Foreground="{ThemeResource TipTextColor}" FontSize="{CustomResource SmallFontSize}" Margin="{x:Bind Level,Converter={StaticResource LevelMarginConverter}}"/>
-                <TextBlock Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" FontFamily="{CustomResource Basic}"
-                           FontSize="{CustomResource BasicFontSize}" Grid.Column="1" FontWeight="{x:Bind Level,Converter={StaticResource LevelFontWeightConverter}}"
-                           HorizontalAlignment="Left" ToolTipService.ToolTip="{x:Bind Title}"
-                           Margin="10,0,0,0"/>
+                <FontIcon
+                    Margin="{x:Bind Level, Converter={StaticResource LevelMarginConverter}}"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource SymbolThemeFontFamily}"
+                    FontSize="{CustomResource SmallFontSize}"
+                    Foreground="{ThemeResource TipTextColor}"
+                    Glyph="&#xE1F5;" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    FontFamily="{CustomResource Basic}"
+                    FontSize="{CustomResource BasicFontSize}"
+                    FontWeight="{x:Bind Level, Converter={StaticResource LevelFontWeightConverter}}"
+                    Text="{x:Bind Title}"
+                    TextTrimming="CharacterEllipsis"
+                    ToolTipService.ToolTip="{x:Bind Title}" />
             </Grid>
         </DataTemplate>
         <CommandBarFlyout x:Name="ReaderFlyout" Opened="ReaderFlyout_Opened">
-            <AppBarButton x:Uid="Control_InsideSearchAppButton" ToolTipService.ToolTip="文内搜索" x:Name="InsideSearchButton" Click="InsideSearchButton_Click" >
+            <AppBarButton
+                x:Name="InsideSearchButton"
+                x:Uid="Control_InsideSearchAppButton"
+                Click="InsideSearchButton_Click"
+                ToolTipService.ToolTip="文内搜索">
                 <AppBarButton.Icon>
-                    <uwp:FeatherIcon Symbol="Search"/>
+                    <uwp:FeatherIcon Symbol="Search" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="Control_QueryAppButton" ToolTipService.ToolTip="网络搜索" x:Name="QueryButton" Click="QueryButton_Click">
+            <AppBarButton
+                x:Name="QueryButton"
+                x:Uid="Control_QueryAppButton"
+                Click="QueryButton_Click"
+                ToolTipService.ToolTip="网络搜索">
                 <AppBarButton.Icon>
-                    <uwp:FeatherIcon Symbol="Globe"/>
+                    <uwp:FeatherIcon Symbol="Globe" />
                 </AppBarButton.Icon>
             </AppBarButton>
 
-            <AppBarButton x:Name="CopyButton" x:Uid="Control_CopyAppButton"
-                  Click="CopyButton_Click" ToolTipService.ToolTip="复制">
+            <AppBarButton
+                x:Name="CopyButton"
+                x:Uid="Control_CopyAppButton"
+                Click="CopyButton_Click"
+                ToolTipService.ToolTip="复制">
                 <AppBarButton.Icon>
-                    <uwp:FeatherIcon Symbol="Copy"/>
+                    <uwp:FeatherIcon Symbol="Copy" />
                 </AppBarButton.Icon>
             </AppBarButton>
             <CommandBarFlyout.SecondaryCommands>
                 <AppBarElementContainer>
-                    <Grid Padding="15,10" Width="280" MaxHeight="200">
-                        <ScrollViewer Style="{StaticResource BasicScrollViewer}"
-                                      HorizontalScrollMode="Disabled"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden">
-                            <components:iCiBaTranslateBlock x:Name="iCiBaBlock"/>
+                    <Grid
+                        Width="280"
+                        MaxHeight="200"
+                        Padding="15,10">
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Hidden"
+                            HorizontalScrollMode="Disabled"
+                            Style="{StaticResource BasicScrollViewer}"
+                            VerticalScrollBarVisibility="Hidden">
+                            <components:iCiBaTranslateBlock x:Name="iCiBaBlock" />
                         </ScrollViewer>
                     </Grid>
                 </AppBarElementContainer>
@@ -59,13 +93,19 @@
         <CommandBarFlyout x:Name="TipFlyout">
             <CommandBarFlyout.SecondaryCommands>
                 <AppBarElementContainer>
-                    <Grid Padding="15,10" Width="280">
+                    <Grid Width="280" Padding="15,10">
                         <StackPanel>
-                            <TextBlock x:Name="TipTitleBlock" Style="{StaticResource SubtitleTextStyle}"/>
-                            <ScrollViewer Style="{StaticResource BasicScrollViewer}" HorizontalScrollMode="Disabled"
-                                          HorizontalScrollBarVisibility="Hidden" Margin="0,10,0,0">
-                                <TextBlock Style="{StaticResource BodyTextStyle}" x:Name="TipDescriptionBlock"
-                                           TextWrapping="Wrap" MaxWidth="250"/>
+                            <TextBlock x:Name="TipTitleBlock" Style="{StaticResource SubtitleTextStyle}" />
+                            <ScrollViewer
+                                Margin="0,10,0,0"
+                                HorizontalScrollBarVisibility="Hidden"
+                                HorizontalScrollMode="Disabled"
+                                Style="{StaticResource BasicScrollViewer}">
+                                <TextBlock
+                                    x:Name="TipDescriptionBlock"
+                                    MaxWidth="250"
+                                    Style="{StaticResource BodyTextStyle}"
+                                    TextWrapping="Wrap" />
                             </ScrollViewer>
                         </StackPanel>
                     </Grid>
@@ -74,80 +114,117 @@
         </CommandBarFlyout>
     </ui:RichasyPage.Resources>
     <Grid>
-        <SplitView DisplayMode="CompactOverlay" PaneBackground="{ThemeResource PaneBackground}"
-                   OpenPaneLength="300" x:Name="ReaderSplitView" CompactPaneLength="0">
+        <SplitView
+            x:Name="ReaderSplitView"
+            CompactPaneLength="0"
+            DisplayMode="CompactOverlay"
+            OpenPaneLength="300"
+            PaneBackground="{ThemeResource PaneBackground}">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Style="{StaticResource SubtitleTextStyle}" HorizontalAlignment="Left" MaxWidth="300"
-                               x:Name="BookTitleBlock" Margin="15,15,0,15" Foreground="{ThemeResource PrimaryColor}"/>
-                    <ListView IsItemClickEnabled="True" x:Name="ChapterListView"
-                          ItemsSource="{x:Bind ChapterCollection}" RequiresPointer="WhenEngaged"
-                          ItemClick="ChapterListView_ItemClick" Grid.Row="1" IsFocusEngagementEnabled="True"
-                          Style="{StaticResource BasicListView}" Padding="10,0" ScrollViewer.HorizontalScrollMode="Disabled"
-                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                          ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
-                          ItemTemplate="{StaticResource ChapterItemTemplate}"/>
+                    <TextBlock
+                        x:Name="BookTitleBlock"
+                        MaxWidth="300"
+                        Margin="15,15,0,15"
+                        HorizontalAlignment="Left"
+                        Foreground="{ThemeResource PrimaryColor}"
+                        Style="{StaticResource SubtitleTextStyle}" />
+                    <ListView
+                        x:Name="ChapterListView"
+                        Grid.Row="1"
+                        Padding="10,0"
+                        IsFocusEngagementEnabled="True"
+                        IsItemClickEnabled="True"
+                        ItemClick="ChapterListView_ItemClick"
+                        ItemContainerStyle="{StaticResource BasicListViewContainerStyle}"
+                        ItemTemplate="{StaticResource ChapterItemTemplate}"
+                        ItemsSource="{x:Bind ChapterCollection}"
+                        RequiresPointer="WhenEngaged"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        ScrollViewer.HorizontalScrollMode="Disabled"
+                        Style="{StaticResource BasicListView}" />
                 </Grid>
 
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <reader:ReaderPanel x:Name="ReaderPanel"
-                            OpenStarting="ReaderPanel_OpenStarting"
-                            OpenCompleted="ReaderPanel_OpenCompleted"
-                            ChapterLoaded="ReaderPanel_ChapterLoaded"
-                            ChapterChanged="ReaderPanel_ChapterChanged"
-                            SetContentStarting="ReaderPanel_SetContentStarting"
-                            SetContentCompleted="ReaderPanel_SetContentCompleted"
-                            ImageTapped="ReaderPanel_ImageTapped"
-                            LinkTapped="ReaderPanel_LinkTapped"
-                            ViewLoaded="ReaderPanel_ViewLoaded"
-                            KeyDown="ReaderPanel_KeyDown"
-                            ProgressChanged="ReaderPanel_ProgressChanged"
-                            TouchTapped="ReaderPanel_TouchTapped"
-                            Loaded="ReaderPanel_Loaded"
-                                         RequiresPointer="WhenEngaged"
-                            CustomContentRequest="ReaderPanel_CustomContentRequest"
-                            SpeechCueChanged="ReaderPanel_SpeechCueChanged"
-                            PointerMoved="ReaderPanel_PointerMoved"
-                            ReaderFlyout="{StaticResource ReaderFlyout}"
-                                        
-                            >
+                    <reader:ReaderPanel
+                        x:Name="ReaderPanel"
+                        ChapterChanged="ReaderPanel_ChapterChanged"
+                        ChapterLoaded="ReaderPanel_ChapterLoaded"
+                        CustomContentRequest="ReaderPanel_CustomContentRequest"
+                        ImageTapped="ReaderPanel_ImageTapped"
+                        KeyDown="ReaderPanel_KeyDown"
+                        LinkTapped="ReaderPanel_LinkTapped"
+                        Loaded="ReaderPanel_Loaded"
+                        OpenCompleted="ReaderPanel_OpenCompleted"
+                        OpenStarting="ReaderPanel_OpenStarting"
+                        PointerMoved="ReaderPanel_PointerMoved"
+                        ProgressChanged="ReaderPanel_ProgressChanged"
+                        ReaderFlyout="{StaticResource ReaderFlyout}"
+                        RequiresPointer="WhenEngaged"
+                        SetContentCompleted="ReaderPanel_SetContentCompleted"
+                        SetContentStarting="ReaderPanel_SetContentStarting"
+                        SpeechCueChanged="ReaderPanel_SpeechCueChanged"
+                        TouchTapped="ReaderPanel_TouchTapped"
+                        ViewLoaded="ReaderPanel_ViewLoaded">
                         <reader:ReaderPanel.Header>
                             <Grid Padding="20,10" GotFocus="ReaderContainer_GotFocus">
-                                <TextBlock x:Name="ChapterTitleBlock" Style="{StaticResource BodyTextStyle}" VerticalAlignment="Center"
-                                           HorizontalAlignment="Left" Foreground="{ThemeResource TipTextColor}"/>
+                                <TextBlock
+                                    x:Name="ChapterTitleBlock"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource TipTextColor}"
+                                    Style="{StaticResource BodyTextStyle}" />
                             </Grid>
                         </reader:ReaderPanel.Header>
                         <reader:ReaderPanel.Footer>
                             <Grid Padding="20,5" GotFocus="ReaderContainer_GotFocus">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="ProgressBlock" Style="{StaticResource BodyTextStyle}" VerticalAlignment="Center"
-                                            Foreground="{ThemeResource TipTextColor}"/>
+                                <TextBlock
+                                    x:Name="ProgressBlock"
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource TipTextColor}"
+                                    Style="{StaticResource BodyTextStyle}" />
                             </Grid>
                         </reader:ReaderPanel.Footer>
                     </reader:ReaderPanel>
-                    <ProgressRing Style="{StaticResource BasicProgressRingStyle}" x:Name="LoadingRing"/>
-                    <components:ReaderBar x:Name="ReaderBar" BackButtonClick="ReaderBar_BackButtonClick" RequiresPointer="WhenEngaged"
-                                          ChapterButtonClick="ReaderBar_ChapterButtonClick" HorizontalAlignment="Center"
-                                          VerticalAlignment="Bottom" SearchButtonClick="ReaderBar_SearchButtonClick"/>
+                    <ProgressRing x:Name="LoadingRing" Style="{StaticResource BasicProgressRingStyle}" />
+                    <components:ReaderBar
+                        x:Name="ReaderBar"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        BackButtonClick="ReaderBar_BackButtonClick"
+                        ChapterButtonClick="ReaderBar_ChapterButtonClick"
+                        RequiresPointer="WhenEngaged"
+                        SearchButtonClick="ReaderBar_SearchButtonClick" />
                 </Grid>
             </SplitView.Content>
         </SplitView>
-        <Grid x:Name="SearchContainer" Background="{ThemeResource TransparentBackground}"
-              VerticalAlignment="Stretch" Tapped="SearchContainer_Tapped" Visibility="Collapsed">
+        <Grid
+            x:Name="SearchContainer"
+            VerticalAlignment="Stretch"
+            Background="{ThemeResource TransparentBackground}"
+            Tapped="SearchContainer_Tapped"
+            Visibility="Collapsed">
 
-            <layout:InsideSearchPanel x:Name="SearchPanel" QuerySubmit="SearchPanel_QuerySubmit" Width="340"
-                                      ItemClick="SearchPanel_ItemClick" HorizontalAlignment="Right"
-                                      Background="{ThemeResource PaneBackground}"
-                                      ItemsSource="{x:Bind SearchCollection}" Padding="20"/>
+            <layout:InsideSearchPanel
+                x:Name="SearchPanel"
+                Width="340"
+                Padding="20"
+                HorizontalAlignment="Right"
+                Background="{ThemeResource PaneBackground}"
+                IsFocusEngagementEnabled="True"
+                ItemClick="SearchPanel_ItemClick"
+                ItemsSource="{x:Bind SearchCollection}"
+                QuerySubmit="SearchPanel_QuerySubmit" />
         </Grid>
     </Grid>
 </ui:RichasyPage>

@@ -1,6 +1,6 @@
 # 干净阅读 V2
 
-> 该版本是[干净阅读](https://www.microsoft.com/store/productId/9MV65L2XFCSK)的历史版本，也是使用 UWP 技术的最后一个版本。从2022年开始，已基于 Windows App SDK 为 Windows 11 重构。
+> 该版本是[干净阅读](https://www.microsoft.com/store/productId/9MV65L2XFCSK)的历史版本，是最后支持 Windows 10 的旧版本
 
 新版本文档：[Windows 桌面版介绍](https://docs.richasy.cn/clean-reader/desktop)
 
